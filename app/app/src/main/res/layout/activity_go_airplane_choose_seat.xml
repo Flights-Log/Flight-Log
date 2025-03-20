@@ -49,79 +49,17 @@
         android:gravity="center_horizontal"
         android:orientation="vertical">
 
-
-
-      <!-- 추후 grid 로 바꿀 것-->
-      <!--A 열-->
+      <!-- 좌석 배치 -->
       <GridLayout
-          android:layout_width="match_parent"
+          android:id="@+id/seatGrid"
+          android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:layout_marginTop="150dp"
-          android:layout_marginBottom="5dp"
-          android:columnCount="7"
-          android:orientation="horizontal">
+          android:layout_gravity="center"
+          android:columnCount="6"
+          android:padding="10dp"
+          android:rowCount="10">
 
-        <TextView
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="5dp"
-            android:background="@drawable/seat"
-            android:padding="10dp"
-            android:text="A1"
-            android:textColor="@color/black"
-            android:textSize="15sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:layout_marginHorizontal="5dp"
-            android:background="@drawable/seat"
-            android:padding="10dp"
-            android:text="A1"
-            android:textColor="@color/black"
-            android:textSize="15sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="20dp"
-            android:background="@drawable/seat"
-            android:padding="10dp"
-            android:text="A1"
-            android:textColor="@color/black"
-            android:textSize="15sp"
-            android:textStyle="bold" />
-
-        <!--중간-->
-
-        <TextView
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="5dp"
-            android:background="@drawable/seat"
-            android:padding="10dp"
-            android:text="A1"
-            android:textColor="@color/black"
-            android:textSize="15sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:layout_marginHorizontal="5dp"
-            android:background="@drawable/seat"
-            android:padding="10dp"
-            android:text="A1"
-            android:textColor="@color/black"
-            android:textSize="15sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/seat"
-            android:padding="10dp"
-            android:text="A1"
-            android:textColor="@color/black"
-            android:textSize="15sp"
-            android:textStyle="bold" />
       </GridLayout>
-
 
     </LinearLayout>
 
