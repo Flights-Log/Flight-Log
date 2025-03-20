@@ -1,4 +1,4 @@
 <resources>
-    <string name="app_name">FlightLog</string>
-    <string name="login">로그인</string>
+  <string name="app_name">FlightLog</string>
+  <string name="login">로그인</string>
 </resources>
