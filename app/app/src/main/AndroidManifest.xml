@@ -13,6 +13,9 @@
       android:theme="@style/Theme.FlightLog"
       tools:targetApi="31">
     <activity
+        android:name=".PaymentHistoryActivity"
+        android:exported="false" />
+    <activity
         android:name=".JoinMemberActivity"
         android:exported="true">
       <intent-filter>
@@ -22,18 +25,16 @@
       </intent-filter>
     </activity>
     <activity
-        android:name=".ComeActivityChooseSeat"
+        android:name=".ComeAirplaneChooseSeatActivity"
         android:exported="false" />
     <activity
         android:name=".TicketHolderActivity"
         android:exported="true" />
     <activity
         android:name=".GoAirplaneChooseSeatActivity"
-        android:exported="true">
-
-    </activity>
+        android:exported="true"></activity>
     <activity
-        android:name=".ComeActivityAirplane"
+        android:name=".ComeAirplaneActivity"
         android:exported="false" />
     <activity
         android:name=".GoAirplaneActivity"
