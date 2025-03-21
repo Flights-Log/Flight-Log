@@ -69,6 +69,7 @@
             android:layout_height="50dp"
             android:layout_weight="3"
             android:background="@drawable/join_member_edit_text"
+            android:inputType="text"
             android:paddingHorizontal="10dp" />
 
       </LinearLayout>
@@ -96,6 +97,7 @@
             android:layout_height="50dp"
             android:layout_weight="3"
             android:background="@drawable/join_member_edit_text"
+            android:inputType="textPassword"
             android:paddingHorizontal="10dp" />
 
       </LinearLayout>
@@ -139,7 +141,8 @@
             android:layout_height="50dp"
             android:layout_weight="6"
             android:background="@drawable/join_member_edit_text"
-            android:paddingHorizontal="10dp" />
+            android:paddingHorizontal="10dp"
+            android:inputType="textPassword"/>
 
       </LinearLayout>
 
@@ -166,7 +169,8 @@
             android:layout_height="50dp"
             android:layout_weight="3"
             android:background="@drawable/join_member_edit_text"
-            android:paddingHorizontal="10dp" />
+            android:paddingHorizontal="10dp"
+            android:inputType="textPersonName"/>
 
       </LinearLayout>
 
@@ -193,7 +197,8 @@
             android:layout_height="50dp"
             android:layout_weight="3"
             android:background="@drawable/join_member_edit_text"
-            android:paddingHorizontal="10dp" />
+            android:paddingHorizontal="10dp"
+            android:inputType="textPersonName"/>
 
       </LinearLayout>
 
@@ -306,7 +311,8 @@
             android:layout_height="50dp"
             android:layout_weight="3"
             android:background="@drawable/join_member_edit_text"
-            android:paddingHorizontal="10dp" />
+            android:paddingHorizontal="10dp"
+            android:inputType="textEmailAddress"/>
 
       </LinearLayout>
 
@@ -333,7 +339,8 @@
             android:layout_height="50dp"
             android:layout_weight="3"
             android:background="@drawable/join_member_edit_text"
-            android:paddingHorizontal="10dp" />
+            android:paddingHorizontal="10dp"
+            android:inputType="phone"/>
 
       </LinearLayout>
 
@@ -373,9 +380,10 @@
 
           <EditText
               android:layout_width="match_parent"
-              android:layout_height="50dp"
+              android:layout_height="0dp"
               android:layout_weight="1"
-              android:background="@drawable/join_member_edit_text" />
+              android:background="@drawable/join_member_edit_text"
+              android:inputType="text"/>
 
         </LinearLayout>
 

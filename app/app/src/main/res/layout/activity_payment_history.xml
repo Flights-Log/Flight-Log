@@ -35,11 +35,12 @@
   <!--  예약 확정-->
   <LinearLayout
       android:layout_width="match_parent"
-      android:layout_height="50dp"
+      android:layout_height="wrap_content"
       android:background="@color/white"
       android:gravity="center_vertical"
       android:orientation="horizontal"
-      android:paddingHorizontal="10dp">
+      android:paddingHorizontal="10dp"
+      android:layout_marginVertical="10dp">
 
     <TextView
         android:layout_width="0dp"
@@ -53,7 +54,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:layout_width="wrap_content"
-        android:layout_height="35dp"
+        android:layout_height="50dp"
         android:layout_weight="1"
         android:background="@drawable/blue_button"
         android:text="날짜순"

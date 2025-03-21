@@ -83,6 +83,7 @@
                 android:layout_width="0dp"
                 android:layout_height="20dp"
                 android:layout_weight="1"
+                android:contentDescription="spinning_arrow"
                 android:src="@drawable/spinning_arrow" />
 
             <TextView
@@ -118,6 +119,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:contentDescription="right_arrow_black"
                 android:src="@drawable/right_arrow_black" />
 
             <TextView
@@ -250,7 +252,7 @@
             <!--조회하기 버튼-->
             <Button
                 android:id="@+id/flight_search"
-                android:layout_width="match_parent"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:text="조회하기"
                 android:textAlignment="center"
@@ -275,6 +277,7 @@
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_marginHorizontal="15dp"
+          android:contentDescription="advertisement1"
           android:src="@drawable/advertisement1" />
 
       <View
