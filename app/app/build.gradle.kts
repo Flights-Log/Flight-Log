@@ -45,4 +45,16 @@ dependencies {
   testImplementation(libs.junit)
   androidTestImplementation(libs.androidx.junit)
   androidTestImplementation(libs.androidx.espresso.core)
+
+  // https://mvnrepository.com/artifact/com.squareup.retrofit2/retrofit
+  implementation("com.squareup.retrofit2:retrofit:2.11.0")
+
+// https://mvnrepository.com/artifact/com.squareup.retrofit2/converter-gson
+  implementation("com.squareup.retrofit2:converter-gson:2.11.0")
+
+// https://mvnrepository.com/artifact/com.google.code.gson/gson
+  implementation("com.google.code.gson:gson:2.12.1")
+
+// https://mvnrepository.com/artifact/com.squareup.retrofit2/converter-scalars
+  implementation("com.squareup.retrofit2:converter-scalars:2.11.0")
 }
