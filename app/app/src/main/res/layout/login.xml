@@ -124,7 +124,7 @@
 
     <Button
         android:layout_width="300dp"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:text="로그인"
         android:backgroundTint="#118CFF"
         app:cornerRadius="6dp"
@@ -134,7 +134,7 @@
 
     <Button
         android:layout_width="300dp"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:layout_marginTop="10dp"
         android:text="회원가입"
         android:backgroundTint="#118CFF"
