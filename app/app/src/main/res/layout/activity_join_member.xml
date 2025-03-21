@@ -14,43 +14,384 @@
       android:id="@+id/tool_bar"
       layout="@layout/tool_bar_login"
       android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_marginBottom="30dp" />
+      android:layout_height="wrap_content" />
 
-  <TextView
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginBottom="10dp"
-      android:text="회원가입"
-      android:textColor="@color/black"
-      android:textSize="20sp" />
-
-  <View
-      android:layout_width="200dp"
-      android:layout_height="5dp"
-      android:background="@color/mainBlue" />
-
-  <LinearLayout
+  <ScrollView
       android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:gravity="center_vertical"
-      android:orientation="horizontal"
-      android:padding="30dp">
+      android:layout_height="match_parent"
+      android:layout_weight="1"
+      android:background="@color/white"
+      android:fillViewport="true"
+      android:paddingTop="10dp"
+      android:scrollbars="none">
 
-    <TextView
-        android:layout_width="0dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="아이디"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        android:textAlignment="center"/>
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
 
-    <EditText
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="3"
-        android:background="@drawable/grey_button"/>
+      <!--  회원가입 텍스트-->
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginBottom="10dp"
+          android:text="회원가입"
+          android:textColor="@color/black"
+          android:textSize="20sp" />
 
-  </LinearLayout>
+      <View
+          android:layout_width="200dp"
+          android:layout_height="5dp"
+          android:layout_marginBottom="20dp"
+          android:background="@color/mainBlue" />
+      <!--  아이디-->
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginVertical="10dp"
+          android:gravity="center_vertical"
+          android:orientation="horizontal"
+          android:paddingHorizontal="30dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="아이디"
+            android:textAlignment="center"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="3"
+            android:background="@drawable/join_member_edit_text"
+            android:paddingHorizontal="10dp" />
+
+      </LinearLayout>
+
+      <!--  비밀번호-->
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginVertical="10dp"
+          android:gravity="center_vertical"
+          android:orientation="horizontal"
+          android:paddingHorizontal="30dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="비밀번호"
+            android:textAlignment="center"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="3"
+            android:background="@drawable/join_member_edit_text"
+            android:paddingHorizontal="10dp" />
+
+      </LinearLayout>
+
+      <!--  비밀번호 확인-->
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginVertical="10dp"
+          android:gravity="center_vertical"
+          android:orientation="horizontal"
+          android:paddingHorizontal="30dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:paddingHorizontal="11dp">
+
+          <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_weight="1"
+              android:text="비밀번호"
+              android:textAlignment="center"
+              android:textSize="15sp"
+              android:textStyle="bold" />
+
+          <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_weight="1"
+              android:text="확인"
+              android:textAlignment="center"
+              android:textSize="15sp"
+              android:textStyle="bold" />
+        </LinearLayout>
+
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="4"
+            android:background="@drawable/join_member_edit_text"
+            android:paddingHorizontal="10dp" />
+
+      </LinearLayout>
+
+      <!--  한글 이름-->
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginVertical="10dp"
+          android:gravity="center_vertical"
+          android:orientation="horizontal"
+          android:paddingHorizontal="30dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="한글 이름"
+            android:textAlignment="center"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="3"
+            android:background="@drawable/join_member_edit_text"
+            android:paddingHorizontal="10dp" />
+
+      </LinearLayout>
+
+      <!--  영어 이름-->
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginVertical="10dp"
+          android:gravity="center_vertical"
+          android:orientation="horizontal"
+          android:paddingHorizontal="30dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="영어 이름"
+            android:textAlignment="center"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="3"
+            android:background="@drawable/join_member_edit_text"
+            android:paddingHorizontal="10dp" />
+
+      </LinearLayout>
+
+      <!--  성별-->
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginVertical="10dp"
+          android:gravity="center_vertical"
+          android:orientation="horizontal"
+          android:paddingHorizontal="30dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:layout_weight="2"
+            android:text="성별"
+            android:textAlignment="center"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:background="@drawable/join_member_gender_male"
+            android:text="남"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:background="@drawable/join_member_gender_female"
+            android:text="여"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+
+      </LinearLayout>
+
+      <!--  생년월일-->
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginVertical="10dp"
+          android:gravity="center_vertical"
+          android:orientation="horizontal"
+          android:paddingHorizontal="30dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="생년월일"
+            android:textAlignment="center"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <!--년도-->
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/join_member_edit_text"
+            android:text="1999" />
+
+        <!--월-->
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/join_member_edit_text"
+            android:text="01" />
+
+        <!--일-->
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/join_member_edit_text"
+            android:text="01" />
+      </LinearLayout>
+
+      <!--  이메일-->
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginVertical="10dp"
+          android:gravity="center_vertical"
+          android:orientation="horizontal"
+          android:paddingHorizontal="30dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="이메일"
+            android:textAlignment="center"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="3"
+            android:background="@drawable/join_member_edit_text"
+            android:paddingHorizontal="10dp" />
+
+      </LinearLayout>
+
+      <!--  휴대전화-->
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginVertical="10dp"
+          android:gravity="center_vertical"
+          android:orientation="horizontal"
+          android:paddingHorizontal="30dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="휴대전화"
+            android:textAlignment="center"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="3"
+            android:background="@drawable/join_member_edit_text"
+            android:paddingHorizontal="10dp" />
+
+      </LinearLayout>
+
+      <!--  거주지역-->
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginBottom="10dp"
+          android:gravity="center_vertical"
+          android:orientation="horizontal"
+          android:paddingHorizontal="30dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1"
+            android:text="거주지역"
+            android:textAlignment="center"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+          <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginBottom="5dp"
+              android:text="대한민국"
+              android:textSize="15sp"
+              android:textStyle="bold" />
+
+          <EditText
+              android:layout_width="match_parent"
+              android:layout_height="50dp"
+              android:layout_weight="1"
+              android:background="@drawable/join_member_edit_text" />
+
+        </LinearLayout>
+
+
+      </LinearLayout>
+
+      <!--  회원가입-->
+      <Button
+          android:layout_width="300dp"
+          android:layout_height="wrap_content"
+          android:layout_marginVertical="10dp"
+          android:text="회원 등록"
+          android:textSize="20sp"
+          android:textStyle="bold" />
+    </LinearLayout>
+  </ScrollView>
+
 </LinearLayout>
