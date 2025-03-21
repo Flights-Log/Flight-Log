@@ -45,6 +45,7 @@
           android:layout_height="5dp"
           android:layout_marginBottom="20dp"
           android:background="@color/mainBlue" />
+
       <!--  아이디-->
       <LinearLayout
           android:layout_width="match_parent"
@@ -109,16 +110,15 @@
           android:paddingHorizontal="30dp">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:orientation="vertical"
-            android:paddingHorizontal="11dp">
+            android:layout_weight="2"
+            android:orientation="vertical">
 
           <TextView
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:layout_weight="1"
               android:text="비밀번호"
               android:textAlignment="center"
               android:textSize="15sp"
@@ -127,7 +127,6 @@
           <TextView
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:layout_weight="1"
               android:text="확인"
               android:textAlignment="center"
               android:textSize="15sp"
@@ -138,7 +137,7 @@
         <EditText
             android:layout_width="0dp"
             android:layout_height="50dp"
-            android:layout_weight="4"
+            android:layout_weight="6"
             android:background="@drawable/join_member_edit_text"
             android:paddingHorizontal="10dp" />
 
@@ -210,26 +209,25 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginRight="20dp"
-            android:layout_weight="2"
+            android:layout_weight="1"
             android:text="성별"
             android:textAlignment="center"
             android:textSize="15sp"
             android:textStyle="bold" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="50dp"
-            android:layout_weight="1"
+            android:layout_weight="1.5"
             android:background="@drawable/join_member_gender_male"
             android:text="남"
             android:textSize="20sp"
             android:textStyle="bold" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="50dp"
-            android:layout_weight="1"
+            android:layout_weight="1.5"
             android:background="@drawable/join_member_gender_female"
             android:text="여"
             android:textSize="20sp"
@@ -254,7 +252,8 @@
             android:text="생년월일"
             android:textAlignment="center"
             android:textSize="15sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:layout_marginRight="5dp"/>
 
         <!--년도-->
         <androidx.appcompat.widget.AppCompatButton
