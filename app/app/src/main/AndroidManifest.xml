@@ -13,17 +13,26 @@
       android:theme="@style/Theme.FlightLog"
       tools:targetApi="31">
     <activity
-        android:name=".ReservationConfirmActivity"
+        android:name=".GoDateActivity"
+        android:exported="false" />
+    <activity
+        android:name=".SelectPeopleActivity"
         android:exported="true">
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+
+        <category android:name="android.intent.category.LAUNCHER" />
+      </intent-filter>
     </activity>
+    <activity
+        android:name=".ReservationConfirmActivity"
+        android:exported="true" />
     <activity
         android:name=".PaymentHistoryActivity"
         android:exported="false" />
     <activity
         android:name=".JoinMemberActivity"
-        android:exported="true">
-
-    </activity>
+        android:exported="true" />
     <activity
         android:name=".ComeAirplaneChooseSeatActivity"
         android:exported="false" />
@@ -41,13 +50,7 @@
         android:exported="true" />
     <activity
         android:name=".MainActivity"
-        android:exported="true">
-      <intent-filter>
-        <action android:name="android.intent.action.MAIN" />
-
-        <category android:name="android.intent.category.LAUNCHER" />
-      </intent-filter>
-    </activity>
+        android:exported="true"></activity>
   </application>
 
 </manifest>
