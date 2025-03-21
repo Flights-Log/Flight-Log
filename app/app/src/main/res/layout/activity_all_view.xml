@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:context=".AllViewActivity">
+
+  <Button
+      android:id="@+id/main_activity_button"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="main_activity" />
+
+  <Button
+      android:id="@+id/go_airplane_activity_button"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="go_airplane_activity" />
+
+  <Button
+      android:id="@+id/go_airplane_choose_seat_Activity_button"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="go_airplane_choose_seat_Activity" />
+
+  <Button
+      android:id="@+id/come_airplane_activity_button"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="come_airplane_activity" />
+
+  <Button
+      android:id="@+id/come_airplane_choose_seat_Activity_button"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="come_airplane_choose_seat_Activity" />
+
+  <Button
+      android:id="@+id/ticket_holder_activity_button"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="ticket_holder_activity" />
+
+  <Button
+      android:id="@+id/payment_history_activity_button"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="payment_history_activity" />
+
+  <Button
+      android:id="@+id/reservation_confirm_activity_button"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="reservation_confirm_activity" />
+
+  <Button
+      android:id="@+id/select_people_activity_button"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="select_people_activity" />
+
+  <Button
+      android:id="@+id/join_member_activity_button"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="join_member_activity" />
+
+</LinearLayout>

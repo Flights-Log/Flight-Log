@@ -13,10 +13,7 @@
       android:theme="@style/Theme.FlightLog"
       tools:targetApi="31">
     <activity
-        android:name=".GoDateActivity"
-        android:exported="false" />
-    <activity
-        android:name=".SelectPeopleActivity"
+        android:name=".AllViewActivity"
         android:exported="true">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
@@ -24,6 +21,12 @@
         <category android:name="android.intent.category.LAUNCHER" />
       </intent-filter>
     </activity>
+    <activity
+        android:name=".GoDateActivity"
+        android:exported="true" />
+    <activity
+        android:name=".SelectPeopleActivity"
+        android:exported="true" />
     <activity
         android:name=".ReservationConfirmActivity"
         android:exported="true" />
@@ -50,7 +53,9 @@
         android:exported="true" />
     <activity
         android:name=".MainActivity"
-        android:exported="true"></activity>
+        android:exported="true">
+
+    </activity>
   </application>
 
 </manifest>

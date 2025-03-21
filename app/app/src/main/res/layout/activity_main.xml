@@ -5,10 +5,10 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context=".MainActivity"
-    android:background="@color/white">
+    tools:context=".MainActivity">
 
   <!--  툴바-->
   <include
@@ -17,7 +17,7 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content" />
 
-<!--  메인 화면-->
+  <!--  메인 화면-->
   <ScrollView
       android:layout_width="match_parent"
       android:layout_height="match_parent"
@@ -145,7 +145,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginVertical="10dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
@@ -160,20 +159,24 @@
                   android:textStyle="bold" />
 
               <TextView
+                  android:id="@+id/choose_go_date_text"
                   android:layout_width="0dp"
                   android:layout_height="wrap_content"
-                  android:layout_weight="1"
+                  android:layout_weight="2"
                   android:text="지정 안함"
                   android:textAlignment="center"
                   android:textColor="@color/black"
                   android:textSize="20sp"
-                  android:textStyle="bold" />
+                  android:textStyle="bold"
+                  android:paddingVertical="5dp"/>
 
               <ImageView
+                  android:id="@+id/choose_go_date_arrow"
                   android:layout_width="0dp"
                   android:layout_height="wrap_content"
                   android:layout_weight="1"
                   android:contentDescription="right_arrow"
+                  android:paddingVertical="6dp"
                   android:src="@drawable/right_arrow_no_line" />
             </LinearLayout>
 
@@ -181,7 +184,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginVertical="10dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
@@ -196,20 +198,24 @@
                   android:textStyle="bold" />
 
               <TextView
+                  android:id="@+id/choose_come_date_text"
                   android:layout_width="0dp"
                   android:layout_height="wrap_content"
-                  android:layout_weight="1"
+                  android:layout_weight="2"
                   android:text="지정 안함"
                   android:textAlignment="center"
                   android:textColor="@color/black"
                   android:textSize="20sp"
-                  android:textStyle="bold" />
+                  android:textStyle="bold"
+                  android:paddingVertical="5dp"/>
 
               <ImageView
+                  android:id="@+id/choose_come_date_arrow"
                   android:layout_width="0dp"
                   android:layout_height="wrap_content"
                   android:layout_weight="1"
                   android:contentDescription="right_arrow"
+                  android:paddingVertical="6dp"
                   android:src="@drawable/right_arrow_no_line" />
             </LinearLayout>
 
@@ -217,7 +223,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginVertical="10dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
@@ -234,17 +239,19 @@
               <TextView
                   android:layout_width="0dp"
                   android:layout_height="wrap_content"
-                  android:layout_weight="1"
+                  android:layout_weight="2"
                   android:text="총 1 명"
                   android:textAlignment="center"
                   android:textColor="@color/black"
                   android:textSize="20sp"
-                  android:textStyle="bold" />
+                  android:textStyle="bold"
+                  android:paddingVertical="5dp"/>
 
               <ImageView
                   android:layout_width="0dp"
                   android:layout_height="wrap_content"
                   android:layout_weight="1"
+                  android:paddingVertical="6dp"
                   android:contentDescription="right_arrow"
                   android:src="@drawable/right_arrow_no_line" />
             </LinearLayout>
