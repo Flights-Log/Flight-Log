@@ -118,7 +118,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:src="@drawable/arrow" />
+                android:src="@drawable/right_arrow_black" />
 
             <TextView
                 android:id="@+id/flight_log_destination"
@@ -172,7 +172,7 @@
                   android:layout_height="wrap_content"
                   android:layout_weight="1"
                   android:contentDescription="right_arrow"
-                  android:src="@drawable/right_arrow" />
+                  android:src="@drawable/right_arrow_no_line" />
             </LinearLayout>
 
             <!--오는 날-->
@@ -208,7 +208,7 @@
                   android:layout_height="wrap_content"
                   android:layout_weight="1"
                   android:contentDescription="right_arrow"
-                  android:src="@drawable/right_arrow" />
+                  android:src="@drawable/right_arrow_no_line" />
             </LinearLayout>
 
             <!--인원 수-->
@@ -244,7 +244,7 @@
                   android:layout_height="wrap_content"
                   android:layout_weight="1"
                   android:contentDescription="right_arrow"
-                  android:src="@drawable/right_arrow" />
+                  android:src="@drawable/right_arrow_no_line" />
             </LinearLayout>
 
             <!--조회하기 버튼-->

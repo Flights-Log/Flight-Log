@@ -64,6 +64,7 @@
         <!-- 좌석 버튼 -->
         <!--A열................................    -->
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/come_seat_A1"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_columnWeight="1"
@@ -73,20 +74,22 @@
             android:textStyle="bold" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/come_seat_A2"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_columnWeight="1"
             android:background="@drawable/blue_button"
-            android:text="A1"
+            android:text="A2"
             android:textSize="15sp"
             android:textStyle="bold" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/come_seat_A3"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_columnWeight="1"
             android:background="@drawable/blue_button"
-            android:text="A1"
+            android:text="A3"
             android:textSize="15sp"
             android:textStyle="bold" />
 
@@ -95,41 +98,44 @@
             android:layout_height="50dp"
             android:layout_columnWeight="0.1"
             android:background="@drawable/blue_button"
-            android:text="A1"
             android:textSize="15sp"
             android:textStyle="bold"
             android:visibility="invisible" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/come_seat_A4"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_columnWeight="1"
             android:background="@drawable/blue_button"
-            android:text="A1"
+            android:text="A4"
             android:textSize="15sp"
             android:textStyle="bold" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/come_seat_A5"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_columnWeight="1"
             android:background="@drawable/blue_button"
-            android:text="A1"
+            android:text="A5"
             android:textSize="15sp"
             android:textStyle="bold" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/come_seat_A6"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_columnWeight="1"
             android:background="@drawable/blue_button"
-            android:text="A1"
+            android:text="A6"
             android:textSize="15sp"
             android:textStyle="bold" />
         <!--A열....................................-->
 
         <!--B열................................    -->
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/come_seat_B1"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_columnWeight="1"
@@ -139,20 +145,22 @@
             android:textStyle="bold" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/come_seat_B2"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_columnWeight="1"
             android:background="@drawable/blue_button"
-            android:text="B1"
+            android:text="B2"
             android:textSize="15sp"
             android:textStyle="bold" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/come_seat_B3"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_columnWeight="1"
             android:background="@drawable/blue_button"
-            android:text="B1"
+            android:text="B3"
             android:textSize="15sp"
             android:textStyle="bold" />
 
@@ -161,41 +169,44 @@
             android:layout_height="50dp"
             android:layout_columnWeight="0.1"
             android:background="@drawable/blue_button"
-            android:text="B1"
             android:textSize="15sp"
             android:textStyle="bold"
             android:visibility="invisible" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/come_seat_B4"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_columnWeight="1"
             android:background="@drawable/blue_button"
-            android:text="B1"
+            android:text="B4"
             android:textSize="15sp"
             android:textStyle="bold" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/come_seat_B5"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_columnWeight="1"
             android:background="@drawable/blue_button"
-            android:text="B1"
+            android:text="B5"
             android:textSize="15sp"
             android:textStyle="bold" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/come_seat_B6"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_columnWeight="1"
             android:background="@drawable/blue_button"
-            android:text="B1"
+            android:text="B6"
             android:textSize="15sp"
             android:textStyle="bold" />
         <!--B열....................................-->
 
         <!--C열................................    -->
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/come_seat_C1"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_columnWeight="1"
@@ -205,20 +216,22 @@
             android:textStyle="bold" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/come_seat_C2"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_columnWeight="1"
             android:background="@drawable/blue_button"
-            android:text="C1"
+            android:text="C2"
             android:textSize="15sp"
             android:textStyle="bold" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/come_seat_C3"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_columnWeight="1"
             android:background="@drawable/blue_button"
-            android:text="C1"
+            android:text="C3"
             android:textSize="15sp"
             android:textStyle="bold" />
 
@@ -227,41 +240,44 @@
             android:layout_height="50dp"
             android:layout_columnWeight="0.1"
             android:background="@drawable/blue_button"
-            android:text="C1"
             android:textSize="15sp"
             android:textStyle="bold"
             android:visibility="invisible" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/come_seat_C4"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_columnWeight="1"
             android:background="@drawable/blue_button"
-            android:text="C1"
+            android:text="C4"
             android:textSize="15sp"
             android:textStyle="bold" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/come_seat_C5"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_columnWeight="1"
             android:background="@drawable/blue_button"
-            android:text="C1"
+            android:text="C5"
             android:textSize="15sp"
             android:textStyle="bold" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/come_seat_C6"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_columnWeight="1"
             android:background="@drawable/blue_button"
-            android:text="C1"
+            android:text="C6"
             android:textSize="15sp"
             android:textStyle="bold" />
         <!--C열....................................-->
 
         <!--D열................................    -->
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/come_seat_D1"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_columnWeight="1"
@@ -271,20 +287,22 @@
             android:textStyle="bold" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/come_seat_D2"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_columnWeight="1"
             android:background="@drawable/blue_button"
-            android:text="D1"
+            android:text="D2"
             android:textSize="15sp"
             android:textStyle="bold" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/come_seat_D3"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_columnWeight="1"
             android:background="@drawable/blue_button"
-            android:text="D1"
+            android:text="D3"
             android:textSize="15sp"
             android:textStyle="bold" />
 
@@ -293,41 +311,44 @@
             android:layout_height="50dp"
             android:layout_columnWeight="0.1"
             android:background="@drawable/blue_button"
-            android:text="D1"
             android:textSize="15sp"
             android:textStyle="bold"
             android:visibility="invisible" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/come_seat_D4"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_columnWeight="1"
             android:background="@drawable/blue_button"
-            android:text="D1"
+            android:text="D4"
             android:textSize="15sp"
             android:textStyle="bold" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/come_seat_D5"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_columnWeight="1"
             android:background="@drawable/blue_button"
-            android:text="D1"
+            android:text="D5"
             android:textSize="15sp"
             android:textStyle="bold" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/come_seat_D6"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_columnWeight="1"
             android:background="@drawable/blue_button"
-            android:text="D1"
+            android:text="D6"
             android:textSize="15sp"
             android:textStyle="bold" />
         <!--D열....................................-->
 
         <!--E열................................    -->
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/come_seat_E1"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_columnWeight="1"
@@ -338,22 +359,24 @@
             android:textStyle="bold" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/come_seat_E2"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_columnWeight="1"
             android:layout_marginTop="15dp"
             android:background="@drawable/blue_button"
-            android:text="E1"
+            android:text="E2"
             android:textSize="15sp"
             android:textStyle="bold" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/come_seat_E3"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_columnWeight="1"
             android:layout_marginTop="15dp"
             android:background="@drawable/blue_button"
-            android:text="E1"
+            android:text="E3"
             android:textSize="15sp"
             android:textStyle="bold" />
 
@@ -363,44 +386,47 @@
             android:layout_columnWeight="0.1"
             android:layout_marginTop="15dp"
             android:background="@drawable/blue_button"
-            android:text="E1"
             android:textSize="15sp"
             android:textStyle="bold"
             android:visibility="invisible" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/come_seat_E4"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_columnWeight="1"
             android:layout_marginTop="15dp"
             android:background="@drawable/blue_button"
-            android:text="E1"
+            android:text="E4"
             android:textSize="15sp"
             android:textStyle="bold" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/come_seat_E5"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_columnWeight="1"
             android:layout_marginTop="15dp"
             android:background="@drawable/blue_button"
-            android:text="E1"
+            android:text="E5"
             android:textSize="15sp"
             android:textStyle="bold" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/come_seat_E6"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_columnWeight="1"
             android:layout_marginTop="15dp"
             android:background="@drawable/blue_button"
-            android:text="E1"
+            android:text="E6"
             android:textSize="15sp"
             android:textStyle="bold" />
         <!--E열....................................-->
 
         <!--F열................................    -->
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/come_seat_F1"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_columnWeight="1"
@@ -411,22 +437,24 @@
             android:textStyle="bold" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/come_seat_F2"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_columnWeight="1"
             android:layout_marginTop="15dp"
             android:background="@drawable/blue_button"
-            android:text="F1"
+            android:text="F2"
             android:textSize="15sp"
             android:textStyle="bold" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/come_seat_F3"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_columnWeight="1"
             android:layout_marginTop="15dp"
             android:background="@drawable/blue_button"
-            android:text="F1"
+            android:text="F3"
             android:textSize="15sp"
             android:textStyle="bold" />
 
@@ -436,44 +464,47 @@
             android:layout_columnWeight="0.1"
             android:layout_marginTop="15dp"
             android:background="@drawable/blue_button"
-            android:text="F1"
             android:textSize="15sp"
             android:textStyle="bold"
             android:visibility="invisible" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/come_seat_F4"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_columnWeight="1"
             android:layout_marginTop="15dp"
             android:background="@drawable/blue_button"
-            android:text="F1"
+            android:text="F4"
             android:textSize="15sp"
             android:textStyle="bold" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/come_seat_F5"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_columnWeight="1"
             android:layout_marginTop="15dp"
             android:background="@drawable/blue_button"
-            android:text="F1"
+            android:text="F5"
             android:textSize="15sp"
             android:textStyle="bold" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/come_seat_F6"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_columnWeight="1"
             android:layout_marginTop="15dp"
             android:background="@drawable/blue_button"
-            android:text="F1"
+            android:text="F6"
             android:textSize="15sp"
             android:textStyle="bold" />
         <!--F열....................................-->
 
         <!--G열................................    -->
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/come_seat_G1"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_columnWeight="1"
@@ -484,22 +515,24 @@
             android:textStyle="bold" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/come_seat_G2"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_columnWeight="1"
             android:layout_marginTop="15dp"
             android:background="@drawable/blue_button"
-            android:text="G1"
+            android:text="G2"
             android:textSize="15sp"
             android:textStyle="bold" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/come_seat_G3"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_columnWeight="1"
             android:layout_marginTop="15dp"
             android:background="@drawable/blue_button"
-            android:text="G1"
+            android:text="G3"
             android:textSize="15sp"
             android:textStyle="bold" />
 
@@ -509,44 +542,47 @@
             android:layout_columnWeight="0.1"
             android:layout_marginTop="15dp"
             android:background="@drawable/blue_button"
-            android:text="G1"
             android:textSize="15sp"
             android:textStyle="bold"
             android:visibility="invisible" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/come_seat_G4"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_columnWeight="1"
             android:layout_marginTop="15dp"
             android:background="@drawable/blue_button"
-            android:text="G1"
+            android:text="G4"
             android:textSize="15sp"
             android:textStyle="bold" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/come_seat_G5"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_columnWeight="1"
             android:layout_marginTop="15dp"
             android:background="@drawable/blue_button"
-            android:text="G1"
+            android:text="G5"
             android:textSize="15sp"
             android:textStyle="bold" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/come_seat_G6"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_columnWeight="1"
             android:layout_marginTop="15dp"
             android:background="@drawable/blue_button"
-            android:text="G1"
+            android:text="G6"
             android:textSize="15sp"
             android:textStyle="bold" />
         <!--G열....................................-->
 
         <!--H열................................    -->
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/come_seat_H1"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_columnWeight="1"
@@ -556,20 +592,22 @@
             android:textStyle="bold" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/come_seat_H2"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_columnWeight="1"
             android:background="@drawable/blue_button"
-            android:text="H1"
+            android:text="H2"
             android:textSize="15sp"
             android:textStyle="bold" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/come_seat_H3"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_columnWeight="1"
             android:background="@drawable/blue_button"
-            android:text="H1"
+            android:text="H3"
             android:textSize="15sp"
             android:textStyle="bold" />
 
@@ -578,35 +616,37 @@
             android:layout_height="50dp"
             android:layout_columnWeight="0.1"
             android:background="@drawable/blue_button"
-            android:text="H1"
             android:textSize="15sp"
             android:textStyle="bold"
             android:visibility="invisible" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/come_seat_H4"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_columnWeight="1"
             android:background="@drawable/blue_button"
-            android:text="H1"
+            android:text="H4"
             android:textSize="15sp"
             android:textStyle="bold" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/come_seat_H5"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_columnWeight="1"
             android:background="@drawable/blue_button"
-            android:text="H1"
+            android:text="H5"
             android:textSize="15sp"
             android:textStyle="bold" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/come_seat_H6"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_columnWeight="1"
             android:background="@drawable/blue_button"
-            android:text="H1"
+            android:text="H6"
             android:textSize="15sp"
             android:textStyle="bold" />
         <!--H열....................................-->
@@ -617,12 +657,12 @@
             android:layout_height="50dp"
             android:layout_columnWeight="1"
             android:background="@drawable/blue_button"
-            android:text="I1"
             android:textSize="15sp"
             android:textStyle="bold"
             android:visibility="invisible" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/come_seat_I1"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_columnWeight="1"
@@ -632,11 +672,12 @@
             android:textStyle="bold" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/come_seat_I2"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_columnWeight="1"
             android:background="@drawable/blue_button"
-            android:text="I1"
+            android:text="I2"
             android:textSize="15sp"
             android:textStyle="bold" />
 
@@ -645,17 +686,27 @@
             android:layout_height="50dp"
             android:layout_columnWeight="0.1"
             android:background="@drawable/blue_button"
-            android:text="I1"
             android:textSize="15sp"
             android:textStyle="bold"
             android:visibility="invisible" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/come_seat_I3"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_columnWeight="1"
             android:background="@drawable/blue_button"
-            android:text="I1"
+            android:text="I3"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/come_seat_I4"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_columnWeight="1"
+            android:background="@drawable/blue_button"
+            android:text="I4"
             android:textSize="15sp"
             android:textStyle="bold" />
 
@@ -664,16 +715,6 @@
             android:layout_height="50dp"
             android:layout_columnWeight="1"
             android:background="@drawable/blue_button"
-            android:text="I1"
-            android:textSize="15sp"
-            android:textStyle="bold" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_columnWeight="1"
-            android:background="@drawable/blue_button"
-            android:text="I1"
             android:textSize="15sp"
             android:textStyle="bold"
             android:visibility="invisible" />
@@ -685,12 +726,12 @@
             android:layout_height="50dp"
             android:layout_columnWeight="1"
             android:background="@drawable/blue_button"
-            android:text="J1"
             android:textSize="15sp"
             android:textStyle="bold"
             android:visibility="invisible" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/come_seat_J1"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_columnWeight="1"
@@ -700,11 +741,12 @@
             android:textStyle="bold" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/come_seat_J2"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_columnWeight="1"
             android:background="@drawable/blue_button"
-            android:text="J1"
+            android:text="J2"
             android:textSize="15sp"
             android:textStyle="bold" />
 
@@ -713,17 +755,27 @@
             android:layout_height="50dp"
             android:layout_columnWeight="0.1"
             android:background="@drawable/blue_button"
-            android:text="J1"
             android:textSize="15sp"
             android:textStyle="bold"
             android:visibility="invisible" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/come_seat_J3"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_columnWeight="1"
             android:background="@drawable/blue_button"
-            android:text="J1"
+            android:text="J3"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/come_seat_J4"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_columnWeight="1"
+            android:background="@drawable/blue_button"
+            android:text="J4"
             android:textSize="15sp"
             android:textStyle="bold" />
 
@@ -732,16 +784,6 @@
             android:layout_height="50dp"
             android:layout_columnWeight="1"
             android:background="@drawable/blue_button"
-            android:text="J1"
-            android:textSize="15sp"
-            android:textStyle="bold" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_columnWeight="1"
-            android:background="@drawable/blue_button"
-            android:text="J1"
             android:textSize="15sp"
             android:textStyle="bold"
             android:visibility="invisible" />

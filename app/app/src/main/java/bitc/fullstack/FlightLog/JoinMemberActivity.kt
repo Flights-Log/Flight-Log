@@ -6,11 +6,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import bitc.fullstack.FlightLog.databinding.ActivityComeChooseSeatBinding
-import bitc.fullstack.FlightLog.databinding.ActivityGoAirplaneChooseSeatBinding
+import bitc.fullstack.FlightLog.databinding.ActivityJoinMemberBinding
 
-class ComeActivityChooseSeat : AppCompatActivity() {
-  private val binding: ActivityComeChooseSeatBinding by lazy {
-    ActivityComeChooseSeatBinding.inflate(layoutInflater)
+class JoinMemberActivity : AppCompatActivity() {
+  private val binding: ActivityJoinMemberBinding by lazy {
+    ActivityJoinMemberBinding.inflate(layoutInflater)
   }
 
   override fun onCreate(savedInstanceState: Bundle?) {

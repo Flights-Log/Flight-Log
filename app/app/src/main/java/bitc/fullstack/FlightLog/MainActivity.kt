@@ -2,7 +2,6 @@ package bitc.fullstack.FlightLog
 
 import android.os.Bundle
 import android.util.Log
-import android.view.Window
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
