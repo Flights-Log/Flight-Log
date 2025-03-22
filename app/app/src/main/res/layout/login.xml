@@ -6,7 +6,29 @@
     android:layout_height="match_parent">
 
 
-<!-- ※ id 부분은 나중에 한꺼번에 맞추기 위해 비워뒀습니다. -->
+<!--
+
+※ id는 비워뒀습니다.
+
+필요 파일들(7개)
+res/drawable/edittext_border.xml
+res/drawable/flight_log_back.png
+res/drawable/flight_log_logo.png
+res/drawable/flight_log_menu.png
+res/layout/login.xml
+res/layout/tool_bar_login.xml
+res/values/colors.xml(내용 추출만)
+    <color name="mainBlue">#118CFF</color>
+    <color name="gray1">#868686</color>
+    <color name="whiteGray1">#eoeoeo</color>
+
+
+파란색 : 118CFF
+회색 : 868686
+하늘색 : 90CAFF
+연한 회색 : eoeoeo
+
+  -->
 
   <!-- 상단 툴바 -->
   <androidx.appcompat.widget.Toolbar
@@ -14,7 +36,6 @@
       android:layout_width="match_parent"
       android:layout_height="?attr/actionBarSize"
       android:background="@color/mainBlue"
-      android:elevation="4dp"
       android:theme="@style/Widget.AppCompat.ActionBar"
       app:titleTextColor="#ffffff">
 
@@ -143,7 +164,7 @@
         android:textStyle="bold"
         android:textColorLink="#118CFF" />
 
-    <!-- 소셜 로그인 아이콘 -->
+    <!-- 소셜 로그인 아이콘(미사용) -->
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -153,26 +174,31 @@
       <ImageView
           android:layout_width="40dp"
           android:layout_height="40dp"
-          android:src="@drawable/kakao_icon"
           android:layout_marginEnd="10dp"/>
+
+      <!--          android:src="@drawable/kakao_icon"-->
 
       <ImageView
           android:layout_width="40dp"
           android:layout_height="40dp"
-          android:src="@drawable/naver_icon"
           android:layout_marginEnd="10dp"/>
+
+<!--      android:src="@drawable/naver_icon"-->
 
       <ImageView
           android:layout_width="40dp"
           android:layout_height="40dp"
-          android:src="@drawable/google_icon"
           android:layout_marginEnd="10dp"/>
+
+<!--      android:src="@drawable/google_icon"-->
 
       <ImageView
           android:layout_width="40dp"
           android:layout_height="40dp"
-          android:src="@drawable/insta_icon"
           app:cornerRadius="6dp"/>
+
+
+<!--      android:src="@drawable/insta_icon"-->
 
     </LinearLayout>
 
