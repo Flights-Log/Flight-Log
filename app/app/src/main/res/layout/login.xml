@@ -1,4 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--    res/layout/login.xml-->
+
+
+
+
+
+
+<!--사용하지 않음 -->
+
+
+
+
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -6,29 +18,7 @@
     android:layout_height="match_parent">
 
 
-<!--
 
-※ id는 비워뒀습니다.
-
-필요 파일들(7개)
-res/drawable/edittext_border.xml
-res/drawable/flight_log_back.png
-res/drawable/flight_log_logo.png
-res/drawable/flight_log_menu.png
-res/layout/login.xml
-res/layout/tool_bar_login.xml
-res/values/colors.xml(내용 추출만)
-    <color name="mainBlue">#118CFF</color>
-    <color name="gray1">#868686</color>
-    <color name="whiteGray1">#eoeoeo</color>
-
-
-파란색 : 118CFF
-회색 : 868686
-하늘색 : 90CAFF
-연한 회색 : eoeoeo
-
-  -->
 
   <!-- 상단 툴바 -->
   <androidx.appcompat.widget.Toolbar

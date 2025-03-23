@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+
+
+
+<!-- 사용하지 않음 -->
+
+
+
+
+    <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+        <item>
+            <shape android:shape="rectangle">
+                <solid android:color="#FFFFFF"/> <!-- 아이템 배경색 -->
+            </shape>
+        </item>
+        <item android:top="-2dp" android:right="-2dp" android:left="-2dp">
+            <shape>
+                <solid android:color="#118CFF"/> <!-- 파란색 선 -->
+                <size android:height="2dp"/>
+            </shape>
+        </item>
+    </layer-list>

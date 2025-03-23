@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--    res/layout/login.xml-->
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/main">
+
+
+
+
+    <!-- 상단 툴바 -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/mainBlue"
+        android:theme="@style/Widget.AppCompat.ActionBar"
+        app:titleTextColor="#ffffff">
+
+        <!-- 뒤로가기 버튼 -->
+        <ImageButton
+            android:id="@+id/flight_log_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/flight_log_back"
+            android:paddingBottom="5dp"
+            android:contentDescription="메뉴" />
+
+        <!-- 중앙 아이콘 -->
+        <ImageView
+            android:id="@+id/flight_log_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/flight_log_logo"
+            android:contentDescription="비행기 아이콘"
+            android:layout_gravity="center" />
+
+        <!-- 닫기 버튼 -->
+        <ImageView
+            android:id="@+id/flight_log_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/flight_log_menu"
+            android:layout_gravity="end"
+            android:paddingEnd="10dp" />
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <!-- 로그인 레이아웃 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:orientation="vertical"
+        android:padding="20dp"
+        android:layout_marginBottom="100dp"
+        android:gravity="center">
+
+
+<!--    로그인 라벨  -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="회원 로그인"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="10dp" />
+
+<!--   라벨 아래의 굵은 파란 선   -->
+        <View
+            android:layout_width="150dp"
+            android:layout_height="3dp"
+            android:background="@color/mainBlue"
+            android:layout_marginBottom="40dp"/>
+
+<!--    로그인 영역 박스  -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginBottom="20dp">
+
+<!--    아이디 라벨  -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="아이디"
+                android:textSize="16sp"
+                android:paddingEnd="10dp"
+                android:layout_marginStart="10dp"/>
+
+<!--    아이디 입력 박스   -->
+            <EditText
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:hint="아이디"
+                android:background="@drawable/edittext_border"
+                android:padding="8dp"
+                android:layout_marginStart="10dp"/>
+
+        </LinearLayout>
+
+<!--    비밀번호 영역 박스  -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginBottom="40dp">
+
+<!--   비밀번호 라벨  -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="비밀번호 "
+                android:textSize="16sp"
+                android:paddingEnd="10dp"/>
+
+<!--    비밀번호 입력 박스  -->
+            <EditText
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:hint="비밀번호"
+                android:background="@drawable/edittext_border"
+                android:padding="8dp"
+                android:inputType="textPassword"/>
+        </LinearLayout>
+
+<!--    로그인 박스  -->
+        <Button
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:text="로그인"
+            android:backgroundTint="#118CFF"
+            app:cornerRadius="6dp"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:layout_marginTop="15dp"/>
+
+<!--    회원가입 박스 -->
+        <Button
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:text="회원가입"
+            android:backgroundTint="#118CFF"
+            app:cornerRadius="6dp"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:textColorLink="#118CFF" />
+
+        <!-- 소셜 로그인 아이콘(미사용) -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="40dp">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="10dp"/>
+
+            <!--          android:src="@drawable/kakao_icon"-->
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="10dp"/>
+
+            <!--      android:src="@drawable/naver_icon"-->
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="10dp"/>
+
+            <!--      android:src="@drawable/google_icon"-->
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                app:cornerRadius="6dp"/>
+
+
+            <!--      android:src="@drawable/insta_icon"-->
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

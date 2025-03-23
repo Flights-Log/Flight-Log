@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--    res/menu/drawer_menu.xml-->
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+<!--    간격 생성을 위한 item 항목(내용없음) -->
+    <item
+        android:id="@+id/empty2">
+
+        <menu>
+            <item
+                android:id="@+id/empty2_2"
+                android:title=""/>
+        </menu>
+
+    </item>
+
+    <!-- 마이페이지 - 회원정보-->
+    <item
+        android:id="@+id/nav_myinfo"
+        android:title="마이페이지"
+        android:icon="@drawable/ic_mypage"
+        android:titleTextStyle="@style/Widget.Design.NavigationView">
+        <menu>
+            <item
+                android:id="@+id/user_info"
+                android:title="     회원 정보" />
+        </menu>
+    </item>
+
+
+    <!-- 마이페이지 - 예약 관련 -->
+    <item
+        android:id="@+id/nav_reservations"
+        android:title="예약"
+        android:icon="@drawable/ic_mypage"
+        android:titleTextStyle="@style/MenuItemTextStyle" >
+        <menu>
+            <item
+                android:id="@+id/nav_my_reservations"
+                android:title="     나의 예약" />
+            <item
+                android:id="@+id/nav_ticket_holder"
+                android:title="     티켓 홀더" />
+            <item
+                android:id="@+id/nav_cancel_reservation"
+                android:title="     예약 취소" />
+        </menu>
+    </item>
+
+    <!-- 마이페이지 - 비회원조회 -->
+    <item
+        android:id="@+id/nav_guest_view"
+        android:title="비회원"
+        android:icon="@drawable/ic_mypage"
+        android:titleTextStyle="@style/MenuItemTextStyle" >
+        <menu>
+            <item
+                android:id="@+id/nav_reservation_list"
+                android:title="     비회원 조회" />
+        </menu>
+    </item>
+
+
+</menu>
