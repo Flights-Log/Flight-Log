@@ -5,13 +5,13 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import bitc.fullstack.FlightLog.databinding.ActivityViewDetailBinding
+import bitc.fullstack.FlightLog.databinding.ActivityPopUpBinding
 
 class Pop_upActivity : AppCompatActivity() {
 
 
-    private val binding: ActivityViewDetailBinding by lazy {
-        ActivityViewDetailBinding.inflate(layoutInflater)
+    private val binding: ActivityPopUpBinding by lazy {
+        ActivityPopUpBinding.inflate(layoutInflater)
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
