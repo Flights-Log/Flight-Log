@@ -8,12 +8,12 @@
     android:orientation="vertical"
     tools:context=".flightmain.ChooseDestinationFragment">
 
-  <androidx.appcompat.widget.SearchView
-      android:id="@+id/destination_search_view"
+  <androidx.recyclerview.widget.RecyclerView
+      android:id="@+id/destination_recycler_view"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:focusable="true"
-      app:iconifiedByDefault="false"
-      app:queryHint="공항 명을 입력하세요" />
+      android:layout_marginTop="10dp"
+      app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+      tools:listitem="@layout/item_destination" />
 
 </LinearLayout>

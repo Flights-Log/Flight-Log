@@ -40,6 +40,10 @@ interface AppServerInterface {
   @GET("searchDeparture")
   fun searchDeparture(): Call<List<String>>
 
+  //  도착하는 도시 목록 가져오기
+  @GET("searchDestination")
+  fun searchDestination(): Call<List<String>>
+
 }
 
 
