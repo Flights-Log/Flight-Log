@@ -9,6 +9,7 @@ import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 //  Retrofit 을 사용하여 서버와 통신 시 사용할 메소드 형식 설정
@@ -41,8 +42,8 @@ interface AppServerInterface {
   fun searchDeparture(): Call<List<String>>
 
   //  도착하는 도시 목록 가져오기
-  @GET("searchDestination")
-  fun searchDestination(): Call<List<String>>
+  @GET("searchDestination/{selectedDeparture}")
+  fun searchDestination(@Path("selectedDeparture") selectedDeparture: String): Call<List<String>>
 
 }
 
