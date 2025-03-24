@@ -10,7 +10,13 @@
         layout="@layout/tool_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+<LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -49,101 +55,15 @@
     </LinearLayout>
 
     <!--    성별 선택-->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginVertical="10dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="신분증 상 성별" />
-
-        <LinearLayout
+    <Spinner
+            android:id="@+id/passenger_info_gender"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:background="@drawable/edittext_border">
-
-            <RadioButton
-                android:id="@+id/female"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="여성"
-                android:textStyle="bold"
-                android:textAlignment="center"/>
-
-            <View
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:background="@color/black" />
-
-            <RadioButton
-                android:id="@+id/male"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="남성"
-                android:textStyle="bold"
-                android:textAlignment="center"/>
-        </LinearLayout>
-    </LinearLayout>
-    <!--    <FrameLayout-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_marginHorizontal="20dp">-->
-
-    <!--        <LinearLayout-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:background="@drawable/edittext_border"-->
-    <!--            android:orientation="horizontal"-->
-    <!--            android:padding="10dp">-->
-
-    <!--            <RadioGroup-->
-    <!--                android:layout_width="match_parent"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                android:orientation="horizontal">-->
-    <!--            <RadioButton-->
-    <!--                android:id="@+id/female"-->
-    <!--                android:layout_width="0dp"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                android:layout_weight="1"-->
-    <!--                android:text="여성"-->
-    <!--                android:textStyle="bold" />-->
-
-    <!--            <View-->
-    <!--                android:layout_width="1dp"-->
-    <!--                android:layout_height="match_parent"-->
-    <!--                android:background="@color/black" />-->
-
-    <!--            <RadioButton-->
-    <!--                android:id="@+id/male"-->
-    <!--                android:layout_width="0dp"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                android:layout_weight="1"-->
-    <!--                android:text="남성"-->
-    <!--                android:textStyle="bold" />-->
-    <!--            </RadioGroup>-->
-    <!--        </LinearLayout>-->
-
-    <!--        <TextView-->
-    <!--            android:layout_width="wrap_content"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:layout_gravity="top|start"-->
-    <!--            android:layout_marginStart="16dp"-->
-    <!--            android:lineHeight="20dp"-->
-    <!--            android:minHeight="20dp"-->
-    <!--            android:paddingHorizontal="6dp"-->
-    <!--            android:text="신분증 상 성별"-->
-    <!--            android:textSize="15sp"-->
-    <!--            android:translationY="0dp" />-->
-    <!--    </FrameLayout>-->
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginVertical="10dp"
+            android:background="@drawable/edittext_border"
+            android:paddingHorizontal="5dp"
+            android:paddingVertical="10dp" />
 
     <Spinner
         android:id="@+id/nationality"
@@ -219,15 +139,44 @@
         android:paddingHorizontal="5dp"
         android:paddingVertical="10dp" />
 
+    <EditText
+            android:id="@+id/passenger_baggage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="수화물 무게"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginVertical="10dp"
+            android:background="@drawable/edittext_border"
+            android:paddingHorizontal="5dp"
+            android:paddingVertical="10dp" />
+
+
+
+    <LinearLayout
+            android:id="@+id/passenger_add_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"/>
+
+    <Button
+            android:id="@+id/btn_add_passenger"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="10dp"
+            android:text="동승객 추가하기"
+            android:backgroundTint="#118cff"/>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
         android:layout_marginVertical="10dp"
+        android:id="@+id/passenger_info_save"
         android:backgroundTint="#118cff"
         android:text="저장"
         android:textSize="20sp"
         android:textStyle="bold" />
-
+</LinearLayout>
+    </ScrollView>
 </LinearLayout>
