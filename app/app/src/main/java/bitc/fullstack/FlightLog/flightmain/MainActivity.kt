@@ -12,7 +12,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import bitc.fullstack.FlightLog.R
+import bitc.fullstack.FlightLog.appserver.AppServerClass
 import bitc.fullstack.FlightLog.databinding.ActivityMainBinding
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.time.LocalDate
 import java.util.Calendar
 
@@ -163,15 +167,56 @@ class MainActivity : AppCompatActivity(), SelectPeopleDialogFragment.OnPassenger
   //  출발지 설정
   fun chooseDeparture() {
     binding.departureText.setOnClickListener {
-      val dialog = ChooseDestinationFragment()
-      dialog.show(supportFragmentManager, "ChooseDestinationFragment")
+      val dialog = ChooseDepartureFragment()
+      dialog.show(supportFragmentManager, "ChooseDepartureFragment")
     }
   }
 
   //  도착지 설정
   fun chooseDestination() {
     binding.destinationText.setOnClickListener {
-
+      val dialog = ChooseDestinationFragment()
+      dialog.show(supportFragmentManager, "ChooseDestinationFragment")
     }
+  }
+
+  //  Retrofit 통신 응답 부분을 따로 메소드로 분리(String)
+  @JvmName("callFromString")
+  private fun retrofitResponse(call: Call<String>) {
+
+    call.enqueue(object : Callback<String> {
+      override fun onResponse(p0: Call<String>, res: Response<String>) {
+        if (res.isSuccessful) {
+          val result = res.body()
+          Log.d("flightLog", "result : $result")
+        } else {
+          Log.d("flightLog", "송신 실패")
+        }
+      }
+
+      override fun onFailure(p0: Call<String>, t: Throwable) {
+        Log.d("flightLog", "message : $t.message")
+      }
+    })
+  }
+
+  //  Retrofit 통신 응답 List<String>
+  @JvmName("callFromListString")
+  private fun retrofitResponse(call: Call<List<String>>) {
+
+    call.enqueue(object : Callback<List<String>> {
+      override fun onResponse(p0: Call<List<String>>, res: Response<List<String>>) {
+        if (res.isSuccessful) {
+          val result = res.body()
+          Log.d("flightLog", "result : $result")
+        } else {
+          Log.d("flightLog", "송신 실패")
+        }
+      }
+
+      override fun onFailure(p0: Call<List<String>>, t: Throwable) {
+        Log.d("flightLog", "message : $t.message")
+      }
+    })
   }
 }
