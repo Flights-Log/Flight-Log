@@ -106,13 +106,13 @@
               android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/flight_log_departure"
+                android:id="@+id/departure_text"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="출발지"
-                android:textSize="20sp"
+                android:textSize="30sp"
                 android:textStyle="bold" />
 
             <ImageView
@@ -123,13 +123,13 @@
                 android:src="@drawable/right_arrow_black" />
 
             <TextView
-                android:id="@+id/flight_log_destination"
+                android:id="@+id/destination_text"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="도착지"
-                android:textSize="20sp"
+                android:textSize="30sp"
                 android:textStyle="bold" />
           </LinearLayout>
 

@@ -66,16 +66,9 @@ class AllViewActivity : AppCompatActivity() {
       startActivity(intent)
     }
 
-    binding.selectPeopleActivityButton.setOnClickListener {
-      val intent = Intent(this, SelectPeopleActivity::class.java)
-      startActivity(intent)
-    }
-
     binding.joinMemberActivityButton.setOnClickListener {
       val intent = Intent(this, JoinMemberActivity::class.java)
       startActivity(intent)
     }
-
-
   }
 }

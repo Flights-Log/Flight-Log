@@ -1,7 +1,6 @@
 package bitc.fullstack.FlightLog
 
 import android.app.DatePickerDialog
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.ImageButton
@@ -83,7 +82,7 @@ class MainActivity : AppCompatActivity(), SelectPeopleDialogFragment.OnPassenger
 
 //      선택 가능한 범위 지정
       datePickerDialog.datePicker.minDate = System.currentTimeMillis()
-      calendar.add(Calendar.MONTH, 1)
+      calendar.add(Calendar.MONTH, 6)
       datePickerDialog.datePicker.maxDate = calendar.timeInMillis
 
       datePickerDialog.show()
@@ -123,7 +122,7 @@ class MainActivity : AppCompatActivity(), SelectPeopleDialogFragment.OnPassenger
 //      선택 가능 범위 지정
       val minDateMillis = goDate.atStartOfDay().toEpochSecond(java.time.ZoneOffset.UTC) * 1000
       val maxDateMillis =
-        goDate.plusMonths(1).atStartOfDay().toEpochSecond(java.time.ZoneOffset.UTC) * 1000
+        goDate.plusMonths(6).atStartOfDay().toEpochSecond(java.time.ZoneOffset.UTC) * 1000
 
       datePickerDialog.datePicker.minDate = minDateMillis
       datePickerDialog.datePicker.maxDate = maxDateMillis
@@ -152,5 +151,17 @@ class MainActivity : AppCompatActivity(), SelectPeopleDialogFragment.OnPassenger
   //  총 인원 수 수정해주는 함수
   override fun onPassengerSelected(result: String) {
     binding.choosePeopleText.text = result
+  }
+
+  fun chooseDeparture(){
+    binding.departureText.setOnClickListener {
+
+    }
+  }
+
+  fun chooseArrive(){
+    binding.destinationText.setOnClickListener {
+
+    }
   }
 }
