@@ -13,4 +13,9 @@ public interface FlightInfoSaveService {
   // 국제 운항 정보
   void saveIFlightInfo(List<iFlightDTO> IflightDTOList);
 
+//  출발지
+  List<String> searchDeparture();
+
+//  도착지
+  List<String> searchDestination(String selectedDeparture);
 }

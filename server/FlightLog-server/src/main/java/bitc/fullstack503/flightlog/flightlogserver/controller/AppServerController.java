@@ -1,6 +1,7 @@
 package bitc.fullstack503.flightlog.flightlogserver.controller;
 
 //import org.springframework.web.bind.annotation.*;
+
 import bitc.fullstack503.flightlog.flightlogserver.dto.dFlightDTO;
 import bitc.fullstack503.flightlog.flightlogserver.dto.iFlightDTO;
 import bitc.fullstack503.flightlog.flightlogserver.service.FlightInfoSaveService;
@@ -8,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 //  서버 기본 주소
@@ -19,7 +23,6 @@ public class AppServerController {
   @Autowired
   private FlightInfoSaveService flightInfoSaveService;
 
-  
   @GetMapping("/gettest1")
   public String getTest1() {
     System.out.println("*** retrofit으로 gettest1에 접속 ***");
@@ -85,7 +88,36 @@ public class AppServerController {
   }
 
 
+  //  국내 항공 출발지 정보
+  @GetMapping("/searchDeparture")
+  public List<String> searchDeparture() {
+    System.out.println("국내 항공 출발 도시명");
+    List<String> searchDepartureList = flightInfoSaveService.searchDeparture();
 
+    if (searchDepartureList == null || searchDepartureList.isEmpty()) {
+      System.out.println("출발 도시 데이터가 없습니다.");
+      return Collections.emptyList(); // 빈 리스트 반환
+    }
+
+    System.out.println("출발 도시 : " + searchDepartureList);
+    return searchDepartureList;
+  }
+
+  //  항공 도착지 정보
+  @GetMapping("/searchDestination/{selectedDeparture}")
+  public List<String> searchDestination(@PathVariable("selectedDeparture") String selectedDeparture) {
+    System.out.println("도착지");
+    List<String> searchDestinationList
+            = flightInfoSaveService.searchDestination(selectedDeparture);
+
+    if (searchDestinationList == null || searchDestinationList.isEmpty()) {
+      System.out.println("도착 도시 데이터가 없습니다.");
+      return Collections.emptyList(); // 빈 리스트 반환
+    }
+
+    System.out.println("도착 도시 : " + searchDestinationList);
+    return searchDestinationList;
+  }
 }
 
 
