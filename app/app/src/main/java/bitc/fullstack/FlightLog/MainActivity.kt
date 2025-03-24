@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import bitc.fullstack.FlightLog.databinding.ActivityMainBinding
-import bitc.fullstack.app.AppServerClass
+import bitc.fullstack.FlightLog.appserver.AppServerClass
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -34,8 +34,8 @@ class MainActivity : AppCompatActivity() {
     binding.btnGet1.setOnClickListener {
       Log.d("csy", "gettest1 시작")
       val api = AppServerClass.instance
-      val call = api.getTest1()
-      retrofitResponse(call)
+      ///val call = api.getTest1()
+      //retrofitResponse(call)
     }
 
   }

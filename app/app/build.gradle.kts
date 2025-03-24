@@ -58,4 +58,13 @@ dependencies {
 
   // https://mvnrepository.com/artifact/com.squareup.retrofit2/converter-scalars
   implementation(libs.converter.scalars)
+
+  // https://mvnrepository.com/artifact/com.squareup.retrofit2/converter-simplexml
+  implementation(libs.converter.simplexml)
+
+
+
+  //api 서버 로그 확인용라이브러리
+  implementation("com.squareup.okhttp3:okhttp:4.9.2")
+  implementation("com.squareup.okhttp3:logging-interceptor:4.9.2")
 }
