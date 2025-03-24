@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:context=".sidebar.PaymentHistoryActivity">
+  <!--  툴바-->
+  <include
+      android:id="@+id/tool_bar"
+      layout="@layout/tool_bar"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content" />
+
+  <!--결제 내역-->
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="40dp"
+      android:background="@color/skyBlue"
+      android:gravity="center">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="결제 내역"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+  </LinearLayout>
+
+  <!--  예약 확정-->
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="@color/white"
+      android:gravity="center_vertical"
+      android:orientation="horizontal"
+      android:paddingHorizontal="10dp"
+      android:layout_marginVertical="10dp">
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="6"
+        android:text="예약 확정"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_weight="1"
+        android:background="@drawable/blue_button"
+        android:text="날짜순"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+  </LinearLayout>
+
+  <View
+      android:layout_width="match_parent"
+      android:layout_height="1dp"
+      android:background="@color/grey" />
+
+  <!-- 확정된 티켓 창-->
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginVertical="10dp"
+      android:orientation="vertical">
+
+    <!--  요일 -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="45dp"
+        android:text="20nn 년 nn 월 nn 일 (요일) : 출발일"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <!--    공항 이름-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="45dp"
+        android:text="아시아나 항공"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        tools:ignore="RtlSymmetry" />
+
+    <!--    출발 공항-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="45dp"
+        android:text="00 공항 (출발 시간)"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        tools:ignore="RtlSymmetry" />
+
+    <!--    도착 공항-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="45dp"
+        android:text=" -> 00 공항 (도착 시간)"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        tools:ignore="RtlSymmetry" />
+
+    <!--    금액-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="45dp"
+        android:text="결제 예정 금액 : 50,000 원 "
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        tools:ignore="RtlSymmetry" />
+  </LinearLayout>
+
+  <View
+      android:layout_width="350dp"
+      android:layout_height="1dp"
+      android:background="@color/grey" />
+</LinearLayout>

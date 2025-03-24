@@ -26,10 +26,42 @@
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
         </activity>
+        <!-- 메인화면 -->
         <activity
-            android:name=".MainActivity"
-            android:exported="true">
-        </activity>
+            android:name=".flightmain.MainActivity"
+            android:exported="true"/>
+        <!-- 인원 선택 -->
+        <activity
+            android:name=".flightmain.JoinMemberActivity"
+            android:exported="true" />
+        <!-- 가는편 비행기 선택 -->
+        <activity
+            android:name=".flightchoose.GoAirplaneActivity"
+            android:exported="true" />
+        <!-- 가는편 비행기 좌석 선택 -->
+        <activity
+            android:name=".flightchoose.GoAirplaneChooseSeatActivity"
+            android:exported="true" />
+        <!-- 오는편 비행기 선택 -->
+        <activity
+            android:name=".flightchoose.ComeAirplaneActivity"
+            android:exported="false" />
+        <!-- 오는편 비행기 좌석 선택 -->
+        <activity
+            android:name=".flightchoose.ComeAirplaneChooseSeatActivity"
+            android:exported="false" />
+        <!-- 사이드바 - 예약 확인 -->
+        <activity
+            android:name=".sidebar.ReservationConfirmActivity"
+            android:exported="true" />
+        <!-- 사이드바 - 티켓홀더 -->
+        <activity
+            android:name=".sidebar.TicketHolderActivity"
+            android:exported="true" />
+        <!-- 사이드바 - 결제내역 -->
+        <activity
+            android:name=".sidebar.PaymentHistoryActivity"
+            android:exported="true" />
     </application>
 
 </manifest>
