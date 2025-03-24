@@ -16,4 +16,4 @@
       app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
       tools:listitem="@layout/item_departure" />
 
-</FrameLayout>
+</LinearLayout>
