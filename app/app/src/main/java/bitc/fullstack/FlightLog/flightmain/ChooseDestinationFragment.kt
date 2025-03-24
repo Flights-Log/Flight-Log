@@ -22,7 +22,7 @@ class ChooseDestinationFragment : DialogFragment() {
 
     // 다이얼로그에 뷰 설정
     builder.setView(view)
-      .setTitle("출발지 선택")
+      .setTitle("도착지 선택")
       .setPositiveButton("확인") { dialog, _ -> dialog.dismiss() }
       .setNegativeButton("취소", null)
 
