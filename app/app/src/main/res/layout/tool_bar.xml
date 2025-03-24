@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.Toolbar
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:background="@color/mainBlue"
+    android:elevation="4dp"
+    android:theme="@style/Widget.AppCompat.ActionBar"
+    app:titleTextColor="#ffffff">
+    <!-- 햄버거 버튼 -->
+    <ImageButton
+        android:id="@+id/flight_log_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:src="@drawable/flight_log_menu"
+        android:contentDescription="메뉴" />
+
+    <!-- 중앙 아이콘 -->
+    <ImageView
+        android:id="@+id/flight_log_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/flight_log_logo"
+        android:contentDescription="비행기 아이콘"
+        android:layout_gravity="center" />
+
+    <!-- 로그인 버튼 -->
+    <TextView
+        android:id="@+id/flight_log_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/login"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        android:layout_gravity="end"
+        android:paddingEnd="16dp"/>
+</androidx.appcompat.widget.Toolbar>
