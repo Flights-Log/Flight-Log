@@ -62,6 +62,18 @@
         <activity
             android:name=".sidebar.PaymentHistoryActivity"
             android:exported="true" />
+        <!-- 사이드바 - 비회원조회 -->
+        <activity
+            android:name=".sidebar.NonmemberActivity"
+            android:exported="true" />
+        <!-- 탑승하는 승객정보 작성 -->
+        <activity
+            android:name=".flightchoose.PassengerActivity"
+            android:exported="true" />
+        <!-- 결제 하고 뜨는 예약 확정 -->
+        <activity
+            android:name=".flightchoose.ReservationCheckActivity"
+            android:exported="true" />
     </application>
 
 </manifest>
