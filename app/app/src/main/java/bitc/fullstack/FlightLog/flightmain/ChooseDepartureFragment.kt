@@ -24,9 +24,10 @@ import retrofit2.Response
 class ChooseDepartureFragment : DialogFragment() {
   private lateinit var binding: FragmentChooseDepartureBinding
   private val departureList = mutableListOf<String>()
-  private lateinit var adapter: MyAdapter
+  private lateinit var adapter: MyAdapterDeparture
   private var listener: OnDepartureSelectedListener? = null
 
+//  만들어지면 할 거
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
 //    MainActivity. 가 구현됐는지 확인하고 listener 에 저장
@@ -43,8 +44,8 @@ class ChooseDepartureFragment : DialogFragment() {
 
 //    리사이클러 뷰 찾기
     val recyclerView = view.findViewById<RecyclerView>(R.id.departure_recycler_view)
-//    출발지의 목록 중에서 내가 값을 선택하면 창 닫기
-    adapter = MyAdapter(departureList) { selectedDeparture ->
+//    도착지의 목록 중에서 내가 값을 선택하면 창 닫기
+    adapter = MyAdapterDeparture(departureList) { selectedDeparture ->
       listener?.onDepartureSelected(selectedDeparture)
       dismiss()
     }
@@ -90,23 +91,23 @@ class ChooseDepartureFragment : DialogFragment() {
 }
 
 //뷰 홀더 클래스
-class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+class MyViewHolderDeparture(view: View) : RecyclerView.ViewHolder(view) {
   val departureName: TextView = view.findViewById(R.id.departure_name)
 }
 
 //어댑터
-class MyAdapter(
+class MyAdapterDeparture(
   private val datas: MutableList<String>,
   private val onItemClick: (String) -> Unit
-) : RecyclerView.Adapter<MyViewHolder>() {
-  override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
+) : RecyclerView.Adapter<MyViewHolderDeparture>() {
+  override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolderDeparture {
     val view = LayoutInflater.from(parent.context)
       .inflate(R.layout.item_departure, parent, false)
-    return MyViewHolder(view)
+    return MyViewHolderDeparture(view)
   }
 
   //  아이템 뷰(출발지 목록 중에서 하나 골라서 누르면) 그 값을 MainActivity 에 전달하기
-  override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+  override fun onBindViewHolder(holder: MyViewHolderDeparture, position: Int) {
     holder.departureName.text = datas[position]
     holder.itemView.setOnClickListener {
       Log.d("flightLog", "선택한 출발지: ${datas[position]}")
@@ -125,6 +126,3 @@ class MyAdapter(
 interface OnDepartureSelectedListener {
   fun onDepartureSelected(departure: String)
 }
-
-
-

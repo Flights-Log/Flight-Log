@@ -20,8 +20,11 @@ import retrofit2.Response
 import java.time.LocalDate
 import java.util.Calendar
 
-class MainActivity : AppCompatActivity(), SelectPeopleDialogFragment.OnPassengerSelectedListener,
-  OnDepartureSelectedListener {
+class MainActivity : AppCompatActivity(),
+  SelectPeopleDialogFragment.OnPassengerSelectedListener,
+  OnDepartureSelectedListener,
+  OnDestinationSelectedListener {
+
   //  ActivityMainBinding
   private val binding: ActivityMainBinding by lazy {
     ActivityMainBinding.inflate(layoutInflater)
@@ -31,6 +34,11 @@ class MainActivity : AppCompatActivity(), SelectPeopleDialogFragment.OnPassenger
   private var goDate = LocalDate.now()
   private var comeDate = goDate.plusWeeks(1)
 
+  //  출발지 및 도착지
+  private var selectedDeparture: String? = null
+  private var selectedDestination: String? = null
+
+  //  만들어지만 할거
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     enableEdgeToEdge()
@@ -177,6 +185,7 @@ class MainActivity : AppCompatActivity(), SelectPeopleDialogFragment.OnPassenger
   fun chooseDestination() {
     binding.destinationText.setOnClickListener {
       val dialog = ChooseDestinationFragment()
+      dialog.setSelectedDeparture(selectedDeparture)
       dialog.show(supportFragmentManager, "ChooseDestinationFragment")
     }
   }
@@ -184,5 +193,14 @@ class MainActivity : AppCompatActivity(), SelectPeopleDialogFragment.OnPassenger
   //  출발지가 선택되면 할 함수
   override fun onDepartureSelected(departure: String) {
     binding.departureText.text = departure
+    selectedDeparture = departure
+    Log.d("flightLog", "출발지 : $departure")
+  }
+
+  //  도착지가 선택되면 할 함수
+  override fun onDestinationSelected(destination: String) {
+    binding.destinationText.text = destination
+    selectedDeparture = destination
+    Log.d("flightLog", "도착지 : $destination")
   }
 }
