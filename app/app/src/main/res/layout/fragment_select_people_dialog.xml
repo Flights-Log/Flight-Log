@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:paddingHorizontal="20dp"
+    android:paddingVertical="10dp">
+
+  <!--  나이 및 인원 수 조절-->
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_weight="1"
+      android:gravity="center"
+      android:orientation="vertical">
+
+    <!--    성인-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+      <!--성인-->
+      <LinearLayout
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="성인"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="만 13세 이상"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+      </LinearLayout>
+
+      <!--인원수 조절-->
+      <LinearLayout
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:gravity="center_vertical"
+          android:orientation="horizontal">
+
+        <!--빼기 버튼-->
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/adult_minus_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/round_light_grey_button"
+            android:text="-"
+            android:textSize="20sp" />
+
+        <!--성인 인원 수-->
+        <TextView
+            android:id="@+id/adult_count_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="1"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <!--더하기 버튼-->
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/adult_plus_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/round_light_grey_button"
+            android:text="+"
+            android:textSize="20sp" />
+      </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginVertical="20dp"
+        android:background="@color/grey" />
+
+    <!--소아-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+      <!--소아 설명문-->
+      <LinearLayout
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="소아"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="만 13세 미만"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+      </LinearLayout>
+
+      <!--인원수 조절-->
+      <LinearLayout
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:gravity="center_vertical"
+          android:orientation="horizontal">
+
+        <!--빼기 버튼-->
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/child_minus_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/round_light_grey_button"
+            android:text="-"
+            android:textSize="20sp" />
+
+        <!--성인 인원 수-->
+        <TextView
+            android:id="@+id/child_count_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="0"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <!--더하기 버튼-->
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/child_plus_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/round_light_grey_button"
+            android:text="+"
+            android:textSize="20sp" />
+      </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginVertical="20dp"
+        android:background="@color/grey" />
+
+    <!--유아-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+      <!--유아 설명문-->
+      <LinearLayout
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="유아"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="만 2세 미만"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+      </LinearLayout>
+
+      <!--인원수 조절-->
+      <LinearLayout
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:gravity="center_vertical"
+          android:orientation="horizontal">
+
+        <!--빼기 버튼-->
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/baby_minus_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/round_light_grey_button"
+            android:text="-"
+            android:textSize="20sp" />
+
+        <!--유아 인원 수-->
+        <TextView
+            android:id="@+id/baby_count_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="0"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <!--더하기 버튼-->
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/baby_plus_button"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:background="@drawable/round_light_grey_button"
+            android:text="+"
+            android:textSize="20sp" />
+      </LinearLayout>
+    </LinearLayout>
+
+  </LinearLayout>
+
+  <View
+      android:layout_width="match_parent"
+      android:layout_height="2dp"
+      android:background="@color/grey" />
+
+  <!--인원 수 출력-->
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="@color/white"
+      android:gravity="center_vertical"
+      android:orientation="horizontal"
+      android:paddingVertical="10dp">
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="총 인원 수"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/all_people_count_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text=""
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+  </LinearLayout>
+</LinearLayout>

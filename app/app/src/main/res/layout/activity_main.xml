@@ -163,21 +163,12 @@
                   android:layout_width="0dp"
                   android:layout_height="wrap_content"
                   android:layout_weight="2"
+                  android:paddingVertical="10dp"
                   android:text="지정 안함"
                   android:textAlignment="center"
                   android:textColor="@color/black"
                   android:textSize="20sp"
-                  android:textStyle="bold"
-                  android:paddingVertical="5dp"/>
-
-              <ImageView
-                  android:id="@+id/choose_go_date_arrow"
-                  android:layout_width="0dp"
-                  android:layout_height="wrap_content"
-                  android:layout_weight="1"
-                  android:contentDescription="right_arrow"
-                  android:paddingVertical="6dp"
-                  android:src="@drawable/right_arrow_no_line" />
+                  android:textStyle="bold" />
             </LinearLayout>
 
             <!--오는 날-->
@@ -202,21 +193,12 @@
                   android:layout_width="0dp"
                   android:layout_height="wrap_content"
                   android:layout_weight="2"
+                  android:paddingVertical="10dp"
                   android:text="지정 안함"
                   android:textAlignment="center"
                   android:textColor="@color/black"
                   android:textSize="20sp"
-                  android:textStyle="bold"
-                  android:paddingVertical="5dp"/>
-
-              <ImageView
-                  android:id="@+id/choose_come_date_arrow"
-                  android:layout_width="0dp"
-                  android:layout_height="wrap_content"
-                  android:layout_weight="1"
-                  android:contentDescription="right_arrow"
-                  android:paddingVertical="6dp"
-                  android:src="@drawable/right_arrow_no_line" />
+                  android:textStyle="bold" />
             </LinearLayout>
 
             <!--인원 수-->
@@ -237,23 +219,16 @@
                   android:textStyle="bold" />
 
               <TextView
+                  android:id="@+id/choose_people_text"
                   android:layout_width="0dp"
                   android:layout_height="wrap_content"
                   android:layout_weight="2"
+                  android:paddingVertical="10dp"
                   android:text="총 1 명"
                   android:textAlignment="center"
                   android:textColor="@color/black"
                   android:textSize="20sp"
-                  android:textStyle="bold"
-                  android:paddingVertical="5dp"/>
-
-              <ImageView
-                  android:layout_width="0dp"
-                  android:layout_height="wrap_content"
-                  android:layout_weight="1"
-                  android:paddingVertical="6dp"
-                  android:contentDescription="right_arrow"
-                  android:src="@drawable/right_arrow_no_line" />
+                  android:textStyle="bold" />
             </LinearLayout>
 
             <!--조회하기 버튼-->
