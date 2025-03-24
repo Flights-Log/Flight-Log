@@ -47,6 +47,12 @@ class MainActivity : AppCompatActivity(), SelectPeopleDialogFragment.OnPassenger
 
 //    인원 선택 창으로 가는 함수
     chooseSelectPeople()
+
+//    출발지 설정
+    chooseDeparture()
+
+//    도착지 설정
+    chooseDestination()
   }
 
   //  가는 날 텍스트(chooseGoDateText) 관련 함수
@@ -153,13 +159,16 @@ class MainActivity : AppCompatActivity(), SelectPeopleDialogFragment.OnPassenger
     binding.choosePeopleText.text = result
   }
 
-  fun chooseDeparture(){
+  //  출발지 설정
+  fun chooseDeparture() {
     binding.departureText.setOnClickListener {
-
+      val dialog = ChooseDestinationFragment()
+      dialog.show(supportFragmentManager, "ChooseDestinationFragment")
     }
   }
 
-  fun chooseArrive(){
+  //  도착지 설정
+  fun chooseDestination() {
     binding.destinationText.setOnClickListener {
 
     }
