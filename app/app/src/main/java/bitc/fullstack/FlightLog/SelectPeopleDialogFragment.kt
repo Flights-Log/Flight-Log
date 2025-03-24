@@ -63,13 +63,12 @@ class SelectPeopleDialogFragment : DialogFragment() {
       }
     }
     adultPlusButton.setOnClickListener {
-      adultCount++
-      adultCountText.text = adultCount.toString()
-      updateTotalPeopleCount(allPeopleCountText)
-
-      if (allPeopleCount > 9) {
+      if (allPeopleCount < 10) {
+        adultCount++
+        updateTotalPeopleCount(allPeopleCountText)
+        adultCountText.text = adultCount.toString()
+      } else {
         showAlert("총 인원이 10명을 넘을 수는 없습니다")
-        allPeopleCount = 9
         Log.d("flightLog", "총 인원 $allPeopleCount 이 10명 이상입니다")
       }
     }
@@ -83,9 +82,14 @@ class SelectPeopleDialogFragment : DialogFragment() {
       }
     }
     childPlusButton.setOnClickListener {
-      childCount++
-      childCountText.text = childCount.toString()
-      updateTotalPeopleCount(allPeopleCountText)
+      if (allPeopleCount < 10) {
+        childCount++
+        updateTotalPeopleCount(allPeopleCountText)
+        childCountText.text = childCount.toString()
+      } else {
+        showAlert("총 인원이 10명을 넘을 수는 없습니다")
+        Log.d("flightLog", "총 인원 $allPeopleCount 이 10명 이상입니다")
+      }
     }
 
 //    유아 버튼 클릭
@@ -97,14 +101,19 @@ class SelectPeopleDialogFragment : DialogFragment() {
       }
     }
     babyPlusButton.setOnClickListener {
-      babyCount++
-      babyCountText.text = babyCount.toString()
-      updateTotalPeopleCount(allPeopleCountText)
+      if (allPeopleCount < 10) {
+        babyCount++
+        updateTotalPeopleCount(allPeopleCountText)
+        babyCountText.text = babyCount.toString()
+      } else {
+        showAlert("총 인원이 10명을 넘을 수는 없습니다")
+        Log.d("flightLog", "총 인원 $allPeopleCount 이 10명 이상입니다")
+      }
     }
 
 //    총 인원 수 출력
     builder.setView(view)
-      .setTitle("인원 선택 (최소 1 명 ~ 최대 9 명)")
+      .setTitle("인원 선택 (최소 1 명 ~ 최대 10 명)")
       .setPositiveButton("확인") { _, _ ->
         val result = "총 $allPeopleCount 명"
         (activity as? OnPassengerSelectedListener)?.onPassengerSelected(result)
