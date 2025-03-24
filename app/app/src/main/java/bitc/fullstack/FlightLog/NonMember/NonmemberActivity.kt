@@ -1,19 +1,17 @@
 package bitc.fullstack.FlightLog
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import bitc.fullstack.FlightLog.R
-import bitc.fullstack.FlightLog.databinding.ActivityReservationCheckBinding
+import bitc.fullstack.FlightLog.databinding.ActivityNonMemberBinding
 
-class ReservationCheckActivity : AppCompatActivity() {
-
-  private val binding: ActivityReservationCheckBinding by lazy{
-    ActivityReservationCheckBinding.inflate(layoutInflater)
+class NonmemberActivity : AppCompatActivity() {
+  private val binding:ActivityNonMemberBinding by lazy{
+    ActivityNonMemberBinding.inflate(layoutInflater)
   }
-
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     enableEdgeToEdge()
@@ -27,8 +25,15 @@ class ReservationCheckActivity : AppCompatActivity() {
     initEventListener()
   }
 
-  private fun initEventListener() {
+  private fun initEventListener(){
+    binding.btnSearch.setOnClickListener {
+//      val intent = Intent(this,결과화면)
+//      startActivity(intent)
+    }
 
-
+    binding.btnHome.setOnClickListener {
+//      val intent = Intent(this, 메인화면)
+//      startActivity(intent)
+    }
   }
 }
