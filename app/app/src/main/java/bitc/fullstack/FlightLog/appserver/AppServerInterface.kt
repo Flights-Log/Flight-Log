@@ -46,17 +46,3 @@ interface AppServerInterface {
   fun searchArrive(@Path("selectedDeparture") selectedDeparture: String): Call<List<String>>
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

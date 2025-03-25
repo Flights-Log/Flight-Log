@@ -19,15 +19,23 @@ class SelectPeopleDialogFragment : DialogFragment() {
   //  인원수 저장 변수
   private var adultCount = 1
 
+  //  리스너 객체(MainActivity)에서 구현
+  private var listener: OnPassengerSelectedListener? = null
+
   @SuppressLint("MissingInflatedId", "SetTextI18n")
   override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
     val builder = AlertDialog.Builder(requireContext())
     // 다이얼로그에 뷰 설정
     builder.setView(binding.root)
       .setTitle("인원 선택")
-      .setPositiveButton("확인", null)
+//      _,_ : 사용하지 않는 변수 (원래는 charSequence text 랑 Onclickelistner 의 listner 를 사용하는데
+//      현재 사용하고 있지 않으므로 _ 를 써서 사용하지 않는 변수임을 나타냄
+      .setPositiveButton("확인") { _, _ ->
+//        listener 가 있으면 onPassengerSelected 실행
+//        $adultCount 값 MainActivity 로 전달
+        listener?.onPassengerSelected("$adultCount 명")
+      }
       .setNegativeButton("취소", null)
-
 
 //    인원수 초기값
     binding.adultCountText.text = adultCount.toString()
@@ -37,7 +45,6 @@ class SelectPeopleDialogFragment : DialogFragment() {
     binding.adultMinusButton.setOnClickListener {
       if (adultCount > 1) {
         adultCount--
-        Log.d("flightLog", "adultCount : $adultCount")
         binding.adultCountText.text = adultCount.toString()
         updateTotalPeopleCount(adultCount)
       }
@@ -48,8 +55,6 @@ class SelectPeopleDialogFragment : DialogFragment() {
       if (adultCount < 10) {
         adultCount++
         updateTotalPeopleCount(adultCount)
-        Log.d("flightLog", "adultCount : $adultCount")
-
         binding.adultCountText.text = adultCount.toString()
       } else {
         showAlert("총 인원이 10명을 넘을 수는 없습니다")
@@ -68,6 +73,11 @@ class SelectPeopleDialogFragment : DialogFragment() {
   //  result 값을 Main 으로 옮기기 위해 만든 인터페이스
   interface OnPassengerSelectedListener {
     fun onPassengerSelected(result: String)
+  }
+
+//  MainActivity 에서 리스너를 설정할 수 있도록 추가
+  fun setOnPassengerSelectedListener(listener: OnPassengerSelectedListener) {
+    this.listener = listener
   }
 
   //  알람 창 띄우는 함수

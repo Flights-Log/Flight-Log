@@ -170,6 +170,7 @@ class MainActivity : AppCompatActivity(),
   fun chooseSelectPeople() {
     binding.choosePeopleText.setOnClickListener {
       val dialog = SelectPeopleDialogFragment()
+      dialog.setOnPassengerSelectedListener(this)
       dialog.show(supportFragmentManager, "SelectPeopleDialog")
     }
   }
