@@ -100,6 +100,8 @@ class PassengerActivity : AppCompatActivity() {
         saveButton.setOnClickListener {
             savePassengerInfo()
         }
+
+
     }
 
     //    동승자 창 화면
@@ -158,7 +160,33 @@ class PassengerActivity : AppCompatActivity() {
     }
 
     private fun savePassengerInfo() {
-        passengerViews.forEach { passengerLayout ->
+
+        val lastNameEditText = findViewById<EditText>(R.id.last_name)
+        val firstNameEditText = findViewById<EditText>(R.id.first_name)
+        val genderSpinner = findViewById<Spinner>(R.id.passenger_info_gender)
+        val nationalitySpinner = findViewById<Spinner>(R.id.nationality)
+        val birthDateEditText = findViewById<EditText>(R.id.et_date)
+        val passportNumberEditText = findViewById<EditText>(R.id.passport_number)
+        val phoneNumberEditText = findViewById<EditText>(R.id.passenger_phone_number)
+        val baggageEditText = findViewById<EditText>(R.id.passenger_baggage)
+
+        // 탑승객 정보
+        val lastName = lastNameEditText.text.toString()
+        val firstName = firstNameEditText.text.toString()
+        val gender = genderSpinner.selectedItem.toString()
+        val nationality = nationalitySpinner.selectedItem.toString()
+        val birthDate = birthDateEditText.text.toString()
+        val passportNumber = passportNumberEditText.text.toString()
+        val phoneNumber = phoneNumberEditText.text.toString()
+        val baggageWeight = baggageEditText.text.toString()
+
+
+        Log.d(
+            "탑승객 정보",
+            "$lastName $firstName, $gender, $nationality, $birthDate, $passportNumber, $phoneNumber, $baggageWeight"
+        )
+
+        passengerViews.forEachIndexed { index,  passengerLayout ->
             val lastNameEditText = passengerLayout.findViewById<EditText>(R.id.last_name)
             val firstNameEditText = passengerLayout.findViewById<EditText>(R.id.first_name)
             val genderSpinner = passengerLayout.findViewById<Spinner>(R.id.passenger_info_gender)
@@ -168,17 +196,19 @@ class PassengerActivity : AppCompatActivity() {
             val phoneNumberEditText = passengerLayout.findViewById<EditText>(R.id.passenger_phone_number)
             val baggageEditText = passengerLayout.findViewById<EditText>(R.id.passenger_baggage)
 
+
             val lastName = lastNameEditText.text.toString()
             val firstName = firstNameEditText.text.toString()
-            val gender: String = genderSpinner.selectedItem.toString()
+            val gender = genderSpinner.selectedItem.toString()
             val nationality = nationalitySpinner.selectedItem.toString()
             val birthDate = birthDateEditText.text.toString()
             val passportNumber = passportNumberEditText.text.toString()
             val phoneNumber = phoneNumberEditText.text.toString()
             val baggageWeight = baggageEditText.text.toString()
 
+
             Log.d(
-                "Passenger Info",
+                "동승객 정보 ${index + 1}",
                 "$lastName $firstName, $gender, $nationality, $birthDate, $passportNumber, $phoneNumber, $baggageWeight"
             )
         }
