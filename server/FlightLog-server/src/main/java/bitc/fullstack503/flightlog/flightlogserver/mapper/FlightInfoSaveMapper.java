@@ -18,5 +18,5 @@ public interface FlightInfoSaveMapper {
   List<String> searchDeparture();
 
   //  도착지 목록. 출발지로 설정한 값 제외
-  List<String> searchDestination(String selectedDeparture);
+  List<String> searchArrive(String selectedDeparture);
 }

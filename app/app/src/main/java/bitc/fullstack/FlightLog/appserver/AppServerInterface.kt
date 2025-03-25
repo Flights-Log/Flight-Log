@@ -42,8 +42,8 @@ interface AppServerInterface {
   fun searchDeparture(): Call<List<String>>
 
   //  도착하는 도시 목록 가져오기
-  @GET("searchDestination/{selectedDeparture}")
-  fun searchDestination(@Path("selectedDeparture") selectedDeparture: String): Call<List<String>>
+  @GET("searchArrive/{selectedDeparture}")
+  fun searchArrive(@Path("selectedDeparture") selectedDeparture: String): Call<List<String>>
 
 }
 

@@ -5,7 +5,6 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import bitc.fullstack.FlightLog.databinding.ActivityViewDetailBinding
 
 class Pop_upActivity : AppCompatActivity() {
 //    private val binding: ActivityViewDetailBinding by lazy {

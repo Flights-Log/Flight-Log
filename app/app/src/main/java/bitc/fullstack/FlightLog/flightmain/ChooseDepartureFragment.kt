@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.RecyclerView
 import bitc.fullstack.FlightLog.R
 import bitc.fullstack.FlightLog.appserver.AppServerClass
 import bitc.fullstack.FlightLog.databinding.FragmentChooseDepartureBinding
-import bitc.fullstack.FlightLog.databinding.FragmentChooseDestinationBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

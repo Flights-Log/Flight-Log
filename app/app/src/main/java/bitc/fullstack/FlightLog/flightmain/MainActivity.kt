@@ -23,7 +23,7 @@ import java.util.Calendar
 class MainActivity : AppCompatActivity(),
   SelectPeopleDialogFragment.OnPassengerSelectedListener,
   OnDepartureSelectedListener,
-  OnDestinationSelectedListener {
+  OnArriveSelectedListener {
 
   //  ActivityMainBinding
   private val binding: ActivityMainBinding by lazy {
@@ -66,7 +66,7 @@ class MainActivity : AppCompatActivity(),
     chooseDeparture()
 
 //    도착지 설정
-    chooseDestination()
+    chooseArrive()
   }
 
   //  가는 날 텍스트(chooseGoDateText) 관련 함수
@@ -182,11 +182,11 @@ class MainActivity : AppCompatActivity(),
   }
 
   //  도착지 설정
-  fun chooseDestination() {
-    binding.destinationText.setOnClickListener {
-      val dialog = ChooseDestinationFragment()
+  fun chooseArrive() {
+    binding.arriveText.setOnClickListener {
+      val dialog = ChooseArriveFragment()
       dialog.setSelectedDeparture(selectedDeparture)
-      dialog.show(supportFragmentManager, "ChooseDestinationFragment")
+      dialog.show(supportFragmentManager, "ChooseArriveFragment")
     }
   }
 
@@ -198,9 +198,9 @@ class MainActivity : AppCompatActivity(),
   }
 
   //  도착지가 선택되면 할 함수
-  override fun onDestinationSelected(destination: String) {
-    binding.destinationText.text = destination
-    selectedDeparture = destination
-    Log.d("flightLog", "도착지 : $destination")
+  override fun onArriveSelected(arrive: String) {
+    binding.arriveText.text = arrive
+    selectedDeparture = arrive
+    Log.d("flightLog", "도착지 : $arrive")
   }
 }

@@ -35,7 +35,7 @@ public class FlightInfoSaveServiceImpl implements FlightInfoSaveService {
 //  공항 도착지 목록
 //  내가 선택한 출발지 제외
   @Override
-  public List<String> searchDestination(String selectedDeparture) {
-    return flightInfoSaveMapper.searchDestination(selectedDeparture);
+  public List<String> searchArrive(String selectedDeparture) {
+    return flightInfoSaveMapper.searchArrive(selectedDeparture);
   }
 }

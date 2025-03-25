@@ -104,19 +104,19 @@ public class AppServerController {
   }
 
   //  항공 도착지 정보
-  @GetMapping("/searchDestination/{selectedDeparture}")
-  public List<String> searchDestination(@PathVariable("selectedDeparture") String selectedDeparture) {
+  @GetMapping("/searchArrive/{selectedDeparture}")
+  public List<String> searchArrive(@PathVariable("selectedDeparture") String selectedDeparture) {
     System.out.println("도착지");
-    List<String> searchDestinationList
-            = flightInfoSaveService.searchDestination(selectedDeparture);
+    List<String> searchArriveList
+            = flightInfoSaveService.searchArrive(selectedDeparture);
 
-    if (searchDestinationList == null || searchDestinationList.isEmpty()) {
+    if (searchArriveList == null || searchArriveList.isEmpty()) {
       System.out.println("도착 도시 데이터가 없습니다.");
       return Collections.emptyList(); // 빈 리스트 반환
     }
 
-    System.out.println("도착 도시 : " + searchDestinationList);
-    return searchDestinationList;
+    System.out.println("도착 도시 : " + searchArriveList);
+    return searchArriveList;
   }
 }
 

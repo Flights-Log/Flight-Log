@@ -13,22 +13,22 @@ import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.RecyclerView
 import bitc.fullstack.FlightLog.R
 import bitc.fullstack.FlightLog.appserver.AppServerClass
-import bitc.fullstack.FlightLog.databinding.FragmentChooseDestinationBinding
+import bitc.fullstack.FlightLog.databinding.FragmentChooseArriveBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class ChooseDestinationFragment : DialogFragment() {
-  private lateinit var binding: FragmentChooseDestinationBinding
-  private val destinationList = mutableListOf<String>()
-  private lateinit var adapter: MyAdapterDestination
-  private var listener: OnDestinationSelectedListener? = null
+class ChooseArriveFragment : DialogFragment() {
+  private lateinit var binding: FragmentChooseArriveBinding
+  private val arriveList = mutableListOf<String>()
+  private lateinit var adapter: MyAdapterArrive
+  private var listener: OnArriveSelectedListener? = null
   private var selectedDeparture: String? = null
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
 //    MainActivity. 가 구현됐는지 확인하고 listener 에 저장
-    listener = activity as? OnDestinationSelectedListener
+    listener = activity as? OnArriveSelectedListener
   }
 
   //출발지를 저장해서 selectedDeparture 에 넣기
@@ -38,16 +38,16 @@ class ChooseDestinationFragment : DialogFragment() {
 
   @SuppressLint("MissingInflatedId", "SetTextI18n")
   override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-    binding = FragmentChooseDestinationBinding.inflate(layoutInflater)
+    binding = FragmentChooseArriveBinding.inflate(layoutInflater)
     val builder = AlertDialog.Builder(requireContext())
     val inflater = requireActivity().layoutInflater
-    val view = inflater.inflate(R.layout.fragment_choose_destination, null)
+    val view = inflater.inflate(R.layout.fragment_choose_arrive, null)
 
 //    리사이클러 뷰 찾기
-    val recyclerView = view.findViewById<RecyclerView>(R.id.destination_recycler_view)
+    val recyclerView = view.findViewById<RecyclerView>(R.id.arrive_recycler_view)
 //    도착지의 목록 중에서 내가 값을 선택하면 창 닫기
-    adapter = MyAdapterDestination(destinationList) { selectedDestination ->
-      listener?.onDestinationSelected(selectedDestination)
+    adapter = MyAdapterArrive(arriveList) { selectedArrive ->
+      listener?.onArriveSelected(selectedArrive)
       dismiss()
     }
     recyclerView.adapter = adapter
@@ -59,7 +59,7 @@ class ChooseDestinationFragment : DialogFragment() {
 
 //도착지 장소 리스트로 가져오기
     val api = AppServerClass.instance
-    val call = api.searchDestination(selectedDeparture.toString())
+    val call = api.searchArrive(selectedDeparture.toString())
     retrofitResponse(call)
 
     return builder.create()
@@ -75,8 +75,8 @@ class ChooseDestinationFragment : DialogFragment() {
           Log.d("flightLog", "result : $result")
 
           result?.let {
-            destinationList.clear()
-            destinationList.addAll(it)
+            arriveList.clear()
+            arriveList.addAll(it)
             adapter.notifyDataSetChanged()  // RecyclerView 업데이트
           }
         } else {
@@ -92,24 +92,24 @@ class ChooseDestinationFragment : DialogFragment() {
 }
 
 //뷰 홀더 클래스
-class MyViewHolderDestination(view: View) : RecyclerView.ViewHolder(view) {
-  val destinationName: TextView = view.findViewById(R.id.destination_name)
+class MyViewHolderArrive(view: View) : RecyclerView.ViewHolder(view) {
+  val arriveName: TextView = view.findViewById(R.id.arrive_name)
 }
 
 //어댑터
-class MyAdapterDestination(
+class MyAdapterArrive(
   private val datas: MutableList<String>,
   private val onItemClick: (String) -> Unit
-) : RecyclerView.Adapter<MyViewHolderDestination>() {
-  override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolderDestination {
+) : RecyclerView.Adapter<MyViewHolderArrive>() {
+  override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolderArrive {
     val view = LayoutInflater.from(parent.context)
-      .inflate(R.layout.item_destination, parent, false)
-    return MyViewHolderDestination(view)
+      .inflate(R.layout.item_arrive, parent, false)
+    return MyViewHolderArrive(view)
   }
 
   //  아이템 뷰(도착지 목록 중에서 하나 골라서 누르면) 그 값을 MainActivity 에 전달하기
-  override fun onBindViewHolder(holder: MyViewHolderDestination, position: Int) {
-    holder.destinationName.text = datas[position]
+  override fun onBindViewHolder(holder: MyViewHolderArrive, position: Int) {
+    holder.arriveName.text = datas[position]
     holder.itemView.setOnClickListener {
       Log.d("flightLog", "선택한 도착지: ${datas[position]}")
       onItemClick(datas[position])
@@ -122,10 +122,10 @@ class MyAdapterDestination(
   }
 }
 
-//destination 값을 MainActivity 로 전달하기 위해서 추가한 interface
+//arrive 값을 MainActivity 로 전달하기 위해서 추가한 interface
 //MainActivity 에서 interface 를 상속받아서 도착지 텍스트 바꿈
-interface OnDestinationSelectedListener {
-  fun onDestinationSelected(destination: String)
+interface OnArriveSelectedListener {
+  fun onArriveSelected(arrive: String)
 }
 
 

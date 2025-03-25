@@ -57,12 +57,14 @@
 
   <!--  도착지 설정하기-->
   <!--  단, 출발지로 설정한 값은 제외한다-->
-  <select id="searchDestination" resultType="string">
-    select flight_info_arrivalCity
+  <!--  또한, 해당하는 출발지에서 도착지로 가는 항공편이 있는 경우에만 출력한다-->
+  <select id="searchArrive" resultType="string">
+    select flight_info_arrivalCity, flight_info_startCity
     from flight_info
     where flight_info_arrivalCity
     not like #{selectedDeparture}
-    group by flight_info_arrivalCity
+    and flight_info_startCity = #{selectedDeparture}
+    group by flight_info_arrivalCity, flight_info_startCity
     order by flight_info_arrivalCity;
   </select>
 </mapper>

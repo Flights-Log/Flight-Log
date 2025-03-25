@@ -17,5 +17,5 @@ public interface FlightInfoSaveService {
   List<String> searchDeparture();
 
 //  도착지
-  List<String> searchDestination(String selectedDeparture);
+  List<String> searchArrive(String selectedDeparture);
 }
