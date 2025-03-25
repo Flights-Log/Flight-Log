@@ -32,7 +32,7 @@ class ChooseArriveFragment : DialogFragment() {
   private var listener: OnArriveSelectedListener? = null
 
   //  기본 출발지
-  private var selectedDeparture: String = "서울|김포"
+  private var selectedDeparture: String = ""
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -95,13 +95,13 @@ class ChooseArriveFragment : DialogFragment() {
             // RecyclerView 업데이트
             adapter.notifyDataSetChanged()
 
+//            만약에 그 공항에서 출발하는 도착지가 하나도 없을 경우 출력
             val noArriveText = binding.noArriveText
             if (arriveList.isEmpty()) {
               noArriveText.visibility = View.VISIBLE
             } else {
               noArriveText.visibility = View.GONE
             }
-
 
           }
         } else {

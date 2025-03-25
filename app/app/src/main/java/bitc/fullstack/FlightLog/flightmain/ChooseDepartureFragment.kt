@@ -3,14 +3,12 @@ package bitc.fullstack.FlightLog.flightmain
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.app.Dialog
-import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.RecyclerView
 import bitc.fullstack.FlightLog.R
@@ -21,12 +19,19 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class ChooseDepartureFragment : DialogFragment() {
+  //  바인딩
   private lateinit var binding: FragmentChooseDepartureBinding
+
+  //  출발지 목록 저장
   private val departureList = mutableListOf<String>()
+
+  //  recyclerView 어댑터
   private lateinit var adapter: MyAdapterDeparture
+
+  //  선택된 출발지 전달 인터페이스
   private var listener: OnDepartureSelectedListener? = null
 
-//  만들어지면 할 거
+  //  만들어지면 할 거
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
 //    MainActivity. 가 구현됐는지 확인하고 listener 에 저장
@@ -38,11 +43,13 @@ class ChooseDepartureFragment : DialogFragment() {
     binding = FragmentChooseDepartureBinding.inflate(layoutInflater)
 
     val builder = AlertDialog.Builder(requireContext())
-    val inflater = requireActivity().layoutInflater
-    val view = inflater.inflate(R.layout.fragment_choose_departure, null)
+    // 다이얼로그에 뷰 설정
+    builder.setView(binding.root)
+      .setTitle("출발지 선택")
+      .setNegativeButton("취소", null)
 
 //    리사이클러 뷰 찾기
-    val recyclerView = view.findViewById<RecyclerView>(R.id.departure_recycler_view)
+    val recyclerView = binding.departureRecyclerView
 //    도착지의 목록 중에서 내가 값을 선택하면 창 닫기
     adapter = MyAdapterDeparture(departureList) { selectedDeparture ->
       listener?.onDepartureSelected(selectedDeparture)
@@ -50,10 +57,6 @@ class ChooseDepartureFragment : DialogFragment() {
     }
     recyclerView.adapter = adapter
 
-    // 다이얼로그에 뷰 설정
-    builder.setView(view)
-      .setTitle("출발지 선택")
-      .setNegativeButton("취소", null)
 
 //출발지 장소 리스트로 가져오기
     val api = AppServerClass.instance
@@ -99,6 +102,7 @@ class MyAdapterDeparture(
   private val datas: MutableList<String>,
   private val onItemClick: (String) -> Unit
 ) : RecyclerView.Adapter<MyViewHolderDeparture>() {
+
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolderDeparture {
     val view = LayoutInflater.from(parent.context)
       .inflate(R.layout.item_departure, parent, false)

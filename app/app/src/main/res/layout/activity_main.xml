@@ -80,6 +80,7 @@
                 android:textStyle="bold" />
 
             <ImageView
+                android:id="@+id/change_destination_arrive_arrow"
                 android:layout_width="0dp"
                 android:layout_height="20dp"
                 android:layout_weight="1"
@@ -120,7 +121,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:contentDescription="right_arrow_black"
-                android:src="@drawable/right_arrow_black" />
+                android:src="@drawable/round_trip_arrow" />
 
             <TextView
                 android:id="@+id/arrive_text"

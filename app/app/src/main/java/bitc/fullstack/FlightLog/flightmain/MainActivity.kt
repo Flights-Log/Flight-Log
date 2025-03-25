@@ -36,7 +36,10 @@ class MainActivity : AppCompatActivity(),
 
   //  출발지 및 도착지
   private var selectedDeparture: String = ""
-  private var selectedDestination: String = ""
+  private var selectedArrive: String = ""
+
+  //  출발지와 도착지를 바꿀 때 임시로 저장할 string 객체 하나
+  private var tempLocation: String = ""
 
   //  만들어지만 할거
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -67,6 +70,9 @@ class MainActivity : AppCompatActivity(),
 
 //    도착지 설정
     chooseArrive()
+
+//    출발지와 도착지를 바꾸기
+    changeDestinationArrive()
   }
 
   //  가는 날 텍스트(chooseGoDateText) 관련 함수
@@ -190,17 +196,31 @@ class MainActivity : AppCompatActivity(),
     }
   }
 
-  //  출발지가 선택되면 할 함수
+  //  ChooseDepartureFragment 에서 가져온 출발지
+//  MainActivity 의 출발지에 텍스트로 넣기
   override fun onDepartureSelected(departure: String) {
     binding.departureText.text = departure
     selectedDeparture = departure
     Log.d("flightLog", "출발지 : $departure")
   }
 
-  //  도착지가 선택되면 할 함수
+  //  ChooseArriveFragment 에서 가져온 출발지
+//  MainActivity 의 도착지에 텍스트로 넣기
   override fun onArriveSelected(arrive: String) {
     binding.arriveText.text = arrive
-    selectedDeparture = arrive
+    selectedArrive = arrive
     Log.d("flightLog", "도착지 : $arrive")
+  }
+
+  //  출발지와 도착지 바꾸기
+  fun changeDestinationArrive() {
+    binding.changeDestinationArriveArrow.setOnClickListener {
+      tempLocation = selectedDeparture
+      selectedDeparture = selectedArrive
+      selectedArrive = tempLocation
+
+      binding.departureText.text = selectedDeparture
+      binding.arriveText.text = selectedArrive
+    }
   }
 }
