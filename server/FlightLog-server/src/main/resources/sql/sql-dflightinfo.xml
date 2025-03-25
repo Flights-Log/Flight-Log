@@ -46,43 +46,4 @@
       )
     </foreach>
   </insert>
-
-  <!--  출발지 설정하기-->
-  <select id="searchDeparture" resultType="string">
-    select flight_info_startCity
-    from flight_info
-    group by flight_info_startCity
-    order by flight_info_startCity;
-  </select>
-
-  <!--  도착지 설정하기-->
-  <!--  단, 출발지로 설정한 값은 제외한다-->
-  <!--  또한, 해당하는 출발지에서 도착지로 가는 항공편이 있는 경우에만 출력한다-->
-  <select id="searchArrive" resultType="string">
-    select flight_info_arrivalCity
-    from flight_info
-    where flight_info_startCity = #{selectedDeparture}
-    and flight_info_arrivalCity not like #{selectedDeparture}
-    group by flight_info_arrivalCity, flight_info_startCity
-    order by flight_info_arrivalCity;
-  </select>
-
-  <!--  지금까지 설정한 값을 바탕으로 출발하는 비행기 값 가져오기-->
-  <!--  단, 2024년 값을 기준으로 한다-->
-  <select id="searchGoAirplane" parameterType="java.util.List">
-    select flight_info_airline, flight_info_startTime, flight_info_arrivalTime
-    from flight_info
-    where flight_info_startCity = #{startCity}
-    and flight_info_arrivalCity = #{arrivalCity}
-    and date_sub(#{goDate}, interval 1 year) between flight_info_startDate and flight_info_Eddate
-    and case weekday(date_sub(#{goDate}, interval 1 year))
-    when 0 then flight_mon
-    when 1 then flight_tue
-    when 2 then flight_wed
-    when 3 then flight_thu
-    when 4 then flight_fri
-    when 5 then flight_sat
-    when 6 then flight_sun
-    end = 'Y';
-  </select>
 </mapper>

@@ -19,6 +19,7 @@ import bitc.fullstack.FlightLog.dto.flightInfoDTO
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.time.format.DateTimeFormatter
 
 class GoAirplaneActivity : AppCompatActivity() {
   //  ActivityGoAirplaneBinding
@@ -145,6 +146,11 @@ class MyAdapterGoAirplane(val datas: MutableList<flightInfoDTO>) :
     val item = datas[position]
 
     binding.goAirplaneAirline.text = item.flightInfoAirline
+
+    var hour = item.flightInfoStartTime
+    hour.chunked(2)
+    Log.d("flightLog", "hour : $hour")
+
     binding.goAirplaneStartTime.text = item.flightInfoStartTime
     binding.goAirplaneArrivalTime.text = item.flightInfoArrivalTime
     binding.goAirplaneMoney.text = "50000"

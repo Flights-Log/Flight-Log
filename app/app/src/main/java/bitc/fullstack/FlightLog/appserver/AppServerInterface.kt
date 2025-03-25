@@ -39,15 +39,15 @@ interface AppServerInterface {
   fun postIFlightInfo(@Body IflightDTOList: MutableList<iFlightDTO>): Call<String>
 
   //  출발하는 도시 목록 가져오기
-  @GET("searchDeparture")
+  @GET("main/searchDeparture")
   fun searchDeparture(): Call<List<String>>
 
   //  도착하는 도시 목록 가져오기
-  @GET("searchArrive/{selectedDeparture}")
+  @GET("main/searchArrive/{selectedDeparture}")
   fun searchArrive(@Path("selectedDeparture") selectedDeparture: String): Call<List<String>>
 
   //  내가 설정한 출발지, 도착지, 출발일을 기준으로 그 출발일에 운항하는 비행기가 있는지 알아오기
-  @GET("searchGoAirplane/{startCity}/{arrivalCity}/{goDate}")
+  @GET("main/searchGoAirplane/{startCity}/{arrivalCity}/{goDate}")
   fun searchGoAirplane(
     @Path("startCity") startCity: String,
     @Path("arrivalCity") arrivalCity: String,

@@ -26,23 +26,4 @@ public class FlightInfoSaveServiceImpl implements FlightInfoSaveService {
   public void saveIFlightInfo(List<iFlightDTO> IflightDTOList) {
     flightInfoSaveMapper.insertIFlightInfo(IflightDTOList);
   }
-
-  //  공항 출발지 목록
-  @Override
-  public List<String> searchDeparture() {
-    return flightInfoSaveMapper.searchDeparture();
-  }
-
-  //  공항 도착지 목록
-//  내가 선택한 출발지 제외
-  @Override
-  public List<String> searchArrive(String selectedDeparture) {
-    return flightInfoSaveMapper.searchArrive(selectedDeparture);
-  }
-
-  //  출발 비행기 찾기
-  @Override
-  public List<flightInfoDTO> searchGoAirplane(String startCity, String arrivalCity, String goDate) {
-    return flightInfoSaveMapper.searchGoAirplane(startCity, arrivalCity, goDate);
-  }
 }
