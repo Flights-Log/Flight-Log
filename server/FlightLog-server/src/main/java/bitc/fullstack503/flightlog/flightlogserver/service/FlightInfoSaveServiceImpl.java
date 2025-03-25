@@ -1,6 +1,7 @@
 package bitc.fullstack503.flightlog.flightlogserver.service;
 
 import bitc.fullstack503.flightlog.flightlogserver.dto.dFlightDTO;
+import bitc.fullstack503.flightlog.flightlogserver.dto.flightInfoDTO;
 import bitc.fullstack503.flightlog.flightlogserver.dto.iFlightDTO;
 import bitc.fullstack503.flightlog.flightlogserver.mapper.FlightInfoSaveMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,16 +27,22 @@ public class FlightInfoSaveServiceImpl implements FlightInfoSaveService {
     flightInfoSaveMapper.insertIFlightInfo(IflightDTOList);
   }
 
-//  공항 출발지 목록
+  //  공항 출발지 목록
   @Override
   public List<String> searchDeparture() {
     return flightInfoSaveMapper.searchDeparture();
   }
 
-//  공항 도착지 목록
+  //  공항 도착지 목록
 //  내가 선택한 출발지 제외
   @Override
   public List<String> searchArrive(String selectedDeparture) {
     return flightInfoSaveMapper.searchArrive(selectedDeparture);
+  }
+
+  //  출발 비행기 찾기
+  @Override
+  public List<flightInfoDTO> searchGoAirplane(String startCity, String arrivalCity, String goDate) {
+    return flightInfoSaveMapper.searchGoAirplane(startCity, arrivalCity, goDate);
   }
 }

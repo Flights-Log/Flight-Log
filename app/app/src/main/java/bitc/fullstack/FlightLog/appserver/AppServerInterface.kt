@@ -4,6 +4,7 @@ package bitc.fullstack.FlightLog.appserver
 import bitc.fullstack.FlightLog.data.FlightResponse
 import bitc.fullstack.FlightLog.data.InterFlightResponse
 import bitc.fullstack.FlightLog.dto.dFlightDTO
+import bitc.fullstack.FlightLog.dto.flightInfoDTO
 import bitc.fullstack.FlightLog.dto.iFlightDTO
 import retrofit2.Call
 import retrofit2.http.Body
@@ -45,4 +46,11 @@ interface AppServerInterface {
   @GET("searchArrive/{selectedDeparture}")
   fun searchArrive(@Path("selectedDeparture") selectedDeparture: String): Call<List<String>>
 
+  //  내가 설정한 출발지, 도착지, 출발일을 기준으로 그 출발일에 운항하는 비행기가 있는지 알아오기
+  @GET("searchGoAirplane/{startCity}/{arrivalCity}/{goDate}")
+  fun searchGoAirplane(
+    @Path("startCity") startCity: String,
+    @Path("arrivalCity") arrivalCity: String,
+    @Path("goDate") goDate: String
+  ): Call<List<flightInfoDTO>>
 }

@@ -1,6 +1,7 @@
 package bitc.fullstack503.flightlog.flightlogserver.mapper;
 
 import bitc.fullstack503.flightlog.flightlogserver.dto.dFlightDTO;
+import bitc.fullstack503.flightlog.flightlogserver.dto.flightInfoDTO;
 import bitc.fullstack503.flightlog.flightlogserver.dto.iFlightDTO;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -19,4 +20,7 @@ public interface FlightInfoSaveMapper {
 
   //  도착지 목록. 출발지로 설정한 값 제외
   List<String> searchArrive(String selectedDeparture);
+
+  //  출발하는 비행기 목록
+  List<flightInfoDTO> searchGoAirplane(String startCity, String arrivalCity, String goDate);
 }

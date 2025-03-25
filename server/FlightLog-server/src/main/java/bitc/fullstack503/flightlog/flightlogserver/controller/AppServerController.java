@@ -3,6 +3,7 @@ package bitc.fullstack503.flightlog.flightlogserver.controller;
 //import org.springframework.web.bind.annotation.*;
 
 import bitc.fullstack503.flightlog.flightlogserver.dto.dFlightDTO;
+import bitc.fullstack503.flightlog.flightlogserver.dto.flightInfoDTO;
 import bitc.fullstack503.flightlog.flightlogserver.dto.iFlightDTO;
 import bitc.fullstack503.flightlog.flightlogserver.service.FlightInfoSaveService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -119,6 +120,30 @@ public class AppServerController {
 
     System.out.println("도착 도시 : " + searchArriveList);
     return searchArriveList;
+  }
+
+  //  내가 선택한 출발지, 도착지, 출발일을 바탕으로 그날에 출발하는 비행기가 있는지 확인하기
+//  단, db 상의 데이터는 2024 년의 데이터가 많기 때문에 현재 날짜 - 1년 을 실행함
+  @GetMapping("searchGoAirplane/{startCity}/{arrivalCity}/{goDate}")
+  public List<flightInfoDTO> searchGoAirplane(@PathVariable("startCity") String startCity,
+                                              @PathVariable("arrivalCity") String arrivalCity,
+                                              @PathVariable("goDate") String goDate) {
+    System.out.println();
+    System.out.println("출발 비행기 정보 가져오기");
+    List<flightInfoDTO> searchGoAirplaneList
+            = flightInfoSaveService.searchGoAirplane(startCity, arrivalCity, goDate);
+
+    if (searchGoAirplaneList == null || searchGoAirplaneList.isEmpty()) {
+      System.out.println("해당하는 날짜에 출발하는 비행기가 없습니다");
+      return Collections.emptyList(); // 빈 리스트 반환
+    }
+
+    for (flightInfoDTO flightInfoDTO : searchGoAirplaneList) {
+      System.out.print("항공편 : " + flightInfoDTO.getFlightInfoAirline() + " / ");
+      System.out.print("출발 시간 : " + flightInfoDTO.getFlightInfoStartTime() + " / ");
+      System.out.println("도착 시간 : " + flightInfoDTO.getFlightInfoArrivalTime());
+    }
+    return searchGoAirplaneList;
   }
 }
 

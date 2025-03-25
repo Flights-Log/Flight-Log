@@ -9,15 +9,3 @@ data class InterFlightBody(
   @field:ElementList(name = "items", inline = false, required = false)
   var InterflightItems: List<InterFlightItem> = mutableListOf()
 )
-
-
-
-
-
-
-
-
-
-
-
-
