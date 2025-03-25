@@ -212,5 +212,19 @@ class PassengerActivity : AppCompatActivity() {
                 "$lastName $firstName, $gender, $nationality, $birthDate, $passportNumber, $phoneNumber, $baggageWeight"
             )
         }
+
+//        탑승객 정보 입력란 초기화
+        lastNameEditText.text.clear()
+        firstNameEditText.text.clear()
+        genderSpinner.setSelection(0)
+        nationalitySpinner.setSelection(0)
+        birthDateEditText.text.clear()
+        passportNumberEditText.text.clear()
+        phoneNumberEditText.text.clear()
+        baggageEditText.text.clear()
+
+//        동승객 입력란도 초기화
+        passengerDynamicLayout.removeAllViews()
+        passengerViews.clear()
     }
 }
