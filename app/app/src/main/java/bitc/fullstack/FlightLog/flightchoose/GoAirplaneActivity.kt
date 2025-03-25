@@ -1,6 +1,7 @@
 package bitc.fullstack.FlightLog.flightchoose
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
@@ -22,17 +23,20 @@ class GoAirplaneActivity : AppCompatActivity() {
     enableEdgeToEdge()
     setContentView(binding.root)
 
-    //    툴바 아이콘
-    val menuButton: ImageButton = findViewById(R.id.flight_log_menu)
-    val iconButton: ImageView = findViewById(R.id.flight_log_icon)
-    val loginButton: TextView = findViewById(R.id.flight_log_login)
-
     ViewCompat.setOnApplyWindowInsetsListener(binding.main) { v, insets ->
       val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
       v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
       insets
     }
 
+    binding.textStartCity.text = intent.getStringExtra("출발지")
+    binding.textArrivalCity.text = intent.getStringExtra("도착지")
+    binding.flightDepartureDate.text = intent.getStringExtra("출발일")
+
+    Log.d("flightLog", "받은 출발지 : ${intent.getStringExtra("출발지")}")
+    Log.d("flightLog", "받은 도착지 : ${intent.getStringExtra("도착지")}")
+    Log.d("flightLog", "받은 출발일 : ${intent.getStringExtra("출발일")}")
+    Log.d("flightLog", "받은 도착일 : ${intent.getStringExtra("도착일")}")
 
   }
 }

@@ -1,6 +1,8 @@
 package bitc.fullstack.FlightLog.flightmain
 
 import android.app.DatePickerDialog
+import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.ImageButton
@@ -14,6 +16,7 @@ import androidx.core.view.WindowInsetsCompat
 import bitc.fullstack.FlightLog.R
 import bitc.fullstack.FlightLog.appserver.AppServerClass
 import bitc.fullstack.FlightLog.databinding.ActivityMainBinding
+import bitc.fullstack.FlightLog.flightchoose.GoAirplaneActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -73,13 +76,16 @@ class MainActivity : AppCompatActivity(),
 
 //    출발지와 도착지를 바꾸기
     changeDestinationArrive()
+
+//    조회하기 버튼
+    searchFlight()
   }
 
   //  가는 날 텍스트(chooseGoDateText) 관련 함수
   fun chooseGoDate() {
 //    날짜 출력
-    Log.d("flightLog", "goDate : $goDate")
     binding.chooseGoDateText.text = goDate.toString()
+    Log.d("flightLog", "바꾸기 전 goDate : $goDate")
 
 //    누르면 캘린더 뷰 나옴
     binding.chooseGoDateText.setOnClickListener {
@@ -100,6 +106,8 @@ class MainActivity : AppCompatActivity(),
             binding.chooseComeDateText.text = comeDate.toString()
           }
           binding.chooseGoDateText.text = goDate.toString()
+          Log.d("flightLog", "바꾼 후 goDate : $goDate")
+
         },
         goDate.year,
         goDate.monthValue - 1,
@@ -117,8 +125,8 @@ class MainActivity : AppCompatActivity(),
 
   //  오는 날 텍스트(chooseComeDateText, chooseComeDateArrow) 관련 함수
   fun chooseComeDate() {
-    Log.d("flightLog", "comeDate : $comeDate")
     binding.chooseComeDateText.text = comeDate.toString()
+    Log.d("flightLog", "바꾸기 전 comeDate : $comeDate")
 
 //    누르면 캘린더 뷰 나옴
     binding.chooseComeDateText.setOnClickListener {
@@ -136,6 +144,8 @@ class MainActivity : AppCompatActivity(),
           } else {
             comeDate = selectedDate
             binding.chooseComeDateText.text = comeDate.toString()
+            Log.d("flightLog", "바꾼 후 comeDate : $comeDate")
+
           }
         },
 
@@ -191,9 +201,17 @@ class MainActivity : AppCompatActivity(),
   //  도착지 설정
   fun chooseArrive() {
     binding.arriveText.setOnClickListener {
-      val dialog = ChooseArriveFragment()
-      dialog.setSelectedDeparture(selectedDeparture)
-      dialog.show(supportFragmentManager, "ChooseArriveFragment")
+      if (selectedDeparture == "") {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("출발지를 먼저 선택해주세요")
+        builder.setPositiveButton("확인", null)
+        builder.create()
+        builder.show()
+      } else {
+        val dialog = ChooseArriveFragment()
+        dialog.setSelectedDeparture(selectedDeparture)
+        dialog.show(supportFragmentManager, "ChooseArriveFragment")
+      }
     }
   }
 
@@ -222,6 +240,35 @@ class MainActivity : AppCompatActivity(),
 
       binding.departureText.text = selectedDeparture
       binding.arriveText.text = selectedArrive
+    }
+  }
+
+  //  조회하기
+  fun searchFlight() {
+//    지금까지 선택한 출발지, 도착지, 출발일, 도착일이 GoAirplaneActivity 로 넘어감
+    binding.flightSearch.setOnClickListener {
+//      출발지와 도착지를 둘 다 선택하지 않은 경우
+      if (selectedDeparture == "" && selectedArrive == "") {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("출발지와 도착지를 선택해주세요")
+        builder.setPositiveButton("확인", null)
+        builder.create()
+        builder.show()
+//        출발지 혹은 도착지를 선택하지 않은 경우
+      } else if (selectedDeparture == "" || selectedArrive == "") {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("출발지 혹은 도착지를 선택해주세요")
+        builder.setPositiveButton("확인", null)
+        builder.create()
+        builder.show()
+      } else {
+        val intent = Intent(this, GoAirplaneActivity::class.java)
+        intent.putExtra("출발지", selectedDeparture)
+        intent.putExtra("도착지", selectedArrive)
+        intent.putExtra("출발일", goDate.toString())
+        intent.putExtra("도착일", comeDate.toString())
+        startActivity(intent)
+      }
     }
   }
 }
