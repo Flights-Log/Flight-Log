@@ -41,10 +41,6 @@ class PassengerActivity : AppCompatActivity() {
             insets
         }
 
-//    edittext랑 버튼 연결
-        dateEditText = findViewById(R.id.et_date)
-        dateButton = findViewById(R.id.btn_birth)
-
 //        버튼 및 레이아웃 초기화
         addPassengerButton = findViewById(R.id.btn_add_passenger)
         saveButton = findViewById(R.id.passenger_info_save)
@@ -68,28 +64,22 @@ class PassengerActivity : AppCompatActivity() {
         val adapter = ArrayAdapter(this, R.layout.spinner_center, nationalities)
         spinner.adapter = adapter
 
+//        생년월일 선택 드롭다운 Spinner
+        val yearSpinner = findViewById<Spinner>(R.id.year_spinner)
+        val monthSpinner = findViewById<Spinner>(R.id.month_spinner)
+        val daySpinner = findViewById<Spinner>(R.id.day_spinner)
 
-//    생년월일 선택 버튼 이벤트
-        binding.btnBirth.setOnClickListener {
+        val years = (1900 .. 2100).toList()
+        val yearAdapter = ArrayAdapter(this, R.layout.spinner_center,years)
+        yearSpinner.adapter = yearAdapter
 
-//      현재 날짜 기준으로 DatePickerDialog 설정
-            val calendar = Calendar.getInstance()
-            val year = calendar.get(Calendar.YEAR)
-            val month = calendar.get(Calendar.MONTH)
-            val day = calendar.get(Calendar.DAY_OF_MONTH)
+        val months = (1..12).toList()
+        val monthAdapter = ArrayAdapter(this,R.layout.spinner_center,months)
+        monthSpinner.adapter = monthAdapter
 
-//      DatePickerDialog 생성
-            val datePickerDialog =
-                DatePickerDialog(this, { _, selectedYear, selectedMonth, selectedDayOfMonth ->
-
-//        날짜 선택하면 edittext에 나오게 함
-                    dateEditText.setText("$selectedYear - ${selectedMonth + 1} - $selectedDayOfMonth")
-                }, year, month, day)
-
-//      다이얼로그 띄우기
-            datePickerDialog.show()
-
-        }
+        val days = (1..31).toList()
+        val daAdapter = ArrayAdapter(this, R.layout.spinner_center,days)
+        daySpinner.adapter = daAdapter
 
 //        동승객 추가 버튼 이벤트
         addPassengerButton.setOnClickListener {
@@ -125,29 +115,22 @@ class PassengerActivity : AppCompatActivity() {
         val adapter = ArrayAdapter(this, R.layout.spinner_center, nationalities)
         nationalitySpinner.adapter = adapter
 
-        val birthDateEditText = newPassengerLayout.findViewById<EditText>(R.id.et_date)
-        val dateButton = newPassengerLayout.findViewById<Button>(R.id.btn_birth)
+//        생년월일 선택 드롭다운 Spinner
+        val yearSpinner = newPassengerLayout.findViewById<Spinner>(R.id.year_spinner)
+        val monthSpinner = newPassengerLayout.findViewById<Spinner>(R.id.month_spinner)
+        val daySpinner = newPassengerLayout.findViewById<Spinner>(R.id.day_spinner)
 
-        dateButton.setOnClickListener {
+        val years = (1900 .. 2100).toList()
+        val yearAdapter = ArrayAdapter(this, R.layout.spinner_center,years)
+        yearSpinner.adapter = yearAdapter
 
-//      현재 날짜 기준으로 DatePickerDialog 설정
-            val calendar = Calendar.getInstance()
-            val year = calendar.get(Calendar.YEAR)
-            val month = calendar.get(Calendar.MONTH)
-            val day = calendar.get(Calendar.DAY_OF_MONTH)
+        val months = (1..12).toList()
+        val monthAdapter = ArrayAdapter(this,R.layout.spinner_center,months)
+        monthSpinner.adapter = monthAdapter
 
-//      DatePickerDialog 생성
-            val datePickerDialog =
-                DatePickerDialog(this, { _, selectedYear, selectedMonth, selectedDayOfMonth ->
-
-//        날짜 선택하면 edittext에 나오게 함
-                    birthDateEditText.setText("$selectedYear - ${selectedMonth + 1} - $selectedDayOfMonth")
-                }, year, month, day)
-
-//      다이얼로그 띄우기
-            datePickerDialog.show()
-
-        }
+        val days = (1..31).toList()
+        val daAdapter = ArrayAdapter(this, R.layout.spinner_center,days)
+        daySpinner.adapter = daAdapter
 
         val passportNumberEditText = newPassengerLayout.findViewById<EditText>(R.id.passport_number)
         val phoneNumberEditText =
@@ -165,7 +148,11 @@ class PassengerActivity : AppCompatActivity() {
         val firstNameEditText = findViewById<EditText>(R.id.first_name)
         val genderSpinner = findViewById<Spinner>(R.id.passenger_info_gender)
         val nationalitySpinner = findViewById<Spinner>(R.id.nationality)
-        val birthDateEditText = findViewById<EditText>(R.id.et_date)
+
+        val yearSpinner = findViewById<Spinner>(R.id.year_spinner)
+        val monthSpinner = findViewById<Spinner>(R.id.month_spinner)
+        val daySpinner = findViewById<Spinner>(R.id.day_spinner)
+
         val passportNumberEditText = findViewById<EditText>(R.id.passport_number)
         val phoneNumberEditText = findViewById<EditText>(R.id.passenger_phone_number)
         val baggageEditText = findViewById<EditText>(R.id.passenger_baggage)
@@ -175,7 +162,10 @@ class PassengerActivity : AppCompatActivity() {
         val firstName = firstNameEditText.text.toString()
         val gender = genderSpinner.selectedItem.toString()
         val nationality = nationalitySpinner.selectedItem.toString()
-        val birthDate = birthDateEditText.text.toString()
+        val year = yearSpinner.selectedItem.toString()
+        val month = monthSpinner.selectedItem.toString().padStart(2,'0')
+        val day = daySpinner.selectedItem.toString().padStart(2,'0')
+        val birthDate = "$year = $month - $day"
         val passportNumber = passportNumberEditText.text.toString()
         val phoneNumber = phoneNumberEditText.text.toString()
         val baggageWeight = baggageEditText.text.toString()
@@ -191,7 +181,9 @@ class PassengerActivity : AppCompatActivity() {
             val firstNameEditText = passengerLayout.findViewById<EditText>(R.id.first_name)
             val genderSpinner = passengerLayout.findViewById<Spinner>(R.id.passenger_info_gender)
             val nationalitySpinner = passengerLayout.findViewById<Spinner>(R.id.nationality)
-            val birthDateEditText = passengerLayout.findViewById<EditText>(R.id.et_date)
+            val yearSpinner = passengerLayout.findViewById<Spinner>(R.id.year_spinner)
+            val monthSpinner = passengerLayout.findViewById<Spinner>(R.id.month_spinner)
+            val daySpinner = passengerLayout.findViewById<Spinner>(R.id.day_spinner)
             val passportNumberEditText = passengerLayout.findViewById<EditText>(R.id.passport_number)
             val phoneNumberEditText = passengerLayout.findViewById<EditText>(R.id.passenger_phone_number)
             val baggageEditText = passengerLayout.findViewById<EditText>(R.id.passenger_baggage)
@@ -201,7 +193,10 @@ class PassengerActivity : AppCompatActivity() {
             val firstName = firstNameEditText.text.toString()
             val gender = genderSpinner.selectedItem.toString()
             val nationality = nationalitySpinner.selectedItem.toString()
-            val birthDate = birthDateEditText.text.toString()
+            val year = yearSpinner.selectedItem.toString()
+            val month = monthSpinner.selectedItem.toString().padStart(2,'0')
+            val day = daySpinner.selectedItem.toString().padStart(2,'0')
+            val birthDate = "$year = $month - $day"
             val passportNumber = passportNumberEditText.text.toString()
             val phoneNumber = phoneNumberEditText.text.toString()
             val baggageWeight = baggageEditText.text.toString()
@@ -218,7 +213,9 @@ class PassengerActivity : AppCompatActivity() {
         firstNameEditText.text.clear()
         genderSpinner.setSelection(0)
         nationalitySpinner.setSelection(0)
-        birthDateEditText.text.clear()
+        yearSpinner.setSelection(0)
+        monthSpinner.setSelection(0)
+        daySpinner.setSelection(0)
         passportNumberEditText.text.clear()
         phoneNumberEditText.text.clear()
         baggageEditText.text.clear()
