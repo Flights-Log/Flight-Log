@@ -35,8 +35,8 @@ class MainActivity : AppCompatActivity(),
   private var comeDate = goDate.plusWeeks(1)
 
   //  출발지 및 도착지
-  private var selectedDeparture: String? = null
-  private var selectedDestination: String? = null
+  private var selectedDeparture: String = ""
+  private var selectedDestination: String = ""
 
   //  만들어지만 할거
   override fun onCreate(savedInstanceState: Bundle?) {

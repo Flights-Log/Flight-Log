@@ -16,4 +16,13 @@
       app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
       tools:listitem="@layout/item_arrive" />
 
+  <TextView
+      android:id="@+id/no_arrive_text"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="도착지가 없습니다."
+      android:textSize="16sp"
+      android:gravity="center"
+      android:visibility="gone"/>
+
 </LinearLayout>

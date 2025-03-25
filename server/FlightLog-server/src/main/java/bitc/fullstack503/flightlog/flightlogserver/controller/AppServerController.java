@@ -100,13 +100,15 @@ public class AppServerController {
     }
 
     System.out.println("출발 도시 : " + searchDepartureList);
+    System.out.println();
     return searchDepartureList;
   }
 
   //  항공 도착지 정보
   @GetMapping("/searchArrive/{selectedDeparture}")
   public List<String> searchArrive(@PathVariable("selectedDeparture") String selectedDeparture) {
-    System.out.println("도착지");
+    System.out.println("출발지 : " + selectedDeparture);
+
     List<String> searchArriveList
             = flightInfoSaveService.searchArrive(selectedDeparture);
 

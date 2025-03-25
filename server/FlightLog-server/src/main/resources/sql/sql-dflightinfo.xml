@@ -59,11 +59,10 @@
   <!--  단, 출발지로 설정한 값은 제외한다-->
   <!--  또한, 해당하는 출발지에서 도착지로 가는 항공편이 있는 경우에만 출력한다-->
   <select id="searchArrive" resultType="string">
-    select flight_info_arrivalCity, flight_info_startCity
+    select flight_info_arrivalCity
     from flight_info
-    where flight_info_arrivalCity
-    not like #{selectedDeparture}
-    and flight_info_startCity = #{selectedDeparture}
+    where flight_info_startCity = #{selectedDeparture}
+    and flight_info_arrivalCity not like #{selectedDeparture}
     group by flight_info_arrivalCity, flight_info_startCity
     order by flight_info_arrivalCity;
   </select>

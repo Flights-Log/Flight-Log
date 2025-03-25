@@ -19,20 +19,31 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class ChooseArriveFragment : DialogFragment() {
+  //  바인딩
   private lateinit var binding: FragmentChooseArriveBinding
+
+  //  도착지 목록 저장
   private val arriveList = mutableListOf<String>()
+
+  //  recyclerView 어뎁터
   private lateinit var adapter: MyAdapterArrive
+
+  //  선택된 도착지 전달 인터페이스
   private var listener: OnArriveSelectedListener? = null
-  private var selectedDeparture: String? = null
+
+  //  기본 출발지
+  private var selectedDeparture: String = "서울|김포"
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
 //    MainActivity. 가 구현됐는지 확인하고 listener 에 저장
+//    나중에 도착지를 선택하면 listener?.onArriveSelected(도착지) 를 호출해서 Main 에 전달
     listener = activity as? OnArriveSelectedListener
   }
 
-  //출발지를 저장해서 selectedDeparture 에 넣기
-  fun setSelectedDeparture(departure: String?) {
+  //출발지 설정 함수
+//  selectedDeparture 에 내가 main 에서 설정한 출발지 값을 넣는다
+  fun setSelectedDeparture(departure: String) {
     selectedDeparture = departure
   }
 
@@ -40,26 +51,28 @@ class ChooseArriveFragment : DialogFragment() {
   override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
     binding = FragmentChooseArriveBinding.inflate(layoutInflater)
     val builder = AlertDialog.Builder(requireContext())
-    val inflater = requireActivity().layoutInflater
-    val view = inflater.inflate(R.layout.fragment_choose_arrive, null)
+    // 다이얼로그에 뷰 설정
+    builder.setView(binding.root)
+      .setTitle("도착지 선택")
+      .setNegativeButton("취소", null)
 
-//    리사이클러 뷰 찾기
-    val recyclerView = view.findViewById<RecyclerView>(R.id.arrive_recycler_view)
-//    도착지의 목록 중에서 내가 값을 선택하면 창 닫기
+//    리사이클러 뷰 찾아서 어댑터와 연결하기
+    val recyclerView = binding.arriveRecyclerView
+
+//    도착지를 클릭하면 listener 의 onArrivedSelecte 호출.
+//    MainActivity 에서 선택한 도착지 받음
+//    도착지를 선택하면 다이얼로그 닫기(dismiss())
     adapter = MyAdapterArrive(arriveList) { selectedArrive ->
       listener?.onArriveSelected(selectedArrive)
       dismiss()
     }
     recyclerView.adapter = adapter
 
-    // 다이얼로그에 뷰 설정
-    builder.setView(view)
-      .setTitle("도착지 선택")
-      .setNegativeButton("취소", null)
-
 //도착지 장소 리스트로 가져오기
     val api = AppServerClass.instance
-    val call = api.searchArrive(selectedDeparture.toString())
+    Log.d("flightLog", "출발지 : $selectedDeparture")
+
+    val call = api.searchArrive(selectedDeparture)
     retrofitResponse(call)
 
     return builder.create()
@@ -68,6 +81,8 @@ class ChooseArriveFragment : DialogFragment() {
   //  Retrofit 통신 응답 List<String>
   private fun retrofitResponse(call: Call<List<String>>) {
     call.enqueue(object : Callback<List<String>> {
+
+      //서버 응답이 성공하면 result 에 저장하고 arriveList에 추가
       @SuppressLint("NotifyDataSetChanged")
       override fun onResponse(p0: Call<List<String>>, res: Response<List<String>>) {
         if (res.isSuccessful) {
@@ -77,10 +92,20 @@ class ChooseArriveFragment : DialogFragment() {
           result?.let {
             arriveList.clear()
             arriveList.addAll(it)
-            adapter.notifyDataSetChanged()  // RecyclerView 업데이트
+            // RecyclerView 업데이트
+            adapter.notifyDataSetChanged()
+
+            val noArriveText = binding.noArriveText
+            if (arriveList.isEmpty()) {
+              noArriveText.visibility = View.VISIBLE
+            } else {
+              noArriveText.visibility = View.GONE
+            }
+
+
           }
         } else {
-          Log.d("flightLog", "송신 실패")
+          Log.d("flightLog", "송신 실패 ")
         }
       }
 
@@ -91,16 +116,20 @@ class ChooseArriveFragment : DialogFragment() {
   }
 }
 
-//뷰 홀더 클래스
+//뷰 홀더 클래스. 도착지 이름을 표시할 TextView 연결
 class MyViewHolderArrive(view: View) : RecyclerView.ViewHolder(view) {
   val arriveName: TextView = view.findViewById(R.id.arrive_name)
 }
 
 //어댑터
 class MyAdapterArrive(
+//  도착지 목록 리스트
   private val datas: MutableList<String>,
+//  도착지 선택 시 호출될 함수
   private val onItemClick: (String) -> Unit
 ) : RecyclerView.Adapter<MyViewHolderArrive>() {
+
+  //  레이아웃 설정
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolderArrive {
     val view = LayoutInflater.from(parent.context)
       .inflate(R.layout.item_arrive, parent, false)
@@ -112,6 +141,7 @@ class MyAdapterArrive(
     holder.arriveName.text = datas[position]
     holder.itemView.setOnClickListener {
       Log.d("flightLog", "선택한 도착지: ${datas[position]}")
+//      도착지 선택 시 호출
       onItemClick(datas[position])
     }
   }
