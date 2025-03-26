@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity(),
   //  출발지와 도착지를 바꿀 때 임시로 저장할 string 객체 하나
   private var tempLocation: String = ""
 
-  private var selectedPeople: Int = 0
+  private var selectedPeople: Int = 1
 
   //  만들어지만 할거
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -193,6 +193,7 @@ class MainActivity : AppCompatActivity(),
     Log.d("flightLog", "result : $result")
 //    n 명 형식의 데이터를 공백을 기준으로 자르고, 그 0번째 값을 가져와서 숫자로 만든다
     selectedPeople = result.split(" ")[0].toInt()
+    Log.d("flightLog", "selectedPeople = $selectedPeople")
   }
 
   //  출발지 설정

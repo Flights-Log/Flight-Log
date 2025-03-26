@@ -26,6 +26,13 @@ import java.text.NumberFormat
 import java.time.format.DateTimeFormatter
 import java.util.Locale
 
+//  출발도시, 도착도시, 가는날
+private var selectedDeparture: String = ""
+private var selectedArrive: String = ""
+private var goDate: String = ""
+private var comeDate: String = ""
+private var selectedPeople: Int = 0
+
 class GoAirplaneActivity : AppCompatActivity() {
   //  ActivityGoAirplaneBinding
   private val binding: ActivityGoAirplaneBinding by lazy {
@@ -38,10 +45,6 @@ class GoAirplaneActivity : AppCompatActivity() {
   //  어댑터
   private lateinit var adapter: MyAdapterGoAirplane
 
-  //  출발도시, 도착도시, 가는날
-  var startCity: String = ""
-  var arrivalCity: String = ""
-  var goDate: String = ""
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -77,24 +80,27 @@ class GoAirplaneActivity : AppCompatActivity() {
 
     //출발지 장소 리스트로 가져오기
     val api = AppServerClass.instance
-    val call = api.searchGoAirplane(startCity, arrivalCity, goDate)
+    val call = api.searchGoAirplane(selectedDeparture, selectedArrive, goDate)
     retrofitResponse(call)
   }
 
   //  내가 MainActivity 에서 intent 로 받아온 값 화면과 로그에 출력
-//  그리고 위에 있는 startCity, arrivalCity, goDate 에 넣어줌
+//  그리고 위에 있는 startCity, selectedArrive, goDate 에 넣어줌
   fun getExtra() {
     binding.textStartCity.text = intent.getStringExtra("출발지")
-    startCity = binding.textStartCity.text.toString()
+    selectedDeparture = binding.textStartCity.text.toString()
 
     binding.textArrivalCity.text = intent.getStringExtra("도착지")
-    arrivalCity = binding.textArrivalCity.text.toString()
+    selectedArrive = binding.textArrivalCity.text.toString()
 
     binding.flightDepartureDate.text = intent.getStringExtra("출발일")
     goDate = binding.flightDepartureDate.text.toString()
 
     Log.d("flightLog", "받은 도착일 : ${intent.getStringExtra("도착일")}")
+    comeDate = intent.getStringExtra("도착일").toString()
+
     Log.d("flightLog", "인원수 : ${intent.getIntExtra("인원수", 1)}")
+    selectedPeople = intent.getIntExtra("인원수", 1)
   }
 
   //  Retrofit 통신 응답 List<String>
@@ -178,7 +184,13 @@ class MyAdapterGoAirplane(val datas: MutableList<flightInfoDTO>) :
     binding.goAirplaneMoney.setOnClickListener {
 //      MyViewHolderGoAirplane 의 binding 의 뿌리 객체(item_go_airplane)를 반환함
       val context = binding.root.context
+
       val intent = Intent(context, GoAirplaneChooseSeatActivity::class.java)
+      intent.putExtra("출발지", selectedDeparture)
+      intent.putExtra("도착지", selectedArrive)
+      intent.putExtra("출발일", goDate.toString())
+      intent.putExtra("도착일", comeDate.toString())
+      intent.putExtra("인원수", selectedPeople)
 //      item_go_airplane 에서 intent(GoAirplaneChooseSeatActivity)로 이동
       context.startActivity(intent)
     }

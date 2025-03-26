@@ -73,7 +73,7 @@ class ChooseDepartureFragment : DialogFragment() {
       override fun onResponse(p0: Call<List<String>>, res: Response<List<String>>) {
         if (res.isSuccessful) {
           val result = res.body()
-          Log.d("flightLog", "result : $result")
+//          Log.d("flightLog", "result : $result")
 
           result?.let {
             departureList.clear()
