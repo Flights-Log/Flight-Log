@@ -26,12 +26,14 @@ import java.text.NumberFormat
 import java.time.format.DateTimeFormatter
 import java.util.Locale
 
-//  출발도시, 도착도시, 가는날
+//  출발도시, 도착도시, 가는날, 오는 날, 선택한 사람 수, 거리
 private var selectedDeparture: String = ""
 private var selectedArrive: String = ""
 private var goDate: String = ""
 private var comeDate: String = ""
 private var selectedPeople: Int = 0
+private var distance: Double = 0.0
+
 
 class GoAirplaneActivity : AppCompatActivity() {
   //  ActivityGoAirplaneBinding
@@ -178,8 +180,13 @@ class MyAdapterGoAirplane(val datas: MutableList<flightInfoDTO>) :
 //    내가 db에서 받아온 네자리 시간값(0000) 을 두자리로 나눠서(00 00) 그 사이에 : 를 넣는다 (00:00)
     binding.goAirplaneStartTime.text = item.flightInfoStartTime.chunked(2).joinToString(":")
     binding.goAirplaneArrivalTime.text = item.flightInfoArrivalTime.chunked(2).joinToString(":")
+
 //    한국 통화 형식으로 숫자(format 의 매개변수 number) 를 바꾼다
-    binding.goAirplaneMoney.text = NumberFormat.getInstance(Locale.KOREA).format(50000)
+    binding.goAirplaneMoney.text =
+      NumberFormat.getInstance(Locale.KOREA).format(item.flightDistance * 500.toInt())
+
+//    아까 찾은 거리값 distance 에 넣기
+    distance = item.flightDistance
 
     binding.goAirplaneMoney.setOnClickListener {
 //      MyViewHolderGoAirplane 의 binding 의 뿌리 객체(item_go_airplane)를 반환함
@@ -191,6 +198,7 @@ class MyAdapterGoAirplane(val datas: MutableList<flightInfoDTO>) :
       intent.putExtra("출발일", goDate.toString())
       intent.putExtra("도착일", comeDate.toString())
       intent.putExtra("인원수", selectedPeople)
+      intent.putExtra("거리", distance)
 //      item_go_airplane 에서 intent(GoAirplaneChooseSeatActivity)로 이동
       context.startActivity(intent)
     }

@@ -49,5 +49,20 @@ data class flightInfoDTO(
   var flightSat: String,
 
   @SerializedName("flightSun")
-  var flightSun: String
+  var flightSun: String,
+
+  @SerializedName("flightStartLatitude")
+  var flightStartLatitude: Double,
+
+  @SerializedName("flightStartLongitude")
+  var flightStartLongitude: Double,
+
+  @SerializedName("flightArriveLatitude")
+  var flightArriveLatitude: Double,
+
+  @SerializedName("flightArriveLongitude")
+  var flightArriveLongitude: Double,
+
+  @SerializedName("flightDistance")
+  var flightDistance: Double
 )

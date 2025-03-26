@@ -73,7 +73,8 @@ public class FlightLogMainController {
     for (flightInfoDTO flightInfoDTO : searchGoAirplaneList) {
       System.out.print("항공편 : " + flightInfoDTO.getFlightInfoAirline() + " / ");
       System.out.print("출발 시간 : " + flightInfoDTO.getFlightInfoStartTime() + " / ");
-      System.out.println("도착 시간 : " + flightInfoDTO.getFlightInfoArrivalTime());
+      System.out.print("도착 시간 : " + flightInfoDTO.getFlightInfoArrivalTime() + " / ");
+      System.out.println("거리 : " + flightInfoDTO.getFlightDistance());
     }
     return searchGoAirplaneList;
   }

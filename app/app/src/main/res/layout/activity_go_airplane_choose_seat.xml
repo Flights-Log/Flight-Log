@@ -765,10 +765,12 @@
 
   <!--  장바구니?(티켓 홀더?) 로-->
   <LinearLayout
+      android:id="@+id/go_airplane_choose_seat_next_button"
       android:layout_width="match_parent"
-      android:layout_height="40dp"
+      android:layout_height="wrap_content"
       android:background="@color/skyBlue"
-      android:gravity="center">
+      android:gravity="center"
+      android:paddingVertical="10dp">
 
     <TextView
         android:layout_width="wrap_content"

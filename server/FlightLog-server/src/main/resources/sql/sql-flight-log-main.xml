@@ -27,7 +27,7 @@
   <!--  지금까지 설정한 값을 바탕으로 출발하는 비행기 값 가져오기-->
   <!--  단, 2024년 값을 기준으로 한다-->
   <select id="searchGoAirplane" parameterType="java.util.List">
-    select flight_info_airline, flight_info_startTime, flight_info_arrivalTime
+    select flight_info_airline, flight_info_startTime, flight_info_arrivalTime, flight_distance
     from flight_info
     where flight_info_startCity = #{startCity}
     and flight_info_arrivalCity = #{arrivalCity}

@@ -1,6 +1,7 @@
 package bitc.fullstack.FlightLog.flightchoose
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.enableEdgeToEdge
@@ -11,6 +12,8 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import bitc.fullstack.FlightLog.R
 import bitc.fullstack.FlightLog.databinding.ActivityGoAirplaneChooseSeatBinding
+import java.text.NumberFormat
+import java.util.Locale
 
 //  출발도시, 도착도시, 가는날
 private var selectedDeparture: String = ""
@@ -19,11 +22,18 @@ private var goDate: String = ""
 private var comeDate: String = ""
 private var selectedPeople: Int = 0
 private var selectedSeat: Int = 0
+private var distance: Double = 0.0
 
 //각 좌석의 가격
-private val firstSeatPrice = 1500
-private val businessSeatPrice = 1000
-private val economySeatPrice = 500
+private const val firstSeatPrice = 1500
+private const val businessSeatPrice = 1000
+private const val regularSeatPrice = 500
+
+//가는 비행기 좌석 총 경비
+private var goAirplaneTotalPrice = 0
+
+//한국 통화 형식으로 환산
+private var formattedGoAirplane = ""
 
 
 class GoAirplaneChooseSeatActivity : AppCompatActivity() {
@@ -33,11 +43,6 @@ class GoAirplaneChooseSeatActivity : AppCompatActivity() {
 
   //  내가 고른 좌석의 텍스트값 저장
   private val selectedSeatNames = mutableListOf<String>()
-
-  private val chong = "총"
-  private val myeong = "명"
-  private val howMuchSelectedSeats = "명 좌석 선택"
-  private val whatIChoosedSeats = "선택 좌석 : "
 
   @SuppressLint("UseCompatLoadingForDrawables", "SetTextI18n")
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,17 +56,21 @@ class GoAirplaneChooseSeatActivity : AppCompatActivity() {
       insets
     }
 
+//    각 변수에 intent 에서 넘어온 값 대입
     selectedDeparture = intent.getStringExtra("출발지").toString()
     selectedArrive = intent.getStringExtra("도착지").toString()
     goDate = intent.getStringExtra("출발일").toString()
     comeDate = intent.getStringExtra("도착일").toString()
     selectedPeople = intent.getIntExtra("인원수", 1)
+    distance = intent.getDoubleExtra("거리", 0.0)
 
+//    확인용
     Log.d("flightLog", "selectedDeparture = $selectedDeparture")
     Log.d("flightLog", "selectedArrive = $selectedArrive")
     Log.d("flightLog", "goDate = $goDate")
     Log.d("flightLog", "comeDate = $comeDate")
     Log.d("flightLog", "selectedPeople = $selectedPeople")
+    Log.d("flightLog", "distance = $distance")
 
 //    일등석
     setUpFirstSeatSelection()
@@ -72,7 +81,11 @@ class GoAirplaneChooseSeatActivity : AppCompatActivity() {
 //    일반석
     setUpRegularSeatSelection()
 
-    binding.textSelectedPeople.text = "$chong $selectedPeople $myeong"
+    binding.textSelectedPeople.text = "총 $selectedPeople 명"
+
+//    다음 버튼 누르면 ComeAirplaneActivity 로
+    goToNextPage()
+
   }
 
   //  일등석
@@ -117,10 +130,17 @@ class GoAirplaneChooseSeatActivity : AppCompatActivity() {
 //            선택된 좌석 수 증가
             selectedSeat++
 //            n 명 좌석 선택 의 n 을 내가 고른 좌석 수로 설정함
-            binding.textSelectedSeat.text = "$selectedSeat $howMuchSelectedSeats"
+            binding.textSelectedSeat.text = "$selectedSeat 명 좌석 선택"
 
 //            내가 선택한 좌석의 이름을 selectedSeatNames 라는 배열에 추가함
             selectedSeatNames.add(seatName)
+
+//            총 가격 = 지금까지의 가격 + ((거리 * 일등석 가격(1500))을 정수로 환산한 값)
+            goAirplaneTotalPrice = (goAirplaneTotalPrice + (distance * firstSeatPrice).toInt())
+            formattedGoAirplane =
+              NumberFormat.getInstance(Locale.KOREA).format(goAirplaneTotalPrice)
+            Log.d("flightLog", "goAirplaneTotalPrice : $goAirplaneTotalPrice")
+            Log.d("flightLog", "formattedGoAirplane : $formattedGoAirplane")
           } else {
 //            선택 가능한 좌석 수 초과 시 안내 메세지 표시
             showSeatLimitDialog()
@@ -134,10 +154,18 @@ class GoAirplaneChooseSeatActivity : AppCompatActivity() {
 //          선택된 좌석 수 감소
           selectedSeat--
           //n 명 좌석 선택 의 n 을 내가 고른 좌석 수로 설정함
-          binding.textSelectedSeat.text = "$selectedSeat $howMuchSelectedSeats"
+          binding.textSelectedSeat.text = "$selectedSeat 명 좌석 선택"
 
           //내가 선택한 좌석의 이름을 selectedSeatNames 라는 배열에서 제거함
           selectedSeatNames.remove(seatName)
+
+//            총 가격 = 지금까지의 가격 - ((거리 * 일등석 가격(1500))을 정수로 환산한 값)
+          goAirplaneTotalPrice = (goAirplaneTotalPrice - (distance * firstSeatPrice).toInt())
+          Log.d("flightLog", "goAirplaneTotalPrice : $goAirplaneTotalPrice")
+          formattedGoAirplane =
+            NumberFormat.getInstance(Locale.KOREA).format(goAirplaneTotalPrice)
+          Log.d("flightLog", "formattedGoAirplane : $formattedGoAirplane")
+
         }
 
 //        선택 좌석에 내가 고른 좌석들의 목록을 배열으로 출력
@@ -198,10 +226,16 @@ class GoAirplaneChooseSeatActivity : AppCompatActivity() {
 //            선택된 좌석 수 증가
             selectedSeat++
             //n 명 좌석 선택 의 n 을 내가 고른 좌석 수로 설정함
-            binding.textSelectedSeat.text = "$selectedSeat $howMuchSelectedSeats"
+            binding.textSelectedSeat.text = "$selectedSeat 명 좌석 선택"
 
             //내가 선택한 좌석의 이름을 selectedSeatNames 라는 배열에 추가함
             selectedSeatNames.add(seatName)
+
+            goAirplaneTotalPrice = (goAirplaneTotalPrice + (distance * businessSeatPrice).toInt())
+            Log.d("flightLog", "goAirplaneTotalPrice : $goAirplaneTotalPrice")
+            formattedGoAirplane =
+              NumberFormat.getInstance(Locale.KOREA).format(goAirplaneTotalPrice)
+            Log.d("flightLog", "formattedGoAirplane : $formattedGoAirplane")
           } else {
 //            선택 가능한 좌석 수 초과 시 안내 메세지 표시
             showSeatLimitDialog()
@@ -215,10 +249,16 @@ class GoAirplaneChooseSeatActivity : AppCompatActivity() {
 //          선택된 좌석 수 감소
           selectedSeat--
           //n 명 좌석 선택 의 n 을 내가 고른 좌석 수로 설정함
-          binding.textSelectedSeat.text = "$selectedSeat $howMuchSelectedSeats"
+          binding.textSelectedSeat.text = "$selectedSeat 명 좌석 선택"
 
           //내가 선택한 좌석의 이름을 selectedSeatNames 라는 배열에서 제거함
           selectedSeatNames.remove(seatName)
+
+          goAirplaneTotalPrice = (goAirplaneTotalPrice - (distance * businessSeatPrice).toInt())
+          Log.d("flightLog", "goAirplaneTotalPrice : $goAirplaneTotalPrice")
+          formattedGoAirplane =
+            NumberFormat.getInstance(Locale.KOREA).format(goAirplaneTotalPrice)
+          Log.d("flightLog", "formattedGoAirplane : $formattedGoAirplane")
         }
         //선택 좌석에 내가 고른 좌석들의 목록을 배열으로 출력
 //        그 배열을 출력하되, 배열 안의 요소 각각의 값은 ', ' 형태로 나눔
@@ -272,10 +312,16 @@ class GoAirplaneChooseSeatActivity : AppCompatActivity() {
 //            선택된 좌석 수 증가
             selectedSeat++
             //n 명 좌석 선택 의 n 을 내가 고른 좌석 수로 설정함
-            binding.textSelectedSeat.text = "$selectedSeat $howMuchSelectedSeats"
+            binding.textSelectedSeat.text = "$selectedSeat 명 좌석 선택"
 
             //내가 선택한 좌석의 이름을 selectedSeatNames 라는 배열에 추가함
             selectedSeatNames.add(seatName)
+
+            goAirplaneTotalPrice = (goAirplaneTotalPrice + (distance * regularSeatPrice).toInt())
+            Log.d("flightLog", "goAirplaneTotalPrice : $goAirplaneTotalPrice")
+            formattedGoAirplane =
+              NumberFormat.getInstance(Locale.KOREA).format(goAirplaneTotalPrice)
+            Log.d("flightLog", "formattedGoAirplane : $formattedGoAirplane")
           } else {
 //            선택 가능한 좌석 수 초과 시 안내 메세지 표시
             showSeatLimitDialog()
@@ -289,10 +335,16 @@ class GoAirplaneChooseSeatActivity : AppCompatActivity() {
 //          선택된 좌석 수 감소
           selectedSeat--
           //n 명 좌석 선택 의 n 을 내가 고른 좌석 수로 설정함
-          binding.textSelectedSeat.text = "$selectedSeat $howMuchSelectedSeats"
+          binding.textSelectedSeat.text = "$selectedSeat 명 좌석 선택"
 
           //내가 선택한 좌석의 이름을 selectedSeatNames 라는 배열에서 제거함
           selectedSeatNames.remove(seatName)
+
+          goAirplaneTotalPrice = (goAirplaneTotalPrice - (distance * regularSeatPrice).toInt())
+          Log.d("flightLog", "goAirplaneTotalPrice : $goAirplaneTotalPrice")
+          formattedGoAirplane =
+            NumberFormat.getInstance(Locale.KOREA).format(goAirplaneTotalPrice)
+          Log.d("flightLog", "formattedGoAirplane : $formattedGoAirplane")
         }
         //선택 좌석에 내가 고른 좌석들의 목록을 배열으로 출력
 //        그 배열을 출력하되, 배열 안의 요소 각각의 값은 ', ' 형태로 나눔
@@ -309,5 +361,22 @@ class GoAirplaneChooseSeatActivity : AppCompatActivity() {
       .setMessage("선택한 좌석 수가 인원 수보다 많습니다")
       .setPositiveButton("확인", null)
       .show()
+  }
+
+  //  ComeAirplaneActivity 로
+  fun goToNextPage() {
+    binding.goAirplaneChooseSeatNextButton.setOnClickListener {
+      val intent = Intent(this, ComeAirplaneActivity::class.java)
+      intent.putExtra("출발지", selectedDeparture)
+      intent.putExtra("도착지", selectedArrive)
+      intent.putExtra("출발일", goDate.toString())
+      intent.putExtra("도착일", comeDate.toString())
+      intent.putExtra("인원수", selectedPeople)
+      intent.putExtra("거리", distance)
+      intent.putExtra("가는 비행기 총 비용", goAirplaneTotalPrice)
+      startActivity(intent)
+    }
+    Log.d("flightLog", "goAirplaneTotalPrice : $goAirplaneTotalPrice")
+    Log.d("flightLog", "formattedGoAirplane : $formattedGoAirplane")
   }
 }

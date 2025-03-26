@@ -52,4 +52,19 @@ public class flightInfoDTO {
 
   @JsonProperty("flightSun")
   private String flightSun;
+
+  @JsonProperty("flightStartLatitude")
+  private Double flightStartLatitude;
+
+  @JsonProperty("flightStartLongitude")
+  private Double flightStartLongitude;
+
+  @JsonProperty("flightArriveLatitude")
+  private Double flightArriveLatitude;
+
+  @JsonProperty("flightArriveLongitude")
+  private Double flightArriveLongitude;
+
+  @JsonProperty("flightDistance")
+  private Double flightDistance;
 }
