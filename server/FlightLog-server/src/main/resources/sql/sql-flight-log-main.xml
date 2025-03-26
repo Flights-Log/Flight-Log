@@ -3,6 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="bitc.fullstack503.flightlog.flightlogserver.mapper.FlightLogMainMapper">
+
   <!--  출발지 설정하기-->
   <select id="searchDeparture" resultType="string">
     select flight_info_startCity
