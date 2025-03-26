@@ -1,6 +1,7 @@
 package bitc.fullstack.FlightLog.flightchoose
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.enableEdgeToEdge
@@ -10,8 +11,12 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import bitc.fullstack.FlightLog.R
+import bitc.fullstack.FlightLog.appserver.AppServerClass
 import bitc.fullstack.FlightLog.databinding.ActivityComeAirplaneChooseSeatBinding
 import bitc.fullstack.FlightLog.flightchoose.GoAirplaneChooseSeatActivity
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.text.NumberFormat
 import java.util.Locale
 
@@ -23,6 +28,7 @@ private var comeDate: String = ""
 private var selectedPeople: Int = 0
 private var selectedSeat: Int = 0
 private var distance: Double = 0.0
+private var comeAirplaneFlightId: Int = 0
 
 //각 좌석의 가격
 private const val firstSeatPrice = 1500
@@ -40,6 +46,8 @@ private var totalPrice = 0
 
 //한국 통화 형식으로 환산
 private var formattedTotalPrice = ""
+
+private val userId = "test1234"
 
 class ComeAirplaneChooseSeatActivity : AppCompatActivity() {
   private val binding: ActivityComeAirplaneChooseSeatBinding by lazy {
@@ -75,11 +83,20 @@ class ComeAirplaneChooseSeatActivity : AppCompatActivity() {
 
     binding.textComeSelectedPeople.text = "총 $selectedPeople 명"
 
+    goToNextPage()
+  }
+
+  //  고른 좌석 초기화
+  override fun onDestroy() {
+    super.onDestroy()
+    selectedSeat = 0
+    selectedSeatNames.removeAll(selectedSeatNames)
   }
 
   //  ComeAirplaneActivity 에서 가져온 값
   fun getExtra() {
     //각 변수에 intent 에서 넘어온 값 대입
+    comeAirplaneFlightId = intent.getIntExtra("오는 비행기 아이디", 0)
     selectedDeparture = intent.getStringExtra("출발지").toString()
     selectedArrive = intent.getStringExtra("도착지").toString()
     goDate = intent.getStringExtra("출발일").toString()
@@ -89,6 +106,7 @@ class ComeAirplaneChooseSeatActivity : AppCompatActivity() {
     goAirplaneTotalPrice = intent.getIntExtra("가는 비행기 총 비용", 0)
 
 //    확인용
+    Log.d("flightLog", "comeAirplaneFlightId = $comeAirplaneFlightId")
     Log.d("flightLog", "selectedDeparture = $selectedDeparture")
     Log.d("flightLog", "selectedArrive = $selectedArrive")
     Log.d("flightLog", "goDate = $goDate")
@@ -378,5 +396,52 @@ class ComeAirplaneChooseSeatActivity : AppCompatActivity() {
       .setMessage("선택한 좌석 수가 인원 수보다 많습니다")
       .setPositiveButton("확인", null)
       .show()
+  }
+
+  //  티켓홀더 로
+  fun goToNextPage() {
+    binding.comeAirplaneChooseSeatNextButton.setOnClickListener {
+      val intent = Intent(this, ComeAirplaneActivity::class.java)
+      intent.putExtra("출발지", selectedDeparture)
+      intent.putExtra("도착지", selectedArrive)
+      intent.putExtra("출발일", goDate.toString())
+      intent.putExtra("도착일", comeDate.toString())
+      intent.putExtra("인원수", selectedPeople)
+      intent.putExtra("총 비용", totalPrice)
+      startActivity(intent)
+
+      //오는 비행기 좌석 예약
+      val api = AppServerClass.instance
+      val call = api.comeAirplaneReserveSeat(
+        comeAirplaneFlightId,
+        comeDate,
+        goDate,
+        selectedPeople,
+        userId,
+        selectedSeatNames.joinToString(",")
+      )
+      retrofitResponse(call)
+    }
+
+    Log.d("flightLog", "goAirplaneTotalPrice : $goAirplaneTotalPrice")
+    Log.d("flightLog", "formattedTotalPrice : $formattedTotalPrice")
+  }
+
+  //  Retrofit 통신 응답 List<String>
+  private fun retrofitResponse(call: Call<Void>) {
+    call.enqueue(object : Callback<Void> {
+      @SuppressLint("NotifyDataSetChanged")
+      override fun onResponse(p0: Call<Void>, res: Response<Void>) {
+        if (res.isSuccessful) {
+          Log.d("flightLog", "성공")
+        } else {
+          Log.d("flightLog", "come 실패. 응답 코드 : ${res.code()}")
+        }
+      }
+
+      override fun onFailure(p0: Call<Void>, t: Throwable) {
+        Log.d("flightLog", "message : $t.message")
+      }
+    })
   }
 }

@@ -33,7 +33,7 @@ private var goDate: String = ""
 private var comeDate: String = ""
 private var selectedPeople: Int = 0
 private var distance: Double = 0.0
-
+private var goAirplaneFlightId: Int = 0
 
 class GoAirplaneActivity : AppCompatActivity() {
   //  ActivityGoAirplaneBinding
@@ -187,12 +187,15 @@ class MyAdapterGoAirplane(val datas: MutableList<flightInfoDTO>) :
 
 //    아까 찾은 거리값 distance 에 넣기
     distance = item.flightDistance
+    goAirplaneFlightId = item.flightId
 
+//    goAirplaneMoney 를 누르면 GoAirplaneChooseSeatActivity 로
     binding.goAirplaneMoney.setOnClickListener {
 //      MyViewHolderGoAirplane 의 binding 의 뿌리 객체(item_go_airplane)를 반환함
       val context = binding.root.context
 
       val intent = Intent(context, GoAirplaneChooseSeatActivity::class.java)
+      intent.putExtra("비행기 아이디", goAirplaneFlightId)
       intent.putExtra("출발지", selectedDeparture)
       intent.putExtra("도착지", selectedArrive)
       intent.putExtra("출발일", goDate.toString())

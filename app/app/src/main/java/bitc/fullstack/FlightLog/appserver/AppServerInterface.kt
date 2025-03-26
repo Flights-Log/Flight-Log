@@ -10,6 +10,7 @@ import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.PUT
 import retrofit2.http.Path
 import retrofit2.http.Query
 
@@ -61,4 +62,44 @@ interface AppServerInterface {
     @Path("arrivalCity") arrivalCity: String,
     @Path("comeDate") comeDate: String
   ): Call<List<flightInfoDTO>>
+
+  //  가는 비행기 예약
+  @PUT(
+    "main" +
+            "/reserveGoSeat" +
+            "/{goAirplaneFlightId}" +
+            "/{goDate}" +
+            "/{comeDate}" +
+            "/{selectedPeople}" +
+            "/{userId}" +
+            "/{selectedSeatNames}"
+  )
+  fun goAirplaneReserveSeat(
+    @Path("goAirplaneFlightId") goAirplaneFlightId: Int,
+    @Path("goDate") goDate: String,
+    @Path("comeDate") comeDate: String,
+    @Path("selectedPeople") selectedPeople: Int,
+    @Path("userId") userId: String,
+    @Path("selectedSeatNames") selectedSeatNames: String
+  ): Call<Void>
+
+  //  오는 비행기 예약
+  @PUT(
+    "main" +
+            "/reserveComeSeat" +
+            "/{comeAirplaneFlightId}" +
+            "/{comeDate}" +
+            "/{goDate}" +
+            "/{selectedPeople}" +
+            "/{userId}" +
+            "/{selectedSeatNames}"
+  )
+  fun comeAirplaneReserveSeat(
+    @Path("comeAirplaneFlightId") comeAirplaneFlightId: Int,
+    @Path("comeDate") comeDate: String,
+    @Path("goDate") goDate: String,
+    @Path("selectedPeople") selectedPeople: Int,
+    @Path("userId") userId: String,
+    @Path("selectedSeatNames") selectedSeatNames: String
+  ): Call<Void>
 }

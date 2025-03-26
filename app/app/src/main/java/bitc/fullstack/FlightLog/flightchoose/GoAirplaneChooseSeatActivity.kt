@@ -11,7 +11,12 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import bitc.fullstack.FlightLog.R
+import bitc.fullstack.FlightLog.appserver.AppServerClass
 import bitc.fullstack.FlightLog.databinding.ActivityGoAirplaneChooseSeatBinding
+import bitc.fullstack.FlightLog.dto.flightInfoDTO
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.text.NumberFormat
 import java.util.Locale
 
@@ -23,6 +28,7 @@ private var comeDate: String = ""
 private var selectedPeople: Int = 0
 private var selectedSeat: Int = 0
 private var distance: Double = 0.0
+private var goAirplaneFlightId = 0
 
 //각 좌석의 가격
 private const val firstSeatPrice = 1500
@@ -34,6 +40,8 @@ private var goAirplaneTotalPrice = 0
 
 //한국 통화 형식으로 환산
 private var formattedGoAirplane = ""
+
+private var userId = "test1234"
 
 
 class GoAirplaneChooseSeatActivity : AppCompatActivity() {
@@ -56,21 +64,8 @@ class GoAirplaneChooseSeatActivity : AppCompatActivity() {
       insets
     }
 
-//    각 변수에 intent 에서 넘어온 값 대입
-    selectedDeparture = intent.getStringExtra("출발지").toString()
-    selectedArrive = intent.getStringExtra("도착지").toString()
-    goDate = intent.getStringExtra("출발일").toString()
-    comeDate = intent.getStringExtra("도착일").toString()
-    selectedPeople = intent.getIntExtra("인원수", 1)
-    distance = intent.getDoubleExtra("거리", 0.0)
-
-//    확인용
-    Log.d("flightLog", "selectedDeparture = $selectedDeparture")
-    Log.d("flightLog", "selectedArrive = $selectedArrive")
-    Log.d("flightLog", "goDate = $goDate")
-    Log.d("flightLog", "comeDate = $comeDate")
-    Log.d("flightLog", "selectedPeople = $selectedPeople")
-    Log.d("flightLog", "distance = $distance")
+//    내가 저번 view 에서 받아온거 확인용
+    getExtra()
 
 //    일등석
     setUpFirstSeatSelection()
@@ -85,7 +80,34 @@ class GoAirplaneChooseSeatActivity : AppCompatActivity() {
 
 //    다음 버튼 누르면 ComeAirplaneActivity 로
     goToNextPage()
+  }
 
+  //  고른 좌석 초기화
+  override fun onDestroy() {
+    super.onDestroy()
+    selectedSeat = 0
+    selectedSeatNames.removeAll(selectedSeatNames)
+  }
+
+  //  확인용
+  fun getExtra() {
+    //    각 변수에 intent 에서 넘어온 값 대입
+    selectedDeparture = intent.getStringExtra("출발지").toString()
+    selectedArrive = intent.getStringExtra("도착지").toString()
+    goDate = intent.getStringExtra("출발일").toString()
+    comeDate = intent.getStringExtra("도착일").toString()
+    selectedPeople = intent.getIntExtra("인원수", 1)
+    distance = intent.getDoubleExtra("거리", 0.0)
+    goAirplaneFlightId = intent.getIntExtra("비행기 아이디", 0)
+
+//    확인용
+    Log.d("flightLog", "goAirplaneFlightId = $goAirplaneFlightId")
+    Log.d("flightLog", "selectedDeparture = $selectedDeparture")
+    Log.d("flightLog", "selectedArrive = $selectedArrive")
+    Log.d("flightLog", "goDate = $goDate")
+    Log.d("flightLog", "comeDate = $comeDate")
+    Log.d("flightLog", "selectedPeople = $selectedPeople")
+    Log.d("flightLog", "distance = $distance")
   }
 
   //  일등석
@@ -350,6 +372,8 @@ class GoAirplaneChooseSeatActivity : AppCompatActivity() {
 //        그 배열을 출력하되, 배열 안의 요소 각각의 값은 ', ' 형태로 나눔
         binding.textSelectedSeatList.text = "선택 좌석 : ${selectedSeatNames.joinToString(", ")}"
         Log.d("flightLog", "selectedSeat : $selectedSeat")
+
+
       }
     }
   }
@@ -375,8 +399,39 @@ class GoAirplaneChooseSeatActivity : AppCompatActivity() {
       intent.putExtra("거리", distance)
       intent.putExtra("가는 비행기 총 비용", goAirplaneTotalPrice)
       startActivity(intent)
+
+      //가는 비행기 좌석 예약
+      val api = AppServerClass.instance
+      val call = api.goAirplaneReserveSeat(
+        goAirplaneFlightId,
+        goDate,
+        comeDate,
+        selectedPeople,
+        userId,
+        selectedSeatNames.joinToString(",")
+      )
+      retrofitResponse(call)
     }
+
     Log.d("flightLog", "goAirplaneTotalPrice : $goAirplaneTotalPrice")
     Log.d("flightLog", "formattedGoAirplane : $formattedGoAirplane")
+  }
+
+  //  Retrofit 통신 응답 List<String>
+  private fun retrofitResponse(call: Call<Void>) {
+    call.enqueue(object : Callback<Void> {
+      @SuppressLint("NotifyDataSetChanged")
+      override fun onResponse(p0: Call<Void>, res: Response<Void>) {
+        if (res.isSuccessful) {
+          Log.d("flightLog", "성공")
+        } else {
+          Log.d("flightLog", "실패. 응답 코드 : ${res.code()}")
+        }
+      }
+
+      override fun onFailure(p0: Call<Void>, t: Throwable) {
+        Log.d("flightLog", "message : $t.message")
+      }
+    })
   }
 }

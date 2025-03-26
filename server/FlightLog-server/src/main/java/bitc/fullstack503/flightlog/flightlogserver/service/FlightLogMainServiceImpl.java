@@ -35,6 +35,18 @@ public class FlightLogMainServiceImpl implements FlightLogMainService {
   //  도착 비행기 찾기
   @Override
   public List<flightInfoDTO> searchComeAirplane(String startCity, String arrivalCity, String comeDate) {
-    return flightLogMainMapper.searchGoAirplane(startCity, arrivalCity, comeDate);
+    return flightLogMainMapper.searchComeAirplane(startCity, arrivalCity, comeDate);
+  }
+
+  @Override
+  public void reserveGoAirplaneSeats(int goAirplaneFlightId, String goDate, String comeDate,
+                                     int selectedPeople, String userId, String selectedSeatNames) {
+    flightLogMainMapper.reserveGoAirplaneSeats(goAirplaneFlightId, goDate, comeDate, selectedPeople, userId, selectedSeatNames);
+  }
+
+  @Override
+  public void reserveComeAirplaneSeats(int comeAirplaneFlightId, String comeDate, String goDate,
+                                       int selectedPeople, String userId, String selectedSeatNames) {
+    flightLogMainMapper.reserveComeAirplaneSeats(comeAirplaneFlightId, comeDate, goDate, selectedPeople, userId, selectedSeatNames);
   }
 }

@@ -4,10 +4,7 @@ import bitc.fullstack503.flightlog.flightlogserver.dto.flightInfoDTO;
 import bitc.fullstack503.flightlog.flightlogserver.service.FlightLogMainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
 import java.util.List;
@@ -71,6 +68,7 @@ public class FlightLogMainController {
     }
 
     for (flightInfoDTO flightInfoDTO : searchGoAirplaneList) {
+      System.out.print("항공편 id : " + flightInfoDTO.getFlightId() + " / ");
       System.out.print("항공편 : " + flightInfoDTO.getFlightInfoAirline() + " / ");
       System.out.print("출발 시간 : " + flightInfoDTO.getFlightInfoStartTime() + " / ");
       System.out.print("도착 시간 : " + flightInfoDTO.getFlightInfoArrivalTime() + " / ");
@@ -83,8 +81,8 @@ public class FlightLogMainController {
 //  단, db 상의 데이터는 2024 년의 데이터가 많기 때문에 현재 날짜 - 1년 을 실행함
   @GetMapping("searchComeAirplane/{startCity}/{arrivalCity}/{comeDate}")
   public List<flightInfoDTO> searchComeAirplane(@PathVariable("startCity") String startCity,
-                                              @PathVariable("arrivalCity") String arrivalCity,
-                                              @PathVariable("comeDate") String goDate) {
+                                                @PathVariable("arrivalCity") String arrivalCity,
+                                                @PathVariable("comeDate") String goDate) {
     System.out.println();
     System.out.println("도착 비행기 정보 가져오기");
     List<flightInfoDTO> searchComeAirplaneList
@@ -96,11 +94,34 @@ public class FlightLogMainController {
     }
 
     for (flightInfoDTO flightInfoDTO : searchComeAirplaneList) {
+      System.out.print("항공편 id : " + flightInfoDTO.getFlightId() + " / ");
       System.out.print("항공편 : " + flightInfoDTO.getFlightInfoAirline() + " / ");
       System.out.print("출발 시간 : " + flightInfoDTO.getFlightInfoStartTime() + " / ");
       System.out.print("도착 시간 : " + flightInfoDTO.getFlightInfoArrivalTime() + " / ");
       System.out.println("거리 : " + flightInfoDTO.getFlightDistance());
     }
     return searchComeAirplaneList;
+  }
+
+  //  가는 비행기 예약
+  @PutMapping("reserveGoSeat/{goAirplaneFlightId}/{goDate}/{comeDate}/{selectedPeople}/{userId}/{selectedSeatNames}")
+  public void reserveGoAirplaneSeats(@PathVariable("goAirplaneFlightId") int goAirplaneFlightId,
+                                     @PathVariable("goDate") String goDate,
+                                     @PathVariable("comeDate") String comeDate,
+                                     @PathVariable("selectedPeople") int selectedPeople,
+                                     @PathVariable("userId") String userId,
+                                     @PathVariable("selectedSeatNames") String selectedSeatNames) {
+    flightlogMainService.reserveGoAirplaneSeats(goAirplaneFlightId, goDate, comeDate, selectedPeople, userId, selectedSeatNames);
+  }
+
+  //  오는 비행기 예약
+  @PutMapping("reserveComeSeat/{comeAirplaneFlightId}/{comeDate}/{goDate}/{selectedPeople}/{userId}/{selectedSeatNames}")
+  public void reserveComeAirplaneSeats(@PathVariable("comeAirplaneFlightId") int comeAirplaneFlightId,
+                                       @PathVariable("comeDate") String comeDate,
+                                       @PathVariable("goDate") String goDate,
+                                       @PathVariable("selectedPeople") int selectedPeople,
+                                       @PathVariable("userId") String userId,
+                                       @PathVariable("selectedSeatNames") String selectedSeatNames) {
+    flightlogMainService.reserveComeAirplaneSeats(comeAirplaneFlightId, comeDate, goDate, selectedPeople, userId, selectedSeatNames);
   }
 }

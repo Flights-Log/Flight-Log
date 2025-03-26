@@ -35,20 +35,11 @@ private var selectedArrive: String = ""
 private var goDate: String = ""
 private var comeDate: String = ""
 private var selectedPeople: Int = 0
-private var selectedSeat: Int = 0
 private var distance: Double = 0.0
-
-//각 좌석의 가격
-private const val firstSeatPrice = 1500
-private const val businessSeatPrice = 1000
-private const val regularSeatPrice = 500
+private var comeAirplaneFlightId: Int = 0
 
 //가는 비행기 좌석 총 경비
 private var goAirplaneTotalPrice = 0
-
-//한국 통화 형식으로 환산
-private var formattedGoAirplane = ""
-
 
 
 class ComeAirplaneActivity : AppCompatActivity() {
@@ -214,11 +205,14 @@ class MyAdapterComeAirplane(val datas: MutableList<flightInfoDTO>) :
 //    아까 찾은 거리값 distance 에 넣기
     distance = item.flightDistance
 
+    comeAirplaneFlightId = item.flightId
+
     binding.comeAirplaneMoney.setOnClickListener {
 //      MyViewHolderComeAirplane 의 binding 의 뿌리 객체(item_come_airplane)를 반환함
       val context = binding.root.context
 
       val intent = Intent(context, ComeAirplaneChooseSeatActivity::class.java)
+      intent.putExtra("오는 비행기 아이디", comeAirplaneFlightId)
       intent.putExtra("출발지", selectedDeparture)
       intent.putExtra("도착지", selectedArrive)
       intent.putExtra("출발일", goDate.toString())

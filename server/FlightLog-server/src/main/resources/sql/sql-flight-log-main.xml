@@ -27,7 +27,7 @@
   <!--  지금까지 설정한 값을 바탕으로 출발하는 비행기 값 가져오기-->
   <!--  단, 2024년 값을 기준으로 한다-->
   <select id="searchGoAirplane" parameterType="java.util.List">
-    select flight_info_airline, flight_info_startTime, flight_info_arrivalTime, flight_distance
+    select flight_id, flight_info_airline, flight_info_startTime, flight_info_arrivalTime, flight_distance
     from flight_info
     where flight_info_startCity = #{startCity}
     and flight_info_arrivalCity = #{arrivalCity}
@@ -46,7 +46,7 @@
   <!--  지금까지 설정한 값을 바탕으로 도착하는 비행기 값 가져오기-->
   <!--  단, 2024년 값을 기준으로 한다-->
   <select id="searchComeAirplane" parameterType="java.util.List">
-    select flight_info_airline, flight_info_startTime, flight_info_arrivalTime, flight_distance
+    select flight_id, flight_info_airline, flight_info_startTime, flight_info_arrivalTime, flight_distance
     from flight_info
     where flight_info_startCity = #{arrivalCity}
     and flight_info_arrivalCity = #{startCity}
@@ -61,4 +61,22 @@
     when 6 then flight_sun
     end = 'Y';
   </select>
+
+  <!--  가는 비행기 좌석 예약하기-->
+  <insert id="reserveGoAirplaneSeats" parameterType="java.util.List">
+    insert into flight_reserve
+    (flight_reno, flight_id, flight_reserveSdate, flight_reserveEdate,
+    flight_memberNum, flight_user_id, flight_reseatNum)
+    values ('testGo4', #{goAirplaneFlightId}, #{goDate}, #{comeDate},
+    #{selectedPeople}, #{userId}, #{selectedSeatNames});
+  </insert>
+
+  <!--  오는 비행기 좌석 예약하기-->
+  <insert id="reserveComeAirplaneSeats" parameterType="java.util.List">
+    insert into flight_reserve
+    (flight_reno, flight_id, flight_reserveSdate, flight_reserveEdate,
+    flight_memberNum, flight_user_id, flight_reseatNum)
+    values ('testCome3', #{comeAirplaneFlightId}, #{comeDate}, #{goDate},
+    #{selectedPeople}, #{userId}, #{selectedSeatNames});
+  </insert>
 </mapper>
