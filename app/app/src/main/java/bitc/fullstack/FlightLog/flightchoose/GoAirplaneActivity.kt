@@ -1,12 +1,15 @@
 package bitc.fullstack.FlightLog.flightchoose
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat.startActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -19,7 +22,9 @@ import bitc.fullstack.FlightLog.dto.flightInfoDTO
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.text.NumberFormat
 import java.time.format.DateTimeFormatter
+import java.util.Locale
 
 class GoAirplaneActivity : AppCompatActivity() {
   //  ActivityGoAirplaneBinding
@@ -53,7 +58,6 @@ class GoAirplaneActivity : AppCompatActivity() {
     getExtra()
 
 //    recyclerView 라는 변수에 binding(ActivityGoAirplane) 의 goAirplaneRecyclerView 를 가져옴
-
 //    adapter 에 goAirplaneInfoList 를 받아서 myAdapterGoAirplane 클래스 실행
     adapter = MyAdapterGoAirplane(goAirplaneInfoList)
 
@@ -90,6 +94,7 @@ class GoAirplaneActivity : AppCompatActivity() {
     goDate = binding.flightDepartureDate.text.toString()
 
     Log.d("flightLog", "받은 도착일 : ${intent.getStringExtra("도착일")}")
+    Log.d("flightLog", "인원수 : ${intent.getIntExtra("인원수", 1)}")
   }
 
   //  Retrofit 통신 응답 List<String>
@@ -99,12 +104,28 @@ class GoAirplaneActivity : AppCompatActivity() {
       override fun onResponse(p0: Call<List<flightInfoDTO>>, res: Response<List<flightInfoDTO>>) {
         if (res.isSuccessful) {
           val result = res.body()
-          Log.d("flightLog", "result : $result")
 
-          result?.let {
+//          어댑터 내용이 변경될 때 전체 레이아웃이 무효화 되는 것 방지
+//          아이템 크기가 변하지 않는다면 성능 최적화
+          binding.goAirplaneRecyclerView.setHasFixedSize(true)
+
+//          조회된 결과가 덦다면
+          if (result.isNullOrEmpty()) {
+//            조호된 결과가 없습니다 를 넣은 레이아웃이 보이게 하기
+//            그리고 리사이클러뷰는 안보이게 하기
+            binding.noGoAirplaneLayout.visibility = View.VISIBLE
+            binding.goAirplaneRecyclerView.visibility = View.GONE
+          } else {
+//            조회된 결과가 잇다면 리사이클러뷰 출력
+            binding.noGoAirplaneLayout.visibility = View.GONE
+            binding.goAirplaneRecyclerView.visibility = View.VISIBLE
+
+//            내가 찾아온 비행기의 목록인 goAirplaneInfoList 를 비우고
+//            가져온 값인 result 를 goAirplaneInfoList 에 배열 형식으로 넣는다
+//            그리고 adapter 의 notifyDataSetChanged() 를 실행시켜 리사이클러 뷰 내부 항목을 새로 보이게 한다
             goAirplaneInfoList.clear()
-            goAirplaneInfoList.addAll(it)
-            adapter.notifyDataSetChanged()  // RecyclerView 업데이트
+            goAirplaneInfoList.addAll(result)
+            adapter.notifyDataSetChanged()
           }
         } else {
           Log.d("flightLog", "송신 실패")
@@ -118,10 +139,11 @@ class GoAirplaneActivity : AppCompatActivity() {
   }
 }
 
-
+//뷰홀더
 class MyViewHolderGoAirplane(val binding: ItemGoAirplaneBinding) :
   RecyclerView.ViewHolder(binding.root)
 
+//어댑터
 class MyAdapterGoAirplane(val datas: MutableList<flightInfoDTO>) :
   RecyclerView.Adapter<RecyclerView.ViewHolder>() {
   override fun onCreateViewHolder(
@@ -147,17 +169,22 @@ class MyAdapterGoAirplane(val datas: MutableList<flightInfoDTO>) :
 
     binding.goAirplaneAirline.text = item.flightInfoAirline
 
-    var hour = item.flightInfoStartTime
-    hour.chunked(2)
-    Log.d("flightLog", "hour : $hour")
+//    내가 db에서 받아온 네자리 시간값(0000) 을 두자리로 나눠서(00 00) 그 사이에 : 를 넣는다 (00:00)
+    binding.goAirplaneStartTime.text = item.flightInfoStartTime.chunked(2).joinToString(":")
+    binding.goAirplaneArrivalTime.text = item.flightInfoArrivalTime.chunked(2).joinToString(":")
+//    한국 통화 형식으로 숫자(format 의 매개변수 number) 를 바꾼다
+    binding.goAirplaneMoney.text = NumberFormat.getInstance(Locale.KOREA).format(50000)
 
-    binding.goAirplaneStartTime.text = item.flightInfoStartTime
-    binding.goAirplaneArrivalTime.text = item.flightInfoArrivalTime
-    binding.goAirplaneMoney.text = "50000"
+    binding.goAirplaneMoney.setOnClickListener {
+//      MyViewHolderGoAirplane 의 binding 의 뿌리 객체(item_go_airplane)를 반환함
+      val context = binding.root.context
+      val intent = Intent(context, GoAirplaneChooseSeatActivity::class.java)
+//      item_go_airplane 에서 intent(GoAirplaneChooseSeatActivity)로 이동
+      context.startActivity(intent)
+    }
   }
 
   override fun getItemCount(): Int {
     return datas.size
   }
-
 }

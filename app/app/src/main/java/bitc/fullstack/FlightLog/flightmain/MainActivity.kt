@@ -44,6 +44,8 @@ class MainActivity : AppCompatActivity(),
   //  출발지와 도착지를 바꿀 때 임시로 저장할 string 객체 하나
   private var tempLocation: String = ""
 
+  private var selectedPeople: Int = 0
+
   //  만들어지만 할거
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -188,6 +190,9 @@ class MainActivity : AppCompatActivity(),
   //  총 인원 수 수정해주는 함수
   override fun onPassengerSelected(result: String) {
     binding.choosePeopleText.text = result
+    Log.d("flightLog", "result : $result")
+//    n 명 형식의 데이터를 공백을 기준으로 자르고, 그 0번째 값을 가져와서 숫자로 만든다
+    selectedPeople = result.split(" ")[0].toInt()
   }
 
   //  출발지 설정
@@ -267,6 +272,7 @@ class MainActivity : AppCompatActivity(),
         intent.putExtra("도착지", selectedArrive)
         intent.putExtra("출발일", goDate.toString())
         intent.putExtra("도착일", comeDate.toString())
+        intent.putExtra("인원수", selectedPeople)
         startActivity(intent)
       }
     }

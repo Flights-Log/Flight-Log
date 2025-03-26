@@ -210,21 +210,31 @@
   </LinearLayout>
 
   <!-- 안에 항공 출력 -->
-  <ScrollView
+
+  <androidx.recyclerview.widget.RecyclerView
+      android:id="@+id/go_airplane_recycler_view"
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_gravity="center_horizontal"
+      android:layout_weight="1"
+      android:scrollbars="vertical" />
+
+  <LinearLayout
+      android:id="@+id/no_go_airplane_layout"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      android:fillViewport="true"
-      android:scrollbars="none"
-      tools:ignore="UselessParent">
+      android:gravity="center"
+      android:orientation="vertical"
+      android:visibility="gone">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/go_airplane_recycler_view"
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:orientation="vertical" />
-
-  </ScrollView>
+        android:text="조회된 비행편이 없습니다"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+  </LinearLayout>
 
 
 </LinearLayout>
