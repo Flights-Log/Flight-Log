@@ -13,8 +13,7 @@ object AppServerClass {
   // 실제 디바이스에서 테스트할 때, PC의 IP 주소를 사용해야 함
   // private val BASE_URL = "http://192.168.1.100:8080/flightLog/"
 
-  val instance: AppServerInterface by lazy {
-    Retrofit.Builder()
+  val instance: AppServerInterface by lazy { Retrofit.Builder()
 //      서버 기본 주소
       .baseUrl(BASE_URL)
       //.addConverterFactory(ScalarsConverterFactory.create())

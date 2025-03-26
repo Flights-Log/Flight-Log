@@ -1,22 +1,30 @@
 package bitc.fullstack.FlightLog.flightmain
 
+import android.R.id.toggle
 import android.app.DatePickerDialog
+import android.media.Image
 import android.os.Bundle
 import android.util.Log
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import androidx.core.view.GravityCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import bitc.fullstack.FlightLog.R
 import bitc.fullstack.FlightLog.databinding.ActivityMainBinding
+import com.google.android.material.navigation.NavigationView
 import java.time.LocalDate
 import java.util.Calendar
 
 class MainActivity : AppCompatActivity(), SelectPeopleDialogFragment.OnPassengerSelectedListener {
+
   //  ActivityMainBinding
   private val binding: ActivityMainBinding by lazy {
     ActivityMainBinding.inflate(layoutInflater)
@@ -26,21 +34,32 @@ class MainActivity : AppCompatActivity(), SelectPeopleDialogFragment.OnPassenger
   private var goDate = LocalDate.now()
   private var comeDate = goDate.plusWeeks(1)
 
+
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     enableEdgeToEdge()
     setContentView(binding.root)
 
-//    툴바 아이콘
+
+    //    툴바 아이콘(뷰 바인딩)
     val menuButton: ImageButton = findViewById(R.id.flight_log_menu)
     val iconButton: ImageView = findViewById(R.id.flight_log_icon)
     val loginButton: TextView = findViewById(R.id.flight_log_login)
 
-    ViewCompat.setOnApplyWindowInsetsListener(binding.main) { v, insets ->
+
+//    드로어 레이아웃
+    val drawerLayout = findViewById<DrawerLayout>(R.id.drawer_layout)
+
+
+
+
+  ViewCompat.setOnApplyWindowInsetsListener(binding.main) { v, insets ->
       val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
       v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
       insets
     }
+
+
 
 //    가는날 오는날 텍스트, 날짜 선택
     chooseGoDate()
@@ -172,6 +191,43 @@ class MainActivity : AppCompatActivity(), SelectPeopleDialogFragment.OnPassenger
   fun chooseDestination() {
     binding.destinationText.setOnClickListener {
 
+    }
+
+
+
+    // View 바인딩
+    val drawerLayout : DrawerLayout = findViewById(R.id.drawer_layout)
+    val navView : NavigationView = findViewById(R.id.nav_view)
+    val toolbar : Toolbar = findViewById(R.id.tool_bar)
+    val menuButton: ImageButton = findViewById(R.id.flight_log_menu)
+
+    // 툴바를 액션바로 설정. 제어권 획득.
+    setSupportActionBar(toolbar)
+    supportActionBar?.setDisplayShowTitleEnabled(false) // 제목 제거 (선택)
+
+    // 버튼 클릭 이벤트 활성화
+    menuButton.setOnClickListener {
+      drawerLayout.openDrawer(GravityCompat.START)
+    }
+
+    // 메뉴 클릭 이벤트 처리(사용하지 않음)
+    navView.setNavigationItemSelectedListener { menuItem ->
+      when (menuItem.itemId) {
+        R.id.nav_myinfo -> {
+        }
+        R.id.nav_reservations -> {
+        }
+        R.id.nav_ticket_info -> {
+        }
+        R.id.nav_ticket_info -> {
+        }
+        R.id.nav_pay_list -> {
+        }
+      }
+
+      // 햄버거 버튼 클릭으로 드로어 닫음
+      drawerLayout.closeDrawer(GravityCompat.START)
+      true
     }
   }
 }

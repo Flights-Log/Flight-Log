@@ -17,30 +17,34 @@
         android:theme="@style/Theme.FlightLog"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+
         <activity
             android:name=".sidebar.LoginActivity"
             android:exported="false" />
         <activity
             android:name=".FlightInfoAPIActivity"
-            android:exported="true"></activity> <!-- 메인화면 -->
+            android:exported="true"/> <!-- 메인화면 -->
         <activity
             android:name=".flightmain.MainActivity"
-            android:exported="true" /> <!-- 인원 선택 -->
+            android:exported="true"/> <!-- 오는편 비행기 선택 -->
+
+        <!-- 인원 선택 -->
         <activity
             android:name=".flightmain.JoinMemberActivity"
-            android:exported="true" /> <!-- 가는편 비행기 선택 -->
-        <activity
-            android:name=".flightchoose.GoAirplaneActivity"
-            android:exported="true" /> <!-- 가는편 비행기 좌석 선택 -->
-        <activity
-            android:name=".flightchoose.GoAirplaneChooseSeatActivity"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity> <!-- 오는편 비행기 선택 -->
+        </activity>
+        <!-- 가는편 비행기 선택 -->
+        <activity
+            android:name=".flightchoose.GoAirplaneActivity"
+            android:exported="true" /> <!-- 가는편 비행기 좌석 선택 -->
+        <activity
+            android:name=".flightchoose.GoAirplaneChooseSeatActivity"
+            android:exported="true"/>
         <activity
             android:name=".flightchoose.ComeAirplaneActivity"
             android:exported="false" /> <!-- 오는편 비행기 좌석 선택 -->

@@ -2,13 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+    android:id="@+id/join_member"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
     android:gravity="center_horizontal"
     android:orientation="vertical"
     tools:context=".flightmain.JoinMemberActivity">
+
+
   <!--  툴바(로그인 및 회원가입)-->
   <include
       android:id="@+id/tool_bar"
@@ -65,6 +67,7 @@
             android:textStyle="bold" />
 
         <EditText
+            android:id="@+id/editId"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_weight="3"
@@ -93,6 +96,7 @@
             android:textStyle="bold" />
 
         <EditText
+            android:id="@+id/editPw"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_weight="3"
@@ -119,6 +123,7 @@
             android:orientation="vertical">
 
           <TextView
+              android:id="@+id/editPwc"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:text="비밀번호"
@@ -165,9 +170,24 @@
             android:textStyle="bold" />
 
         <EditText
+            android:id="@+id/editKoFirstName"
             android:layout_width="0dp"
             android:layout_height="50dp"
-            android:layout_weight="3"
+            android:layout_weight="1.5"
+            android:hint="성"
+            android:gravity="center"
+            android:background="@drawable/join_member_edit_text"
+            android:paddingHorizontal="5dp"
+            android:inputType="textPersonName"/>
+
+        <EditText
+            android:id="@+id/editKoLastName"
+            android:layout_marginStart="10dp"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1.5"
+            android:hint="이름"
+            android:gravity="center"
             android:background="@drawable/join_member_edit_text"
             android:paddingHorizontal="10dp"
             android:inputType="textPersonName"/>
@@ -193,9 +213,24 @@
             android:textStyle="bold" />
 
         <EditText
+            android:id="@+id/editFirstName"
             android:layout_width="0dp"
             android:layout_height="50dp"
-            android:layout_weight="3"
+            android:layout_weight="1.5"
+            android:hint="First Name"
+            android:gravity="center"
+            android:background="@drawable/join_member_edit_text"
+            android:paddingHorizontal="10dp"
+            android:inputType="textPersonName"/>
+
+        <EditText
+            android:id="@+id/editLastName"
+            android:layout_marginStart="10dp"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1.5"
+            android:hint="Last Name"
+            android:gravity="center"
             android:background="@drawable/join_member_edit_text"
             android:paddingHorizontal="10dp"
             android:inputType="textPersonName"/>
@@ -221,22 +256,31 @@
             android:textStyle="bold" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnMale"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_weight="1.5"
             android:background="@drawable/join_member_gender_male"
             android:text="남"
+            android:gravity="center"
             android:textSize="20sp"
             android:textStyle="bold" />
 
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="0dp" />
+
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnFemale"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_weight="1.5"
             android:background="@drawable/join_member_gender_female"
             android:text="여"
+            android:gravity="center"
             android:textSize="20sp"
             android:textStyle="bold" />
+
 
 
       </LinearLayout>
@@ -261,31 +305,41 @@
             android:layout_marginRight="5dp"/>
 
         <!--년도-->
-        <androidx.appcompat.widget.AppCompatButton
-            android:layout_width="0dp"
+        <EditText
+            android:id="@+id/editBirthDate"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="5dp"
-            android:layout_weight="1"
+            android:hint="생년월일 선택"
+            android:layout_weight="2"
+            android:layout_marginLeft="10dp"
+            android:focusable="false"
+            android:clickable="true"
+            android:inputType="none"
+            android:textSize="16sp"
             android:background="@drawable/join_member_edit_text"
-            android:text="1999" />
+            android:gravity="center"/>
+
+        <!--            android:layout_marginRight="5dp"-->
 
         <!--월-->
         <androidx.appcompat.widget.AppCompatButton
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="5dp"
-            android:layout_weight="1"
+            android:layout_weight="0"
             android:background="@drawable/join_member_edit_text"
-            android:text="01" />
+            android:text="09"
+            android:gravity="center"/>
 
         <!--일-->
         <androidx.appcompat.widget.AppCompatButton
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
-            android:layout_weight="1"
+            android:layout_weight="0"
             android:background="@drawable/join_member_edit_text"
-            android:text="01" />
+            android:text="01"
+            android:gravity="center"/>
       </LinearLayout>
 
       <!--  이메일-->
@@ -307,10 +361,12 @@
             android:textStyle="bold" />
 
         <EditText
+            android:id="@+id/editEmail"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_weight="3"
             android:background="@drawable/join_member_edit_text"
+            android:hint="example@example.com"
             android:paddingHorizontal="10dp"
             android:inputType="textEmailAddress"/>
 
@@ -335,10 +391,12 @@
             android:textStyle="bold" />
 
         <EditText
+            android:id="@+id/editPhone"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_weight="3"
             android:background="@drawable/join_member_edit_text"
+            android:hint="010-0000-0000"
             android:paddingHorizontal="10dp"
             android:inputType="phone"/>
 
@@ -379,10 +437,13 @@
               android:textStyle="bold" />
 
           <EditText
+              android:id="@+id/editLocation"
               android:layout_width="match_parent"
               android:layout_height="0dp"
               android:layout_weight="1"
               android:background="@drawable/join_member_edit_text"
+              android:hint="지역 이름"
+              android:gravity="center"
               android:inputType="text"/>
 
         </LinearLayout>
@@ -400,5 +461,4 @@
           android:textStyle="bold" />
     </LinearLayout>
   </ScrollView>
-
 </LinearLayout>
