@@ -42,4 +42,23 @@
     when 6 then flight_sun
     end = 'Y';
   </select>
+
+  <!--  지금까지 설정한 값을 바탕으로 도착하는 비행기 값 가져오기-->
+  <!--  단, 2024년 값을 기준으로 한다-->
+  <select id="searchComeAirplane" parameterType="java.util.List">
+    select flight_info_airline, flight_info_startTime, flight_info_arrivalTime, flight_distance
+    from flight_info
+    where flight_info_startCity = #{arrivalCity}
+    and flight_info_arrivalCity = #{startCity}
+    and date_sub(#{comeDate}, interval 1 year) between flight_info_startDate and flight_info_Eddate
+    and case weekday(date_sub(#{comeDate}, interval 1 year))
+    when 0 then flight_mon
+    when 1 then flight_tue
+    when 2 then flight_wed
+    when 3 then flight_thu
+    when 4 then flight_fri
+    when 5 then flight_sat
+    when 6 then flight_sun
+    end = 'Y';
+  </select>
 </mapper>

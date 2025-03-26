@@ -12,4 +12,7 @@ public interface FlightLogMainService {
 
   //  해당하는 출발 비행기 있는지 확인
   List<flightInfoDTO> searchGoAirplane(String startCity, String arrivalCity, String goDate);
+
+  //  해당하는 도착 비행기 있는지 확인
+  List<flightInfoDTO> searchComeAirplane(String startCity, String arrivalCity, String comeDate);
 }

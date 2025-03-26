@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity(),
 
   //  현재 날짜값 및 도착 예정 날짜값
   private var goDate = LocalDate.now()
-  private var comeDate = goDate.plusWeeks(1)
+  private var comeDate = LocalDate.now()
 
   //  출발지 및 도착지
   private var selectedDeparture: String = ""
@@ -103,10 +103,10 @@ class MainActivity : AppCompatActivity(),
 
 //          가는 날 변경 시 오는 날도 최소 한 주 뒤로 자동 업데이트
           goDate = selectedDate
-          if (comeDate.isBefore(goDate.plusWeeks(1))) {
-            comeDate = goDate.plusWeeks(1)
-            binding.chooseComeDateText.text = comeDate.toString()
-          }
+//          if (comeDate.isBefore(goDate.plusWeeks(1))) {
+//            comeDate = goDate.plusWeeks(1)
+//            binding.chooseComeDateText.text = comeDate.toString()
+//          }
           binding.chooseGoDateText.text = goDate.toString()
           Log.d("flightLog", "바꾼 후 goDate : $goDate")
 

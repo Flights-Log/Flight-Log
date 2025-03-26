@@ -31,4 +31,10 @@ public class FlightLogMainServiceImpl implements FlightLogMainService {
   public List<flightInfoDTO> searchGoAirplane(String startCity, String arrivalCity, String goDate) {
     return flightLogMainMapper.searchGoAirplane(startCity, arrivalCity, goDate);
   }
+
+  //  도착 비행기 찾기
+  @Override
+  public List<flightInfoDTO> searchComeAirplane(String startCity, String arrivalCity, String comeDate) {
+    return flightLogMainMapper.searchGoAirplane(startCity, arrivalCity, comeDate);
+  }
 }

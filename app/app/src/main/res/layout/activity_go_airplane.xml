@@ -20,9 +20,10 @@
   <!--  가는 항공편 조회-->
   <LinearLayout
       android:layout_width="match_parent"
-      android:layout_height="40dp"
+      android:layout_height="wrap_content"
       android:background="@color/skyBlue"
-      android:gravity="center">
+      android:gravity="center"
+      android:paddingVertical="10dp">
 
     <TextView
         android:layout_width="wrap_content"
@@ -210,7 +211,6 @@
   </LinearLayout>
 
   <!-- 안에 항공 출력 -->
-
   <androidx.recyclerview.widget.RecyclerView
       android:id="@+id/go_airplane_recycler_view"
       android:layout_width="match_parent"

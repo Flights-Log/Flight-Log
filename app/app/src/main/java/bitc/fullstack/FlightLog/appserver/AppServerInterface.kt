@@ -53,4 +53,12 @@ interface AppServerInterface {
     @Path("arrivalCity") arrivalCity: String,
     @Path("goDate") goDate: String
   ): Call<List<flightInfoDTO>>
+
+  //  내가 설정한 출발지, 도착지, 도착일을 기준으로 그 도착일에 운항하는 비행기가 있는지 알아오기
+  @GET("main/searchComeAirplane/{startCity}/{arrivalCity}/{comeDate}")
+  fun searchComeAirplane(
+    @Path("startCity") startCity: String,
+    @Path("arrivalCity") arrivalCity: String,
+    @Path("comeDate") comeDate: String
+  ): Call<List<flightInfoDTO>>
 }
