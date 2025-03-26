@@ -38,7 +38,11 @@
             android:contentDescription="비행기 아이콘"
             android:layout_gravity="center" />
 
+<<<<<<< HEAD
         <!-- 메뉴 버튼 -->
+=======
+        <!-- 닫기 버튼 -->
+>>>>>>> 5553c3a29947f778d03501e9eb492d872fb4e601
         <ImageView
             android:id="@+id/flight_log_login"
             android:layout_width="wrap_content"
@@ -60,7 +64,11 @@
         android:gravity="center">
 
 
+<<<<<<< HEAD
         <!--    로그인 라벨  -->
+=======
+<!--    로그인 라벨  -->
+>>>>>>> 5553c3a29947f778d03501e9eb492d872fb4e601
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -69,14 +77,22 @@
             android:textStyle="bold"
             android:layout_marginBottom="10dp" />
 
+<<<<<<< HEAD
         <!--   라벨 아래의 굵은 파란 선   -->
+=======
+<!--   라벨 아래의 굵은 파란 선   -->
+>>>>>>> 5553c3a29947f778d03501e9eb492d872fb4e601
         <View
             android:layout_width="150dp"
             android:layout_height="3dp"
             android:background="@color/mainBlue"
             android:layout_marginBottom="40dp"/>
 
+<<<<<<< HEAD
         <!--    로그인 영역 박스  -->
+=======
+<!--    로그인 영역 박스  -->
+>>>>>>> 5553c3a29947f778d03501e9eb492d872fb4e601
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -85,7 +101,11 @@
             android:gravity="center"
             android:layout_marginBottom="20dp">
 
+<<<<<<< HEAD
             <!--    아이디 라벨  -->
+=======
+<!--    아이디 라벨  -->
+>>>>>>> 5553c3a29947f778d03501e9eb492d872fb4e601
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -94,7 +114,11 @@
                 android:paddingEnd="10dp"
                 android:layout_marginStart="10dp"/>
 
+<<<<<<< HEAD
             <!--    아이디 입력 박스   -->
+=======
+<!--    아이디 입력 박스   -->
+>>>>>>> 5553c3a29947f778d03501e9eb492d872fb4e601
             <EditText
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
@@ -105,7 +129,11 @@
 
         </LinearLayout>
 
+<<<<<<< HEAD
         <!--    비밀번호 영역 박스  -->
+=======
+<!--    비밀번호 영역 박스  -->
+>>>>>>> 5553c3a29947f778d03501e9eb492d872fb4e601
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -114,7 +142,11 @@
             android:gravity="center"
             android:layout_marginBottom="40dp">
 
+<<<<<<< HEAD
             <!--   비밀번호 라벨  -->
+=======
+<!--   비밀번호 라벨  -->
+>>>>>>> 5553c3a29947f778d03501e9eb492d872fb4e601
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -122,7 +154,11 @@
                 android:textSize="16sp"
                 android:paddingEnd="10dp"/>
 
+<<<<<<< HEAD
             <!--    비밀번호 입력 박스  -->
+=======
+<!--    비밀번호 입력 박스  -->
+>>>>>>> 5553c3a29947f778d03501e9eb492d872fb4e601
             <EditText
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
@@ -132,7 +168,11 @@
                 android:inputType="textPassword"/>
         </LinearLayout>
 
+<<<<<<< HEAD
         <!--    로그인 박스  -->
+=======
+<!--    로그인 박스  -->
+>>>>>>> 5553c3a29947f778d03501e9eb492d872fb4e601
         <Button
             android:layout_width="300dp"
             android:layout_height="50dp"
@@ -143,7 +183,11 @@
             android:textStyle="bold"
             android:layout_marginTop="15dp"/>
 
+<<<<<<< HEAD
         <!--    회원가입 박스 -->
+=======
+<!--    회원가입 박스 -->
+>>>>>>> 5553c3a29947f778d03501e9eb492d872fb4e601
         <Button
             android:layout_width="300dp"
             android:layout_height="50dp"

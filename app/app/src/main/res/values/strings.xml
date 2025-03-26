@@ -1,6 +1,8 @@
+<!--res/values/strings.xml-->
 <resources>
     <string name="app_name">FlightLog</string>
     <string name="login">로그인</string>
+<<<<<<< HEAD
     <string name="logout">로그아웃</string>
     <string name="navigation_drawer_open">드로어 열기</string>
     <string name="navigation_drawer_close">드로어 닫기</string>
@@ -9,4 +11,7 @@
         <item>여성</item>
         <item>남성</item>
     </string-array>
+=======
+    <string name="my_page_title">마이페이지</string>
+>>>>>>> 5553c3a29947f778d03501e9eb492d872fb4e601
 </resources>
