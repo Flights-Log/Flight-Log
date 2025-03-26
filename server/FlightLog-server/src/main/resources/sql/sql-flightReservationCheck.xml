@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bitc.fullstack503.flightlog.flightlogserver.mapper.FlightChooseServiceMapper">
+
+    <!-- reservationNumber에 해당하는 항목들을 List 형태로 반환 -->
+    <select id="flightReservationCheck" parameterType="String" resultType="bitc.fullstack503.flightlog.flightlogserver.dto.FlightReservationCheckDTO">
+        SELECT DISTINCT
+        fr.flight_reno AS reno,
+        fi.flight_info_startCity AS startCity,
+        fi.flight_info_arrivalCity AS arrivalCity,
+        fr.flight_reserveSdate AS Sdate,
+        fi.flight_info_startTime AS startTime,
+        fr.flight_memberNum AS memberNum,
+        frm.flight_mem_seatNum AS seatNum,
+        frm.flight_passport AS passport,
+        frm.flight_mem_luggage AS luggage
+        FROM flight_reserve fr
+        JOIN flight_reserve_member frm ON fr.flight_reno = frm.flight_reno
+        JOIN flight_info fi ON fi.flight_id = fr.flight_id
+        WHERE fr.flight_reno = #{etReservationNumber}
+    </select>
+
+</mapper>
