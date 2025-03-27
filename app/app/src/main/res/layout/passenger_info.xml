@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="20dp"
+    android:background="@color/white"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+  <View
+      android:layout_width="match_parent"
+      android:layout_height="2dp"
+      android:background="@color/grey"
+      android:layout_marginBottom="10dp"
+      android:layout_marginHorizontal="10dp"/>
+
+  <!--영문 이름-->
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="10dp"
+      android:gravity="center_vertical"
+      android:orientation="horizontal">
+
+    <EditText
+        android:id="@+id/last_name"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="20dp"
+        android:layout_weight="1"
+        android:background="@drawable/edittext_border"
+        android:hint="영문 성"
+        android:textAlignment="center"
+        android:textColor="#000000" />
+
+    <EditText
+        android:id="@+id/first_name"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="20dp"
+        android:layout_weight="1"
+        android:background="@drawable/edittext_border"
+        android:hint="영문 이름"
+        android:textAlignment="center"
+        android:textColor="#000000" />
+
+  </LinearLayout>
+
+  <!--여권 번호-->
+  <EditText
+      android:id="@+id/passport_number"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginVertical="10dp"
+      android:background="@drawable/edittext_border"
+      android:hint="여권 번호를 입력하세요"
+      android:paddingHorizontal="5dp"
+      android:paddingVertical="10dp"
+      android:textAlignment="center" />
+
+  <!--수하물 무게-->
+  <EditText
+      android:id="@+id/passenger_luggage_weight"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginVertical="10dp"
+      android:background="@drawable/edittext_border"
+      android:hint="수하물 무게(없다면 0)"
+      android:paddingHorizontal="5dp"
+      android:paddingVertical="10dp"
+      android:textAlignment="center" />
+
+</LinearLayout>

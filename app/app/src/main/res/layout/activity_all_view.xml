@@ -69,4 +69,10 @@
       android:layout_height="wrap_content"
       android:text="join_member_activity" />
 
+  <Button
+      android:id="@+id/passenger_activity_button"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="passenger_activity" />
+
 </LinearLayout>

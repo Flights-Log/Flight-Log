@@ -69,7 +69,7 @@
     insert into flight_reserve
     (flight_reno, flight_user_id, flight_memberNum,
     flight_start_id, flight_reserveSdate, flight_start_seatNum)
-    values ('testNo3',#{userId},#{selectedPeople},#{goAirplaneFlightId},#{goDate},#{selectedSeatNames});
+    values ('testNo10',#{userId},#{selectedPeople},#{goAirplaneFlightId},#{goDate},#{selectedSeatNames});
   </insert>
 
   <!--  오는 비행기 좌석 예약하기-->
@@ -110,4 +110,18 @@
     '$[*]' COLUMNS (split_column VARCHAR(50) PATH '$')
     ) temp;
   </select>
+
+  <!--  유저 성, 이름 가져오기-->
+  <select id="searchUserName" parameterType="java.util.List">
+    select flight_user_firstname, flight_user_lastname
+    from flight_user
+    where flight_user_id = #{userId};
+  </select>
+
+  <!-- 가는 비행기 혼자 갈때 예약하기-->
+  <insert id="goFlightAlone" parameterType="java.util.List">
+    insert into flight_reserve_member(flight_passport, flight_reno, flight_user_id,
+    flight_mem_firstName, flight_mem_lastName, flight_mem_start_seatNum, flight_mem_luggage)
+    values (#{passport},'testNo10',#{userId},#{firstName},#{lastName},#{selectedSeatName},#{luggage});
+  </insert>
 </mapper>

@@ -11,6 +11,7 @@ import bitc.fullstack.FlightLog.flightchoose.ComeAirplaneActivity
 import bitc.fullstack.FlightLog.flightchoose.ComeAirplaneChooseSeatActivity
 import bitc.fullstack.FlightLog.flightchoose.GoAirplaneActivity
 import bitc.fullstack.FlightLog.flightchoose.GoAirplaneChooseSeatActivity
+import bitc.fullstack.FlightLog.flightchoose.PassengerActivity
 import bitc.fullstack.FlightLog.flightmain.JoinMemberActivity
 import bitc.fullstack.FlightLog.flightmain.MainActivity
 import bitc.fullstack.FlightLog.sidebar.PaymentHistoryActivity
@@ -76,6 +77,11 @@ class AllViewActivity : AppCompatActivity() {
 
     binding.joinMemberActivityButton.setOnClickListener {
       val intent = Intent(this, JoinMemberActivity::class.java)
+      startActivity(intent)
+    }
+
+    binding.passengerActivityButton.setOnClickListener {
+      val intent = Intent(this, PassengerActivity::class.java)
       startActivity(intent)
     }
   }

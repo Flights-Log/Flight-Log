@@ -445,7 +445,7 @@ class ComeAirplaneChooseSeatActivity : AppCompatActivity() {
       .show()
   }
 
-  //  티켓홀더 로
+  //  정보 입력으로
   fun goToNextPage() {
     binding.comeAirplaneChooseSeatNextButton.setOnClickListener {
       val intent = Intent(this, ComeAirplaneActivity::class.java)

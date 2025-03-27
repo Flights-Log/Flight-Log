@@ -1,6 +1,7 @@
 package bitc.fullstack503.flightlog.flightlogserver.service;
 
 import bitc.fullstack503.flightlog.flightlogserver.dto.flightInfoDTO;
+import bitc.fullstack503.flightlog.flightlogserver.dto.flightUserDTO;
 
 import java.util.List;
 
@@ -31,4 +32,10 @@ public interface FlightLogMainService {
 
   //  오는 비행기 예매된 좌석 배열로 가져오기
   List<String> searchComeAirplaneIsSeatReserved(int comeAirplaneFlightId);
+
+  //  로그인한 사용자의 이름 가져오기
+  List<flightUserDTO> searchUserName(String userId);
+
+  //  혼자서 가는 비행기(편도) 예매하기
+  void goFlightAlone(String passport, String userId, String firstName, String lastName, String selectedSeatName, String luggage);
 }

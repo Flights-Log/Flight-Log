@@ -1,7 +1,6 @@
 package bitc.fullstack.FlightLog.flightchoose
 
 import android.annotation.SuppressLint
-import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -14,12 +13,11 @@ import androidx.core.view.WindowInsetsCompat
 import bitc.fullstack.FlightLog.R
 import bitc.fullstack.FlightLog.appserver.AppServerClass
 import bitc.fullstack.FlightLog.databinding.ActivityGoAirplaneChooseSeatBinding
-import bitc.fullstack.FlightLog.sidebar.TicketHolderActivity
+import bitc.fullstack.FlightLog.flightmain.SelectPeopleDialogFragment
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.text.NumberFormat
-import java.util.Collections.list
 import java.util.Locale
 
 //  출발도시, 도착도시, 가는날
@@ -416,44 +414,29 @@ class GoAirplaneChooseSeatActivity : AppCompatActivity() {
 //  만일 예 를 누른다면 바로 오는 티켓 예매 창으로 감
 //  만일 아니요 를 누른다면 티켓 홀더로 감. 그리고 가는 티켓에 관한 정보를 서버에 db로 저장함
   fun goToNextPage() {
+//    flight_reserve 에 저장하기
     binding.goAirplaneChooseSeatNextButton.setOnClickListener {
-      AlertDialog.Builder(this)
-        .setTitle("가는 티켓 예매 완료")
-        .setMessage("오는 티켓도 예매 하시겠습니까?")
-        .setPositiveButton("예", object : DialogInterface.OnClickListener {
-          override fun onClick(dialog: DialogInterface?, which: Int) {
-            val intent = Intent(this@GoAirplaneChooseSeatActivity, ComeAirplaneActivity::class.java)
-            intent.putExtra("가는 비행기 아이디", goAirplaneFlightId)
-            intent.putExtra("출발지", selectedDeparture)
-            intent.putExtra("도착지", selectedArrive)
-            intent.putExtra("출발일", goDate.toString())
-            intent.putExtra("도착일", comeDate.toString())
-            intent.putExtra("인원수", selectedPeople)
-            intent.putExtra("거리", distance)
-            intent.putExtra("가는 비행기 총 비용", goAirplaneTotalPrice)
-            intent.putExtra("가는 비행기 선택 좌석", selectedSeatNames.joinToString(","))
-            startActivity(intent)
-          }
-        })
-        .setNegativeButton("아니요", object : DialogInterface.OnClickListener {
-          override fun onClick(dialog: DialogInterface?, which: Int) {
-            //가는 비행기 좌석 예약
-            val api = AppServerClass.instance
-            val call = api.goAirplaneReserveSeat(
-              userId,
-              selectedPeople,
-              goAirplaneFlightId,
-              goDate,
-              selectedSeatNames.joinToString(",")
-            )
-            retrofitResponse(call)
+      val api = AppServerClass.instance
+      val call = api.goAirplaneReserveSeat(
+        userId,
+        selectedPeople,
+        goAirplaneFlightId,
+        goDate,
+        selectedSeatNames.joinToString(",")
+      )
+      retrofitResponse(call)
 
-            val intent = Intent(this@GoAirplaneChooseSeatActivity, TicketHolderActivity::class.java)
-            startActivity(intent)
-          }
-        })
-        .create()
-        .show()
+      val intent = Intent(this@GoAirplaneChooseSeatActivity, PassengerActivity::class.java)
+      intent.putExtra("가는 비행기 아이디", goAirplaneFlightId)
+      intent.putExtra("출발지", selectedDeparture)
+      intent.putExtra("도착지", selectedArrive)
+      intent.putExtra("출발일", goDate.toString())
+      intent.putExtra("도착일", comeDate.toString())
+      intent.putExtra("인원수", selectedPeople)
+      intent.putExtra("거리", distance)
+      intent.putExtra("가는 비행기 총 비용", goAirplaneTotalPrice)
+      intent.putExtra("가는 비행기 선택 좌석", selectedSeatNames.joinToString(","))
+      startActivity(intent)
     }
 
     Log.d("flightLog", "goAirplaneTotalPrice : $goAirplaneTotalPrice")

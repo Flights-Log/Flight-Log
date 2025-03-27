@@ -5,6 +5,7 @@ import bitc.fullstack.FlightLog.data.FlightResponse
 import bitc.fullstack.FlightLog.data.InterFlightResponse
 import bitc.fullstack.FlightLog.dto.dFlightDTO
 import bitc.fullstack.FlightLog.dto.flightInfoDTO
+import bitc.fullstack.FlightLog.dto.flightUserDTO
 import bitc.fullstack.FlightLog.dto.iFlightDTO
 import retrofit2.Call
 import retrofit2.http.Body
@@ -117,4 +118,20 @@ interface AppServerInterface {
     @Path("comeAirplaneFlightId") comeAirplaneFlightId: Int
   ): Call<List<String>>
 
+  //  현재 로그인한 유저의 성, 이름 가져오기
+  @GET("main/getUserName/{userId}")
+  fun getUserName(
+    @Path("userId") userId: String
+  ): Call<List<flightUserDTO>>
+
+  //  혼자서 가는(편도) 비행기 예매할 때
+  @PUT("main/goFlightAlone/{passport}/{userId}/{firstName}/{lastName}/{selectedSeatName}/{luggage}")
+  fun goFlightAlone(
+    @Path("passport") passport: String,
+    @Path("userId") userId: String,
+    @Path("firstName") firstName: String,
+    @Path("lastName") lastName: String,
+    @Path("selectedSeatName") selectedSeatName: String,
+    @Path("luggage") luggage: String
+  ): Call<Void>
 }

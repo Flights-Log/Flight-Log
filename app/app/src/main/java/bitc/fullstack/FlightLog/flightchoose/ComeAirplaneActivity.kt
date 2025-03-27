@@ -102,6 +102,7 @@ class ComeAirplaneActivity : AppCompatActivity() {
   //  내가 MainActivity 에서 intent 로 받아온 값 화면과 로그에 출력
 //  그리고 위에 있는 startCity, selectedArrive, goDate 에 넣어줌
   fun getExtra() {
+    Log.d("flightLog", "-----------ComeAirplaneActivity-----------------")
     Log.d("flightLog", "받은 가는 비행기 아이디 : ${intent.getIntExtra("가는 비행기 아이디", 0)}")
     goAirplaneFlightId = intent.getIntExtra("가는 비행기 아이디", 0)
 

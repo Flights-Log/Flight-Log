@@ -5,11 +5,9 @@ import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
 import android.util.Log
-import android.widget.TextView
-import androidx.appcompat.widget.AppCompatButton
 import androidx.fragment.app.DialogFragment
-import bitc.fullstack.FlightLog.R
 import bitc.fullstack.FlightLog.databinding.FragmentSelectPeopleDialogBinding
+import bitc.fullstack.FlightLog.flightchoose.GoAirplaneChooseSeatActivity
 
 class SelectPeopleDialogFragment : DialogFragment() {
   private val binding: FragmentSelectPeopleDialogBinding by lazy {
@@ -76,7 +74,7 @@ class SelectPeopleDialogFragment : DialogFragment() {
   }
 
 //  MainActivity 에서 리스너를 설정할 수 있도록 추가
-  fun setOnPassengerSelectedListener(listener: OnPassengerSelectedListener) {
+  fun setOnPassengerSelectedListener(listener: MainActivity) {
     this.listener = listener
   }
 

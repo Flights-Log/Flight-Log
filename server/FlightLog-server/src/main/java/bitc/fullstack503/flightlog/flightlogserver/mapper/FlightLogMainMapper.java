@@ -1,6 +1,7 @@
 package bitc.fullstack503.flightlog.flightlogserver.mapper;
 
 import bitc.fullstack503.flightlog.flightlogserver.dto.flightInfoDTO;
+import bitc.fullstack503.flightlog.flightlogserver.dto.flightUserDTO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -33,4 +34,10 @@ public interface FlightLogMainMapper {
 
   //  오는 비행기의 예약된 좌석 배열로 가져오기
   List<String> searchComeAirplaneIsSeatReserved(int comeAirplaneFlightId);
+
+  //  유저 이름 가져오기
+  List<flightUserDTO> searchUserName(String userId);
+
+  //  가는 비행기 혼자 예매하기
+  void goFlightAlone(String passport, String userId, String firstName, String lastName, String selectedSeatName, String luggage);
 }

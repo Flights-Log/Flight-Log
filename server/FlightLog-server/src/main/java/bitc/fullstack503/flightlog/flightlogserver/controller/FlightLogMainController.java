@@ -1,6 +1,7 @@
 package bitc.fullstack503.flightlog.flightlogserver.controller;
 
 import bitc.fullstack503.flightlog.flightlogserver.dto.flightInfoDTO;
+import bitc.fullstack503.flightlog.flightlogserver.dto.flightUserDTO;
 import bitc.fullstack503.flightlog.flightlogserver.service.FlightLogMainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -163,4 +164,29 @@ public class FlightLogMainController {
 
     return comeReservatedSeatList;
   }
+
+  //  로그인한 유저의 성, 이름 가져오기
+  @GetMapping("getUserName/{userId}")
+  public List<flightUserDTO> searchUserName(@PathVariable("userId") String userId) {
+    List<flightUserDTO> userNameList = flightlogMainService.searchUserName(userId);
+
+    for (flightUserDTO flightUserDTO : userNameList) {
+      System.out.print("firstName : " + flightUserDTO.getFlightUserFirstname() + " / ");
+      System.out.println("lastName : " + flightUserDTO.getFlightUserLastname());
+    }
+
+    return userNameList;
+  }
+
+  //  혼자서 가는 비행기(편도)예매하기
+  @PutMapping("goFlightAlone/{passport}/{userId}/{firstName}/{lastName}/{selectedSeatName}/{luggage}")
+  public void goFlightAlone(@PathVariable("passport") String passport,
+                            @PathVariable("userId") String userId,
+                            @PathVariable("firstName") String firstName,
+                            @PathVariable("lastName") String lastName,
+                            @PathVariable("selectedSeatName") String selectedSeatName,
+                            @PathVariable("luggage") String luggage) {
+    flightlogMainService.goFlightAlone(passport, userId, firstName, lastName, selectedSeatName, luggage);
+  }
+
 }
