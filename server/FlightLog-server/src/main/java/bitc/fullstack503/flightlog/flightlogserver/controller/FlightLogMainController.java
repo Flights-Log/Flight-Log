@@ -148,4 +148,19 @@ public class FlightLogMainController {
 
     return goReservatedSeatList;
   }
+
+  //  오는 비행기 예매된 좌석 확인하기
+  @GetMapping("comeAirplaneIsSeatReservated/{comeAirplaneFlightId}")
+  public List<String> searchComeAirplaneIsSeatReserved(@PathVariable("comeAirplaneFlightId") int comeAirplaneFlightId) {
+    List<String> comeReservatedSeatList = flightlogMainService.searchComeAirplaneIsSeatReserved(comeAirplaneFlightId);
+
+    if (comeReservatedSeatList == null || comeReservatedSeatList.isEmpty()) {
+      return Collections.emptyList();
+    }
+
+    System.out.println("예약된 좌석 : " + comeReservatedSeatList);
+    System.out.println();
+
+    return comeReservatedSeatList;
+  }
 }

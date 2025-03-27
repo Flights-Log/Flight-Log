@@ -110,4 +110,11 @@ interface AppServerInterface {
   fun goAirplaneIsSeatReservated(
     @Path("goAirplaneFlightId") goAirplaneFlightId: Int
   ): Call<List<String>>
+
+  //  오는 비행기의 예약된 좌석 목록 가져오기
+  @GET("main/comeAirplaneIsSeatReservated/{comeAirplaneFlightId}")
+  fun comeAirplaneIsSeatReservated(
+    @Path("comeAirplaneFlightId") comeAirplaneFlightId: Int
+  ): Call<List<String>>
+
 }

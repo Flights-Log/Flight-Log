@@ -28,4 +28,7 @@ public interface FlightLogMainService {
 
   //  가는 비행기 예매된 좌석 배열로 가져오기
   List<String> searchGoAirplaneIsSeatReservated(int goAirplaneFlightId);
+
+  //  오는 비행기 예매된 좌석 배열로 가져오기
+  List<String> searchComeAirplaneIsSeatReserved(int comeAirplaneFlightId);
 }

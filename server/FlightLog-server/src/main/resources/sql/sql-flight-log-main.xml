@@ -69,7 +69,7 @@
     insert into flight_reserve
     (flight_reno, flight_user_id, flight_memberNum,
     flight_start_id, flight_reserveSdate, flight_start_seatNum)
-    values ('testNo1',#{userId},#{selectedPeople},#{goAirplaneFlightId},#{goDate},#{selectedSeatNames});
+    values ('testNo3',#{userId},#{selectedPeople},#{goAirplaneFlightId},#{goDate},#{selectedSeatNames});
   </insert>
 
   <!--  오는 비행기 좌석 예약하기-->
@@ -78,22 +78,36 @@
     (flight_reno, flight_user_id, flight_memberNum,
     flight_start_id, flight_reserveSdate, flight_start_seatNum,
     flight_arr_id, flight_reserveEdate, flight_arr_seatNum)
-    values ('test99',#{userId},#{selectedPeople},
+    values ('test88',#{userId},#{selectedPeople},
     #{goAirplaneFlightId},#{goDate},#{selectedStartSeatNames},
     #{comeAirplaneFlightId},#{comeDate},#{selectedArriveSeatNames});
   </insert>
 
-  <!--  가는 비행기 예매된 좌석인지 확인-->
-<!--  <select id="searchGoAirplaneIsSeatReservated" parameterType="java.util.List">-->
-<!--    SELECT temp.split_column-->
-<!--    FROM (-->
-<!--    SELECT flight_reseatNum-->
-<!--    FROM flight_reserve-->
-<!--    WHERE flight_id = #{goAirplaneFlightId}-->
-<!--    ) f-->
-<!--    JOIN JSON_TABLE(-->
-<!--    CONCAT('[\"', REPLACE(f.flight_reseatNum, ',', '\",\"'), '\"]'),-->
-<!--    '$[*]' COLUMNS (split_column VARCHAR(50) PATH '$')-->
-<!--    ) temp;-->
-<!--  </select>-->
+  <!-- 편도 (가는) 비행기 예매된 좌석인지 확인-->
+  <select id="searchGoAirplaneIsSeatReservated" parameterType="java.util.List">
+    SELECT temp.split_column
+    FROM (
+    SELECT flight_start_seatNum
+    FROM flight_reserve
+    WHERE flight_start_id = #{goAirplaneFlightId}
+    ) f
+    JOIN JSON_TABLE(
+    CONCAT('[\"', REPLACE(f.flight_start_seatNum, ',', '\",\"'), '\"]'),
+    '$[*]' COLUMNS (split_column VARCHAR(50) PATH '$')
+    ) temp;
+  </select>
+
+  <!--  왕복(오는)비행기 예매된 좌석인지 확인-->
+  <select id="searchComeAirplaneIsSeatReserved" parameterType="java.util.List">
+    SELECT temp.split_column
+    FROM (
+    SELECT flight_arr_seatNum
+    FROM flight_reserve
+    WHERE flight_arr_id = #{comeAirplaneFlightId}
+    ) f
+    JOIN JSON_TABLE(
+    CONCAT('[\"', REPLACE(f.flight_arr_seatNum, ',', '\",\"'), '\"]'),
+    '$[*]' COLUMNS (split_column VARCHAR(50) PATH '$')
+    ) temp;
+  </select>
 </mapper>
