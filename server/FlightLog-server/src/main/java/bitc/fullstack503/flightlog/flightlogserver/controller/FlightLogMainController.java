@@ -70,6 +70,8 @@ public class FlightLogMainController {
     for (flightInfoDTO flightInfoDTO : searchGoAirplaneList) {
       System.out.print("항공편 id : " + flightInfoDTO.getFlightId() + " / ");
       System.out.print("항공편 : " + flightInfoDTO.getFlightInfoAirline() + " / ");
+      System.out.print("출발 도시 : " + flightInfoDTO.getFlightInfoStartCity() + " / ");
+      System.out.print("도착 도시 : " + flightInfoDTO.getFlightInfoArrivalCity() + " / ");
       System.out.print("출발 시간 : " + flightInfoDTO.getFlightInfoStartTime() + " / ");
       System.out.print("도착 시간 : " + flightInfoDTO.getFlightInfoArrivalTime() + " / ");
       System.out.println("거리 : " + flightInfoDTO.getFlightDistance());
@@ -80,13 +82,13 @@ public class FlightLogMainController {
   //  내가 선택한 출발지, 도착지, 출발일을 바탕으로 그날에 도착하는 비행기가 있는지 확인하기
 //  단, db 상의 데이터는 2024 년의 데이터가 많기 때문에 현재 날짜 - 1년 을 실행함
   @GetMapping("searchComeAirplane/{startCity}/{arrivalCity}/{comeDate}")
-  public List<flightInfoDTO> searchComeAirplane(@PathVariable("startCity") String startCity,
-                                                @PathVariable("arrivalCity") String arrivalCity,
+  public List<flightInfoDTO> searchComeAirplane(@PathVariable("startCity") String arrivalCity,
+                                                @PathVariable("arrivalCity") String startCity,
                                                 @PathVariable("comeDate") String goDate) {
     System.out.println();
     System.out.println("도착 비행기 정보 가져오기");
     List<flightInfoDTO> searchComeAirplaneList
-            = flightlogMainService.searchComeAirplane(startCity, arrivalCity, goDate);
+            = flightlogMainService.searchComeAirplane(arrivalCity, startCity, goDate);
 
     if (searchComeAirplaneList == null || searchComeAirplaneList.isEmpty()) {
       System.out.println("해당하는 날짜에 도착하는 비행기가 없습니다");
@@ -96,6 +98,8 @@ public class FlightLogMainController {
     for (flightInfoDTO flightInfoDTO : searchComeAirplaneList) {
       System.out.print("항공편 id : " + flightInfoDTO.getFlightId() + " / ");
       System.out.print("항공편 : " + flightInfoDTO.getFlightInfoAirline() + " / ");
+      System.out.print("출발 도시 : " + flightInfoDTO.getFlightInfoStartCity() + " / ");
+      System.out.print("도착 도시 : " + flightInfoDTO.getFlightInfoArrivalCity() + " / ");
       System.out.print("출발 시간 : " + flightInfoDTO.getFlightInfoStartTime() + " / ");
       System.out.print("도착 시간 : " + flightInfoDTO.getFlightInfoArrivalTime() + " / ");
       System.out.println("거리 : " + flightInfoDTO.getFlightDistance());
@@ -104,24 +108,44 @@ public class FlightLogMainController {
   }
 
   //  가는 비행기 예약
-  @PutMapping("reserveGoSeat/{goAirplaneFlightId}/{goDate}/{comeDate}/{selectedPeople}/{userId}/{selectedSeatNames}")
-  public void reserveGoAirplaneSeats(@PathVariable("goAirplaneFlightId") int goAirplaneFlightId,
-                                     @PathVariable("goDate") String goDate,
-                                     @PathVariable("comeDate") String comeDate,
+  @PutMapping("reserveGoSeat/{userId}/{selectedPeople}/{goAirplaneFlightId}/{goDate}/{selectedSeatNames}")
+  public void reserveGoAirplaneSeats(@PathVariable("userId") String userId,
                                      @PathVariable("selectedPeople") int selectedPeople,
-                                     @PathVariable("userId") String userId,
+                                     @PathVariable("goAirplaneFlightId") int goAirplaneFlightId,
+                                     @PathVariable("goDate") String goDate,
                                      @PathVariable("selectedSeatNames") String selectedSeatNames) {
-    flightlogMainService.reserveGoAirplaneSeats(goAirplaneFlightId, goDate, comeDate, selectedPeople, userId, selectedSeatNames);
+    flightlogMainService.reserveGoAirplaneSeats(userId, selectedPeople, goAirplaneFlightId, goDate, selectedSeatNames);
   }
 
   //  오는 비행기 예약
-  @PutMapping("reserveComeSeat/{comeAirplaneFlightId}/{comeDate}/{goDate}/{selectedPeople}/{userId}/{selectedSeatNames}")
-  public void reserveComeAirplaneSeats(@PathVariable("comeAirplaneFlightId") int comeAirplaneFlightId,
-                                       @PathVariable("comeDate") String comeDate,
-                                       @PathVariable("goDate") String goDate,
+  @PutMapping("reserveComeSeat/{userId}/{selectedPeople}/" +
+          "{goAirplaneFlightId}/{goDate}/{selectedStartSeatNames}/" +
+          "{comeAirplaneFlightId}/{comeDate}/{selectedArriveSeatNames}")
+  public void reserveComeAirplaneSeats(@PathVariable("userId") String userId,
                                        @PathVariable("selectedPeople") int selectedPeople,
-                                       @PathVariable("userId") String userId,
-                                       @PathVariable("selectedSeatNames") String selectedSeatNames) {
-    flightlogMainService.reserveComeAirplaneSeats(comeAirplaneFlightId, comeDate, goDate, selectedPeople, userId, selectedSeatNames);
+                                       @PathVariable("goAirplaneFlightId") int goAirplaneFlightId,
+                                       @PathVariable("goDate") String goDate,
+                                       @PathVariable("selectedStartSeatNames") String selectedStartSeatNames,
+                                       @PathVariable("comeAirplaneFlightId") int comeAirplaneFlightId,
+                                       @PathVariable("comeDate") String comeDate,
+                                       @PathVariable("selectedArriveSeatNames") String selectedArriveSeatNames) {
+    flightlogMainService.reserveComeAirplaneSeats(userId, selectedPeople,
+            goAirplaneFlightId, goDate, selectedStartSeatNames,
+            comeAirplaneFlightId, comeDate, selectedArriveSeatNames);
+  }
+
+  //  가는 비행기 예매된 좌석 확인하기
+  @GetMapping("goAirplaneIsSeatReservated/{goAirplaneFlightId}")
+  public List<String> searchGoAirplaneIsSeatReservated(@PathVariable("goAirplaneFlightId") int goAirplaneFlightId) {
+    List<String> goReservatedSeatList = flightlogMainService.searchGoAirplaneIsSeatReservated(goAirplaneFlightId);
+
+    if (goReservatedSeatList == null || goReservatedSeatList.isEmpty()) {
+      return Collections.emptyList();
+    }
+
+    System.out.println("예약된 좌석 : " + goReservatedSeatList);
+    System.out.println();
+
+    return goReservatedSeatList;
   }
 }

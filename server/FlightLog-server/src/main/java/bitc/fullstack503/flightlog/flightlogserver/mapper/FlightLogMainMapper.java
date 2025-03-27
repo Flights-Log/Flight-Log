@@ -17,13 +17,17 @@ public interface FlightLogMainMapper {
   List<flightInfoDTO> searchGoAirplane(String startCity, String arrivalCity, String goDate);
 
   //  도착하는 비행기 목록
-  List<flightInfoDTO> searchComeAirplane(String startCity, String arrivalCity, String comeDate);
+  List<flightInfoDTO> searchComeAirplane(String arrivalCity, String startCity, String comeDate);
 
-  //  가는 비행기 좌석 예약하기
-  void reserveGoAirplaneSeats(int goAirplaneFlightId, String goDate, String comeDate,
-                              int selectedPeople, String userId, String selectedSeatNames);
+  //  편도 비행기 좌석 예약하기
+  void reserveGoAirplaneSeats(String userId, int selectedPeople, int goAirplaneFlightId,
+                              String goDate, String selectedSeatNames);
 
   //  오는 비행기 좌석 예약하기
-  void reserveComeAirplaneSeats(int comeAirplaneFlightId, String comeDate, String goDate,
-                              int selectedPeople, String userId, String selectedSeatNames);
+  void reserveComeAirplaneSeats(String userId, int selectedPeople,
+                                int goAirplaneFlightId, String goDate, String selectedStartSeatNames,
+                                int comeAirplaneFlightId, String comeDate, String selectedArriveSeatNames);
+
+  //  가는 비행기의 예약된 좌석 배열로 가져오기
+  List<String> searchGoAirplaneIsSeatReservated(int goAirplaneFlightId);
 }

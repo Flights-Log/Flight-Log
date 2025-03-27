@@ -63,43 +63,51 @@ interface AppServerInterface {
     @Path("comeDate") comeDate: String
   ): Call<List<flightInfoDTO>>
 
-  //  가는 비행기 예약
+  //  가는(편도) 비행기 예약
   @PUT(
     "main" +
             "/reserveGoSeat" +
+            "/{userId}" +
+            "/{selectedPeople}" +
             "/{goAirplaneFlightId}" +
             "/{goDate}" +
-            "/{comeDate}" +
-            "/{selectedPeople}" +
-            "/{userId}" +
             "/{selectedSeatNames}"
   )
   fun goAirplaneReserveSeat(
+    @Path("userId") userId: String,
+    @Path("selectedPeople") selectedPeople: Int,
     @Path("goAirplaneFlightId") goAirplaneFlightId: Int,
     @Path("goDate") goDate: String,
-    @Path("comeDate") comeDate: String,
-    @Path("selectedPeople") selectedPeople: Int,
-    @Path("userId") userId: String,
     @Path("selectedSeatNames") selectedSeatNames: String
   ): Call<Void>
 
-  //  오는 비행기 예약
+  //  왕복 비행기 예약
   @PUT(
     "main" +
             "/reserveComeSeat" +
+            "/{userId}" +
+            "/{selectedPeople}" +
+            "/{goAirplaneFlightId}" +
+            "/{goDate}" +
+            "/{selectedStartSeatNames}" +
             "/{comeAirplaneFlightId}" +
             "/{comeDate}" +
-            "/{goDate}" +
-            "/{selectedPeople}" +
-            "/{userId}" +
-            "/{selectedSeatNames}"
+            "/{selectedArriveSeatNames}"
   )
   fun comeAirplaneReserveSeat(
+    @Path("userId") userId: String,
+    @Path("selectedPeople") selectedPeople: Int,
+    @Path("goAirplaneFlightId") goAirplaneFlightId: Int,
+    @Path("goDate") goDate: String,
+    @Path("selectedStartSeatNames") selectedStartSeatNames: String,
     @Path("comeAirplaneFlightId") comeAirplaneFlightId: Int,
     @Path("comeDate") comeDate: String,
-    @Path("goDate") goDate: String,
-    @Path("selectedPeople") selectedPeople: Int,
-    @Path("userId") userId: String,
-    @Path("selectedSeatNames") selectedSeatNames: String
+    @Path("selectedArriveSeatNames") selectedArriveSeatNames: String
   ): Call<Void>
+
+  //  가는 비행기의 예약된 좌석 목록 가져오기
+  @GET("main/goAirplaneIsSeatReservated/{goAirplaneFlightId}")
+  fun goAirplaneIsSeatReservated(
+    @Path("goAirplaneFlightId") goAirplaneFlightId: Int
+  ): Call<List<String>>
 }

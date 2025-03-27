@@ -1,6 +1,7 @@
 package bitc.fullstack.FlightLog.flightchoose
 
 import android.annotation.SuppressLint
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -13,7 +14,7 @@ import androidx.core.view.WindowInsetsCompat
 import bitc.fullstack.FlightLog.R
 import bitc.fullstack.FlightLog.appserver.AppServerClass
 import bitc.fullstack.FlightLog.databinding.ActivityGoAirplaneChooseSeatBinding
-import bitc.fullstack.FlightLog.dto.flightInfoDTO
+import bitc.fullstack.FlightLog.sidebar.TicketHolderActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -66,6 +67,9 @@ class GoAirplaneChooseSeatActivity : AppCompatActivity() {
 
 //    내가 저번 view 에서 받아온거 확인용
     getExtra()
+
+//    좌석이 예약되었는지 확인용
+//    isSeatReservated()
 
 //    일등석
     setUpFirstSeatSelection()
@@ -387,37 +391,65 @@ class GoAirplaneChooseSeatActivity : AppCompatActivity() {
       .show()
   }
 
-  //  ComeAirplaneActivity 로
+  //  가는 좌석을 예매하면 오는 티켓도 예매하겠냐고 물어보는 창이 뜸
+//  만일 예 를 누른다면 바로 오는 티켓 예매 창으로 감
+//  만일 아니요 를 누른다면 티켓 홀더로 감. 그리고 가는 티켓에 관한 정보를 서버에 db로 저장함
   fun goToNextPage() {
     binding.goAirplaneChooseSeatNextButton.setOnClickListener {
-      val intent = Intent(this, ComeAirplaneActivity::class.java)
-      intent.putExtra("출발지", selectedDeparture)
-      intent.putExtra("도착지", selectedArrive)
-      intent.putExtra("출발일", goDate.toString())
-      intent.putExtra("도착일", comeDate.toString())
-      intent.putExtra("인원수", selectedPeople)
-      intent.putExtra("거리", distance)
-      intent.putExtra("가는 비행기 총 비용", goAirplaneTotalPrice)
-      startActivity(intent)
+      AlertDialog.Builder(this)
+        .setTitle("가는 티켓 예매 완료")
+        .setMessage("오는 티켓도 예매 하시겠습니까?")
+        .setPositiveButton("예", object : DialogInterface.OnClickListener {
+          override fun onClick(dialog: DialogInterface?, which: Int) {
+            val intent = Intent(this@GoAirplaneChooseSeatActivity, ComeAirplaneActivity::class.java)
+            intent.putExtra("가는 비행기 아이디", goAirplaneFlightId)
+            intent.putExtra("출발지", selectedDeparture)
+            intent.putExtra("도착지", selectedArrive)
+            intent.putExtra("출발일", goDate.toString())
+            intent.putExtra("도착일", comeDate.toString())
+            intent.putExtra("인원수", selectedPeople)
+            intent.putExtra("거리", distance)
+            intent.putExtra("가는 비행기 총 비용", goAirplaneTotalPrice)
+            intent.putExtra("가는 비행기 선택 좌석", selectedSeatNames.joinToString(","))
+            startActivity(intent)
+          }
+        })
+        .setNegativeButton("아니요", object : DialogInterface.OnClickListener {
+          override fun onClick(dialog: DialogInterface?, which: Int) {
+            //가는 비행기 좌석 예약
+            val api = AppServerClass.instance
+            val call = api.goAirplaneReserveSeat(
+              userId,
+              selectedPeople,
+              goAirplaneFlightId,
+              goDate,
+              selectedSeatNames.joinToString(",")
+            )
+            retrofitResponse(call)
 
-      //가는 비행기 좌석 예약
-      val api = AppServerClass.instance
-      val call = api.goAirplaneReserveSeat(
-        goAirplaneFlightId,
-        goDate,
-        comeDate,
-        selectedPeople,
-        userId,
-        selectedSeatNames.joinToString(",")
-      )
-      retrofitResponse(call)
+            val intent = Intent(this@GoAirplaneChooseSeatActivity, TicketHolderActivity::class.java)
+            startActivity(intent)
+          }
+        })
+        .create()
+        .show()
     }
 
     Log.d("flightLog", "goAirplaneTotalPrice : $goAirplaneTotalPrice")
     Log.d("flightLog", "formattedGoAirplane : $formattedGoAirplane")
   }
 
-  //  Retrofit 통신 응답 List<String>
+  //  해당하는 비행기 아이디의 좌석이 예약되었는지 확인
+//  fun isSeatReservated() {
+//    //가는 비행기 좌석 예약
+//    val api = AppServerClass.instance
+//    val call = api.goAirplaneIsSeatReservated(
+//      goAirplaneFlightId
+//    )
+//    retrofitResponseSeat(call)
+//  }
+
+  //  Retrofit 통신 응답 List<Void> : 예매 용
   private fun retrofitResponse(call: Call<Void>) {
     call.enqueue(object : Callback<Void> {
       @SuppressLint("NotifyDataSetChanged")
@@ -430,6 +462,25 @@ class GoAirplaneChooseSeatActivity : AppCompatActivity() {
       }
 
       override fun onFailure(p0: Call<Void>, t: Throwable) {
+        Log.d("flightLog", "message : $t.message")
+      }
+    })
+  }
+
+  //  Retrofit 통신 응답 List<String> : 좌석이 예약되었는지 확인용
+  private fun retrofitResponseSeat(call: Call<List<String>>) {
+    call.enqueue(object : Callback<List<String>> {
+      @SuppressLint("NotifyDataSetChanged")
+      override fun onResponse(p0: Call<List<String>>, res: Response<List<String>>) {
+        if (res.isSuccessful) {
+          var result = res.body();
+          Log.d("flightLog", "result : $result")
+        } else {
+          Log.d("flightLog", "실패. 응답 코드 : ${res.code()}")
+        }
+      }
+
+      override fun onFailure(p0: Call<List<String>>, t: Throwable) {
         Log.d("flightLog", "message : $t.message")
       }
     })

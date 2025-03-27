@@ -30,6 +30,7 @@ import java.text.NumberFormat
 import java.util.Locale
 
 //  출발도시, 도착도시, 가는날, 오는 날, 선택한 사람 수, 거리
+private var goAirplaneFlightId: Int = 0
 private var selectedDeparture: String = ""
 private var selectedArrive: String = ""
 private var goDate: String = ""
@@ -37,6 +38,7 @@ private var comeDate: String = ""
 private var selectedPeople: Int = 0
 private var distance: Double = 0.0
 private var comeAirplaneFlightId: Int = 0
+private var goAirplaneSelectedSeats: String = ""
 
 //가는 비행기 좌석 총 경비
 private var goAirplaneTotalPrice = 0
@@ -100,6 +102,9 @@ class ComeAirplaneActivity : AppCompatActivity() {
   //  내가 MainActivity 에서 intent 로 받아온 값 화면과 로그에 출력
 //  그리고 위에 있는 startCity, selectedArrive, goDate 에 넣어줌
   fun getExtra() {
+    Log.d("flightLog", "받은 가는 비행기 아이디 : ${intent.getIntExtra("가는 비행기 아이디", 0)}")
+    goAirplaneFlightId = intent.getIntExtra("가는 비행기 아이디", 0)
+
     binding.textComeStartCity.text = intent.getStringExtra("출발지")
     selectedDeparture = binding.textComeStartCity.text.toString()
 
@@ -120,6 +125,9 @@ class ComeAirplaneActivity : AppCompatActivity() {
 
     Log.d("flightLog", "가는 비행기 총 비용 : ${intent.getIntExtra("가는 비행기 총 비용", 0)}")
     goAirplaneTotalPrice = intent.getIntExtra("가는 비행기 총 비용", 0)
+
+    Log.d("flightLog", "가는 비행기 선택 좌석 : ${intent.getStringExtra("가는 비행기 선택 좌석")}")
+    goAirplaneSelectedSeats = intent.getStringExtra("가는 비행기 선택 좌석").toString()
   }
 
   //  Retrofit 통신 응답 List<String>
@@ -212,6 +220,7 @@ class MyAdapterComeAirplane(val datas: MutableList<flightInfoDTO>) :
       val context = binding.root.context
 
       val intent = Intent(context, ComeAirplaneChooseSeatActivity::class.java)
+      intent.putExtra("가는 비행기 아이디", goAirplaneFlightId)
       intent.putExtra("오는 비행기 아이디", comeAirplaneFlightId)
       intent.putExtra("출발지", selectedDeparture)
       intent.putExtra("도착지", selectedArrive)
@@ -220,6 +229,7 @@ class MyAdapterComeAirplane(val datas: MutableList<flightInfoDTO>) :
       intent.putExtra("인원수", selectedPeople)
       intent.putExtra("거리", distance)
       intent.putExtra("가는 비행기 총 비용", goAirplaneTotalPrice)
+      intent.putExtra("가는 비행기 선택 좌석", goAirplaneSelectedSeats)
 //      item_go_airplane 에서 intent(ComeAirplaneChooseSeatActivity)로 이동
       context.startActivity(intent)
     }

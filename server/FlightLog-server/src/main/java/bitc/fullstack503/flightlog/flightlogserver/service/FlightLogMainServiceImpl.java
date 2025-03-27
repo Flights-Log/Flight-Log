@@ -34,19 +34,27 @@ public class FlightLogMainServiceImpl implements FlightLogMainService {
 
   //  도착 비행기 찾기
   @Override
-  public List<flightInfoDTO> searchComeAirplane(String startCity, String arrivalCity, String comeDate) {
-    return flightLogMainMapper.searchComeAirplane(startCity, arrivalCity, comeDate);
+  public List<flightInfoDTO> searchComeAirplane(String arrivalCity, String startCity, String comeDate) {
+    return flightLogMainMapper.searchComeAirplane(arrivalCity, startCity, comeDate);
   }
 
   @Override
-  public void reserveGoAirplaneSeats(int goAirplaneFlightId, String goDate, String comeDate,
-                                     int selectedPeople, String userId, String selectedSeatNames) {
-    flightLogMainMapper.reserveGoAirplaneSeats(goAirplaneFlightId, goDate, comeDate, selectedPeople, userId, selectedSeatNames);
+  public void reserveGoAirplaneSeats(String userId, int selectedPeople, int goAirplaneFlightId,
+                                     String goDate, String selectedSeatNames) {
+    flightLogMainMapper.reserveGoAirplaneSeats(userId, selectedPeople, goAirplaneFlightId, goDate, selectedSeatNames);
   }
 
   @Override
-  public void reserveComeAirplaneSeats(int comeAirplaneFlightId, String comeDate, String goDate,
-                                       int selectedPeople, String userId, String selectedSeatNames) {
-    flightLogMainMapper.reserveComeAirplaneSeats(comeAirplaneFlightId, comeDate, goDate, selectedPeople, userId, selectedSeatNames);
+  public void reserveComeAirplaneSeats(String userId, int selectedPeople,
+                                       int goAirplaneFlightId, String goDate, String selectedStartSeatNames,
+                                       int comeAirplaneFlightId, String comeDate, String selectedArriveSeatNames) {
+    flightLogMainMapper.reserveComeAirplaneSeats(userId, selectedPeople,
+            goAirplaneFlightId, goDate, selectedStartSeatNames,
+            comeAirplaneFlightId, comeDate, selectedArriveSeatNames);
+  }
+
+  @Override
+  public List<String> searchGoAirplaneIsSeatReservated(int goAirplaneFlightId) {
+    return flightLogMainMapper.searchGoAirplaneIsSeatReservated(goAirplaneFlightId);
   }
 }
