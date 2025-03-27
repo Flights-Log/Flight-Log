@@ -14,8 +14,12 @@ public class FlightChooseServiceImpl implements FlightChooseService {
     private FlightChooseServiceMapper flightChooseServiceMapper;
 
     @Override
-    public List<FlightReservationCheckDTO> flightReservationCheck(String etReservationNumber) {
-        return flightChooseServiceMapper.flightReservationCheck(etReservationNumber);
+    public List<FlightReservationCheckDTO> flightReservationCheck(String reservationNumber) {
 
+        List<FlightReservationCheckDTO> test = flightChooseServiceMapper.flightReservationCheck(reservationNumber);
+
+        System.out.println(test);
+
+        return flightChooseServiceMapper.flightReservationCheck(reservationNumber);
     }
 }
