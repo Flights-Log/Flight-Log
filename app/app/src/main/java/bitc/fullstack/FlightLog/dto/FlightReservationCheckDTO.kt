@@ -1,45 +1,53 @@
 package bitc.fullstack.FlightLog.dto
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class FlightReservationCheckDTO(
 
-    @SerializedName("reno")
-    val flightReno: String,  // 예약 번호
+    // 가는 DTO - 여권 번호
+    var passport: String,
 
-    @SerializedName("member_lastName")
-    val flightMemberLastName: String,  // 탑승자 성
+    var flightReno: String,//예약 번호
 
-    @SerializedName("member_first_name")
-    val flightMemberFirstName: String,  // 탑승자 이름
+    var firstName: String, //승객 이름
 
-    @SerializedName("start_city")
-    val flightStartCity: String,  // 출발 도시
+    var lastName: String, //승객 성
 
-    @SerializedName("arrival_city")
-    val flightArrivalCity: String,  // 도착 도시
+    var startCity:String, // 출발지
 
-    @SerializedName("start_date")
-    val flightReserveStartDate: String,  // 출발 날짜
+    var arrivalCity:String, // 도착지
 
-    @SerializedName("start_time")
-    val flightInfoStartTime: String,  // 출발 시간
+    var departureDate:String, // 도착 날짜
 
-    @SerializedName("arrival_date")
-    val flightReserveEndDate: String,  // 도착 날짜
+    var departureTime:String, // 도착 시간
 
-    @SerializedName("arrival_time")
-    val flightInfoArrivalTime: String,  // 도착 시간
+    var arrivalTime:String, // 도착 시간
 
-    @SerializedName("member_num")
-    val flightMemberNum: Int,  // 탑승 인원
+    var numPassengers:String, // 승객 수
 
-    @SerializedName("start_seat_num")
-    val flightMemStartSeatNum: String,  // 좌석 번호
+    var seatNumber: String,// 좌석 번호
 
-    @SerializedName("passport")
-    val flightPassport: String,  // 여권 번호
+    var flightStartPayCheck: String,//
 
-    @SerializedName("luggage")
-    val flightMemLuggage: String  // 수하물
-)
+    var flightArrPayCheck: String,
+
+    var luggage: String,// 수하물
+
+    var flightArrId: Int, //
+
+
+    //    오는날
+    var returnStartCity: String, //출발지
+
+    var returnArrivalCity:String,//도착지
+
+    var returnDepartureDate:String,//출발 날짜
+
+    var returnDepartureTime:String,//출발 시간
+
+    var returnArrivalTime:String,//도착 시간
+
+    var returnSeatNumber:String,//좌석 번호
+
+) : Serializable

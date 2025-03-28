@@ -22,4 +22,14 @@ public class FlightChooseServiceImpl implements FlightChooseService {
 
         return flightChooseServiceMapper.flightReservationCheck(reservationNumber);
     }
+
+    @Override
+    public List<FlightReservationCheckDTO> OneWayReservationCheck(String reservationNumber) {
+
+        List<FlightReservationCheckDTO> test = flightChooseServiceMapper.OneWayReservationCheck(reservationNumber);
+
+        System.out.println(test);
+
+        return flightChooseServiceMapper.OneWayReservationCheck(reservationNumber);
+    }
 }

@@ -1,5 +1,6 @@
 package bitc.fullstack.FlightLog.flightchoose
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.enableEdgeToEdge
@@ -9,6 +10,7 @@ import androidx.core.view.WindowInsetsCompat
 import bitc.fullstack.FlightLog.appserver.AppServerClass
 import bitc.fullstack.FlightLog.databinding.ActivityReservationCheckBinding
 import bitc.fullstack.FlightLog.dto.FlightReservationCheckDTO
+import bitc.fullstack.FlightLog.flightmain.MainActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -34,6 +36,11 @@ class ReservationCheckActivity : AppCompatActivity() {
 
   private fun initEventListener() {
 
+    binding.btnHome.setOnClickListener {
+      val intent = Intent(this, MainActivity::class.java)
+      startActivity(intent)
+    }
+
 //    val reno = binding.reservationNumber.text.toString()
 
     val reservationNumber = "test99"
@@ -50,6 +57,30 @@ class ReservationCheckActivity : AppCompatActivity() {
         if (res.isSuccessful) {
           val result = res.body()
           Log.d("csy", "result : $result")
+
+//          if (result != null) {
+//            // flightArrId가 null인 경우를 체크
+//            val hasReturnFlight = result.any { it.flightArrId != null }
+//
+//            val intent = Intent(this@ReservationCheckActivity, ReservationCheckActivity::class.java)
+//            // flightArrId가 null인 경우 다른 화면으로 전환
+//            if (hasReturnFlight) {
+//              // 왕복 비행편인 경우
+//              intent.putExtra("flight_data", ArrayList(result))
+//              startActivity(intent)
+//            } else {
+//              // 편도 비행편인 경우
+//              // 다른 화면을 보여주고, 그 화면에 맞는 Activity로 전환
+//              val oneWayIntent = Intent(this@ReservationCheckActivity, OneWayReservationActivity::class.java)
+//              oneWayIntent.putExtra("flight_data", ArrayList(result))
+//              startActivity(oneWayIntent)
+//            }
+//          }
+//
+//          else {
+//            Log.e("csy", "Result is null!")
+//          }
+
 
           if (result != null && result.isNotEmpty()) {
             updateUI(result[0])  // 첫 번째 예약 데이터를 UI에 반영
@@ -74,19 +105,27 @@ class ReservationCheckActivity : AppCompatActivity() {
 
   private fun updateUI(reservation: FlightReservationCheckDTO) {
     binding.reservationNumber.setText(reservation.flightReno)
-    binding.lastName.setText(reservation.flightMemberLastName)
-    binding.firstName.setText(reservation.flightMemberFirstName)
-    binding.startCity.setText(reservation.flightStartCity)
-    binding.arrivalCity.setText(reservation.flightArrivalCity)
-    binding.departureDate.setText(reservation.flightReserveStartDate)
-    binding.departureTime.setText(reservation.flightInfoStartTime)
-    binding.arrivalDate.setText(reservation.flightReserveEndDate)
-    binding.arrivalTime.setText(reservation.flightInfoArrivalTime)
-    binding.passengers.setText(reservation.flightMemberNum.toString())
-    binding.seatNumber.setText(reservation.flightMemStartSeatNum)
-    binding.passportNumber.setText(reservation.flightPassport)
-    binding.luggage.setText(reservation.flightMemLuggage)
+    binding.lastName.setText(reservation.lastName)
+    binding.firstName.setText(reservation.firstName)
+    binding.startCity.setText(reservation.startCity)
+    binding.arrivalCity.setText(reservation.arrivalCity)
+    binding.departureDate.setText(reservation.departureDate)
+    binding.departureTime.setText(reservation.departureTime)
+    binding.arrivalTime.setText(reservation.arrivalTime)
+    binding.passengers.setText(reservation.numPassengers.toString())
+    binding.seatNumber.setText(reservation.seatNumber)
+    binding.passportNumber.setText(reservation.passport)
+    binding.luggage.setText(reservation.luggage)
 
+    binding.returnStartCity.setText(reservation.returnStartCity)
+    binding.returnArrivalCity.setText(reservation.returnArrivalCity)
+    binding.returnDepartureDate.setText(reservation.returnDepartureDate)
+    binding.returnDepartureTime.setText(reservation.returnDepartureTime)
+    binding.returnArrivalTime.setText(reservation.returnArrivalTime)
+    binding.returnPassengers.setText(reservation.numPassengers.toString())
+    binding.returnSeatNumber.setText(reservation.returnSeatNumber)
+    binding.returnPassportNumber.setText(reservation.passport)
+    binding.returnLuggage.setText(reservation.luggage)
   }
 
 }

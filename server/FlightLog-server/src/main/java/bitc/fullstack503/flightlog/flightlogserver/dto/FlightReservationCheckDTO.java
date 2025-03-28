@@ -4,46 +4,69 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.val;
 
 @Data
 public class FlightReservationCheckDTO {
 
-    @JsonProperty("reno")
+    @JsonProperty("passport")
+    private String passport;  // 여권 번호
+
+    @JsonProperty("flightReno")
     private String flightReno;  // 예약 번호
 
-    @JsonProperty("member_lastName")
-    private String flightMemberLastName;  // 탑승자 성
+    @JsonProperty("firstName")
+    private String firstName;  // 회원 이름 (이름)
 
-    @JsonProperty("member_first_name")
-    private String flightMemberFirstName;  // 탑승자 이름
+    @JsonProperty("lastName")
+    private String lastName;  // 회원 이름 (성)
 
-    @JsonProperty("start_city")
-    private String flightStartCity;  // 출발 도시
+    @JsonProperty("startCity")
+    private String startCity;  // 출발 도시
 
-    @JsonProperty("arrival_city")
-    private String flightArrivalCity;  // 도착 도시
+    @JsonProperty("arrivalCity")
+    private String arrivalCity;  // 도착 도시
 
-    @JsonProperty("start_date")
-    private String flightReserveStartDate;  // 출발 날짜
+    @JsonProperty("departureDate")
+    private String departureDate;  // 출발 일자
 
-    @JsonProperty("start_time")
-    private String flightInfoStartTime;  // 출발 시간
+    @JsonProperty("departureTime")
+    private String departureTime;  // 출발 시간
 
-    @JsonProperty("arrival_date")
-    private String flightReserveEndDate;  // 도착 날짜
+    @JsonProperty("arrivalTime")
+    private String arrivalTime;  // 도착 시간
 
-    @JsonProperty("arrival_time")
-    private String flightInfoArrivalTime;  // 도착 시간
+    @JsonProperty("numPassengers")
+    private int numPassengers;  // 승객 수
 
-    @JsonProperty("member_num")
-    private Integer flightMemberNum;  // 탑승 인원
-
-    @JsonProperty("start_seat_num")
-    private String flightMemStartSeatNum;  // 좌석 번호
-
-    @JsonProperty("passport")
-    private String flightPassport;  // 여권 번호
+    @JsonProperty("seatNumber")
+    private String seatNumber;  // 좌석 번호
 
     @JsonProperty("luggage")
-    private String flightMemLuggage;  // 수하물
+    private String luggage;  // 수하물 정보
+
+    @JsonProperty("returnStartCity")
+    private String returnStartCity;  // 돌아오는 출발 도시
+
+    @JsonProperty("returnArrivalCity")
+    private String returnArrivalCity;  // 돌아오는 도착 도시
+
+    @JsonProperty("returnDepartureDate")
+    private String returnDepartureDate;  // 돌아오는 출발 일자
+
+    @JsonProperty("returnDepartureTime")
+    private String returnDepartureTime;  // 돌아오는 출발 시간
+
+    @JsonProperty("returnArrivalTime")
+    private String returnArrivalTime;  // 돌아오는 도착 시간
+
+    @JsonProperty("returnSeatNumber")
+    private String returnSeatNumber;  // 돌아오는 좌석 번호
+
+    @JsonProperty("flightArrPayCheck")
+    private String flightArrPayCheck;  // 도착지 결제 확인
+
+    @JsonProperty("flightArrId")
+    private int flightArrId;  // 도착 ID
+
 }
