@@ -492,6 +492,7 @@ class ComeAirplaneChooseSeatActivity : AppCompatActivity() {
       intent.putExtra("오는 비행기 아이디", comeAirplaneFlightId)
       intent.putExtra("왕복 선택 여부", roundTripChecked)
       intent.putExtra("왕복 예약 번호", flightReno)
+      intent.putExtra("거리", distance)
       startActivity(intent)
     }
 //    Log.d("flightLog", "goAirplaneTotalPrice : $goAirplaneTotalPrice")

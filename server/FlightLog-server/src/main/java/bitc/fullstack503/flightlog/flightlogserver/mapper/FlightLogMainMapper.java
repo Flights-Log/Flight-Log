@@ -40,11 +40,12 @@ public interface FlightLogMainMapper {
 
   //  편도 비행기 예매하기
   void reserveGoAirplaneMember(String passport, String flightReno, String userId, String firstName, String lastName,
-                               String selectedSeatName, String luggage);
+                               String selectedSeatName, int startSeatPrice, String luggage);
 
   //  왕복 비행기 혼자 예매하기
   void reserveRoundAirplaneMember(String passport, String roundFlightReno, String userId, String firstName, String lastName,
-                                  String selectedStartSeatName, String luggage, String selectedArriveSeatName);
+                                  String selectedStartSeatName, int startSeatPrice, String luggage,
+                                  String selectedArriveSeatName, int arriveSeatPrice);
 
   //  만약에 내가 설정한 날짜에 출발하는 비행기가 없을 경우 다른 날짜 추천
   String recommendStartDate(String startCity, String arrivalCity);

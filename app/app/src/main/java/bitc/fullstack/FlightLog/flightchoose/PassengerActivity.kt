@@ -210,12 +210,38 @@ class PassengerActivity : AppCompatActivity() {
       val lastNames = mutableListOf<String>()
       val passports = mutableListOf<String>()
       val luggageWeights = mutableListOf<String>()
+      val startSeatPriceList = mutableListOf<Int>()
+      val arriveSeatPriceList = mutableListOf<Int>()
 
 //      배열에 텍스트 값을 넣음
       firstNames.add(binding.firstNameUser.text.toString())
       lastNames.add(binding.lastNameUser.text.toString())
       passports.add(binding.passportNumberUser.text.toString())
       luggageWeights.add(binding.luggageWeightUser.text.toString() + "kg")
+
+//      가격 계산(편도)
+      for (seat in selectedStartSeatNameList) {
+        val seatFirstChar = seat.substring(0, 1)
+        val startSeatPrice = when (seatFirstChar) {
+          "A", "B", "C" -> (distance * 1500).toInt()
+          "D", "E", "F" -> (distance * 1000).toInt()
+          "G", "H", "I" -> (distance * 500).toInt()
+          else -> 0
+        }
+        startSeatPriceList.add(startSeatPrice)
+      }
+
+//      가격 계산(왕복)
+      for (seat in selectedArriveSeatNameList) {
+        val seatFirstChar = seat.substring(0, 1)
+        val arriveSeatPrice = when (seatFirstChar) {
+          "A", "B", "C" -> (distance * 1500).toInt()
+          "D", "E", "F" -> (distance * 1000).toInt()
+          "G", "H", "I" -> (distance * 500).toInt()
+          else -> 0
+        }
+        arriveSeatPriceList.add(arriveSeatPrice)
+      }
 
 //      동승자 정보 추가 (passenger_more_info_layout 의 자식 수 만큼)
       for (i in 0 until buttonClick - 1) {
@@ -247,7 +273,6 @@ class PassengerActivity : AppCompatActivity() {
         return@setOnClickListener
       } else {
         val api = AppServerClass.instance
-
 //      편도 여행이면
         if (roundTripChecked == false) {
 //          firstNames 의 길이만큼 n 번째 값을 reserveGoAirplaneMember 에 계속해서 넣어줌
@@ -259,6 +284,7 @@ class PassengerActivity : AppCompatActivity() {
               firstNames[i],
               lastNames[i],
               selectedStartSeatNameList[i],
+              startSeatPriceList[i],
               luggageWeights[i]
             )
             retrofitResponseAlone(call)
@@ -296,8 +322,10 @@ class PassengerActivity : AppCompatActivity() {
               firstNames[i],
               lastNames[i],
               selectedStartSeatNameList[i],
+              startSeatPriceList[i],
               luggageWeights[i],
-              selectedArriveSeatNameList[i]
+              selectedArriveSeatNameList[i],
+              arriveSeatPriceList[i]
             )
             retrofitResponseAlone(call)
           }

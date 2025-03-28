@@ -76,13 +76,13 @@ public class FlightLogMainServiceImpl implements FlightLogMainService {
 
   //  편도 비행기 예매하기
   @Override
-  public void reserveGoAirplaneMember(String passport, String flightReno, String userId, String firstName, String lastName, String selectedSeatName, String luggage) {
-    flightLogMainMapper.reserveGoAirplaneMember(passport, flightReno, userId, firstName, lastName, selectedSeatName, luggage);
+  public void reserveGoAirplaneMember(String passport, String flightReno, String userId, String firstName, String lastName, String selectedSeatName, int startSeatPrice, String luggage) {
+    flightLogMainMapper.reserveGoAirplaneMember(passport, flightReno, userId, firstName, lastName, selectedSeatName, startSeatPrice, luggage);
   }
 
   @Override
-  public void reserveRoundAirplaneMember(String passport, String roundFlightReno, String userId, String firstName, String lastName, String selectedSeatName, String luggage, String selectedArriveSeatName) {
-    flightLogMainMapper.reserveRoundAirplaneMember(passport, roundFlightReno, userId, firstName, lastName, selectedSeatName, luggage, selectedArriveSeatName);
+  public void reserveRoundAirplaneMember(String passport, String roundFlightReno, String userId, String firstName, String lastName, String selectedSeatName, int startSeatPrice, String luggage, String selectedArriveSeatName, int arriveSeatPrice) {
+    flightLogMainMapper.reserveRoundAirplaneMember(passport, roundFlightReno, userId, firstName, lastName, selectedSeatName, startSeatPrice, luggage, selectedArriveSeatName, arriveSeatPrice);
   }
 
   @Override

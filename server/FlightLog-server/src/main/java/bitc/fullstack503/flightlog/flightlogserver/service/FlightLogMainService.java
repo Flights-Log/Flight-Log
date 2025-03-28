@@ -37,10 +37,10 @@ public interface FlightLogMainService {
   List<flightUserDTO> searchUserName(String userId);
 
   //  가는 비행기(편도) 예매하기
-  void reserveGoAirplaneMember(String passport, String flightReno, String userId, String firstName, String lastName, String selectedSeatName, String luggage);
+  void reserveGoAirplaneMember(String passport, String flightReno, String userId, String firstName, String lastName, String selectedSeatName, int startSeatPrice, String luggage);
 
   //  혼자서 왕복 비행기 에매하기
-  void reserveRoundAirplaneMember(String passport, String roundFlightReno, String userId, String firstName, String lastName, String selectedStartSeatName, String luggage, String selectedArriveSeatName);
+  void reserveRoundAirplaneMember(String passport, String roundFlightReno, String userId, String firstName, String lastName, String selectedSeatName, int startSeatPrice, String luggage, String selectedArriveSeatName, int arriveSeatPrice);
 
   //  다른 날짜 추천
   String recommendStartDate(String startCity, String arrivalCity);

@@ -121,17 +121,23 @@
   <!-- roundTripChecked 가 false 일 때 가는 비행기 예약하기-->
   <insert id="reserveGoAirplaneMember" parameterType="java.util.List">
     insert into flight_reserve_member(flight_passport, flight_reno, flight_user_id,
-    flight_mem_firstName, flight_mem_lastName, flight_mem_start_seatNum, flight_mem_luggage)
-    values (#{passport},#{flightReno},#{userId},#{firstName},#{lastName},#{selectedSeatName},#{luggage});
+    flight_mem_firstName, flight_mem_lastName,
+    flight_mem_start_seatNum, flight_mem_start_price, flight_mem_luggage)
+    values
+    (#{passport},#{flightReno},#{userId},#{firstName},#{lastName},
+    #{selectedSeatName},#{startSeatPrice},#{luggage});
   </insert>
 
   <!-- roundTripChecked 가 true 일 때 왕복 비행기 예매하기 -->
   <insert id="reserveRoundAirplaneMember" parameterType="java.util.List">
     insert into flight_reserve_member(flight_passport, flight_reno, flight_user_id,
     flight_mem_firstName, flight_mem_lastName,
-    flight_mem_start_seatNum, flight_mem_luggage, flight_mem_arrive_seatNum)
+    flight_mem_start_seatNum, flight_mem_start_price, flight_mem_luggage,
+    flight_mem_arrive_seatNum, flight_mem_arr_price)
     values
-    (#{passport},#{roundFlightReno},#{userId},#{firstName},#{lastName},#{selectedStartSeatName},#{luggage},#{selectedArriveSeatName});
+    (#{passport},#{roundFlightReno},#{userId},#{firstName},#{lastName},
+    #{selectedStartSeatName},#{startSeatPrice},#{luggage},
+    #{selectedArriveSeatName}, #{arriveSeatPrice});
   </insert>
 
   <!-- 만약에 내가 설정한 날짜에 출발하는 비행기가 없을 경우 다른 날짜 추천 -->

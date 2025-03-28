@@ -130,7 +130,7 @@ interface AppServerInterface {
   ): Call<List<flightUserDTO>>
 
   //  가는(편도) 비행기 예매할 때
-  @PUT("main/reserveGoAirplaneMember/{passport}/{flightReno}/{userId}/{firstName}/{lastName}/{selectedSeatName}/{luggage}")
+  @PUT("main/reserveGoAirplaneMember/{passport}/{flightReno}/{userId}/{firstName}/{lastName}/{selectedSeatName}/{startSeatPrice}/{luggage}")
   fun reserveGoAirplaneMember(
     @Path("passport") passport: String,
     @Path("flightReno") flightReno: String,
@@ -138,11 +138,12 @@ interface AppServerInterface {
     @Path("firstName") firstName: String,
     @Path("lastName") lastName: String,
     @Path("selectedSeatName") selectedSeatName: String,
+    @Path("startSeatPrice") startSeatPrice: Int,
     @Path("luggage") luggage: String
   ): Call<Void>
 
   //  혼자서 왕복 비행기 예매할 때
-  @PUT("main/reserveRoundAirplaneMember/{passport}/{roundFlightReno}/{userId}/{firstName}/{lastName}/{selectedStartSeatName}/{luggage}/{selectedArriveSeatName}")
+  @PUT("main/reserveRoundAirplaneMember/{passport}/{roundFlightReno}/{userId}/{firstName}/{lastName}/{selectedStartSeatName}/{startSeatPrice}/{luggage}/{selectedArriveSeatName}/{arriveSeatPrice}")
   fun reserveRoundAirplaneMember(
     @Path("passport") passport: String,
     @Path("roundFlightReno") roundFlightReno: String,
@@ -150,8 +151,10 @@ interface AppServerInterface {
     @Path("firstName") firstName: String,
     @Path("lastName") lastName: String,
     @Path("selectedStartSeatName") selectedStartSeatName: String,
+    @Path("startSeatPrice") startSeatPrice: Int,
     @Path("luggage") luggage: String,
-    @Path("selectedArriveSeatName") selectedArriveSeatName: String
+    @Path("selectedArriveSeatName") selectedArriveSeatName: String,
+    @Path("arriveSeatPrice") arriveSeatPrice: Int
   ): Call<Void>
 
   //  다른 날짜 추천

@@ -26,6 +26,9 @@ public class flightReserveMemberDTO {
   @JsonProperty("flightMemStartSeatNum")
   private String flightMemStartSeatNum;
 
+  @JsonProperty("flightMemStartPrice")
+  private int flightMemStartPrice;
+
   @JsonProperty("flightStartPayCheck")
   private String flightStartPayCheck;
 
@@ -34,4 +37,7 @@ public class flightReserveMemberDTO {
 
   @JsonProperty("flightMemArriveSeatNum")
   private String flightMemArriveSeatNum;
+
+  @JsonProperty("flightMemArrPrice")
+  private int flightMemArrPrice;
 }

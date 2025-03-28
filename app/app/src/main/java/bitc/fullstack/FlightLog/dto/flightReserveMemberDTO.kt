@@ -24,6 +24,9 @@ data class flightReserveMemberDTO(
   @SerializedName("flightMemStartSeatNum")
   var flightMemStartSeatNum: String,
 
+  @SerializedName("flightMemStartPrice")
+  var flightMemStartPrice: Int,
+
   @SerializedName("flightStartPayCheck")
   var flightStartPayCheck: String,
 
@@ -34,5 +37,8 @@ data class flightReserveMemberDTO(
   var flightMemLuggage: String,
 
   @SerializedName("flightMemArriveSeatNum")
-  var flightMemArriveSeatNum: String
+  var flightMemArriveSeatNum: String,
+
+  @SerializedName("flightMemArrPrice")
+  var flightMemArrPrice: Int
 )
