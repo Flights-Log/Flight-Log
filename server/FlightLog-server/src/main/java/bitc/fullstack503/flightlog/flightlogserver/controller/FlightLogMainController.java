@@ -183,26 +183,35 @@ public class FlightLogMainController {
   //  가는 비행기(편도)예매하기
   @PutMapping("reserveGoAirplaneMember/{passport}/{flightReno}/{userId}/{firstName}/{lastName}/{selectedSeatName}/{luggage}")
   public void reserveGoAirplaneMember(@PathVariable("passport") String passport,
-                            @PathVariable("flightReno") String flightReno,
-                            @PathVariable("userId") String userId,
-                            @PathVariable("firstName") String firstName,
-                            @PathVariable("lastName") String lastName,
-                            @PathVariable("selectedSeatName") String selectedSeatName,
-                            @PathVariable("luggage") String luggage) {
+                                      @PathVariable("flightReno") String flightReno,
+                                      @PathVariable("userId") String userId,
+                                      @PathVariable("firstName") String firstName,
+                                      @PathVariable("lastName") String lastName,
+                                      @PathVariable("selectedSeatName") String selectedSeatName,
+                                      @PathVariable("luggage") String luggage) {
     flightlogMainService.reserveGoAirplaneMember(passport, flightReno, userId, firstName, lastName, selectedSeatName, luggage);
   }
 
   //  혼자서 왕복 비행기 예매하기
   @PutMapping("reserveRoundAirplaneMember/{passport}/{roundFlightReno}/{userId}/{firstName}/{lastName}/{selectedStartSeatName}/{luggage}/{selectedArriveSeatName}")
   public void reserveRoundAirplaneMember(@PathVariable("passport") String passport,
-                               @PathVariable("roundFlightReno") String roundFlightReno,
-                               @PathVariable("userId") String userId,
-                               @PathVariable("firstName") String firstName,
-                               @PathVariable("lastName") String lastName,
-                               @PathVariable("selectedStartSeatName") String selectedStartSeatName,
-                               @PathVariable("luggage") String luggage,
-                               @PathVariable("selectedArriveSeatName") String selectedArriveSeatName) {
+                                         @PathVariable("roundFlightReno") String roundFlightReno,
+                                         @PathVariable("userId") String userId,
+                                         @PathVariable("firstName") String firstName,
+                                         @PathVariable("lastName") String lastName,
+                                         @PathVariable("selectedStartSeatName") String selectedStartSeatName,
+                                         @PathVariable("luggage") String luggage,
+                                         @PathVariable("selectedArriveSeatName") String selectedArriveSeatName) {
     flightlogMainService.reserveRoundAirplaneMember(passport, roundFlightReno, userId, firstName, lastName, selectedStartSeatName, luggage, selectedArriveSeatName);
+  }
+
+  //  다른 날짜 추천
+  @GetMapping("recommendStartDate/{startCity}/{arrivalCity}")
+  public String recommendStartDate(@PathVariable("startCity") String startCity,
+                                   @PathVariable("arrivalCity") String arrivalCity) {
+    String recommendDate = flightlogMainService.recommendStartDate(startCity, arrivalCity);
+    System.out.println(recommendDate);
+    return recommendDate;
   }
 
 }

@@ -42,4 +42,6 @@ public interface FlightLogMainService {
   //  혼자서 왕복 비행기 에매하기
   void reserveRoundAirplaneMember(String passport, String roundFlightReno, String userId, String firstName, String lastName, String selectedStartSeatName, String luggage, String selectedArriveSeatName);
 
+  //  다른 날짜 추천
+  String recommendStartDate(String startCity, String arrivalCity);
 }

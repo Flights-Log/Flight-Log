@@ -133,4 +133,12 @@
     values
     (#{passport},#{roundFlightReno},#{userId},#{firstName},#{lastName},#{selectedStartSeatName},#{luggage},#{selectedArriveSeatName});
   </insert>
+
+  <!-- 만약에 내가 설정한 날짜에 출발하는 비행기가 없을 경우 다른 날짜 추천 -->
+  <select id="recommendStartDate" parameterType="string">
+    select max(flight_info_startDate)
+    from flight_info
+    where flight_info_startCity = #{startCity}
+    and flight_info_arrivalCity = #{arrivalCity}
+  </select>
 </mapper>

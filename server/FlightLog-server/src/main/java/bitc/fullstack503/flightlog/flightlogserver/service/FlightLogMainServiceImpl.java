@@ -84,4 +84,9 @@ public class FlightLogMainServiceImpl implements FlightLogMainService {
   public void reserveRoundAirplaneMember(String passport, String roundFlightReno, String userId, String firstName, String lastName, String selectedSeatName, String luggage, String selectedArriveSeatName) {
     flightLogMainMapper.reserveRoundAirplaneMember(passport, roundFlightReno, userId, firstName, lastName, selectedSeatName, luggage, selectedArriveSeatName);
   }
+
+  @Override
+  public String recommendStartDate(String startCity, String arrivalCity){
+    return flightLogMainMapper.recommendStartDate(startCity, arrivalCity);
+  }
 }

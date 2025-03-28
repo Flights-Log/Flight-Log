@@ -45,4 +45,7 @@ public interface FlightLogMainMapper {
   //  왕복 비행기 혼자 예매하기
   void reserveRoundAirplaneMember(String passport, String roundFlightReno, String userId, String firstName, String lastName,
                                   String selectedStartSeatName, String luggage, String selectedArriveSeatName);
+
+  //  만약에 내가 설정한 날짜에 출발하는 비행기가 없을 경우 다른 날짜 추천
+  String recommendStartDate(String startCity, String arrivalCity);
 }

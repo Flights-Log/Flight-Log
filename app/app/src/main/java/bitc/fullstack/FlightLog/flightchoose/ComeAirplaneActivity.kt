@@ -36,8 +36,7 @@ private var selectedArrive: String = ""
 private var goDate: String = ""
 private var comeDate: String = ""
 private var selectedPeople: Int = 0
-private var distance: Double = 0.0
-private var comeAirplaneFlightId: Int = 0
+
 private var goAirplaneSelectedSeats: String = ""
 private var roundTripChecked = false
 
@@ -106,8 +105,8 @@ class ComeAirplaneActivity : AppCompatActivity() {
     Log.d("flightLog", "받은 가는 비행기 아이디 : ${intent.getIntExtra("가는 비행기 아이디", 0)}")
     goAirplaneFlightId = intent.getIntExtra("가는 비행기 아이디", 0)
 
-    Log.d("flightLog", "받은 오는 비행기 아이디 : ${intent.getIntExtra("오는 비행기 아이디", 0)}")
-    comeAirplaneFlightId = intent.getIntExtra("오는 비행기 아이디", 0)
+//    Log.d("flightLog", "받은 오는 비행기 아이디 : ${intent.getIntExtra("오는 비행기 아이디", 0)}")
+//    comeAirplaneFlightId = intent.getIntExtra("오는 비행기 아이디", 0)
 
     binding.textComeStartCity.text = intent.getStringExtra("출발지")
     selectedDeparture = binding.textComeStartCity.text.toString()
@@ -124,8 +123,8 @@ class ComeAirplaneActivity : AppCompatActivity() {
     Log.d("flightLog", "인원수 : ${intent.getIntExtra("인원수", 1)}")
     selectedPeople = intent.getIntExtra("인원수", 1)
 
-    Log.d("flightLog", "거리 : ${intent.getDoubleExtra("거리", 0.0)}")
-    distance = intent.getDoubleExtra("거리", 0.0)
+//    Log.d("flightLog", "거리 : ${intent.getDoubleExtra("거리", 0.0)}")
+//    distance = intent.getDoubleExtra("거리", 0.0)
 
     Log.d("flightLog", "가는 비행기 총 비용 : ${intent.getIntExtra("가는 비행기 총 비용", 0)}")
     goAirplaneTotalPrice = intent.getIntExtra("가는 비행기 총 비용", 0)
@@ -217,10 +216,9 @@ class MyAdapterComeAirplane(val datas: MutableList<flightInfoDTO>) :
     binding.comeAirplaneMoney.text =
       NumberFormat.getInstance(Locale.KOREA).format(item.flightDistance * 500.toInt())
 
-//    아까 찾은 거리값 distance 에 넣기
-    distance = item.flightDistance
-
-    comeAirplaneFlightId = item.flightId
+//    각각의 값에 대입
+    val distance = item.flightDistance
+    val comeAirplaneFlightId = item.flightId
 
     binding.comeAirplaneMoney.setOnClickListener {
 //      MyViewHolderComeAirplane 의 binding 의 뿌리 객체(item_come_airplane)를 반환함

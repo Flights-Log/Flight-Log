@@ -7,6 +7,7 @@ import bitc.fullstack.FlightLog.dto.dFlightDTO
 import bitc.fullstack.FlightLog.dto.flightInfoDTO
 import bitc.fullstack.FlightLog.dto.flightUserDTO
 import bitc.fullstack.FlightLog.dto.iFlightDTO
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -152,4 +153,11 @@ interface AppServerInterface {
     @Path("luggage") luggage: String,
     @Path("selectedArriveSeatName") selectedArriveSeatName: String
   ): Call<Void>
+
+  //  다른 날짜 추천
+  @GET("main/recommendStartDate/{startCity}/{arrivalCity}")
+  fun recommendStartDate(
+    @Path("startCity") startCity: String,
+    @Path("arrivalCity") arrivalCity: String
+  ): Call<ResponseBody>
 }
