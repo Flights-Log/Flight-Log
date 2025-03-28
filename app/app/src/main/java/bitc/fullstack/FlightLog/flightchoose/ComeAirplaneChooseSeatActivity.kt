@@ -28,6 +28,8 @@ private var selectedSeat: Int = 0
 private var distance: Double = 0.0
 private var comeAirplaneFlightId: Int = 0
 private var selectedStartSeatNames: String = ""
+private var selectedArriveSeatNames: String = ""
+private var roundTripChecked = false
 
 //각 좌석의 가격
 private const val firstSeatPrice = 1500
@@ -57,7 +59,7 @@ class ComeAirplaneChooseSeatActivity : AppCompatActivity() {
   }
 
   //  내가 고른 좌석의 텍스트값 저장
-  private val selectedArriveSeatNames = mutableListOf<String>()
+  private val selectedArriveSeatNameList = mutableListOf<String>()
 
   @SuppressLint("SetTextI18n")
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -96,11 +98,12 @@ class ComeAirplaneChooseSeatActivity : AppCompatActivity() {
   override fun onDestroy() {
     super.onDestroy()
     selectedSeat = 0
-    selectedArriveSeatNames.removeAll(selectedArriveSeatNames)
+    selectedArriveSeatNameList.removeAll(selectedArriveSeatNameList)
   }
 
   //  ComeAirplaneActivity 에서 가져온 값
   fun getExtra() {
+    Log.d("flightLog", "----------ComeAirplaneChooseSeatActivity--------------")
     //각 변수에 intent 에서 넘어온 값 대입
     goAirplaneFlightId = intent.getIntExtra("가는 비행기 아이디", 0)
     comeAirplaneFlightId = intent.getIntExtra("오는 비행기 아이디", 0)
@@ -112,6 +115,7 @@ class ComeAirplaneChooseSeatActivity : AppCompatActivity() {
     distance = intent.getDoubleExtra("거리", 0.0)
     goAirplaneTotalPrice = intent.getIntExtra("가는 비행기 총 비용", 0)
     selectedStartSeatNames = intent.getStringExtra("가는 비행기 선택 좌석").toString()
+    roundTripChecked = intent.getBooleanExtra("왕복 선택 여부", false)
 
 //    확인용
     Log.d("flightLog", "goAirplaneFlightId = $goAirplaneFlightId")
@@ -124,6 +128,8 @@ class ComeAirplaneChooseSeatActivity : AppCompatActivity() {
     Log.d("flightLog", "distance = $distance")
     Log.d("flightLog", "goAirplaneTotalPrice = $goAirplaneTotalPrice")
     Log.d("flightLog", "selectedStartSeatNames = $selectedStartSeatNames")
+    Log.d("flightLog", "roundTripChecked = $roundTripChecked")
+
   }
 
   //  해당하는 비행기 아이디의 좌석이 예약되었는지 확인
@@ -186,8 +192,8 @@ class ComeAirplaneChooseSeatActivity : AppCompatActivity() {
 //            n 명 좌석 선택 의 n 을 내가 고른 좌석 수로 설정함
               binding.textComeSelectedSeat.text = "$selectedSeat 명 좌석 선택"
 
-//            내가 선택한 좌석의 이름을 selectedArriveSeatNames 라는 배열에 추가함
-              selectedArriveSeatNames.add(seatName)
+//            내가 선택한 좌석의 이름을 selectedArriveSeatNameList 라는 배열에 추가함
+              selectedArriveSeatNameList.add(seatName)
 
 //            총 가격 = 지금까지의 가격 + ((거리 * 일등석 가격(1500))을 정수로 환산한 값)
               comeAirplaneTotalPrice =
@@ -212,8 +218,8 @@ class ComeAirplaneChooseSeatActivity : AppCompatActivity() {
             //n 명 좌석 선택 의 n 을 내가 고른 좌석 수로 설정함
             binding.textComeSelectedSeat.text = "$selectedSeat 명 좌석 선택"
 
-            //내가 선택한 좌석의 이름을 selectedArriveSeatNames 라는 배열에서 제거함
-            selectedArriveSeatNames.remove(seatName)
+            //내가 선택한 좌석의 이름을 selectedArriveSeatNameList 라는 배열에서 제거함
+            selectedArriveSeatNameList.remove(seatName)
 
 //            총 가격 = 지금까지의 가격 - ((거리 * 일등석 가격(1500))을 정수로 환산한 값)
             comeAirplaneTotalPrice = (comeAirplaneTotalPrice - (distance * firstSeatPrice).toInt())
@@ -227,7 +233,7 @@ class ComeAirplaneChooseSeatActivity : AppCompatActivity() {
 //        선택 좌석에 내가 고른 좌석들의 목록을 배열으로 출력
 //        그 배열을 출력하되, 배열 안의 요소 각각의 값은 ', ' 형태로 나눔
           binding.textComeSelectedSeatList.text =
-            "선택 좌석 : ${selectedArriveSeatNames.joinToString(", ")}"
+            "선택 좌석 : ${selectedArriveSeatNameList.joinToString(", ")}"
           Log.d("flightLog", "selectedSeat : $selectedSeat")
         }
       }
@@ -292,8 +298,8 @@ class ComeAirplaneChooseSeatActivity : AppCompatActivity() {
               //n 명 좌석 선택 의 n 을 내가 고른 좌석 수로 설정함
               binding.textComeSelectedSeat.text = "$selectedSeat 명 좌석 선택"
 
-              //내가 선택한 좌석의 이름을 selectedArriveSeatNames 라는 배열에 추가함
-              selectedArriveSeatNames.add(seatName)
+              //내가 선택한 좌석의 이름을 selectedArriveSeatNameList 라는 배열에 추가함
+              selectedArriveSeatNameList.add(seatName)
 
               comeAirplaneTotalPrice =
                 (comeAirplaneTotalPrice + (distance * businessSeatPrice).toInt())
@@ -317,8 +323,8 @@ class ComeAirplaneChooseSeatActivity : AppCompatActivity() {
             //n 명 좌석 선택 의 n 을 내가 고른 좌석 수로 설정함
             binding.textComeSelectedSeat.text = "$selectedSeat 명 좌석 선택"
 
-            //내가 선택한 좌석의 이름을 selectedArriveSeatNames 라는 배열에서 제거함
-            selectedArriveSeatNames.remove(seatName)
+            //내가 선택한 좌석의 이름을 selectedArriveSeatNameList 라는 배열에서 제거함
+            selectedArriveSeatNameList.remove(seatName)
 
             comeAirplaneTotalPrice =
               (comeAirplaneTotalPrice - (distance * businessSeatPrice).toInt())
@@ -331,7 +337,7 @@ class ComeAirplaneChooseSeatActivity : AppCompatActivity() {
           //선택 좌석에 내가 고른 좌석들의 목록을 배열으로 출력
 //        그 배열을 출력하되, 배열 안의 요소 각각의 값은 ', ' 형태로 나눔
           binding.textComeSelectedSeatList.text =
-            "선택 좌석 : ${selectedArriveSeatNames.joinToString(", ")}"
+            "선택 좌석 : ${selectedArriveSeatNameList.joinToString(", ")}"
           Log.d("flightLog", "selectedSeat : $selectedSeat")
         }
       }
@@ -390,8 +396,8 @@ class ComeAirplaneChooseSeatActivity : AppCompatActivity() {
               //n 명 좌석 선택 의 n 을 내가 고른 좌석 수로 설정함
               binding.textComeSelectedSeat.text = "$selectedSeat 명 좌석 선택"
 
-              //내가 선택한 좌석의 이름을 selectedArriveSeatNames 라는 배열에 추가함
-              selectedArriveSeatNames.add(seatName)
+              //내가 선택한 좌석의 이름을 selectedArriveSeatNameList 라는 배열에 추가함
+              selectedArriveSeatNameList.add(seatName)
 
               comeAirplaneTotalPrice =
                 (comeAirplaneTotalPrice + (distance * regularSeatPrice).toInt())
@@ -415,8 +421,8 @@ class ComeAirplaneChooseSeatActivity : AppCompatActivity() {
             //n 명 좌석 선택 의 n 을 내가 고른 좌석 수로 설정함
             binding.textComeSelectedSeat.text = "$selectedSeat 명 좌석 선택"
 
-            //내가 선택한 좌석의 이름을 selectedArriveSeatNames 라는 배열에서 제거함
-            selectedArriveSeatNames.remove(seatName)
+            //내가 선택한 좌석의 이름을 selectedArriveSeatNameList 라는 배열에서 제거함
+            selectedArriveSeatNameList.remove(seatName)
 
             comeAirplaneTotalPrice =
               (comeAirplaneTotalPrice - (distance * regularSeatPrice).toInt())
@@ -429,7 +435,7 @@ class ComeAirplaneChooseSeatActivity : AppCompatActivity() {
           //선택 좌석에 내가 고른 좌석들의 목록을 배열으로 출력
 //        그 배열을 출력하되, 배열 안의 요소 각각의 값은 ', ' 형태로 나눔
           binding.textComeSelectedSeatList.text =
-            "선택 좌석 : ${selectedArriveSeatNames.joinToString(", ")}"
+            "선택 좌석 : ${selectedArriveSeatNameList.joinToString(", ")}"
           Log.d("flightLog", "selectedSeat : $selectedSeat")
         }
       }
@@ -448,18 +454,9 @@ class ComeAirplaneChooseSeatActivity : AppCompatActivity() {
   //  정보 입력으로
   fun goToNextPage() {
     binding.comeAirplaneChooseSeatNextButton.setOnClickListener {
-      val intent = Intent(this, ComeAirplaneActivity::class.java)
-      intent.putExtra("출발지", selectedDeparture)
-      intent.putExtra("도착지", selectedArrive)
-      intent.putExtra("출발일", goDate.toString())
-      intent.putExtra("도착일", comeDate.toString())
-      intent.putExtra("인원수", selectedPeople)
-      intent.putExtra("총 비용", totalPrice)
-      startActivity(intent)
-
-      //오는 비행기 좌석 예약
+//      왕복 비행기 예약
       val api = AppServerClass.instance
-      val call = api.comeAirplaneReserveSeat(
+      val call = api.roundAirplaneReserveSeat(
         userId,
         selectedPeople,
         goAirplaneFlightId,
@@ -467,12 +464,28 @@ class ComeAirplaneChooseSeatActivity : AppCompatActivity() {
         selectedStartSeatNames,
         comeAirplaneFlightId,
         comeDate,
-        selectedArriveSeatNames.joinToString(",")
+        selectedArriveSeatNameList.joinToString(",")
       )
       retrofitResponse(call)
-    }
 
-    Log.d("flightLog", "goAirplaneTotalPrice : $goAirplaneTotalPrice")
+//      내가 지금까지 고른 좌석 배열을 항목 하나마다 사이에 , 를 넣어서 문자열로 만듦
+      selectedArriveSeatNames = selectedArriveSeatNameList.joinToString(",")
+
+      val intent = Intent(this, PassengerActivity::class.java)
+      intent.putExtra("출발지", selectedDeparture)
+      intent.putExtra("도착지", selectedArrive)
+      intent.putExtra("출발일", goDate.toString())
+      intent.putExtra("도착일", comeDate.toString())
+      intent.putExtra("인원수", selectedPeople)
+      intent.putExtra("총 비용", totalPrice)
+      intent.putExtra("가는 비행기 선택 좌석", selectedStartSeatNames)
+      intent.putExtra("오는 비행기 선택 좌석", selectedArriveSeatNames)
+      intent.putExtra("가는 비행기 아이디", goAirplaneFlightId)
+      intent.putExtra("오는 비행기 아이디", comeAirplaneFlightId)
+      intent.putExtra("왕복 선택 여부", roundTripChecked)
+      startActivity(intent)
+    }
+//    Log.d("flightLog", "goAirplaneTotalPrice : $goAirplaneTotalPrice")
     Log.d("flightLog", "formattedTotalPrice : $formattedTotalPrice")
   }
 

@@ -29,6 +29,7 @@ private var selectedPeople: Int = 0
 private var selectedSeat: Int = 0
 private var distance: Double = 0.0
 private var goAirplaneFlightId = 0
+private var roundTripChecked: Boolean = false
 
 //각 좌석의 가격
 private const val firstSeatPrice = 1500
@@ -85,6 +86,12 @@ class GoAirplaneChooseSeatActivity : AppCompatActivity() {
 
 //    다음 버튼 누르면 ComeAirplaneActivity 로
     goToNextPage()
+
+    if (roundTripChecked == true) {
+      binding.goAirplaneUnderButton.text = "오는 비행기 예매"
+    } else {
+      binding.goAirplaneUnderButton.text = "탑승객 정보 입력하기"
+    }
   }
 
   //  고른 좌석 초기화
@@ -96,6 +103,7 @@ class GoAirplaneChooseSeatActivity : AppCompatActivity() {
 
   //  확인용
   fun getExtra() {
+    Log.d("flightLog", "-----------GoAirplaneChooseSeatActivity----------")
     //    각 변수에 intent 에서 넘어온 값 대입
     selectedDeparture = intent.getStringExtra("출발지").toString()
     selectedArrive = intent.getStringExtra("도착지").toString()
@@ -104,6 +112,8 @@ class GoAirplaneChooseSeatActivity : AppCompatActivity() {
     selectedPeople = intent.getIntExtra("인원수", 1)
     distance = intent.getDoubleExtra("거리", 0.0)
     goAirplaneFlightId = intent.getIntExtra("비행기 아이디", 0)
+    Log.d("flightLog", "왕복 선택 여부 : ${intent.getBooleanExtra("왕복 선택 여부", false)}")
+    roundTripChecked = intent.getBooleanExtra("왕복 선택 여부", false)
 
 //    확인용
     Log.d("flightLog", "goAirplaneFlightId = $goAirplaneFlightId")
@@ -410,37 +420,52 @@ class GoAirplaneChooseSeatActivity : AppCompatActivity() {
       .show()
   }
 
-  //  가는 좌석을 예매하면 오는 티켓도 예매하겠냐고 물어보는 창이 뜸
-//  만일 예 를 누른다면 바로 오는 티켓 예매 창으로 감
-//  만일 아니요 를 누른다면 티켓 홀더로 감. 그리고 가는 티켓에 관한 정보를 서버에 db로 저장함
+  //  편도여행이라면 바로 탑승객 정보 입력으로
+//  왕복여행이라면 오는 비행기 예매로
   fun goToNextPage() {
-//    flight_reserve 에 저장하기
     binding.goAirplaneChooseSeatNextButton.setOnClickListener {
-      val api = AppServerClass.instance
-      val call = api.goAirplaneReserveSeat(
-        userId,
-        selectedPeople,
-        goAirplaneFlightId,
-        goDate,
-        selectedSeatNames.joinToString(",")
-      )
-      retrofitResponse(call)
+//      편도여행
+      if (roundTripChecked == false) {
+        val api = AppServerClass.instance
+        val call = api.goAirplaneReserveSeat(
+          userId,
+          selectedPeople,
+          goAirplaneFlightId,
+          goDate,
+          selectedSeatNames.joinToString(",")
+        )
+        retrofitResponse(call)
 
-      val intent = Intent(this@GoAirplaneChooseSeatActivity, PassengerActivity::class.java)
-      intent.putExtra("가는 비행기 아이디", goAirplaneFlightId)
-      intent.putExtra("출발지", selectedDeparture)
-      intent.putExtra("도착지", selectedArrive)
-      intent.putExtra("출발일", goDate.toString())
-      intent.putExtra("도착일", comeDate.toString())
-      intent.putExtra("인원수", selectedPeople)
-      intent.putExtra("거리", distance)
-      intent.putExtra("가는 비행기 총 비용", goAirplaneTotalPrice)
-      intent.putExtra("가는 비행기 선택 좌석", selectedSeatNames.joinToString(","))
-      startActivity(intent)
+        val intent = Intent(this@GoAirplaneChooseSeatActivity, PassengerActivity::class.java)
+        intent.putExtra("가는 비행기 아이디", goAirplaneFlightId)
+        intent.putExtra("출발지", selectedDeparture)
+        intent.putExtra("도착지", selectedArrive)
+        intent.putExtra("출발일", goDate.toString())
+        intent.putExtra("도착일", comeDate.toString())
+        intent.putExtra("인원수", selectedPeople)
+        intent.putExtra("거리", distance)
+        intent.putExtra("가는 비행기 총 비용", goAirplaneTotalPrice)
+        intent.putExtra("가는 비행기 선택 좌석", selectedSeatNames.joinToString(","))
+        intent.putExtra("왕복 선택 여부", roundTripChecked)
+        startActivity(intent)
+      } else {
+//        왕복 여행일 때 오는 비행기 선택하는 창으로
+        val intent = Intent(this@GoAirplaneChooseSeatActivity, ComeAirplaneActivity::class.java)
+        intent.putExtra("가는 비행기 아이디", goAirplaneFlightId)
+        intent.putExtra("출발지", selectedDeparture)
+        intent.putExtra("도착지", selectedArrive)
+        intent.putExtra("출발일", goDate.toString())
+        intent.putExtra("도착일", comeDate.toString())
+        intent.putExtra("인원수", selectedPeople)
+        intent.putExtra("거리", distance)
+        intent.putExtra("가는 비행기 총 비용", goAirplaneTotalPrice)
+        intent.putExtra("가는 비행기 선택 좌석", selectedSeatNames.joinToString(","))
+        intent.putExtra("왕복 선택 여부", roundTripChecked)
+        startActivity(intent)
+      }
+      Log.d("flightLog", "goAirplaneTotalPrice : $goAirplaneTotalPrice")
+      Log.d("flightLog", "formattedGoAirplane : $formattedGoAirplane")
     }
-
-    Log.d("flightLog", "goAirplaneTotalPrice : $goAirplaneTotalPrice")
-    Log.d("flightLog", "formattedGoAirplane : $formattedGoAirplane")
   }
 
   //  해당하는 비행기 아이디의 좌석이 예약되었는지 확인

@@ -64,7 +64,7 @@ interface AppServerInterface {
     @Path("comeDate") comeDate: String
   ): Call<List<flightInfoDTO>>
 
-  //  가는(편도) 비행기 예약
+  //  roundTripChecked 가 false 일때 가는(편도) 비행기 예약
   @PUT(
     "main" +
             "/reserveGoSeat" +
@@ -82,10 +82,10 @@ interface AppServerInterface {
     @Path("selectedSeatNames") selectedSeatNames: String
   ): Call<Void>
 
-  //  왕복 비행기 예약
+  //  roundTripChecked 가 True 일때 왕복 비행기 예약
   @PUT(
     "main" +
-            "/reserveComeSeat" +
+            "/reserveRoundSeat" +
             "/{userId}" +
             "/{selectedPeople}" +
             "/{goAirplaneFlightId}" +
@@ -95,7 +95,7 @@ interface AppServerInterface {
             "/{comeDate}" +
             "/{selectedArriveSeatNames}"
   )
-  fun comeAirplaneReserveSeat(
+  fun roundAirplaneReserveSeat(
     @Path("userId") userId: String,
     @Path("selectedPeople") selectedPeople: Int,
     @Path("goAirplaneFlightId") goAirplaneFlightId: Int,
@@ -133,5 +133,17 @@ interface AppServerInterface {
     @Path("lastName") lastName: String,
     @Path("selectedSeatName") selectedSeatName: String,
     @Path("luggage") luggage: String
+  ): Call<Void>
+
+  //  혼자서 왕복 비행기 예매할 때
+  @PUT("main/roundFlightAlone/{passport}/{userId}/{firstName}/{lastName}/{selectedStartSeatName}/{luggage}/{selectedArriveSeatName}")
+  fun roundFlightAlone(
+    @Path("passport") passport: String,
+    @Path("userId") userId: String,
+    @Path("firstName") firstName: String,
+    @Path("lastName") lastName: String,
+    @Path("selectedStartSeatName") selectedStartSeatName: String,
+    @Path("luggage") luggage: String,
+    @Path("selectedArriveSeatName") selectedArriveSeatName: String
   ): Call<Void>
 }

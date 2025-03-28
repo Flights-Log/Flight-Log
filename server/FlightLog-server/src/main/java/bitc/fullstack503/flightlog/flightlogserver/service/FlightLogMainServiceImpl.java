@@ -48,10 +48,10 @@ public class FlightLogMainServiceImpl implements FlightLogMainService {
 
   //  가는 비행기 + 오는 비행기(왕복) 예매할 경우 예매 정보 저장하기
   @Override
-  public void reserveComeAirplaneSeats(String userId, int selectedPeople,
-                                       int goAirplaneFlightId, String goDate, String selectedStartSeatNames,
-                                       int comeAirplaneFlightId, String comeDate, String selectedArriveSeatNames) {
-    flightLogMainMapper.reserveComeAirplaneSeats(userId, selectedPeople,
+  public void reserveRoundAirplaneSeats(String userId, int selectedPeople,
+                                        int goAirplaneFlightId, String goDate, String selectedStartSeatNames,
+                                        int comeAirplaneFlightId, String comeDate, String selectedArriveSeatNames) {
+    flightLogMainMapper.reserveRoundAirplaneSeats(userId, selectedPeople,
             goAirplaneFlightId, goDate, selectedStartSeatNames,
             comeAirplaneFlightId, comeDate, selectedArriveSeatNames);
   }
@@ -74,8 +74,14 @@ public class FlightLogMainServiceImpl implements FlightLogMainService {
     return flightLogMainMapper.searchUserName(userId);
   }
 
+  //  편도 비행기 혼자 예매하기
   @Override
   public void goFlightAlone(String passport, String userId, String firstName, String lastName, String selectedSeatName, String luggage) {
     flightLogMainMapper.goFlightAlone(passport, userId, firstName, lastName, selectedSeatName, luggage);
+  }
+
+  @Override
+  public void roundFlightAlone(String passport, String userId, String firstName, String lastName, String selectedSeatName, String luggage, String selectedArriveSeatName){
+    flightLogMainMapper.roundFlightAlone(passport, userId, firstName, lastName, selectedSeatName, luggage, selectedArriveSeatName);
   }
 }

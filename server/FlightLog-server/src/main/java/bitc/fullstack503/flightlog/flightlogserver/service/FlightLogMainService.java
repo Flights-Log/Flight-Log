@@ -23,9 +23,9 @@ public interface FlightLogMainService {
                               String goDate, String selectedSeatNames);
 
   //  오는 비행기 좌석 예약
-  void reserveComeAirplaneSeats(String userId, int selectedPeople,
-                                int goAirplaneFlightId, String goDate, String selectedStartSeatNames,
-                                int comeAirplaneFlightId, String comeDate, String selectedArriveSeatNames);
+  void reserveRoundAirplaneSeats(String userId, int selectedPeople,
+                                 int goAirplaneFlightId, String goDate, String selectedStartSeatNames,
+                                 int comeAirplaneFlightId, String comeDate, String selectedArriveSeatNames);
 
   //  가는 비행기 예매된 좌석 배열로 가져오기
   List<String> searchGoAirplaneIsSeatReservated(int goAirplaneFlightId);
@@ -38,4 +38,8 @@ public interface FlightLogMainService {
 
   //  혼자서 가는 비행기(편도) 예매하기
   void goFlightAlone(String passport, String userId, String firstName, String lastName, String selectedSeatName, String luggage);
+
+  //  혼자서 왕복 비행기 에매하기
+  void roundFlightAlone(String passport, String userId, String firstName, String lastName, String selectedStartSeatName, String luggage, String selectedArriveSeatName);
+
 }

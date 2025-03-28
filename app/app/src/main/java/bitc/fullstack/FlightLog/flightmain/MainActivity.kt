@@ -4,6 +4,8 @@ import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
@@ -17,6 +19,7 @@ import bitc.fullstack.FlightLog.databinding.ActivityMainBinding
 import bitc.fullstack.FlightLog.flightchoose.GoAirplaneActivity
 import java.time.LocalDate
 import java.util.Calendar
+import kotlin.math.round
 
 class MainActivity : AppCompatActivity(),
   SelectPeopleDialogFragment.OnPassengerSelectedListener,
@@ -40,6 +43,8 @@ class MainActivity : AppCompatActivity(),
   private var tempLocation: String = ""
 
   private var selectedPeople: Int = 1
+
+  private var roundTripChecked: Boolean = false
 
   //  만들어지만 할거
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -76,6 +81,26 @@ class MainActivity : AppCompatActivity(),
 
 //    조회하기 버튼
     searchFlight()
+
+    binding.roundTripCheckbox.setOnCheckedChangeListener { buttonView, isChecked ->
+      Log.d("flightLog", "checked : $isChecked")
+//      왕복 선택 여부를 roundTripChecked 에 넣음
+      roundTripChecked = isChecked
+
+//      왕복을 선택하면 왕복 화살표와 오는 날 선택창 나오게
+      if (isChecked == true) {
+        binding.mainOneWayTripArrow.visibility = GONE
+        binding.mainRoundTripArrow.visibility = VISIBLE
+        binding.comeDateChooseLayout.visibility = VISIBLE
+//        아니면 사라지게
+      } else {
+        binding.mainOneWayTripArrow.visibility = VISIBLE
+        binding.mainRoundTripArrow.visibility = GONE
+        binding.comeDateChooseLayout.visibility = GONE
+      }
+
+    }
+
   }
 
   //  가는 날 텍스트(chooseGoDateText) 관련 함수
@@ -269,6 +294,7 @@ class MainActivity : AppCompatActivity(),
         intent.putExtra("출발일", goDate.toString())
         intent.putExtra("도착일", comeDate.toString())
         intent.putExtra("인원수", selectedPeople)
+        intent.putExtra("왕복 선택 여부", roundTripChecked)
         startActivity(intent)
       }
     }

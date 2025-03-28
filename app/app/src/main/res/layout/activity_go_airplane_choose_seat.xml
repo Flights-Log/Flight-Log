@@ -773,6 +773,7 @@
       android:paddingVertical="10dp">
 
     <TextView
+        android:id="@+id/go_airplane_under_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="탑승객 정보 입력하기"

@@ -39,6 +39,7 @@ private var selectedPeople: Int = 0
 private var distance: Double = 0.0
 private var comeAirplaneFlightId: Int = 0
 private var goAirplaneSelectedSeats: String = ""
+private var roundTripChecked = false
 
 //가는 비행기 좌석 총 경비
 private var goAirplaneTotalPrice = 0
@@ -106,6 +107,9 @@ class ComeAirplaneActivity : AppCompatActivity() {
     Log.d("flightLog", "받은 가는 비행기 아이디 : ${intent.getIntExtra("가는 비행기 아이디", 0)}")
     goAirplaneFlightId = intent.getIntExtra("가는 비행기 아이디", 0)
 
+    Log.d("flightLog", "받은 오는 비행기 아이디 : ${intent.getIntExtra("오는 비행기 아이디", 0)}")
+    comeAirplaneFlightId = intent.getIntExtra("오는 비행기 아이디", 0)
+
     binding.textComeStartCity.text = intent.getStringExtra("출발지")
     selectedDeparture = binding.textComeStartCity.text.toString()
 
@@ -129,6 +133,9 @@ class ComeAirplaneActivity : AppCompatActivity() {
 
     Log.d("flightLog", "가는 비행기 선택 좌석 : ${intent.getStringExtra("가는 비행기 선택 좌석")}")
     goAirplaneSelectedSeats = intent.getStringExtra("가는 비행기 선택 좌석").toString()
+
+    Log.d("flightLog", "roundTripChecked : ${intent.getBooleanExtra("왕복 선택 여부", false)}")
+    roundTripChecked = intent.getBooleanExtra("왕복 선택 여부", false)
   }
 
   //  Retrofit 통신 응답 List<String>
@@ -231,6 +238,7 @@ class MyAdapterComeAirplane(val datas: MutableList<flightInfoDTO>) :
       intent.putExtra("거리", distance)
       intent.putExtra("가는 비행기 총 비용", goAirplaneTotalPrice)
       intent.putExtra("가는 비행기 선택 좌석", goAirplaneSelectedSeats)
+      intent.putExtra("왕복 선택 여부", roundTripChecked)
 //      item_go_airplane 에서 intent(ComeAirplaneChooseSeatActivity)로 이동
       context.startActivity(intent)
     }

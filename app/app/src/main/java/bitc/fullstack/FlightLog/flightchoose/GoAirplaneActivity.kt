@@ -34,6 +34,7 @@ private var comeDate: String = ""
 private var selectedPeople: Int = 0
 private var distance: Double = 0.0
 private var goAirplaneFlightId: Int = 0
+private var roundTripChecked: Boolean = false
 
 class GoAirplaneActivity : AppCompatActivity() {
   //  ActivityGoAirplaneBinding
@@ -89,6 +90,7 @@ class GoAirplaneActivity : AppCompatActivity() {
   //  내가 MainActivity 에서 intent 로 받아온 값 화면과 로그에 출력
 //  그리고 위에 있는 startCity, selectedArrive, goDate 에 넣어줌
   fun getExtra() {
+    Log.d("flightLog", "---------GoAirplaneActivity----------")
     binding.textStartCity.text = intent.getStringExtra("출발지")
     selectedDeparture = binding.textStartCity.text.toString()
 
@@ -103,6 +105,9 @@ class GoAirplaneActivity : AppCompatActivity() {
 
     Log.d("flightLog", "인원수 : ${intent.getIntExtra("인원수", 1)}")
     selectedPeople = intent.getIntExtra("인원수", 1)
+
+    Log.d("flightLog", "왕복 선택 여부 : ${intent.getBooleanExtra("왕복 선택 여부", false)}")
+    roundTripChecked = intent.getBooleanExtra("왕복 선택 여부", false)
   }
 
   //  Retrofit 통신 응답 List<String>
@@ -193,8 +198,8 @@ class MyAdapterGoAirplane(val datas: MutableList<flightInfoDTO>) :
     binding.goAirplaneMoney.setOnClickListener {
 //      MyViewHolderGoAirplane 의 binding 의 뿌리 객체(item_go_airplane)를 반환함
       val context = binding.root.context
-
       val intent = Intent(context, GoAirplaneChooseSeatActivity::class.java)
+
       intent.putExtra("비행기 아이디", goAirplaneFlightId)
       intent.putExtra("출발지", selectedDeparture)
       intent.putExtra("도착지", selectedArrive)
@@ -202,6 +207,8 @@ class MyAdapterGoAirplane(val datas: MutableList<flightInfoDTO>) :
       intent.putExtra("도착일", comeDate.toString())
       intent.putExtra("인원수", selectedPeople)
       intent.putExtra("거리", distance)
+      intent.putExtra("왕복 선택 여부", roundTripChecked)
+
 //      item_go_airplane 에서 intent(GoAirplaneChooseSeatActivity)로 이동
       context.startActivity(intent)
     }
