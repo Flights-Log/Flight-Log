@@ -13,79 +13,110 @@
 
     <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@drawable/background_gradient">
+
 
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:padding="16dp">
-
-            <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="예약 내역 상세 보기"
-                    android:textSize="24sp"
-                    android:textStyle="bold" />
-
-
-            <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="5dp"
-                    android:text="예약 번호"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-            <EditText
-                    android:id="@+id/reservation_number"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:hint="예약 번호"
-                    android:background="@drawable/eddittext_no_under_line" />
-
             <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
-
                 <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
-                        android:layout_marginTop="5dp"
-                        android:text="성 "
+                        android:layout_marginVertical="5dp"
                         android:textSize="18sp"
+                        android:text="예약 번호"
                         android:textStyle="bold" />
+
+                <EditText
+                        android:id="@+id/reservation_number"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginVertical="5dp"
+                        android:textSize="18sp"
+                        android:hint="예약 번호"
+                        android:background="@drawable/eddittext_no_under_line_blue" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="end"
+                    android:textAlignment="textEnd">
 
                 <EditText
                         android:id="@+id/last_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
+                        android:layout_marginVertical="5dp"
                         android:hint="성(LastName)"
-                        android:background="@drawable/eddittext_no_under_line"/>
-
-                <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="5dp"
-                        android:text="이름 "
                         android:textSize="18sp"
-                        android:textStyle="bold" />
+                        android:background="@drawable/eddittext_no_under_line_blue" />
+
 
                 <EditText
                         android:id="@+id/first_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
+                        android:layout_marginVertical="5dp"
+                        android:textSize="18sp"
                         android:hint="이름(FirstName)"
-                        android:background="@drawable/eddittext_no_under_line"/>
+
+                        android:background="@drawable/eddittext_no_under_line_blue" />
 
             </LinearLayout>
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="50dp"
+
+                    android:background="@drawable/reservation_inner_background">
+
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="예약 내역 상세 보기"
+                    android:textSize="40sp"
+                    android:textStyle="bold" />
+
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/black"
+                    android:layout_marginVertical="3dp" />
+
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="출발 편"
+                        android:textStyle="bold"
+                        android:textSize="30sp"
+                        android:layout_marginVertical="10dp"
+                        android:textAlignment="center"/>
+
+
+
+
+
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="5dp"
+                    android:background="#868686" />
 
             <LinearLayout
                     android:layout_width="match_parent"
@@ -97,7 +128,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginVertical="10dp"
                         android:layout_weight="2"
-                        android:text="출발(from)"
+                        android:text="출발(Start City)"
                         android:textAlignment="center"
                         android:textSize="18sp"
                         android:textStyle="bold" />
@@ -118,7 +149,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginVertical="10dp"
                         android:layout_weight="2"
-                        android:text="도착(to)"
+                        android:text="도착(Arrival City)"
                         android:textAlignment="center"
                         android:textSize="18sp"
                         android:textStyle="bold" />
@@ -138,16 +169,15 @@
                         android:layout_weight="2"
                         android:hint="출발지"
                         android:textAlignment="center"
-                        android:textSize="40sp"
-                        android:background="@drawable/eddittext_no_under_line"/>
+                        android:textSize="35sp"
+                        android:background="@drawable/eddittext_no_under_line" />
 
                 <ImageView
                         android:layout_width="0dp"
                         android:layout_height="50dp"
                         android:layout_marginHorizontal="10dp"
-                        android:layout_marginTop="10dp"
                         android:layout_weight="1"
-                        android:src="@drawable/right_arrow" />
+                        android:src="@drawable/flight_arrow" />
 
                 <EditText
                         android:id="@+id/arrival_city"
@@ -157,7 +187,7 @@
                         android:layout_weight="2"
                         android:hint="도착지"
                         android:textAlignment="center"
-                        android:textSize="40sp"
+                        android:textSize="35sp"
                         android:background="@drawable/eddittext_no_under_line" />
             </LinearLayout>
 
@@ -172,13 +202,17 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
+                <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
                 <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
-                        android:layout_marginTop="7dp"
-                        android:text="출발 날짜"
+                        android:layout_marginVertical="7dp"
                         android:textSize="18sp"
+                        android:text="출발 날짜"
                         android:textStyle="bold" />
 
                 <EditText
@@ -186,19 +220,25 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
+                        android:layout_marginVertical="7dp"
+                        android:textSize="18sp"
                         android:hint="yyyy-MM-dd"
-                        android:background="@drawable/eddittext_no_under_line"/>
+                        android:background="@drawable/eddittext_no_under_line" />
+                </LinearLayout>
 
                 <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
+
                     <TextView
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="10dp"
                             android:layout_marginTop="7dp"
+                            android:textAlignment="center"
                             android:text="출발 시간"
+                            android:layout_marginVertical="7dp"
                             android:textSize="18sp"
                             android:textStyle="bold" />
 
@@ -207,16 +247,18 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="10dp"
-                            android:layout_marginTop="7dp"
+                            android:layout_marginVertical="7dp"
+                            android:textSize="18sp"
                             android:hint="hh:mm"
                             android:background="@drawable/eddittext_no_under_line" />
 
                     <TextView
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="10dp"
-                            android:layout_marginTop="7dp"
                             android:text="도착 시간"
+                            android:textAlignment="center"
+                            android:layout_marginVertical="7dp"
                             android:textSize="18sp"
                             android:textStyle="bold" />
 
@@ -226,24 +268,23 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="10dp"
                             android:hint="hh:mm"
-                            android:layout_marginTop="7dp"
-
-                            android:background="@drawable/eddittext_no_under_line"/>
+                            android:layout_marginVertical="7dp"
+                            android:textSize="18sp"
+                            android:background="@drawable/eddittext_no_under_line" />
                 </LinearLayout>
             </LinearLayout>
 
-            <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="5dp"
-                    android:background="#868686" />
+        <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
             <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:layout_marginTop="7dp"
                     android:text="탑승 인원"
+                    android:layout_marginVertical="7dp"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -252,17 +293,23 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
+                    android:layout_marginVertical="7dp"
+                    android:textSize="18sp"
                     android:hint="1명"
-                    android:background="@drawable/eddittext_no_under_line"/>
+                    android:background="@drawable/eddittext_no_under_line" />
+        </LinearLayout>
 
-
+        <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
             <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:layout_marginTop="7dp"
-                    android:text="좌석 번호"
+                    android:layout_marginVertical="7dp"
                     android:textSize="18sp"
+                    android:text="좌석 번호"
                     android:textStyle="bold" />
 
             <EditText
@@ -270,17 +317,23 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
+                    android:layout_marginVertical="7dp"
+                    android:textSize="18sp"
                     android:hint="A1"
-                    android:background="@drawable/eddittext_no_under_line"/>
+                    android:background="@drawable/eddittext_no_under_line" />
+        </LinearLayout>
 
-
+        <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
             <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:layout_marginTop="7dp"
-                    android:text="여권 번호"
+                    android:layout_marginVertical="7dp"
                     android:textSize="18sp"
+                    android:text="여권 번호"
                     android:textStyle="bold" />
 
             <EditText
@@ -288,16 +341,24 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
+                    android:layout_marginVertical="7dp"
+                    android:textSize="18sp"
                     android:hint="0000000000000"
-                    android:background="@drawable/eddittext_no_under_line"/>
+                    android:background="@drawable/eddittext_no_under_line" />
 
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
             <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:layout_marginTop="7dp"
-                    android:text="수하물"
+                    android:layout_marginVertical="7dp"
                     android:textSize="18sp"
+                    android:text="수하물   "
                     android:textStyle="bold" />
 
             <EditText
@@ -305,36 +366,60 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
+                    android:layout_marginVertical="7dp"
+                    android:textSize="18sp"
                     android:hint="최대 40Kg"
-                    android:background="@drawable/eddittext_no_under_line"/>
-
-
+                    android:background="@drawable/eddittext_no_under_line" />
+        </LinearLayout>
             <!--            오는거-->
 
 
-            <View
+            <!--                <Button-->
+            <!--                        android:layout_width="match_parent"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:text="돌아오는 티켓 확인"-->
+            <!--                        android:layout_marginVertical="20dp"-->
+            <!--                        android:layout_marginHorizontal="10sp"-->
+            <!--                        android:id="@+id/btn_return_check"/>-->
+
+            <!--            <LinearLayout-->
+            <!--                    android:layout_width="match_parent"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:orientation="vertical"-->
+            <!--                    android:visibility="invisible"-->
+            <!--                    android:id="@+id/return_ticket">-->
+            </LinearLayout>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_gravity="center"
+                android:background="@drawable/reservation_inner_background">
+            <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="4dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="18dp"
-                    android:background="#000000" />
+                    android:layout_height="wrap_content"
+                    android:text="도착 편"
+                    android:textStyle="bold"
+                    android:textSize="30sp"
+                    android:layout_marginVertical="5dp"
+                    android:textAlignment="center"/>
 
             <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-
-
                 <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginVertical="10dp"
-                        android:text="출발(from)"
+                        android:text="출발(Start City)"
                         android:textSize="18sp"
                         android:textStyle="bold"
                         android:layout_weight="2"
-                        android:textAlignment="center"/>
+                        android:textAlignment="center" />
+
                 <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -344,17 +429,17 @@
                         android:textStyle="bold"
                         android:layout_weight="1"
                         android:textAlignment="center"
-                        android:visibility="invisible"/>
+                        android:visibility="invisible" />
 
                 <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginVertical="10dp"
-                        android:text="도착(to)"
+                        android:text="도착(Arrival City)"
                         android:textSize="18sp"
                         android:textStyle="bold"
                         android:layout_weight="2"
-                        android:textAlignment="center"/>
+                        android:textAlignment="center" />
             </LinearLayout>
 
             <LinearLayout
@@ -369,18 +454,17 @@
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="20dp"
                         android:hint="출발지"
-                        android:textSize="40sp"
+                        android:textSize="35sp"
                         android:layout_weight="2"
                         android:textAlignment="center"
-                        android:background="@drawable/eddittext_no_under_line"/>
+                        android:background="@drawable/eddittext_no_under_line" />
 
                 <ImageView
                         android:layout_width="0dp"
                         android:layout_height="50dp"
                         android:layout_marginHorizontal="10dp"
-                        android:layout_marginTop="10dp"
-                        android:src="@drawable/right_arrow"
-                        android:layout_weight="1"/>
+                        android:src="@drawable/flight_arrow"
+                        android:layout_weight="1" />
 
                 <EditText
                         android:id="@+id/return_arrival_city"
@@ -388,10 +472,10 @@
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="20dp"
                         android:hint="도착지"
-                        android:textSize="40sp"
+                        android:textSize="35sp"
                         android:layout_weight="2"
                         android:textAlignment="center"
-                        android:background="@drawable/eddittext_no_under_line"/>
+                        android:background="@drawable/eddittext_no_under_line" />
             </LinearLayout>
 
             <View
@@ -405,11 +489,15 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
+                <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
                 <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
-                        android:layout_marginTop="7dp"
+                        android:layout_marginVertical="7dp"
                         android:text="출발 날짜"
                         android:textSize="18sp"
                         android:textStyle="bold" />
@@ -419,13 +507,16 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
+                        android:layout_marginVertical="7dp"
                         android:hint="yyyy-MM-dd"
                         android:background="@drawable/eddittext_no_under_line" />
+                </LinearLayout>
 
                 <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
+
                     <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -443,7 +534,7 @@
                             android:hint="hh:mm"
                             android:layout_marginTop="7dp"
 
-                            android:background="@drawable/eddittext_no_under_line"/>
+                            android:background="@drawable/eddittext_no_under_line" />
 
                     <TextView
                             android:layout_width="match_parent"
@@ -462,21 +553,19 @@
                             android:hint="hh:mm"
                             android:layout_marginTop="7dp"
 
-                            android:background="@drawable/eddittext_no_under_line"/>
+                            android:background="@drawable/eddittext_no_under_line" />
                 </LinearLayout>
             </LinearLayout>
 
-            <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="5dp"
-                    android:background="#868686" />
-
+        <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
             <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:layout_marginTop="7dp"
+                    android:layout_marginVertical="7dp"
                     android:text="탑승 인원"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -486,15 +575,20 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
+                    android:layout_marginVertical="7dp"
                     android:hint="1명"
-                    android:background="@drawable/eddittext_no_under_line"/>
+                    android:background="@drawable/eddittext_no_under_line" />
+        </LinearLayout>
 
-
+        <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
             <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:layout_marginTop="7dp"
+                    android:layout_marginVertical="7dp"
                     android:text="좌석 번호"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -504,15 +598,20 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
+                    android:layout_marginVertical="7dp"
                     android:hint="A1"
-                    android:background="@drawable/eddittext_no_under_line"/>
+                    android:background="@drawable/eddittext_no_under_line" />
+        </LinearLayout>
 
-
+        <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
             <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:layout_marginTop="7dp"
+                    android:layout_marginVertical="7dp"
                     android:text="여권 번호"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -522,16 +621,22 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
+                    android:layout_marginVertical="7dp"
                     android:hint="0000000000000"
-                    android:background="@drawable/eddittext_no_under_line"/>
+                    android:background="@drawable/eddittext_no_under_line" />
+        </LinearLayout>
 
+        <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
             <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:layout_marginTop="7dp"
-                    android:text="수하물"
+                    android:layout_marginVertical="7dp"
                     android:textSize="18sp"
+                    android:text="수하물   "
                     android:textStyle="bold" />
 
             <EditText
@@ -539,9 +644,12 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:id="@+id/return_luggage"
+                    android:layout_marginVertical="7dp"
                     android:hint="최대 40Kg"
-                    android:background="@drawable/eddittext_no_under_line"/>
-
+                    android:background="@drawable/eddittext_no_under_line" />
+        </LinearLayout>
+            <!--            </LinearLayout>-->
+        </LinearLayout>
 
             <Button
                     android:id="@+id/btn_home"
