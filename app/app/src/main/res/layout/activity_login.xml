@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--    res/layout/login.xml-->
+<!-- 로그인 페이지 -->
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -7,7 +8,7 @@
     android:layout_height="match_parent"
     android:id="@+id/LoginPage">
 
-    <!-- 상단 툴바 -->
+    <!--  로그인 전용 툴바 -->
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -35,15 +36,6 @@
             android:contentDescription="비행기 아이콘"
             android:layout_gravity="center" />
 
-        <!-- 메뉴 버튼 -->
-        <ImageView
-            android:id="@+id/flight_log_login"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/flight_log_menu"
-            android:layout_gravity="end"
-            android:paddingEnd="10dp" />
-
     </androidx.appcompat.widget.Toolbar>
 
     <!-- 로그인 레이아웃 -->
@@ -59,7 +51,7 @@
         app:layout_anchorGravity="center">
 
 
-        <!--    로그인 라벨  -->
+        <!--    회원 로그인 라벨  -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -68,14 +60,14 @@
             android:textSize="18sp"
             android:textStyle="bold" />
 
-        <!--   라벨 아래의 굵은 파란 선   -->
+        <!--   "회원 로그인" 라벨 아래의 굵은 파란 선   -->
         <View
             android:layout_width="150dp"
             android:layout_height="3dp"
             android:layout_marginBottom="40dp"
             android:background="@color/mainBlue" />
 
-        <!--    로그인 영역 박스  -->
+        <!--    로그인 컨테이너  -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -105,7 +97,7 @@
 
         </LinearLayout>
 
-        <!--    비밀번호 영역 박스  -->
+        <!--    비밀번호 컨테이너  -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -114,13 +106,15 @@
             android:gravity="center"
             android:orientation="horizontal">
 
-            <!--   비밀번호 라벨  -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingEnd="10dp"
-                android:text="비밀번호 "
-                android:textSize="16sp" />
+
+        <!--   비밀번호 라벨  -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingEnd="10dp"
+            android:text="비밀번호 "
+            android:textSize="16sp" />
+
 
             <!--    비밀번호 입력 박스  -->
             <EditText
@@ -131,9 +125,10 @@
                 android:id="@+id/input_user_pw"
                 android:inputType="textPassword"
                 android:padding="8dp" />
+
         </LinearLayout>
 
-        <!--    로그인 박스  -->
+        <!--    로그인 버튼  -->
         <Button
             android:layout_width="300dp"
             android:layout_height="50dp"
@@ -145,7 +140,7 @@
             android:textStyle="bold"
             app:cornerRadius="6dp" />
 
-        <!--    회원가입 박스 -->
+        <!--    회원가입 버튼 -->
         <Button
             android:layout_width="300dp"
             android:layout_height="50dp"

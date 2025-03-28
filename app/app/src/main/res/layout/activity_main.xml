@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--    res/layout/activity_main.xml-->
+<!-- 메인화면 -->
 
+
+
+<!-- 드로어 레이아웃(서랍) -->
 <androidx.drawerlayout.widget.DrawerLayout
     android:id="@id/main"
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -10,7 +15,7 @@
     tools:context=".flightmain.MainActivity">
 
 
-
+<!-- 메뉴 목록(네비게이션 메뉴) -->
   <com.google.android.material.navigation.NavigationView
       android:id="@+id/nav_view"
       android:layout_width="wrap_content"
@@ -20,6 +25,7 @@
       app:menu="@menu/drawer_menu">
 
 
+<!--   간격재는 레이아웃 -->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -66,6 +72,8 @@
 
   </com.google.android.material.navigation.NavigationView>
 
+
+<!--  원본 컨테이너 -->
   <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="match_parent"
@@ -75,7 +83,7 @@
       tools:context=".flightmain.MainActivity">
 
 
-    <!--  툴바-->
+    <!-- 기본 툴바 -->
     <include
         android:id="@+id/tool_bar"
         layout="@layout/activity_tool_bar"
@@ -91,6 +99,7 @@
         android:scrollbars="none"
         tools:ignore="UselessParent">
 
+<!--      메인 컨테이너-->
       <LinearLayout
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
@@ -111,6 +120,7 @@
               android:orientation="vertical"
               android:paddingHorizontal="15dp">
 
+<!--            항공권 예매 라벨  -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -120,6 +130,7 @@
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
+<!--            항공권 예매 밑의 선 -->
             <View
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
@@ -134,6 +145,7 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
+<!--              출발 라벨(파란색)  -->
               <TextView
                   android:id="@+id/flight_log_departure_icon"
                   android:layout_width="0dp"
@@ -145,12 +157,18 @@
                   android:textSize="15sp"
                   android:textStyle="bold" />
 
+
+<!--              변경 버튼 -->
+
               <ImageView
                   android:layout_width="0dp"
                   android:layout_height="20dp"
                   android:layout_weight="1"
                   android:contentDescription="spinning_arrow"
                   android:src="@drawable/spinning_arrow" />
+
+<!--              도착 라벨(파란색)-->
+
 
               <TextView
                   android:id="@+id/flight_log_destination_icon"
@@ -171,6 +189,7 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
+<!--              출발지 라벨 -->
               <TextView
                   android:id="@+id/departure_text"
                   android:layout_width="0dp"
@@ -181,6 +200,7 @@
                   android:textSize="30sp"
                   android:textStyle="bold" />
 
+<!--              출발지 도착지 화살표 표시-->
               <ImageView
                   android:layout_width="0dp"
                   android:layout_height="wrap_content"
@@ -188,6 +208,7 @@
                   android:contentDescription="right_arrow_black"
                   android:src="@drawable/right_arrow_black" />
 
+<!--              도착지 라벨 -->
               <TextView
                   android:id="@+id/destination_text"
                   android:layout_width="0dp"

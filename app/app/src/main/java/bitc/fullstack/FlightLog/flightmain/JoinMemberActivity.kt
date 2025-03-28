@@ -1,5 +1,11 @@
 package bitc.fullstack.FlightLog.flightmain
 
+
+//java/bitc/fullstack/FlightLog/flightmain/JoinMemberActivity.kt
+
+//회원가입 액티비티
+
+
 import android.app.DatePickerDialog
 import android.graphics.Color
 import android.icu.util.Calendar
@@ -26,6 +32,7 @@ class JoinMemberActivity : AppCompatActivity() {
     ActivityJoinMemberBinding.inflate(layoutInflater)
   }
 
+//  성별 버튼 선택 선언
   var selectedGender: String? = null
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,12 +48,14 @@ class JoinMemberActivity : AppCompatActivity() {
     }
 
 
+//    버튼 뷰 선언(변경 대기중)
+
     val btnMale = findViewById<AppCompatButton>(R.id.btnMale)
     val btnFemale = findViewById<AppCompatButton>(R.id.btnFemale)
-
-
     val editBirthDate = findViewById<EditText>(R.id.editBirthDate)
 
+
+//    성별 버튼 선택 이벤트(남성)
     binding.btnMale.setOnClickListener {
       selectedGender = "M"
       btnMale.setBackgroundResource(R.drawable.gender_button_selected)
@@ -55,6 +64,7 @@ class JoinMemberActivity : AppCompatActivity() {
       btnFemale.setTextColor(Color.BLACK)
     }
 
+//    성별 버튼 선택 이벤트(여성)
     binding.btnFemale.setOnClickListener {
       selectedGender = "F"
       btnFemale.setBackgroundResource(R.drawable.gender_button_selected)
@@ -63,6 +73,7 @@ class JoinMemberActivity : AppCompatActivity() {
       btnMale.setTextColor(Color.BLACK)
     }
 
+//    생년월일 선택 이벤트
     binding.editBirthDate.setOnClickListener {
       val calendar = Calendar.getInstance()
       val year = calendar.get(Calendar.YEAR)
@@ -81,6 +92,7 @@ class JoinMemberActivity : AppCompatActivity() {
 
 
 
+//    회원가입 버튼(누를 시, 회원가입 데이터 생성)
     binding.btnJoin.setOnClickListener {
       //val joinDataList = mutableListOf<JoinDTO>()
 
@@ -99,6 +111,7 @@ class JoinMemberActivity : AppCompatActivity() {
       //joinDataList.add(joinData)
 
 
+//      네트워크 통신
       val api = AppServerClass.instance
       val call = api.joinMember(joinData)
       retrofitResponse(call)
@@ -107,6 +120,8 @@ class JoinMemberActivity : AppCompatActivity() {
   }
 
 
+
+//  송수신 점검 코드
 
   private fun retrofitResponse(call: Call<String>) {
 

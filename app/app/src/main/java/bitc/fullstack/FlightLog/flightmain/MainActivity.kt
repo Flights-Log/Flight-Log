@@ -1,5 +1,12 @@
 package bitc.fullstack.FlightLog.flightmain
 
+
+// java/bitc/fullstack/FlightLog/flightmain/MainActivity.kt
+
+
+// 메인 액티비티
+
+
 import android.R.id.toggle
 import android.app.DatePickerDialog
 import android.media.Image
@@ -205,7 +212,7 @@ open class MainActivity  : AppCompatActivity(), SelectPeopleDialogFragment.OnPas
 
 //사이드바
 
-            // View 바인딩
+//    툴바, 메뉴가 보이게 활성화
 //    val navView : NavigationView = findViewById(R.id.nav_view)
             val toolbar = binding.toolBar.toolBarActivity
             val menuButton = binding.toolBar.flightLogMenu

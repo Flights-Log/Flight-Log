@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- 회원가입 페이지 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -11,22 +12,24 @@
     tools:context=".flightmain.JoinMemberActivity">
 
 
-  <!--  툴바(로그인 및 회원가입)-->
+  <!--  회원가입 전용 툴바  -->
   <include
       android:id="@+id/tool_bar"
       layout="@layout/tool_bar_login"
       android:layout_width="match_parent"
       android:layout_height="wrap_content" />
 
+<!--  스크롤 뷰 -->
   <ScrollView
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:layout_weight="1"
       android:background="@color/white"
       android:fillViewport="true"
-      android:paddingTop="10dp"
-      android:scrollbars="none">
+      android:scrollbars="vertical">
 
+
+<!--    세로순서 구성용 레이아웃-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -42,13 +45,14 @@
           android:textColor="@color/black"
           android:textSize="20sp" />
 
+<!--      파란색 선(뷰) -->
       <View
           android:layout_width="200dp"
           android:layout_height="5dp"
           android:layout_marginBottom="20dp"
-          android:background="@color/mainBlue" />
+          android:background="@color/mainBlue"/>
 
-      <!--  아이디-->
+      <!--  아이디 컨테이너-->
       <LinearLayout
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
@@ -57,6 +61,7 @@
           android:orientation="horizontal"
           android:paddingHorizontal="30dp">
 
+    <!-- 아이디 라벨  -->
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -66,6 +71,7 @@
             android:textSize="15sp"
             android:textStyle="bold" />
 
+<!--        아이디 작성 에디트 박스 -->
         <EditText
             android:id="@+id/editId"
             android:layout_width="0dp"
@@ -77,7 +83,7 @@
 
       </LinearLayout>
 
-      <!--  비밀번호-->
+      <!--  비밀번호 컨테이너  -->
       <LinearLayout
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
@@ -86,6 +92,7 @@
           android:orientation="horizontal"
           android:paddingHorizontal="30dp">
 
+<!--   비밀번호 라벨  -->
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -95,6 +102,7 @@
             android:textSize="15sp"
             android:textStyle="bold" />
 
+<!--       비밀번호 에디트 박스 -->
         <EditText
             android:id="@+id/editPw"
             android:layout_width="0dp"
@@ -106,7 +114,7 @@
 
       </LinearLayout>
 
-      <!--  비밀번호 확인-->
+      <!--  비밀번호 재확인 컨테이너 -->
       <LinearLayout
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
@@ -115,6 +123,7 @@
           android:orientation="horizontal"
           android:paddingHorizontal="30dp">
 
+<!--        비밀번호 재확인 컨테이너 2 (세로 간격맞추기 용도) -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -122,6 +131,7 @@
             android:layout_weight="2"
             android:orientation="vertical">
 
+<!--          비밀번호 재확인 라벨 -->
           <TextView
               android:id="@+id/editPwc"
               android:layout_width="wrap_content"
@@ -131,6 +141,7 @@
               android:textSize="15sp"
               android:textStyle="bold" />
 
+<!--          비밀번호 재확인 라벨 2(밑에거) -->
           <TextView
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
@@ -141,6 +152,7 @@
         </LinearLayout>
 
 
+<!--        비밀번호 재확인 에디트 박스 -->
         <EditText
             android:layout_width="0dp"
             android:layout_height="50dp"
@@ -151,7 +163,7 @@
 
       </LinearLayout>
 
-      <!--  한글 이름-->
+      <!--  한글 이름 컨테이너 -->
       <LinearLayout
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
@@ -160,6 +172,8 @@
           android:orientation="horizontal"
           android:paddingHorizontal="30dp">
 
+
+<!--     한글 이름 입력 라벨    -->
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -169,6 +183,8 @@
             android:textSize="15sp"
             android:textStyle="bold" />
 
+
+<!--        한글 FristName 에디트 박스 -->
         <EditText
             android:id="@+id/editKoFirstName"
             android:layout_width="0dp"
@@ -180,6 +196,7 @@
             android:paddingHorizontal="5dp"
             android:inputType="textPersonName"/>
 
+<!--        한글 FirstName 에디트 박스 -->
         <EditText
             android:id="@+id/editKoLastName"
             android:layout_marginStart="10dp"
@@ -194,7 +211,7 @@
 
       </LinearLayout>
 
-      <!--  영어 이름-->
+      <!--  영어 FirstName 컨테이너 -->
       <LinearLayout
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
@@ -203,6 +220,7 @@
           android:orientation="horizontal"
           android:paddingHorizontal="30dp">
 
+<!--        영어 LastName(성이름) 라벨 -->
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -212,6 +230,7 @@
             android:textSize="15sp"
             android:textStyle="bold" />
 
+<!--        영어 LastName(성이름) 에디트 박스 -->
         <EditText
             android:id="@+id/editFirstName"
             android:layout_width="0dp"
@@ -223,6 +242,7 @@
             android:paddingHorizontal="10dp"
             android:inputType="textPersonName"/>
 
+<!--        영어 이름 성이름 컨테이너 -->
         <EditText
             android:id="@+id/editLastName"
             android:layout_marginStart="10dp"
@@ -237,7 +257,7 @@
 
       </LinearLayout>
 
-      <!--  성별-->
+      <!--  성별 컨테이너 -->
       <LinearLayout
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
@@ -246,6 +266,7 @@
           android:orientation="horizontal"
           android:paddingHorizontal="30dp">
 
+<!--        성별 선택 라벨 -->
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -255,6 +276,7 @@
             android:textSize="15sp"
             android:textStyle="bold" />
 
+<!--        성별 선택 버튼(남) -->
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnMale"
             android:layout_width="0dp"
@@ -270,6 +292,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp" />
 
+<!--        성별 선택 버튼(여)   -->
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnFemale"
             android:layout_width="0dp"
@@ -285,7 +308,7 @@
 
       </LinearLayout>
 
-      <!--  생년월일-->
+      <!--  생년월일 컨테이너   -->
       <LinearLayout
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
@@ -294,6 +317,7 @@
           android:orientation="horizontal"
           android:paddingHorizontal="30dp">
 
+<!--        생년월일 선택 라벨 -->
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -304,7 +328,7 @@
             android:textStyle="bold"
             android:layout_marginRight="5dp"/>
 
-        <!--년도-->
+        <!--생년월일 선택 버튼(연도)-->
         <EditText
             android:id="@+id/editBirthDate"
             android:layout_width="wrap_content"
@@ -321,6 +345,7 @@
 
         <!--            android:layout_marginRight="5dp"-->
 
+        <!--생년월일 선택 버튼(월)-->
         <!--월-->
         <androidx.appcompat.widget.AppCompatButton
             android:layout_width="0dp"
@@ -331,7 +356,8 @@
             android:text="09"
             android:gravity="center"/>
 
-        <!--일-->
+
+        <!--생년월일 선택 버튼(일)-->
         <androidx.appcompat.widget.AppCompatButton
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -340,9 +366,13 @@
             android:background="@drawable/join_member_edit_text"
             android:text="01"
             android:gravity="center"/>
+
+
       </LinearLayout>
 
-      <!--  이메일-->
+
+
+      <!--  이메일 컨테이너 -->
       <LinearLayout
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
@@ -351,6 +381,7 @@
           android:orientation="horizontal"
           android:paddingHorizontal="30dp">
 
+<!--        이메일 작성 라벨 -->
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -360,6 +391,7 @@
             android:textSize="15sp"
             android:textStyle="bold" />
 
+<!--        이메일 작성 박스 -->
         <EditText
             android:id="@+id/editEmail"
             android:layout_width="0dp"
@@ -372,7 +404,7 @@
 
       </LinearLayout>
 
-      <!--  휴대전화-->
+      <!--  연락처 컨테이너 -->
       <LinearLayout
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
@@ -381,6 +413,7 @@
           android:orientation="horizontal"
           android:paddingHorizontal="30dp">
 
+<!--        연락처 라벨 -->
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -390,6 +423,7 @@
             android:textSize="15sp"
             android:textStyle="bold" />
 
+<!--        연락처 작성 박스-->
         <EditText
             android:id="@+id/editPhone"
             android:layout_width="0dp"
@@ -402,7 +436,7 @@
 
       </LinearLayout>
 
-      <!--  거주지역-->
+      <!--  거주지역 컨테이너 -->
       <LinearLayout
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
@@ -411,6 +445,7 @@
           android:orientation="horizontal"
           android:paddingHorizontal="30dp">
 
+<!--        거주지역 작성 라벨-->
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -420,14 +455,14 @@
             android:textAlignment="center"
             android:textSize="15sp"
             android:textStyle="bold" />
-
+<!--    거주지역 컨테이너 2-->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="3"
             android:gravity="center_horizontal"
             android:orientation="vertical">
-
+<!--    거주지역 "대한민국" 라벨 -->
           <TextView
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
@@ -436,6 +471,7 @@
               android:textSize="15sp"
               android:textStyle="bold" />
 
+<!--      거주지역 작성 박스 -->
           <EditText
               android:id="@+id/editLocation"
               android:layout_width="match_parent"
@@ -451,7 +487,7 @@
 
       </LinearLayout>
 
-      <!--  회원가입-->
+      <!--  회원 등록 버튼 -->
       <Button
           android:id="@+id/btnJoin"
           android:layout_width="300dp"
@@ -460,6 +496,7 @@
           android:text="회원 등록"
           android:textSize="20sp"
           android:textStyle="bold" />
+
     </LinearLayout>
   </ScrollView>
 </LinearLayout>
