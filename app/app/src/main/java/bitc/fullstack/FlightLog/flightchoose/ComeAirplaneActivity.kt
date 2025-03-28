@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
@@ -23,6 +24,7 @@ import bitc.fullstack.FlightLog.databinding.ActivityComeAirplaneBinding
 import bitc.fullstack.FlightLog.databinding.ItemComeAirplaneBinding
 import bitc.fullstack.FlightLog.databinding.ItemGoAirplaneBinding
 import bitc.fullstack.FlightLog.dto.flightInfoDTO
+import bitc.fullstack.FlightLog.flightmain.MainActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -36,12 +38,18 @@ private var selectedArrive: String = ""
 private var goDate: String = ""
 private var comeDate: String = ""
 private var selectedPeople: Int = 0
+private var distance: Double = 0.0
+private var userId = "test1234"
 
-private var goAirplaneSelectedSeats: String = ""
+private var selectedSeatNames: String = ""
 private var roundTripChecked = false
 
-//가는 비행기 좌석 총 경비
-private var goAirplaneTotalPrice = 0
+
+//임시로 넣은 랜덤 예약번호
+private val charset = ('0'..'9') + ('a'..'z') + ('A'..'Z')
+
+//  내가 고른 좌석의 텍스트값 저장
+//private val selectedSeatNames = mutableListOf<String>()
 
 class ComeAirplaneActivity : AppCompatActivity() {
   private val binding: ActivityComeAirplaneBinding by lazy {
@@ -105,9 +113,6 @@ class ComeAirplaneActivity : AppCompatActivity() {
     Log.d("flightLog", "받은 가는 비행기 아이디 : ${intent.getIntExtra("가는 비행기 아이디", 0)}")
     goAirplaneFlightId = intent.getIntExtra("가는 비행기 아이디", 0)
 
-//    Log.d("flightLog", "받은 오는 비행기 아이디 : ${intent.getIntExtra("오는 비행기 아이디", 0)}")
-//    comeAirplaneFlightId = intent.getIntExtra("오는 비행기 아이디", 0)
-
     binding.textComeStartCity.text = intent.getStringExtra("출발지")
     selectedDeparture = binding.textComeStartCity.text.toString()
 
@@ -123,17 +128,14 @@ class ComeAirplaneActivity : AppCompatActivity() {
     Log.d("flightLog", "인원수 : ${intent.getIntExtra("인원수", 1)}")
     selectedPeople = intent.getIntExtra("인원수", 1)
 
-//    Log.d("flightLog", "거리 : ${intent.getDoubleExtra("거리", 0.0)}")
-//    distance = intent.getDoubleExtra("거리", 0.0)
-
-    Log.d("flightLog", "가는 비행기 총 비용 : ${intent.getIntExtra("가는 비행기 총 비용", 0)}")
-    goAirplaneTotalPrice = intent.getIntExtra("가는 비행기 총 비용", 0)
-
     Log.d("flightLog", "가는 비행기 선택 좌석 : ${intent.getStringExtra("가는 비행기 선택 좌석")}")
-    goAirplaneSelectedSeats = intent.getStringExtra("가는 비행기 선택 좌석").toString()
+    selectedSeatNames = intent.getStringExtra("가는 비행기 선택 좌석").toString()
 
     Log.d("flightLog", "roundTripChecked : ${intent.getBooleanExtra("왕복 선택 여부", false)}")
     roundTripChecked = intent.getBooleanExtra("왕복 선택 여부", false)
+
+    Log.d("flightLog", "distance : ${intent.getDoubleExtra("거리", 0.0)}")
+    distance = intent.getDoubleExtra("거리", 0.0)
   }
 
   //  Retrofit 통신 응답 List<String>
@@ -154,6 +156,48 @@ class ComeAirplaneActivity : AppCompatActivity() {
 //            그리고 리사이클러뷰는 안보이게 하기
             binding.noComeAirplaneLayout.visibility = View.VISIBLE
             binding.comeAirplaneRecyclerView.visibility = View.GONE
+
+//            별로에요 누르면 지금까지의 모든 데이터를 삭제한 후 MainActivity 로
+            val comeBadRecommendBtn = findViewById<Button>(R.id.come_bad_recommend_button)
+            comeBadRecommendBtn.setOnClickListener {
+              val intent = Intent(this@ComeAirplaneActivity, MainActivity::class.java)
+              finish()
+              startActivity(intent)
+            }
+
+            val comeGoodRecommendBtn = findViewById<Button>(R.id.come_good_recommend_button)
+            comeGoodRecommendBtn.setOnClickListener {
+
+//              왕복을 편도로 바꾸고 다시 통신하기
+              val api = AppServerClass.instance
+              val flightReno = List(10) { charset.random() }.joinToString("")
+              Log.d("flightLog", "flightReno = $flightReno")
+
+              val call = api.goAirplaneReserveSeat(
+                flightReno,
+                userId,
+                selectedPeople,
+                goAirplaneFlightId,
+                goDate,
+                selectedSeatNames
+              )
+              retrofitResponseOneWay(call)
+
+//              편도 비행기로 바꾸기
+              roundTripChecked = false
+
+              val intent = Intent(this@ComeAirplaneActivity, PassengerActivity::class.java)
+              intent.putExtra("가는 비행기 아이디", goAirplaneFlightId)
+              intent.putExtra("출발지", selectedDeparture)
+              intent.putExtra("도착지", selectedArrive)
+              intent.putExtra("출발일", goDate.toString())
+              intent.putExtra("거리", distance)
+              intent.putExtra("인원수", selectedPeople)
+              intent.putExtra("가는 비행기 선택 좌석", selectedSeatNames)
+              intent.putExtra("왕복 선택 여부", roundTripChecked)
+              intent.putExtra("왕복 비행기 없을 때", flightReno)
+              startActivity(intent)
+            }
           } else {
 //            조회된 결과가 잇다면 리사이클러뷰 출력
             binding.noComeAirplaneLayout.visibility = View.GONE
@@ -172,6 +216,24 @@ class ComeAirplaneActivity : AppCompatActivity() {
       }
 
       override fun onFailure(p0: Call<List<flightInfoDTO>>, t: Throwable) {
+        Log.d("flightLog", "message : $t.message")
+      }
+    })
+  }
+
+  //  Retrofit 통신 응답 List<String>(편도로 바꾼 경우
+  private fun retrofitResponseOneWay(call: Call<Void>) {
+    call.enqueue(object : Callback<Void> {
+      @SuppressLint("NotifyDataSetChanged")
+      override fun onResponse(p0: Call<Void>, res: Response<Void>) {
+        if (res.isSuccessful) {
+          Log.d("flightLog", "성공!")
+        } else {
+          Log.d("flightLog", "실패")
+        }
+      }
+
+      override fun onFailure(p0: Call<Void>, t: Throwable) {
         Log.d("flightLog", "message : $t.message")
       }
     })
@@ -233,8 +295,7 @@ class MyAdapterComeAirplane(val datas: MutableList<flightInfoDTO>) :
       intent.putExtra("도착일", comeDate.toString())
       intent.putExtra("인원수", selectedPeople)
       intent.putExtra("거리", distance)
-      intent.putExtra("가는 비행기 총 비용", goAirplaneTotalPrice)
-      intent.putExtra("가는 비행기 선택 좌석", goAirplaneSelectedSeats)
+      intent.putExtra("가는 비행기 선택 좌석", selectedSeatNames)
       intent.putExtra("왕복 선택 여부", roundTripChecked)
 //      item_go_airplane 에서 intent(ComeAirplaneChooseSeatActivity)로 이동
       context.startActivity(intent)

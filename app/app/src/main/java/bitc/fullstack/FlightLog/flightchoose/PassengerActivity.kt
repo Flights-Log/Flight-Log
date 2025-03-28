@@ -1,16 +1,11 @@
 package bitc.fullstack.FlightLog.flightchoose
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.app.AlertDialog
-import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
-import android.util.AttributeSet
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.EditText
@@ -20,9 +15,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import bitc.fullstack.FlightLog.R
-import bitc.fullstack.FlightLog.databinding.ActivityPassengerBinding
-import androidx.core.view.isGone
 import bitc.fullstack.FlightLog.appserver.AppServerClass
+import bitc.fullstack.FlightLog.databinding.ActivityPassengerBinding
 import bitc.fullstack.FlightLog.dto.flightUserDTO
 import bitc.fullstack.FlightLog.flightmain.MainActivity
 import bitc.fullstack.FlightLog.sidebar.TicketHolderActivity
@@ -54,6 +48,10 @@ private var flightReno: String = ""
 
 //임시 예약 번호(왕복)
 private var roundFlightReno: String = ""
+
+//왕복 비행기를 검색하고 싶었는데 돌아오는 비행기가 없어서
+//어쩔 수 없이 편도로 예매해야 할 때 사용하는 예약번호
+private var noComeAirplaneReno: String = ""
 
 //가는 비행기 좌석 총 경비
 private var goAirplaneTotalPrice = 0
@@ -135,6 +133,7 @@ class PassengerActivity : AppCompatActivity() {
 //    예약 번호
     flightReno = intent.getStringExtra("예약 번호").toString()
     roundFlightReno = intent.getStringExtra("왕복 예약 번호").toString()
+    noComeAirplaneReno = intent.getStringExtra("왕복 비행기 없을 때").toString()
 
 //    확인용
     Log.d("flightLog", "------------PassengerActivity-------------")
@@ -153,6 +152,7 @@ class PassengerActivity : AppCompatActivity() {
     Log.d("flightLog", "selectedArriveSeatNameList = $selectedArriveSeatNameList")
     Log.d("flightLog", "flightReno = $flightReno")
     Log.d("flightLog", "roundFlightReno = $roundFlightReno")
+    Log.d("flightLog", "noComeAirplaneReno = $noComeAirplaneReno")
   }
 
   //    인원 수가 2명 이상이면 인원 추가 버튼 보이게
@@ -274,7 +274,7 @@ class PassengerActivity : AppCompatActivity() {
       } else {
         val api = AppServerClass.instance
 //      편도 여행이면
-        if (roundTripChecked == false) {
+        if (roundTripChecked == false && noComeAirplaneReno == "") {
 //          firstNames 의 길이만큼 n 번째 값을 reserveGoAirplaneMember 에 계속해서 넣어줌
           for (i in firstNames.indices) {
             val call = api.reserveGoAirplaneMember(
@@ -307,7 +307,40 @@ class PassengerActivity : AppCompatActivity() {
             })
             .create()
             .show()
-        } else {
+        } else if (roundTripChecked == false && noComeAirplaneReno != null){
+          for (i in firstNames.indices) {
+            val call = api.reserveGoAirplaneMember(
+              passports[i],
+              noComeAirplaneReno,
+              userId,
+              firstNames[i],
+              lastNames[i],
+              selectedStartSeatNameList[i],
+              startSeatPriceList[i],
+              luggageWeights[i]
+            )
+            retrofitResponseAlone(call)
+          }
+
+          AlertDialog.Builder(this)
+            .setTitle("편도 여행 티켓 예매 완료")
+            .setMessage("티켓 홀더로 이동하시겠습니까?")
+            .setPositiveButton("예", object : DialogInterface.OnClickListener {
+              override fun onClick(dialog: DialogInterface?, which: Int) {
+                val intent = Intent(this@PassengerActivity, TicketHolderActivity::class.java)
+                startActivity(intent)
+              }
+            })
+            .setNegativeButton("아니요", object : DialogInterface.OnClickListener {
+              override fun onClick(dialog: DialogInterface?, which: Int) {
+                val intent = Intent(this@PassengerActivity, MainActivity::class.java)
+                startActivity(intent)
+              }
+            })
+            .create()
+            .show()
+        }
+        else {
 //        roundTripChecked 가 True(왕복 여행) 이면
           Log.d("flightLog", "-------------------------------")
           Log.d("flightLog", "selectedArriveSeatNames : $selectedArriveSeatNames")
