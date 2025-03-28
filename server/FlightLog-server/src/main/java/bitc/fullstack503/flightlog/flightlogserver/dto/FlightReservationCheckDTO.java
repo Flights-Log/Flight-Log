@@ -63,6 +63,9 @@ public class FlightReservationCheckDTO {
     @JsonProperty("returnSeatNumber")
     private String returnSeatNumber;  // 돌아오는 좌석 번호
 
+    @JsonProperty("flightStartPatCheck")
+    private String flightStartPatCheck;
+
     @JsonProperty("flightArrPayCheck")
     private String flightArrPayCheck;  // 도착지 결제 확인
 

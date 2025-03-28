@@ -13,7 +13,6 @@
         fi.flight_info_arrivalCity as flight_arrival_city,
         DATE_FORMAT(fr.flight_reserveSdate, '%Y-%m-%d') as flight_reserve_start_date,
         fi.flight_info_startTime as flight_info_start_time,
-        DATE_FORMAT(fr.flight_reserveEdate, '%Y-%m-%d') as flight_reserve_end_date,
         fi.flight_info_arrivalTime as flight_info_arrival_time,
         fr.flight_memberNum as flight_member_num,
         frm.flight_mem_start_seatNum as flight_mem_start_seatNum,
@@ -59,6 +58,7 @@
         frm.flight_passport AS return_passport,
         frm.flight_mem_luggage AS return_luggage,
 
+        frm.flight_start_payCheck AS start_payCheck,
         frm.flight_arr_payCheck AS arr_payCheck,
         fr.flight_arr_id as arr_id
 
@@ -67,6 +67,8 @@
         JOIN flight_info fi_start ON fr.flight_start_id = fi_start.flight_id
         LEFT JOIN flight_info fi_arr ON fr.flight_arr_id = fi_arr.flight_id
 
-        WHERE fr.flight_reno = #{reservationNumber} and frm.flight_arr_payCheck = 'y';
+        WHERE fr.flight_reno = #{reservationNumber}
+        and frm.flight_arr_payCheck = 'y'
+        or frm.flight_start_payCheck = 'y'
     </select>
 </mapper>
