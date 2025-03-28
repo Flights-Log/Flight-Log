@@ -68,6 +68,7 @@ interface AppServerInterface {
   @PUT(
     "main" +
             "/reserveGoSeat" +
+            "/{flightReno}" +
             "/{userId}" +
             "/{selectedPeople}" +
             "/{goAirplaneFlightId}" +
@@ -75,6 +76,7 @@ interface AppServerInterface {
             "/{selectedSeatNames}"
   )
   fun goAirplaneReserveSeat(
+    @Path("flightReno") flightReno: String,
     @Path("userId") userId: String,
     @Path("selectedPeople") selectedPeople: Int,
     @Path("goAirplaneFlightId") goAirplaneFlightId: Int,
@@ -86,6 +88,7 @@ interface AppServerInterface {
   @PUT(
     "main" +
             "/reserveRoundSeat" +
+            "/{flightReno}" +
             "/{userId}" +
             "/{selectedPeople}" +
             "/{goAirplaneFlightId}" +
@@ -96,6 +99,7 @@ interface AppServerInterface {
             "/{selectedArriveSeatNames}"
   )
   fun roundAirplaneReserveSeat(
+    @Path("flightReno") flightReno: String,
     @Path("userId") userId: String,
     @Path("selectedPeople") selectedPeople: Int,
     @Path("goAirplaneFlightId") goAirplaneFlightId: Int,
@@ -124,10 +128,11 @@ interface AppServerInterface {
     @Path("userId") userId: String
   ): Call<List<flightUserDTO>>
 
-  //  혼자서 가는(편도) 비행기 예매할 때
-  @PUT("main/goFlightAlone/{passport}/{userId}/{firstName}/{lastName}/{selectedSeatName}/{luggage}")
-  fun goFlightAlone(
+  //  가는(편도) 비행기 예매할 때
+  @PUT("main/reserveGoAirplaneMember/{passport}/{flightReno}/{userId}/{firstName}/{lastName}/{selectedSeatName}/{luggage}")
+  fun reserveGoAirplaneMember(
     @Path("passport") passport: String,
+    @Path("flightReno") flightReno: String,
     @Path("userId") userId: String,
     @Path("firstName") firstName: String,
     @Path("lastName") lastName: String,
@@ -136,9 +141,10 @@ interface AppServerInterface {
   ): Call<Void>
 
   //  혼자서 왕복 비행기 예매할 때
-  @PUT("main/roundFlightAlone/{passport}/{userId}/{firstName}/{lastName}/{selectedStartSeatName}/{luggage}/{selectedArriveSeatName}")
-  fun roundFlightAlone(
+  @PUT("main/reserveRoundAirplaneMember/{passport}/{roundFlightReno}/{userId}/{firstName}/{lastName}/{selectedStartSeatName}/{luggage}/{selectedArriveSeatName}")
+  fun reserveRoundAirplaneMember(
     @Path("passport") passport: String,
+    @Path("roundFlightReno") roundFlightReno: String,
     @Path("userId") userId: String,
     @Path("firstName") firstName: String,
     @Path("lastName") lastName: String,

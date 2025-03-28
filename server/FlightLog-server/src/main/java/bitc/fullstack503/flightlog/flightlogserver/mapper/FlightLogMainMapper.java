@@ -21,13 +21,13 @@ public interface FlightLogMainMapper {
   List<flightInfoDTO> searchComeAirplane(String arrivalCity, String startCity, String comeDate);
 
   //  편도 비행기 좌석 예약하기
-  void reserveGoAirplaneSeats(String userId, int selectedPeople, int goAirplaneFlightId,
+  void reserveGoAirplaneSeats(String flightReno, String userId, int selectedPeople, int goAirplaneFlightId,
                               String goDate, String selectedSeatNames);
 
   //  왕복 비행기 좌석 예약하기
-  void reserveRoundAirplaneSeats(String userId, int selectedPeople,
-                                int goAirplaneFlightId, String goDate, String selectedStartSeatNames,
-                                int comeAirplaneFlightId, String comeDate, String selectedArriveSeatNames);
+  void reserveRoundAirplaneSeats(String flightReno, String userId, int selectedPeople,
+                                 int goAirplaneFlightId, String goDate, String selectedStartSeatNames,
+                                 int comeAirplaneFlightId, String comeDate, String selectedArriveSeatNames);
 
   //  가는 비행기의 예약된 좌석 배열로 가져오기
   List<String> searchGoAirplaneIsSeatReservated(int goAirplaneFlightId);
@@ -38,11 +38,11 @@ public interface FlightLogMainMapper {
   //  유저 이름 가져오기
   List<flightUserDTO> searchUserName(String userId);
 
-  //  가는 비행기 혼자 예매하기
-  void goFlightAlone(String passport, String userId, String firstName, String lastName,
-                     String selectedSeatName, String luggage);
+  //  편도 비행기 예매하기
+  void reserveGoAirplaneMember(String passport, String flightReno, String userId, String firstName, String lastName,
+                               String selectedSeatName, String luggage);
 
-//  왕복 비행기 혼자 예매하기
-  void roundFlightAlone(String passport, String userId, String firstName, String lastName,
-                        String selectedStartSeatName, String luggage, String selectedArriveSeatName);
+  //  왕복 비행기 혼자 예매하기
+  void reserveRoundAirplaneMember(String passport, String roundFlightReno, String userId, String firstName, String lastName,
+                                  String selectedStartSeatName, String luggage, String selectedArriveSeatName);
 }

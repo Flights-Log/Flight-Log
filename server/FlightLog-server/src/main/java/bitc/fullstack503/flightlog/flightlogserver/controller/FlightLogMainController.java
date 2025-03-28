@@ -109,20 +109,22 @@ public class FlightLogMainController {
   }
 
   //  가는 비행기 예약
-  @PutMapping("reserveGoSeat/{userId}/{selectedPeople}/{goAirplaneFlightId}/{goDate}/{selectedSeatNames}")
-  public void reserveGoAirplaneSeats(@PathVariable("userId") String userId,
+  @PutMapping("reserveGoSeat/{flightReno}/{userId}/{selectedPeople}/{goAirplaneFlightId}/{goDate}/{selectedSeatNames}")
+  public void reserveGoAirplaneSeats(@PathVariable("flightReno") String flightReno,
+                                     @PathVariable("userId") String userId,
                                      @PathVariable("selectedPeople") int selectedPeople,
                                      @PathVariable("goAirplaneFlightId") int goAirplaneFlightId,
                                      @PathVariable("goDate") String goDate,
                                      @PathVariable("selectedSeatNames") String selectedSeatNames) {
-    flightlogMainService.reserveGoAirplaneSeats(userId, selectedPeople, goAirplaneFlightId, goDate, selectedSeatNames);
+    flightlogMainService.reserveGoAirplaneSeats(flightReno, userId, selectedPeople, goAirplaneFlightId, goDate, selectedSeatNames);
   }
 
   //  왕복 비행기 예약
-  @PutMapping("reserveRoundSeat/{userId}/{selectedPeople}/" +
+  @PutMapping("reserveRoundSeat/{flightReno}/{userId}/{selectedPeople}/" +
           "{goAirplaneFlightId}/{goDate}/{selectedStartSeatNames}/" +
           "{comeAirplaneFlightId}/{comeDate}/{selectedArriveSeatNames}")
-  public void reserveComeAirplaneSeats(@PathVariable("userId") String userId,
+  public void reserveComeAirplaneSeats(@PathVariable("flightReno") String flightReno,
+                                       @PathVariable("userId") String userId,
                                        @PathVariable("selectedPeople") int selectedPeople,
                                        @PathVariable("goAirplaneFlightId") int goAirplaneFlightId,
                                        @PathVariable("goDate") String goDate,
@@ -130,7 +132,7 @@ public class FlightLogMainController {
                                        @PathVariable("comeAirplaneFlightId") int comeAirplaneFlightId,
                                        @PathVariable("comeDate") String comeDate,
                                        @PathVariable("selectedArriveSeatNames") String selectedArriveSeatNames) {
-    flightlogMainService.reserveRoundAirplaneSeats(userId, selectedPeople,
+    flightlogMainService.reserveRoundAirplaneSeats(flightReno, userId, selectedPeople,
             goAirplaneFlightId, goDate, selectedStartSeatNames,
             comeAirplaneFlightId, comeDate, selectedArriveSeatNames);
   }
@@ -178,27 +180,29 @@ public class FlightLogMainController {
     return userNameList;
   }
 
-  //  혼자서 가는 비행기(편도)예매하기
-  @PutMapping("goFlightAlone/{passport}/{userId}/{firstName}/{lastName}/{selectedSeatName}/{luggage}")
-  public void goFlightAlone(@PathVariable("passport") String passport,
+  //  가는 비행기(편도)예매하기
+  @PutMapping("reserveGoAirplaneMember/{passport}/{flightReno}/{userId}/{firstName}/{lastName}/{selectedSeatName}/{luggage}")
+  public void reserveGoAirplaneMember(@PathVariable("passport") String passport,
+                            @PathVariable("flightReno") String flightReno,
                             @PathVariable("userId") String userId,
                             @PathVariable("firstName") String firstName,
                             @PathVariable("lastName") String lastName,
                             @PathVariable("selectedSeatName") String selectedSeatName,
                             @PathVariable("luggage") String luggage) {
-    flightlogMainService.goFlightAlone(passport, userId, firstName, lastName, selectedSeatName, luggage);
+    flightlogMainService.reserveGoAirplaneMember(passport, flightReno, userId, firstName, lastName, selectedSeatName, luggage);
   }
 
   //  혼자서 왕복 비행기 예매하기
-  @PutMapping("roundFlightAlone/{passport}/{userId}/{firstName}/{lastName}/{selectedStartSeatName}/{luggage}/{selectedArriveSeatName}")
-  public void roundFlightAlone(@PathVariable("passport") String passport,
+  @PutMapping("reserveRoundAirplaneMember/{passport}/{roundFlightReno}/{userId}/{firstName}/{lastName}/{selectedStartSeatName}/{luggage}/{selectedArriveSeatName}")
+  public void reserveRoundAirplaneMember(@PathVariable("passport") String passport,
+                               @PathVariable("roundFlightReno") String roundFlightReno,
                                @PathVariable("userId") String userId,
                                @PathVariable("firstName") String firstName,
                                @PathVariable("lastName") String lastName,
                                @PathVariable("selectedStartSeatName") String selectedStartSeatName,
                                @PathVariable("luggage") String luggage,
                                @PathVariable("selectedArriveSeatName") String selectedArriveSeatName) {
-    flightlogMainService.roundFlightAlone(passport, userId, firstName, lastName, selectedStartSeatName, luggage, selectedArriveSeatName);
+    flightlogMainService.reserveRoundAirplaneMember(passport, roundFlightReno, userId, firstName, lastName, selectedStartSeatName, luggage, selectedArriveSeatName);
   }
 
 }

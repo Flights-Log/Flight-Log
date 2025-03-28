@@ -41,17 +41,17 @@ public class FlightLogMainServiceImpl implements FlightLogMainService {
 
   //  가는 비행기(편도만) 예매할 경우 예매 정보 저장하기
   @Override
-  public void reserveGoAirplaneSeats(String userId, int selectedPeople, int goAirplaneFlightId,
+  public void reserveGoAirplaneSeats(String flightReno, String userId, int selectedPeople, int goAirplaneFlightId,
                                      String goDate, String selectedSeatNames) {
-    flightLogMainMapper.reserveGoAirplaneSeats(userId, selectedPeople, goAirplaneFlightId, goDate, selectedSeatNames);
+    flightLogMainMapper.reserveGoAirplaneSeats(flightReno, userId, selectedPeople, goAirplaneFlightId, goDate, selectedSeatNames);
   }
 
   //  가는 비행기 + 오는 비행기(왕복) 예매할 경우 예매 정보 저장하기
   @Override
-  public void reserveRoundAirplaneSeats(String userId, int selectedPeople,
+  public void reserveRoundAirplaneSeats(String flightReno, String userId, int selectedPeople,
                                         int goAirplaneFlightId, String goDate, String selectedStartSeatNames,
                                         int comeAirplaneFlightId, String comeDate, String selectedArriveSeatNames) {
-    flightLogMainMapper.reserveRoundAirplaneSeats(userId, selectedPeople,
+    flightLogMainMapper.reserveRoundAirplaneSeats(flightReno, userId, selectedPeople,
             goAirplaneFlightId, goDate, selectedStartSeatNames,
             comeAirplaneFlightId, comeDate, selectedArriveSeatNames);
   }
@@ -74,14 +74,14 @@ public class FlightLogMainServiceImpl implements FlightLogMainService {
     return flightLogMainMapper.searchUserName(userId);
   }
 
-  //  편도 비행기 혼자 예매하기
+  //  편도 비행기 예매하기
   @Override
-  public void goFlightAlone(String passport, String userId, String firstName, String lastName, String selectedSeatName, String luggage) {
-    flightLogMainMapper.goFlightAlone(passport, userId, firstName, lastName, selectedSeatName, luggage);
+  public void reserveGoAirplaneMember(String passport, String flightReno, String userId, String firstName, String lastName, String selectedSeatName, String luggage) {
+    flightLogMainMapper.reserveGoAirplaneMember(passport, flightReno, userId, firstName, lastName, selectedSeatName, luggage);
   }
 
   @Override
-  public void roundFlightAlone(String passport, String userId, String firstName, String lastName, String selectedSeatName, String luggage, String selectedArriveSeatName){
-    flightLogMainMapper.roundFlightAlone(passport, userId, firstName, lastName, selectedSeatName, luggage, selectedArriveSeatName);
+  public void reserveRoundAirplaneMember(String passport, String roundFlightReno, String userId, String firstName, String lastName, String selectedSeatName, String luggage, String selectedArriveSeatName) {
+    flightLogMainMapper.reserveRoundAirplaneMember(passport, roundFlightReno, userId, firstName, lastName, selectedSeatName, luggage, selectedArriveSeatName);
   }
 }

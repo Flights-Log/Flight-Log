@@ -47,6 +47,9 @@ private var userId = "test1234"
 //이미 예약된 좌석 담을 배열
 private var reservedSeats = listOf<String>()
 
+//임시로 넣은 랜덤 예약번호
+private val charset = ('0'..'9') + ('a'..'z') + ('A'..'Z')
+
 class GoAirplaneChooseSeatActivity : AppCompatActivity() {
   private val binding: ActivityGoAirplaneChooseSeatBinding by lazy {
     ActivityGoAirplaneChooseSeatBinding.inflate(layoutInflater)
@@ -426,8 +429,13 @@ class GoAirplaneChooseSeatActivity : AppCompatActivity() {
     binding.goAirplaneChooseSeatNextButton.setOnClickListener {
 //      편도여행
       if (roundTripChecked == false) {
+//        랜덤 번호 만들기
+        val flightReno = List(10) { charset.random() }.joinToString("")
+        Log.d("flightLog", "flightReno = $flightReno")
+
         val api = AppServerClass.instance
         val call = api.goAirplaneReserveSeat(
+          flightReno,
           userId,
           selectedPeople,
           goAirplaneFlightId,
@@ -447,6 +455,7 @@ class GoAirplaneChooseSeatActivity : AppCompatActivity() {
         intent.putExtra("가는 비행기 총 비용", goAirplaneTotalPrice)
         intent.putExtra("가는 비행기 선택 좌석", selectedSeatNames.joinToString(","))
         intent.putExtra("왕복 선택 여부", roundTripChecked)
+        intent.putExtra("예약 번호", flightReno)
         startActivity(intent)
       } else {
 //        왕복 여행일 때 오는 비행기 선택하는 창으로

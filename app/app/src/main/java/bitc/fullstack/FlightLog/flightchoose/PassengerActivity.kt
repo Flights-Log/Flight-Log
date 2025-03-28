@@ -3,13 +3,18 @@ package bitc.fullstack.FlightLog.flightchoose
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.AlertDialog
+import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
+import android.util.AttributeSet
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
+import android.widget.EditText
+import android.widget.LinearLayout
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -44,6 +49,12 @@ private var selectedStartSeatNameList = listOf<String>()
 private var selectedArriveSeatNames: String = ""
 private var selectedArriveSeatNameList = listOf<String>()
 
+//임시 예약 번호(편도)
+private var flightReno: String = ""
+
+//임시 예약 번호(왕복)
+private var roundFlightReno: String = ""
+
 //가는 비행기 좌석 총 경비
 private var goAirplaneTotalPrice = 0
 
@@ -52,11 +63,11 @@ private var formattedGoAirplane = ""
 
 private var userId = "test1234"
 
+//여권번호, 수하물, 이름, 성 등 저장
 private var passportNumber = ""
 private var luggageWeight = ""
 private var userFirstName = ""
 private var userLastName = ""
-
 
 class PassengerActivity : AppCompatActivity() {
   private val binding: ActivityPassengerBinding by lazy {
@@ -65,9 +76,6 @@ class PassengerActivity : AppCompatActivity() {
 
   //  동승객 정보 추가 버튼 클릭횟수 세는 변수
   var buttonClick = 1
-
-  //  내가 고른 좌석의 텍스트값 저장
-//  private val selectedSeatNames = mutableListOf<String>()
 
   @SuppressLint("InflateParams")
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -86,91 +94,14 @@ class PassengerActivity : AppCompatActivity() {
 //    동승자가 2명보다 많은지 체크해서 동승자 추가하기 버튼을 넣을지 말지
     isSelectedPeopleBiggerThen2()
 
-//    동승자 수 만큼 동승자 추가하기 버튼 클릭 가능하게
+    //    동승자 수 만큼 동승자 추가하기 버튼 클릭 가능하게
     plusPeopleInfoButton()
 
     //현재 로그인한 유저의 이름 가져오기
     getUserName()
 
-//    저장버튼 누르면
-    binding.reserveGoAirplaneBtn.setOnClickListener {
-      //    입력받은 여권 번호, 수하물 무게 출력
-      userFirstName = binding.firstNameUser.text.toString()
-      userLastName = binding.lastNameUser.text.toString()
-      passportNumber = binding.passportNumberUser.text.toString()
-      luggageWeight = binding.luggageWeightUser.text.toString() + "kg"
-      Log.d("flightLog", "userFirstName : $userFirstName")
-      Log.d("flightLog", "userLastName : $userLastName")
-      Log.d("flightLog", "passportNumber : $passportNumber")
-      Log.d("flightLog", "luggageWeight : $luggageWeight")
-
-//      편도 여행이면
-      if (roundTripChecked == false) {
-        //      flight_reserve_member 에 저장하기
-        val api = AppServerClass.instance
-        val call = api.goFlightAlone(
-          passportNumber,
-          userId,
-          userFirstName,
-          userLastName,
-          selectedStartSeatNames,
-          luggageWeight
-        )
-        retrofitResponseAlone(call)
-
-        AlertDialog.Builder(this)
-          .setTitle("편도 여행 티켓 예매 완료")
-          .setMessage("티켓 홀더로 이동하시겠습니까?")
-          .setPositiveButton("예", object : DialogInterface.OnClickListener {
-            override fun onClick(dialog: DialogInterface?, which: Int) {
-              val intent = Intent(this@PassengerActivity, TicketHolderActivity::class.java)
-              startActivity(intent)
-            }
-          })
-          .setNegativeButton("아니요", object : DialogInterface.OnClickListener {
-            override fun onClick(dialog: DialogInterface?, which: Int) {
-              val intent = Intent(this@PassengerActivity, MainActivity::class.java)
-              startActivity(intent)
-            }
-          })
-          .create()
-          .show()
-      } else {
-//        roundTripChecked 가 True(왕복 여행) 이면
-        Log.d("flightLog", "-------------------------------")
-        Log.d("flightLog", "selectedArriveSeatNames : $selectedArriveSeatNames")
-        Log.d("flightLog", "-------------------------------")
-        val api = AppServerClass.instance
-        val call = api.roundFlightAlone(
-          passportNumber,
-          userId,
-          userFirstName,
-          userLastName,
-          selectedStartSeatNames,
-          luggageWeight,
-          selectedArriveSeatNames
-        )
-        retrofitResponseAlone(call)
-
-        AlertDialog.Builder(this)
-          .setTitle("왕복 여행 티켓 예매 완료")
-          .setMessage("티켓 홀더로 이동하시겠습니까?")
-          .setPositiveButton("예", object : DialogInterface.OnClickListener {
-            override fun onClick(dialog: DialogInterface?, which: Int) {
-              val intent = Intent(this@PassengerActivity, TicketHolderActivity::class.java)
-              startActivity(intent)
-            }
-          })
-          .setNegativeButton("아니요", object : DialogInterface.OnClickListener {
-            override fun onClick(dialog: DialogInterface?, which: Int) {
-              val intent = Intent(this@PassengerActivity, MainActivity::class.java)
-              startActivity(intent)
-            }
-          })
-          .create()
-          .show()
-      }
-    }
+    //    저장버튼 누르면 실제 db 저장
+    saveButton()
   }
 
   override fun onDestroy() {
@@ -201,6 +132,10 @@ class PassengerActivity : AppCompatActivity() {
     selectedArriveSeatNames = intent.getStringExtra("오는 비행기 선택 좌석").toString()
     selectedArriveSeatNameList = selectedArriveSeatNames.split(",")
 
+//    예약 번호
+    flightReno = intent.getStringExtra("예약 번호").toString()
+    roundFlightReno = intent.getStringExtra("왕복 예약 번호").toString()
+
 //    확인용
     Log.d("flightLog", "------------PassengerActivity-------------")
     Log.d("flightLog", "roundTripChecked : $roundTripChecked")
@@ -216,6 +151,8 @@ class PassengerActivity : AppCompatActivity() {
     Log.d("flightLog", "selectedStartSeatNameList = $selectedStartSeatNameList")
     Log.d("flightLog", "selectedArriveSeatNames = $selectedArriveSeatNames")
     Log.d("flightLog", "selectedArriveSeatNameList = $selectedArriveSeatNameList")
+    Log.d("flightLog", "flightReno = $flightReno")
+    Log.d("flightLog", "roundFlightReno = $roundFlightReno")
   }
 
   //    인원 수가 2명 이상이면 인원 추가 버튼 보이게
@@ -236,12 +173,14 @@ class PassengerActivity : AppCompatActivity() {
         Log.d("flightLog", "plusPeopleInfo 누른 횟수 : $buttonClick")
 
 //        새로운 동승객 입력 레이아웃 추가
-        val passengerView = layoutInflater.inflate(R.layout.passenger_info, null)
+        val passengerView =
+          layoutInflater.inflate(R.layout.passenger_info, binding.moreInfoLayout, false)
         binding.moreInfoLayout.addView(passengerView)
 
 //        버튼이 항상 맨 밑으로 가게끔 뷰에서 삭제했다가 다시 넣어줌
         binding.moreInfoLayout.removeView(binding.plusPeopleInfoBtn)
         binding.moreInfoLayout.removeView(binding.reserveGoAirplaneBtn)
+
         binding.moreInfoLayout.addView(binding.plusPeopleInfoBtn)
         binding.moreInfoLayout.addView(binding.reserveGoAirplaneBtn)
 
@@ -261,6 +200,128 @@ class PassengerActivity : AppCompatActivity() {
       userId,
     )
     retrofitResponse(call)
+  }
+
+  //  저장 버튼 누르면 실제 db 저장
+  fun saveButton() {
+    binding.reserveGoAirplaneBtn.setOnClickListener {
+//      탑승자 정보를 담기 위한 배열
+      val firstNames = mutableListOf<String>()
+      val lastNames = mutableListOf<String>()
+      val passports = mutableListOf<String>()
+      val luggageWeights = mutableListOf<String>()
+
+//      배열에 텍스트 값을 넣음
+      firstNames.add(binding.firstNameUser.text.toString())
+      lastNames.add(binding.lastNameUser.text.toString())
+      passports.add(binding.passportNumberUser.text.toString())
+      luggageWeights.add(binding.luggageWeightUser.text.toString() + "kg")
+
+//      동승자 정보 추가 (passenger_more_info_layout 의 자식 수 만큼)
+      for (i in 0 until buttonClick - 1) {
+        val passengerView = findViewById<LinearLayout>(R.id.passenger_more_info_layout)
+        val firstName =
+          passengerView.findViewById<EditText>(R.id.first_name_passenger).text.toString()
+        val lastName =
+          passengerView.findViewById<EditText>(R.id.last_name_passenger).text.toString()
+        val passport =
+          passengerView.findViewById<EditText>(R.id.passport_number_passenger).text.toString()
+        val luggage =
+          passengerView.findViewById<EditText>(R.id.luggage_weight_passenger).text.toString() + "kg"
+
+//        더 넣을 거 있으면 더 넣기
+        firstNames.add(firstName)
+        lastNames.add(lastName)
+        passports.add(passport)
+        luggageWeights.add(luggage)
+      }
+
+      Log.d("flightLog", "승객 수: ${firstNames.size}, 좌석 수: ${selectedStartSeatNameList.size}")
+
+      if (firstNames.size != selectedStartSeatNameList.size) {
+        AlertDialog.Builder(this@PassengerActivity)
+          .setMessage("승객 수 만큼의 정보를 작성해주세요")
+          .setPositiveButton("확인", null)
+          .create()
+          .show()
+        return@setOnClickListener
+      } else {
+        val api = AppServerClass.instance
+
+//      편도 여행이면
+        if (roundTripChecked == false) {
+//          firstNames 의 길이만큼 n 번째 값을 reserveGoAirplaneMember 에 계속해서 넣어줌
+          for (i in firstNames.indices) {
+            val call = api.reserveGoAirplaneMember(
+              passports[i],
+              flightReno,
+              userId,
+              firstNames[i],
+              lastNames[i],
+              selectedStartSeatNameList[i],
+              luggageWeights[i]
+            )
+            retrofitResponseAlone(call)
+          }
+
+          AlertDialog.Builder(this)
+            .setTitle("편도 여행 티켓 예매 완료")
+            .setMessage("티켓 홀더로 이동하시겠습니까?")
+            .setPositiveButton("예", object : DialogInterface.OnClickListener {
+              override fun onClick(dialog: DialogInterface?, which: Int) {
+                val intent = Intent(this@PassengerActivity, TicketHolderActivity::class.java)
+                startActivity(intent)
+              }
+            })
+            .setNegativeButton("아니요", object : DialogInterface.OnClickListener {
+              override fun onClick(dialog: DialogInterface?, which: Int) {
+                val intent = Intent(this@PassengerActivity, MainActivity::class.java)
+                startActivity(intent)
+              }
+            })
+            .create()
+            .show()
+        } else {
+//        roundTripChecked 가 True(왕복 여행) 이면
+          Log.d("flightLog", "-------------------------------")
+          Log.d("flightLog", "selectedArriveSeatNames : $selectedArriveSeatNames")
+          Log.d("flightLog", "-------------------------------")
+
+          // firstNames 의 길이만큼 n 번째 값을 reserveRoundAirplaneMember 에 계속해서 넣어줌
+          for (i in firstNames.indices) {
+            val call = api.reserveRoundAirplaneMember(
+              passports[i],
+              roundFlightReno,
+              userId,
+              firstNames[i],
+              lastNames[i],
+              selectedStartSeatNameList[i],
+              luggageWeights[i],
+              selectedArriveSeatNameList[i]
+            )
+            retrofitResponseAlone(call)
+          }
+
+          AlertDialog.Builder(this)
+            .setTitle("왕복 여행 티켓 예매 완료")
+            .setMessage("티켓 홀더로 이동하시겠습니까?")
+            .setPositiveButton("예", object : DialogInterface.OnClickListener {
+              override fun onClick(dialog: DialogInterface?, which: Int) {
+                val intent = Intent(this@PassengerActivity, TicketHolderActivity::class.java)
+                startActivity(intent)
+              }
+            })
+            .setNegativeButton("아니요", object : DialogInterface.OnClickListener {
+              override fun onClick(dialog: DialogInterface?, which: Int) {
+                val intent = Intent(this@PassengerActivity, MainActivity::class.java)
+                startActivity(intent)
+              }
+            })
+            .create()
+            .show()
+        }
+      }
+    }
   }
 
   //  Retrofit 통신 응답 List<List<flightUserDTO> : 예매 용
@@ -302,7 +363,7 @@ class PassengerActivity : AppCompatActivity() {
           Log.d("flightLog", "성공")
         } else {
           Log.d("flightLog", "실패. 응답 코드 : ${res.code()}")
-          Log.d("flightLog","${res.errorBody()}")
+          Log.d("flightLog", "${res.errorBody()}")
         }
       }
 

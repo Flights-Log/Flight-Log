@@ -44,7 +44,6 @@ private var roundTripChecked = false
 //가는 비행기 좌석 총 경비
 private var goAirplaneTotalPrice = 0
 
-
 class ComeAirplaneActivity : AppCompatActivity() {
   private val binding: ActivityComeAirplaneBinding by lazy {
     ActivityComeAirplaneBinding.inflate(layoutInflater)

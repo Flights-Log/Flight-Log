@@ -19,11 +19,11 @@ public interface FlightLogMainService {
   List<flightInfoDTO> searchComeAirplane(String arrivalCity, String startCity, String comeDate);
 
   //  가는 비행기 좌석 예약
-  void reserveGoAirplaneSeats(String userId, int selectedPeople, int goAirplaneFlightId,
+  void reserveGoAirplaneSeats(String flightReno, String userId, int selectedPeople, int goAirplaneFlightId,
                               String goDate, String selectedSeatNames);
 
   //  오는 비행기 좌석 예약
-  void reserveRoundAirplaneSeats(String userId, int selectedPeople,
+  void reserveRoundAirplaneSeats(String flightReno, String userId, int selectedPeople,
                                  int goAirplaneFlightId, String goDate, String selectedStartSeatNames,
                                  int comeAirplaneFlightId, String comeDate, String selectedArriveSeatNames);
 
@@ -36,10 +36,10 @@ public interface FlightLogMainService {
   //  로그인한 사용자의 이름 가져오기
   List<flightUserDTO> searchUserName(String userId);
 
-  //  혼자서 가는 비행기(편도) 예매하기
-  void goFlightAlone(String passport, String userId, String firstName, String lastName, String selectedSeatName, String luggage);
+  //  가는 비행기(편도) 예매하기
+  void reserveGoAirplaneMember(String passport, String flightReno, String userId, String firstName, String lastName, String selectedSeatName, String luggage);
 
   //  혼자서 왕복 비행기 에매하기
-  void roundFlightAlone(String passport, String userId, String firstName, String lastName, String selectedStartSeatName, String luggage, String selectedArriveSeatName);
+  void reserveRoundAirplaneMember(String passport, String roundFlightReno, String userId, String firstName, String lastName, String selectedStartSeatName, String luggage, String selectedArriveSeatName);
 
 }

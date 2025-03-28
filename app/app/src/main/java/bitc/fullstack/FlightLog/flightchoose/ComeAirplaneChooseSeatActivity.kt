@@ -53,6 +53,9 @@ private val userId = "test1234"
 //이미 예약된 좌석 담을 배열
 private var reservedSeats = listOf<String>()
 
+//임시로 넣은 랜덤 예약번호
+private val charset = ('0'..'9') + ('a'..'z') + ('A'..'Z')
+
 class ComeAirplaneChooseSeatActivity : AppCompatActivity() {
   private val binding: ActivityComeAirplaneChooseSeatBinding by lazy {
     ActivityComeAirplaneChooseSeatBinding.inflate(layoutInflater)
@@ -454,9 +457,14 @@ class ComeAirplaneChooseSeatActivity : AppCompatActivity() {
   //  정보 입력으로
   fun goToNextPage() {
     binding.comeAirplaneChooseSeatNextButton.setOnClickListener {
+      //랜덤 번호 만들기
+      val flightReno = List(10) { charset.random() }.joinToString("")
+      Log.d("flightLog", "flightReno = $flightReno")
+
 //      왕복 비행기 예약
       val api = AppServerClass.instance
       val call = api.roundAirplaneReserveSeat(
+        flightReno,
         userId,
         selectedPeople,
         goAirplaneFlightId,
@@ -483,6 +491,7 @@ class ComeAirplaneChooseSeatActivity : AppCompatActivity() {
       intent.putExtra("가는 비행기 아이디", goAirplaneFlightId)
       intent.putExtra("오는 비행기 아이디", comeAirplaneFlightId)
       intent.putExtra("왕복 선택 여부", roundTripChecked)
+      intent.putExtra("왕복 예약 번호", flightReno)
       startActivity(intent)
     }
 //    Log.d("flightLog", "goAirplaneTotalPrice : $goAirplaneTotalPrice")
