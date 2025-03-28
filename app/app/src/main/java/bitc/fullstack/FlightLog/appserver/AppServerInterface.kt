@@ -3,10 +3,13 @@ package bitc.fullstack.FlightLog.appserver
 //import bitc.fullstack.app.dto.UserDTO
 import bitc.fullstack.FlightLog.data.FlightResponse
 import bitc.fullstack.FlightLog.data.InterFlightResponse
+import bitc.fullstack.FlightLog.dto.FlightMemberDTO
 import bitc.fullstack.FlightLog.dto.dFlightDTO
 import bitc.fullstack.FlightLog.dto.iFlightDTO
 import retrofit2.Call
 import retrofit2.http.Body
+import retrofit2.http.Field
+import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Query
@@ -36,18 +39,12 @@ interface AppServerInterface {
   @POST("postIFlightInfo")
   fun postIFlightInfo(@Body IflightDTOList: MutableList<iFlightDTO>): Call<String>
 
+//  예약조회 화면 예매번호,여권번호 입력하는 부분
+  @POST("postUnuserSearch")
+  @FormUrlEncoded
+  fun postUnuserSearch(
+    @Field("nonmemberReservationNumber")nonmemberReservationNumber: String,
+    @Field("nonmemberPassnum")nonmemberPassnum: String
+  ):Call<List<FlightMemberDTO>>
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

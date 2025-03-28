@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bitc.fullstack503.flightlog.flightlogserver.mapper.FlightSideBarServiceMapper">
+
+<!--   예매조회 -->
+<select id="unusercheck" parameterType="map" resultType="bitc.fullstack503.flightlog.flightlogserver.dto.FlightMemberDTO">
+    SELECT
+    fr.flight_reno AS flight_reno,
+    frm.flight_mem_lastName AS last_name,
+    frm.flight_mem_firstName AS first_name,
+
+    fi_start.flight_info_startCity AS start_city,
+    fi_start.flight_info_arrivalCity AS arrival_city,
+    DATE_FORMAT(fr.flight_reserveSdate, '%Y-%m-%d') AS departure_date,
+    fi_start.flight_info_startTime AS departure_time,
+    fi_start.flight_info_arrivalTime AS arrival_time,
+
+    fr.flight_memberNum AS num_passengers,
+    frm.flight_mem_start_seatNum AS seat_number,
+    frm.flight_passport AS passport,
+    frm.flight_mem_luggage AS luggage,
+
+    fi_arr.flight_info_startCity AS return_start_city,
+    fi_arr.flight_info_arrivalCity AS return_arrival_city,
+    DATE_FORMAT(fr.flight_reserveEdate, '%Y-%m-%d') AS return_departure_date,
+    fi_arr.flight_info_startTime AS return_departure_time,
+    fi_arr.flight_info_arrivalTime AS return_arrival_time,
+
+    frm.flight_mem_arrive_seatNum AS return_seat_number,
+
+    frm.flight_arr_payCheck AS arr_payCheck,
+    fr.flight_arr_id
+
+    FROM flight_reserve fr
+    JOIN flight_reserve_member frm ON fr.flight_reno = frm.flight_reno
+    JOIN flight_info fi_start ON fr.flight_start_id = fi_start.flight_id
+    LEFT JOIN flight_info fi_arr ON fr.flight_arr_id = fi_arr.flight_id
+    where frm.flight_reno = #{nonmemberReservationNumber}
+    and frm.flight_passport = #{nonmemberPassnum}
+</select>
+
+</mapper>
