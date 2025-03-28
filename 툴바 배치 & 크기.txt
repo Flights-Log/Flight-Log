@@ -1,0 +1,9 @@
+원본 레이아웃 바로 밑에 놔두고
+
+    <!--  툴바-->
+    <include
+        android:id="@+id/tool_bar"
+        layout="@layout/activity_tool_bar"
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+        android:layout_marginTop="58dp"/> - 마진은 자리배치 내려오면 없애도 됨.
