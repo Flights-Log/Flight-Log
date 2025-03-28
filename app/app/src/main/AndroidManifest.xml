@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--    AndroidManifest.xml-->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools" >
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -17,43 +16,30 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FlightLog"
         android:usesCleartextTraffic="true"
-        tools:targetApi="31">
-
+        tools:targetApi="31" >
         <activity
-<<<<<<< HEAD
-            android:name=".sidebar.LoginActivity"
+            android:name=".sidebar.ToolBarActivity"
             android:exported="false" />
         <activity
+            android:name=".sidebar.LoginActivity"
+            android:exported="true" />
+        <activity
             android:name=".FlightInfoAPIActivity"
-            android:exported="true"/> <!-- 메인화면 -->
+            android:exported="false" /> <!-- 메인화면 -->
         <activity
             android:name=".flightmain.MainActivity"
-            android:exported="true"/> <!-- 오는편 비행기 선택 -->
-
+            android:exported="true" /> <!-- 오는편 비행기 선택 -->
         <!-- 인원 선택 -->
         <activity
             android:name=".flightmain.JoinMemberActivity"
-            android:exported="true" >
-=======
-            android:name=".LoginActivity"
-            android:exported="false" />
-        <activity
-            android:name=".MainActivity"
-            android:exported="true">
->>>>>>> 5553c3a29947f778d03501e9eb492d872fb4e601
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <!-- 가는편 비행기 선택 -->
+            android:exported="false" >
+        </activity> <!-- 가는편 비행기 선택 -->
         <activity
             android:name=".flightchoose.GoAirplaneActivity"
-            android:exported="true" /> <!-- 가는편 비행기 좌석 선택 -->
+            android:exported="false" /> <!-- 가는편 비행기 좌석 선택 -->
         <activity
             android:name=".flightchoose.GoAirplaneChooseSeatActivity"
-            android:exported="true"/>
+            android:exported="false" />
         <activity
             android:name=".flightchoose.ComeAirplaneActivity"
             android:exported="false" /> <!-- 오는편 비행기 좌석 선택 -->
@@ -62,16 +48,22 @@
             android:exported="false" /> <!-- 사이드바 - 예약 확인 -->
         <activity
             android:name=".sidebar.ReservationConfirmActivity"
-            android:exported="true" /> <!-- 사이드바 - 티켓홀더 -->
+            android:exported="false" /> <!-- 사이드바 - 티켓홀더 -->
         <activity
             android:name=".sidebar.TicketHolderActivity"
-            android:exported="true" /> <!-- 사이드바 - 결제내역 -->
+            android:exported="false" /> <!-- 사이드바 - 결제내역 -->
         <activity
             android:name=".sidebar.PaymentHistoryActivity"
-            android:exported="true" /> <!-- 사이드바 - 비회원조회 -->
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity> <!-- 사이드바 - 비회원조회 -->
         <activity
             android:name=".sidebar.NonmemberActivity"
-            android:exported="true" /> <!-- 사이드바 - 비회원조회 결과 -->
+            android:exported="false" /> <!-- 사이드바 - 비회원조회 결과 -->
         <activity
             android:name=".sidebar.UnuserReservationActivity"
             android:exported="false" /> <!-- 사이드바 - 회원정보 수정 -->
@@ -83,9 +75,10 @@
             android:exported="false" /> <!-- 탑승하는 승객정보 작성 -->
         <activity
             android:name=".flightchoose.PassengerActivity"
-            android:exported="true" /> <!-- 결제 하고 뜨는 예약 확정 -->
+            android:exported="false" /> <!-- 결제 하고 뜨는 예약 확정 -->
         <activity
             android:name=".flightchoose.ReservationCheckActivity"
-            android:exported="true" />
+            android:exported="false" />
     </application>
+
 </manifest>

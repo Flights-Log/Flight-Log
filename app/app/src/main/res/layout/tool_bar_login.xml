@@ -1,11 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<<<<<<< HEAD
 <androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
-=======
-<!--    res/layout/tool_bar_login.xml-->
-<androidx.appcompat.widget.Toolbar
-    xmlns:android="http://schemas.android.com/apk/res/android"
->>>>>>> 5553c3a29947f778d03501e9eb492d872fb4e601
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
@@ -13,7 +7,6 @@
     android:elevation="4dp"
     android:theme="@style/Widget.AppCompat.ActionBar"
     app:titleTextColor="#ffffff">
-<<<<<<< HEAD
   <!-- 뒤로 가기 버튼 -->
   <ImageButton
       android:id="@+id/tool_bar_back_arrow"
@@ -31,36 +24,4 @@
       android:layout_gravity="center"
       android:contentDescription="비행기 아이콘"
       android:src="@drawable/flight_log_logo" />
-=======
-
-    <!-- 뒤로가기 버튼 -->
-    <ImageButton
-        android:id="@+id/flight_log_back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:src="@drawable/flight_log_back"
-        android:paddingBottom="5dp"
-        android:contentDescription="메뉴" />
-
-    <!-- 중앙 아이콘 -->
-    <ImageView
-        android:id="@+id/flight_log_icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/flight_log_logo"
-        android:contentDescription="비행기 아이콘"
-        android:layout_gravity="center" />
-
-
-    <!-- 햄버거 버튼 -->
-    <ImageButton
-        android:id="@+id/flight_log_menu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:src="@drawable/flight_log_menu"
-        android:contentDescription="메뉴"
-        android:layout_gravity="end"/>
->>>>>>> 5553c3a29947f778d03501e9eb492d872fb4e601
 </androidx.appcompat.widget.Toolbar>

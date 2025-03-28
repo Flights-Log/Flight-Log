@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--    res/layout/activity_tool_bar.xml-->
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    tools:context=".flightmain.MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+    <androidx.appcompat.widget.Toolbar
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:id="@+id/tool_bar_activity"
+        android:background="@color/mainBlue"
+        android:elevation="4dp"
+        android:theme="@style/Widget.AppCompat.ActionBar"
+        app:titleTextColor="#ffffff">
+
+        <!-- 햄버거 버튼 -->
+        <ImageButton
+            android:id="@+id/flight_log_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="메뉴"
+            android:src="@drawable/flight_log_menu" />
+
+        <!-- 로그인 버튼 -->
+        <TextView
+            android:id="@+id/flight_log_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:paddingEnd="16dp"
+            android:text="@string/login"
+            android:textColor="@android:color/white"
+            android:textSize="16sp" />
+
+        <!-- 중앙 아이콘 -->
+        <ImageView
+            android:id="@+id/flight_log_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:contentDescription="비행기 아이콘"
+            android:src="@drawable/flight_log_logo" />
+
+
+    </androidx.appcompat.widget.Toolbar>
+
+    </LinearLayout>
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:layout_marginTop="72dp"
+        app:menu="@menu/drawer_menu">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp">
+
+            <!-- 로그인 상태 텍스트 -->
+            <EditText
+                android:id="@+id/login_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:fontFamily="sans-serif-medium"
+                android:text="로그인이 필요합니다"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+            <!-- 로그인 아이콘 -->
+            <ImageView
+                android:id="@+id/action_login"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="80dp"
+                android:layout_toEndOf="@id/login_status"
+                android:src="@drawable/ic_login" />
+
+            <!-- 알림 아이콘 -->
+            <ImageView
+                android:id="@+id/action_notifications"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="10dp"
+                android:layout_toEndOf="@id/action_login"
+                android:src="@drawable/ic_notifications" />
+
+            <!-- 설정 아이콘 -->
+            <ImageView
+                android:id="@+id/action_settings"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="10dp"
+                android:layout_toEndOf="@id/action_notifications"
+                android:src="@drawable/ic_settings" />
+
+        </RelativeLayout>
+
+    </com.google.android.material.navigation.NavigationView>
+
+</androidx.drawerlayout.widget.DrawerLayout>
+
+

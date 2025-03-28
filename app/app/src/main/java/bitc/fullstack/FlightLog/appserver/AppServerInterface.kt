@@ -4,10 +4,14 @@ package bitc.fullstack.FlightLog.appserver
 import bitc.fullstack.FlightLog.data.FlightResponse
 import bitc.fullstack.FlightLog.data.InterFlightResponse
 import bitc.fullstack.FlightLog.dto.JoinDTO
+import bitc.fullstack.FlightLog.dto.LoginResponse
 import bitc.fullstack.FlightLog.dto.dFlightDTO
 import bitc.fullstack.FlightLog.dto.iFlightDTO
+import okhttp3.Response
 import retrofit2.Call
 import retrofit2.http.Body
+import retrofit2.http.Field
+import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Query
@@ -37,10 +41,17 @@ interface AppServerInterface {
   @POST("postIFlightInfo")
   fun postIFlightInfo(@Body IflightDTOList: MutableList<iFlightDTO>): Call<String>
 
+
   //  회원가입 입력 전송하기
   @POST("joinMember")
-  fun joinMember(@Body joinRequest: JoinDTO): Call<String>  // 또는 Call<ResponseDTO>
+  fun joinMember(@Body joinDTO: JoinDTO): Call<String>
 
+  // 로그인 요청
+  @POST("flightLogin")
+  @FormUrlEncoded
+  fun flightLogin(@Field("inputUserId") inputUserId:String,
+                  @Field("inputUserPw") inputUserPw:String): Call<LoginResponse>
+  
 }
 
 

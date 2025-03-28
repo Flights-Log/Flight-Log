@@ -1,8 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<<<<<<< HEAD
-=======
-<!--    res/layout/tool_bar.xml-->
->>>>>>> 5553c3a29947f778d03501e9eb492d872fb4e601
 <androidx.appcompat.widget.Toolbar
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -12,7 +8,8 @@
     android:elevation="4dp"
     android:theme="@style/Widget.AppCompat.ActionBar"
     app:titleTextColor="#ffffff">
-<<<<<<< HEAD
+
+
   <!-- 햄버거 버튼 -->
   <ImageButton
       android:id="@+id/flight_log_menu"
@@ -21,6 +18,7 @@
       android:background="?attr/selectableItemBackgroundBorderless"
       android:src="@drawable/flight_log_menu"
       android:contentDescription="메뉴" />
+
 
   <!-- 중앙 아이콘 -->
   <ImageView
@@ -41,37 +39,9 @@
       android:textSize="16sp"
       android:layout_gravity="end"
       android:paddingEnd="16dp"/>
-=======
 
 
 
-    <!-- 햄버거 버튼 -->
-    <ImageButton
-        android:id="@+id/flight_log_menu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:src="@drawable/flight_log_menu"
-        android:contentDescription="메뉴" />
-
-    <!-- 중앙 아이콘 -->
-    <ImageView
-        android:id="@+id/flight_log_icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/flight_log_logo"
-        android:contentDescription="비행기 아이콘"
-        android:layout_gravity="center" />
-
-    <!-- 로그인 버튼 -->
-    <TextView
-        android:id="@+id/flight_log_login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/login"
-        android:textColor="@android:color/white"
-        android:textSize="16sp"
-        android:layout_gravity="end"
-        android:paddingEnd="16dp"/>
->>>>>>> 5553c3a29947f778d03501e9eb492d872fb4e601
 </androidx.appcompat.widget.Toolbar>
+
+

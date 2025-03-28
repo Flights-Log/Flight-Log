@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--    res/menu/drawer_menu.xml-->
-<<<<<<< HEAD
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -9,30 +8,14 @@
     <item
         android:id="@+id/empty2"
         android:title="">
-=======
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-
-<!--    간격 생성을 위한 item 항목(내용없음) -->
-    <item
-        android:id="@+id/empty2">
-
->>>>>>> 5553c3a29947f778d03501e9eb492d872fb4e601
         <menu>
             <item
                 android:id="@+id/empty2_2"
                 android:title=""/>
         </menu>
-<<<<<<< HEAD
     </item>
 
     <!-- 마이페이지 - 회원 정보 -->
-=======
-
-    </item>
-
-    <!-- 마이페이지 - 회원정보-->
->>>>>>> 5553c3a29947f778d03501e9eb492d872fb4e601
     <item
         android:id="@+id/nav_myinfo"
         android:title="마이페이지"
@@ -45,21 +28,11 @@
         </menu>
     </item>
 
-<<<<<<< HEAD
     <!-- 마이페이지 - 예약 -->
     <item
         android:id="@+id/nav_reservations"
         android:title="예약"
         android:icon="@drawable/ic_mypage">
-=======
-
-    <!-- 마이페이지 - 예약 관련 -->
-    <item
-        android:id="@+id/nav_reservations"
-        android:title="예약"
-        android:icon="@drawable/ic_mypage"
-        android:titleTextStyle="@style/MenuItemTextStyle" >
->>>>>>> 5553c3a29947f778d03501e9eb492d872fb4e601
         <menu>
             <item
                 android:id="@+id/nav_my_reservations"
@@ -73,7 +46,6 @@
         </menu>
     </item>
 
-<<<<<<< HEAD
     <!-- 마이페이지 - 예매 조회 -->
     <item
         android:id="@+id/nav_ticket_info"
@@ -98,20 +70,4 @@
         </menu>
     </item>
 
-=======
-    <!-- 마이페이지 - 비회원조회 -->
-    <item
-        android:id="@+id/nav_guest_view"
-        android:title="비회원"
-        android:icon="@drawable/ic_mypage"
-        android:titleTextStyle="@style/MenuItemTextStyle" >
-        <menu>
-            <item
-                android:id="@+id/nav_reservation_list"
-                android:title="     비회원 조회" />
-        </menu>
-    </item>
-
-
->>>>>>> 5553c3a29947f778d03501e9eb492d872fb4e601
 </menu>

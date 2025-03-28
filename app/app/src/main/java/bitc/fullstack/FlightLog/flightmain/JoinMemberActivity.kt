@@ -4,15 +4,22 @@ import android.app.DatePickerDialog
 import android.graphics.Color
 import android.icu.util.Calendar
 import android.os.Bundle
+import android.util.Log
 import android.widget.EditText
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import bitc.fullstack.FlightLog.R
+import bitc.fullstack.FlightLog.appserver.AppServerClass
 import bitc.fullstack.FlightLog.databinding.ActivityJoinMemberBinding
 import bitc.fullstack.FlightLog.dto.JoinDTO
+import bitc.fullstack.FlightLog.dto.iFlightDTO
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class JoinMemberActivity : AppCompatActivity() {
   private val binding: ActivityJoinMemberBinding by lazy {
@@ -34,14 +41,8 @@ class JoinMemberActivity : AppCompatActivity() {
     }
 
 
-    val email = findViewById<EditText>(R.id.editEmail).text.toString()
-    val phone = findViewById<EditText>(R.id.editPhone).text.toString()
-    val location = findViewById<EditText>(R.id.editLocation).text.toString()
-
-
     val btnMale = findViewById<AppCompatButton>(R.id.btnMale)
     val btnFemale = findViewById<AppCompatButton>(R.id.btnFemale)
-
 
 
     val editBirthDate = findViewById<EditText>(R.id.editBirthDate)
@@ -76,18 +77,58 @@ class JoinMemberActivity : AppCompatActivity() {
 
       datePicker.show()
     }
-    fun joinMember() {
-      val user = JoinDTO(
+
+
+
+
+    binding.btnJoin.setOnClickListener {
+      //val joinDataList = mutableListOf<JoinDTO>()
+
+      val joinData = JoinDTO(
         flightUserId = binding.editId.text.toString(),
+        flightUserEmail = binding.editEmail.text.toString(),
         flightUserPw = binding.editPw.text.toString(),
         flightUserFirstname = binding.editFirstName.text.toString(),
         flightUserLastname = binding.editLastName.text.toString(),
         flightUserKoFirstname = binding.editKoFirstName.text.toString(),
         flightUserKoLastname = binding.editKoLastName.text.toString(),
         flightUserPhone = binding.editPhone.text.toString(),
-        flightUserBirth = binding.editBirthDate.text.toString(),
         flightUserGender = selectedGender ?: "",
-        flightUserEmail = binding.editEmail.text.toString())
+        flightUserBirth = binding.editBirthDate.text.toString()
+      )
+      //joinDataList.add(joinData)
+
+
+      val api = AppServerClass.instance
+      val call = api.joinMember(joinData)
+      retrofitResponse(call)
+
     }
+  }
+
+
+
+  private fun retrofitResponse(call: Call<String>) {
+
+    call.enqueue(object : Callback<String>{
+      override fun onResponse(p0: Call<String>, res: Response<String>) {
+        if (res.isSuccessful) {
+          val result = res.body()
+          Log.d("csy", "result : $result")
+        }
+        else {
+          Log.d("csy", "송신 실패, 상태 코드: ${res.code()}, 메시지: ${res.message()}")
+          //Log.d("csy", "송신 실패")
+          res.errorBody()?.let { errorBody ->
+            val error = errorBody.string()
+            Log.d("csy", "Error Response: $error")
+          }
+        }
+      }
+
+      override fun onFailure(p0: Call<String>, t: Throwable) {
+        Log.d("csy", "message : $t.message")
+      }
+    })
   }
 }
