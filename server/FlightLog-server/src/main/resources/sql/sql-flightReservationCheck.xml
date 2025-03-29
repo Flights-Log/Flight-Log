@@ -7,17 +7,17 @@
     <select id="OneWayReservationCheck" parameterType="String" resultType="bitc.fullstack503.flightlog.flightlogserver.dto.FlightReservationCheckDTO">
         select
         fr.flight_reno as flight_reno,
-        frm.flight_mem_lastName as flight_member_last_name,
-        frm.flight_mem_firstName as flight_member_first_name,
-        fi.flight_info_startCity as flight_start_city,
-        fi.flight_info_arrivalCity as flight_arrival_city,
-        DATE_FORMAT(fr.flight_reserveSdate, '%Y-%m-%d') as flight_reserve_start_date,
-        fi.flight_info_startTime as flight_info_start_time,
-        fi.flight_info_arrivalTime as flight_info_arrival_time,
-        fr.flight_memberNum as flight_member_num,
-        frm.flight_mem_start_seatNum as flight_mem_start_seatNum,
-        frm.flight_passport as flight_passport,
-        frm.flight_mem_luggage as flight_mem_luggage
+        frm.flight_mem_lastName as last_name,
+        frm.flight_mem_firstName as first_name,
+        fi.flight_info_startCity as start_city,
+        fi.flight_info_arrivalCity as arrival_city,
+        DATE_FORMAT(fr.flight_reserveSdate, '%Y-%m-%d') as departure_date,
+        fi.flight_info_startTime as departure_time,
+        fi.flight_info_arrivalTime as arrival_time,
+        fr.flight_memberNum as num_passengers,
+        frm.flight_mem_start_seatNum as seat_number,
+        frm.flight_passport as passport,
+        frm.flight_mem_luggage as luggage
 
         from flight_reserve fr
 

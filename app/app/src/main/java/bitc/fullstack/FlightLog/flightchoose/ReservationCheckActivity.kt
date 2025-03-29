@@ -3,10 +3,14 @@ package bitc.fullstack.FlightLog.flightchoose
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import bitc.fullstack.FlightLog.R
 import bitc.fullstack.FlightLog.appserver.AppServerClass
 import bitc.fullstack.FlightLog.databinding.ActivityReservationCheckBinding
 import bitc.fullstack.FlightLog.dto.FlightReservationCheckDTO
@@ -41,9 +45,29 @@ class ReservationCheckActivity : AppCompatActivity() {
       startActivity(intent)
     }
 
+
+//    val roundTrip = intent.getBooleanExtra("왕복", false)
+//
+//    val returnTicket = binding.returnTicket
+//    if (roundTrip) {
+//      returnTicket.visibility = View.VISIBLE  // 왕복이면 보이기
+//    } else {
+//      returnTicket.visibility = View.GONE  // 편도면 숨기기
+//    }
+//
+//    binding.btnReturnCheck.setOnClickListener {
+//      val oneWay = returnTicket.visibility
+//      if (oneWay == View.VISIBLE) {
+//        returnTicket.visibility = View.GONE  // 숨김
+//      } else {
+//        returnTicket.visibility = View.VISIBLE  // 보임
+//      }
+//    }
+
+
 //    val reno = binding.reservationNumber.text.toString()
 
-    val reservationNumber = "test99"
+    val reservationNumber = "testNo1"
     val api = AppServerClass.instance
     //      DTO 타입을 서버로 전달
     val call = api.getReservationCheck(reservationNumber)
@@ -63,6 +87,7 @@ class ReservationCheckActivity : AppCompatActivity() {
 //            val hasReturnFlight = result.any { it.flightArrId != null }
 //
 //            val intent = Intent(this@ReservationCheckActivity, ReservationCheckActivity::class.java)
+
 //            // flightArrId가 null인 경우 다른 화면으로 전환
 //            if (hasReturnFlight) {
 //              // 왕복 비행편인 경우
@@ -71,7 +96,7 @@ class ReservationCheckActivity : AppCompatActivity() {
 //            } else {
 //              // 편도 비행편인 경우
 //              // 다른 화면을 보여주고, 그 화면에 맞는 Activity로 전환
-//              val oneWayIntent = Intent(this@ReservationCheckActivity, OneWayReservationActivity::class.java)
+//              val oneWayIntent = Intent(this@OneWayReservationActivity, OneWayReservationActivity::class.java)
 //              oneWayIntent.putExtra("flight_data", ArrayList(result))
 //              startActivity(oneWayIntent)
 //            }
@@ -117,6 +142,9 @@ class ReservationCheckActivity : AppCompatActivity() {
     binding.passportNumber.setText(reservation.passport)
     binding.luggage.setText(reservation.luggage)
 
+    binding.returnReservationNumber.setText(reservation.flightReno)
+    binding.returnLastName.setText(reservation.lastName)
+    binding.returnFirstName.setText(reservation.firstName)
     binding.returnStartCity.setText(reservation.returnStartCity)
     binding.returnArrivalCity.setText(reservation.returnArrivalCity)
     binding.returnDepartureDate.setText(reservation.returnDepartureDate)
@@ -126,6 +154,6 @@ class ReservationCheckActivity : AppCompatActivity() {
     binding.returnSeatNumber.setText(reservation.returnSeatNumber)
     binding.returnPassportNumber.setText(reservation.passport)
     binding.returnLuggage.setText(reservation.luggage)
-  }
 
+  }
 }
