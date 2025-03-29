@@ -3,6 +3,7 @@ package bitc.fullstack.FlightLog.appserver
 //import bitc.fullstack.app.dto.UserDTO
 import bitc.fullstack.FlightLog.data.FlightResponse
 import bitc.fullstack.FlightLog.data.InterFlightResponse
+import bitc.fullstack.FlightLog.dto.FlightReservationCheckDTO
 import bitc.fullstack.FlightLog.dto.dFlightDTO
 import bitc.fullstack.FlightLog.dto.iFlightDTO
 import retrofit2.Call
@@ -36,18 +37,14 @@ interface AppServerInterface {
   @POST("postIFlightInfo")
   fun postIFlightInfo(@Body IflightDTOList: MutableList<iFlightDTO>): Call<String>
 
+//  결제 후 예약 확정 페이지
+  @GET("getReservationCheck")
+  fun getReservationCheck(
+    @Query("reservationNumber") reservationNumber:String
+  ): Call<List<FlightReservationCheckDTO>>
+
+  @GET("getOneWayReservationCheck")
+  fun getOneWayReservationCheck(
+    @Query("reservationNumber") reservationNumber:String
+  ): Call<List<FlightReservationCheckDTO>>
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

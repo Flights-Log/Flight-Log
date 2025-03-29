@@ -1,6 +1,5 @@
 package bitc.fullstack503.flightlog.flightlogserver.controller;
 
-//import org.springframework.web.bind.annotation.*;
 import bitc.fullstack503.flightlog.flightlogserver.dto.dFlightDTO;
 import bitc.fullstack503.flightlog.flightlogserver.dto.iFlightDTO;
 import bitc.fullstack503.flightlog.flightlogserver.service.FlightInfoSaveService;
@@ -19,7 +18,6 @@ public class AppServerController {
   @Autowired
   private FlightInfoSaveService flightInfoSaveService;
 
-  
   @GetMapping("/gettest1")
   public String getTest1() {
     System.out.println("*** retrofit으로 gettest1에 접속 ***");
@@ -84,7 +82,7 @@ public class AppServerController {
     return IflightDTOList;
   }
 
-
+  
 
 }
 
