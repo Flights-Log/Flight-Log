@@ -5,7 +5,7 @@
 <mapper namespace="bitc.fullstack503.flightlog.flightlogserver.mapper.FlightSideBarServiceMapper">
 
 <!--   예매조회 -->
-<select id="unusercheck" parameterType="map" resultType="bitc.fullstack503.flightlog.flightlogserver.dto.FlightMemberDTO">
+<select id="unusercheck" parameterType="map" resultType="bitc.fullstack503.flightlog.flightlogserver.dto.FlightReservationCheckDTO">
     SELECT
     fr.flight_reno AS flight_reno,
     frm.flight_mem_lastName AS last_name,

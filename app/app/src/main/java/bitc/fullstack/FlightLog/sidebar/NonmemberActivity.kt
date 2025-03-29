@@ -10,7 +10,7 @@ import androidx.core.view.WindowInsetsCompat
 import bitc.fullstack.FlightLog.appserver.AppServerClass
 import bitc.fullstack.FlightLog.data.InterFlightResponse
 import bitc.fullstack.FlightLog.databinding.ActivityNonMemberBinding
-import bitc.fullstack.FlightLog.dto.FlightMemberDTO
+import bitc.fullstack.FlightLog.dto.FlightReservationCheckDTO
 import bitc.fullstack.FlightLog.dto.iFlightDTO
 import com.google.gson.Gson
 import retrofit2.Call
@@ -50,10 +50,10 @@ class NonmemberActivity : AppCompatActivity() {
   }
 
   //  Retrofit 통신 응답 부분을 따로 메소드로 분리
-  private fun retrofitResponse(call: Call<List<FlightMemberDTO>>) {
+  private fun retrofitResponse(call: Call<List<FlightReservationCheckDTO>>) {
 
-    call.enqueue(object : Callback<List<FlightMemberDTO>>{
-      override fun onResponse(p0: Call<List<FlightMemberDTO>>, res: Response<List<FlightMemberDTO>>) {
+    call.enqueue(object : Callback<List<FlightReservationCheckDTO>>{
+      override fun onResponse(p0: Call<List<FlightReservationCheckDTO>>, res: Response<List<FlightReservationCheckDTO>>) {
           if (res.isSuccessful) {
               val result = res.body()
               Log.d("csy", "result : $result")
@@ -61,9 +61,6 @@ class NonmemberActivity : AppCompatActivity() {
               if (result != null) {
                   // flightArrId가 null인 경우를 체크 it.flightArrId != null &&
                   val hasReturnFlight = result.any { it.flightArrId != 0 }
-
-
-
 
                   // flightArrId가 null인 경우 다른 화면으로 전환
                   if (hasReturnFlight) {
@@ -83,7 +80,7 @@ class NonmemberActivity : AppCompatActivity() {
               }
           }
       }
-      override fun onFailure(p0: Call<List<FlightMemberDTO>>, t: Throwable) {
+      override fun onFailure(p0: Call<List<FlightReservationCheckDTO>>, t: Throwable) {
         Log.d("csy", "message : $t.message")
       }
     })

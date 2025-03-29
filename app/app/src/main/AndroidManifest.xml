@@ -25,7 +25,13 @@
             android:exported="true"></activity> <!-- 메인화면 -->
         <activity
             android:name=".flightmain.MainActivity"
-            android:exported="true" /> <!-- 인원 선택 -->
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity> <!-- 인원 선택 -->
         <activity
             android:name=".flightmain.JoinMemberActivity"
             android:exported="true" /> <!-- 가는편 비행기 선택 -->
@@ -35,11 +41,6 @@
         <activity
             android:name=".flightchoose.GoAirplaneChooseSeatActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity> <!-- 오는편 비행기 선택 -->
         <activity
             android:name=".flightchoose.ComeAirplaneActivity"
@@ -58,10 +59,17 @@
             android:exported="true" /> <!-- 사이드바 - 비회원조회 -->
         <activity
             android:name=".sidebar.NonmemberActivity"
-            android:exported="true" /> <!-- 사이드바 - 비회원조회 결과 -->
+            android:exported="true">
+        </activity>
+        <!-- 사이드바 - 예약 조회(왕복) -->
         <activity
             android:name=".sidebar.UnuserReservationActivity"
-            android:exported="false" /> <!-- 사이드바 - 회원정보 수정 -->
+            android:exported="false" />
+        <!-- 사이드바 - 예약 조회(편도) -->
+        <activity
+            android:name=".sidebar.ReservationGoActivity"
+            android:exported="false" />
+        <!-- 사이드바 - 회원정보 수정 -->
         <activity
             android:name=".sidebar.PassengerInfoActivity"
             android:exported="false" /> <!-- 사이드바 - 예약확인및취소 - 상세정보 -->

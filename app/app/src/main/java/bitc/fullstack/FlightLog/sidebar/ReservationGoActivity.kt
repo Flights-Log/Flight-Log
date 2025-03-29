@@ -9,7 +9,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import bitc.fullstack.FlightLog.databinding.ActivityReservationGoBinding
 import bitc.fullstack.FlightLog.databinding.ActivityUnuserReservationBinding
-import bitc.fullstack.FlightLog.dto.FlightMemberDTO
+import bitc.fullstack.FlightLog.dto.FlightReservationCheckDTO
 
 class ReservationGoActivity : AppCompatActivity() {
 
@@ -30,7 +30,7 @@ class ReservationGoActivity : AppCompatActivity() {
     }
     private fun initEventListener(){
 
-        val flightMembers = intent.getSerializableExtra("flight_data") as? List<FlightMemberDTO>
+        val flightMembers = intent.getSerializableExtra("flight_data") as? List<FlightReservationCheckDTO>
 
         if (flightMembers != null && flightMembers.isNotEmpty()) {
             // 데이터가 정상적으로 전달된 경우

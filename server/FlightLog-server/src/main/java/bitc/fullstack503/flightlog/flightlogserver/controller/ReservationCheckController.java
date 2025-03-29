@@ -19,11 +19,6 @@ public class ReservationCheckController {
     @Autowired
     private FlightChooseService flightChooseService;
 
-//    @Autowired
-//    public ReservationCheckController(FlightChooseService flightChooseService) {
-//        this.flightChooseService = flightChooseService;
-//    }
-
     @GetMapping("/getReservationCheck")
     public List<FlightReservationCheckDTO> getReservationCheck(@RequestParam("reservationNumber") String reservationNumber) {
         List<FlightReservationCheckDTO> flightReservationCheckList;

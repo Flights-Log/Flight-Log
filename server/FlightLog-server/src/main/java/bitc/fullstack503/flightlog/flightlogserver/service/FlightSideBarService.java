@@ -1,10 +1,10 @@
 package bitc.fullstack503.flightlog.flightlogserver.service;
 
-import bitc.fullstack503.flightlog.flightlogserver.dto.FlightMemberDTO;
+import bitc.fullstack503.flightlog.flightlogserver.dto.FlightReservationCheckDTO;
 
 import java.util.List;
 
 public interface FlightSideBarService {
 
-    List<FlightMemberDTO> unusercheck(String nonmemberReservationNumber, String nonmemberPassnum);
+    List<FlightReservationCheckDTO> unusercheck(String nonmemberReservationNumber, String nonmemberPassnum);
 }
