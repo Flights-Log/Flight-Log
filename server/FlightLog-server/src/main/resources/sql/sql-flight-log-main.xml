@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bitc.fullstack503.flightlog.flightlogserver.mapper.FlightLogMainMapper">
+
+  <!--  출발지 설정하기-->
+  <select id="searchDeparture" resultType="string">
+    select flight_info_startCity
+    from flight_info
+    group by flight_info_startCity
+    order by flight_info_startCity
+  </select>
+
+  <!--  도착지 설정하기-->
+  <!--  단, 출발지로 설정한 값은 제외한다-->
+  <!--  또한, 해당하는 출발지에서 도착지로 가는 항공편이 있는 경우에만 출력한다-->
+  <select id="searchArrive" resultType="string">
+    select flight_info_arrivalCity
+    from flight_info
+    where flight_info_startCity = #{selectedDeparture}
+    and flight_info_arrivalCity not like #{selectedDeparture}
+    group by flight_info_arrivalCity, flight_info_startCity
+    order by flight_info_arrivalCity;
+  </select>
+
+  <!--  지금까지 설정한 값을 바탕으로 출발하는 비행기 값 가져오기-->
+  <!--  단, 2024년 값을 기준으로 한다-->
+  <select id="searchGoAirplane" parameterType="java.util.List">
+    select flight_id, flight_info_airline, flight_info_startCity, flight_info_arrivalCity,
+    flight_info_startTime, flight_info_arrivalTime, flight_distance
+    from flight_info
+    where flight_info_startCity = #{startCity}
+    and flight_info_arrivalCity = #{arrivalCity}
+    and date_sub(#{goDate}, interval 1 year) between flight_info_startDate and flight_info_Eddate
+    and case weekday(date_sub(#{goDate}, interval 1 year))
+    when 0 then flight_mon
+    when 1 then flight_tue
+    when 2 then flight_wed
+    when 3 then flight_thu
+    when 4 then flight_fri
+    when 5 then flight_sat
+    when 6 then flight_sun
+    end = 'Y';
+  </select>
+
+  <!--  지금까지 설정한 값을 바탕으로 도착하는 비행기 값 가져오기-->
+  <!--  단, 2024년 값을 기준으로 한다-->
+  <select id="searchComeAirplane" parameterType="java.util.List">
+    select flight_id, flight_info_airline, flight_info_startCity, flight_info_arrivalCity,
+    flight_info_startTime, flight_info_arrivalTime, flight_distance
+    from flight_info
+    where flight_info_startCity = #{arrivalCity}
+    and flight_info_arrivalCity = #{startCity}
+    and date_sub(#{comeDate}, interval 1 year) between flight_info_startDate and flight_info_Eddate
+    and case weekday(date_sub(#{comeDate}, interval 1 year))
+    when 0 then flight_mon
+    when 1 then flight_tue
+    when 2 then flight_wed
+    when 3 then flight_thu
+    when 4 then flight_fri
+    when 5 then flight_sat
+    when 6 then flight_sun
+    end = 'Y';
+  </select>
+
+  <!--  roundTripChecked 가 false 일때 편도 비행기 좌석 예약하기-->
+  <insert id="reserveGoAirplaneSeats" parameterType="java.util.List">
+    insert into flight_reserve
+    (flight_reno, flight_user_id, flight_memberNum,
+    flight_start_id, flight_reserveSdate, flight_start_seatNum)
+    values (#{flightReno},#{userId},#{selectedPeople},#{goAirplaneFlightId},#{goDate},#{selectedSeatNames});
+  </insert>
+
+  <!--  roundTripChecked 가 true 일때 왕복 비행기 좌석 예약하기-->
+  <insert id="reserveRoundAirplaneSeats" parameterType="java.util.List">
+    insert into flight_reserve
+    (flight_reno, flight_user_id, flight_memberNum,
+    flight_start_id, flight_reserveSdate, flight_start_seatNum,
+    flight_arr_id, flight_reserveEdate, flight_arr_seatNum)
+    values (#{flightReno},#{userId},#{selectedPeople},
+    #{goAirplaneFlightId},#{goDate},#{selectedStartSeatNames},
+    #{comeAirplaneFlightId},#{comeDate},#{selectedArriveSeatNames});
+  </insert>
+
+  <!-- 편도 (가는) 비행기 예매된 좌석인지 확인-->
+  <select id="searchGoAirplaneIsSeatReservated" parameterType="java.util.List">
+    SELECT temp.split_column
+    FROM (
+    SELECT flight_start_seatNum
+    FROM flight_reserve
+    WHERE flight_start_id = #{goAirplaneFlightId}
+    ) f
+    JOIN JSON_TABLE(
+    CONCAT('[\"', REPLACE(f.flight_start_seatNum, ',', '\",\"'), '\"]'),
+    '$[*]' COLUMNS (split_column VARCHAR(50) PATH '$')
+    ) temp;
+  </select>
+
+  <!--  왕복(오는)비행기 예매된 좌석인지 확인-->
+  <select id="searchComeAirplaneIsSeatReserved" parameterType="java.util.List">
+    SELECT temp.split_column
+    FROM (
+    SELECT flight_arr_seatNum
+    FROM flight_reserve
+    WHERE flight_arr_id = #{comeAirplaneFlightId}
+    ) f
+    JOIN JSON_TABLE(
+    CONCAT('[\"', REPLACE(f.flight_arr_seatNum, ',', '\",\"'), '\"]'),
+    '$[*]' COLUMNS (split_column VARCHAR(50) PATH '$')
+    ) temp;
+  </select>
+
+  <!--  유저 성, 이름 가져오기-->
+  <select id="searchUserName" parameterType="java.util.List">
+    select flight_user_firstname, flight_user_lastname
+    from flight_user
+    where flight_user_id = #{userId};
+  </select>
+
+  <!-- roundTripChecked 가 false 일 때 가는 비행기 예약하기-->
+  <insert id="reserveGoAirplaneMember" parameterType="java.util.List">
+    insert into flight_reserve_member(flight_passport, flight_reno, flight_user_id,
+    flight_mem_firstName, flight_mem_lastName,
+    flight_mem_start_seatNum, flight_mem_start_price, flight_mem_luggage)
+    values
+    (#{passport},#{flightReno},#{userId},#{firstName},#{lastName},
+    #{selectedSeatName},#{startSeatPrice},#{luggage});
+  </insert>
+
+  <!-- roundTripChecked 가 true 일 때 왕복 비행기 예매하기 -->
+  <insert id="reserveRoundAirplaneMember" parameterType="java.util.List">
+    insert into flight_reserve_member(flight_passport, flight_reno, flight_user_id,
+    flight_mem_firstName, flight_mem_lastName,
+    flight_mem_start_seatNum, flight_mem_start_price, flight_mem_luggage,
+    flight_mem_arrive_seatNum, flight_mem_arr_price)
+    values
+    (#{passport},#{roundFlightReno},#{userId},#{firstName},#{lastName},
+    #{selectedStartSeatName},#{startSeatPrice},#{luggage},
+    #{selectedArriveSeatName}, #{arriveSeatPrice});
+  </insert>
+
+  <!-- 만약에 내가 설정한 날짜에 출발하는 비행기가 없을 경우 다른 날짜 추천 -->
+  <select id="recommendStartDate" parameterType="string">
+    select max(flight_info_startDate)
+    from flight_info
+    where flight_info_startCity = #{startCity}
+    and flight_info_arrivalCity = #{arrivalCity}
+  </select>
+</mapper>

@@ -5,133 +5,77 @@ import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
 import android.util.Log
-import android.widget.TextView
-import androidx.appcompat.widget.AppCompatButton
 import androidx.fragment.app.DialogFragment
-import bitc.fullstack.FlightLog.R
 import bitc.fullstack.FlightLog.databinding.FragmentSelectPeopleDialogBinding
+import bitc.fullstack.FlightLog.flightchoose.GoAirplaneChooseSeatActivity
 
 class SelectPeopleDialogFragment : DialogFragment() {
   private val binding: FragmentSelectPeopleDialogBinding by lazy {
     FragmentSelectPeopleDialogBinding.inflate(layoutInflater)
   }
 
-  //  성인, 소아, 유아 수를 저장하는 변수
+  //  인원수 저장 변수
   private var adultCount = 1
-  private var childCount = 0
-  private var babyCount = 0
-  private var allPeopleCount = 1
+
+  //  리스너 객체(MainActivity)에서 구현
+  private var listener: OnPassengerSelectedListener? = null
 
   @SuppressLint("MissingInflatedId", "SetTextI18n")
   override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-    val builder = android.app.AlertDialog.Builder(requireContext())
-    val inflater = requireActivity().layoutInflater
-    val view = inflater.inflate(R.layout.fragment_select_people_dialog, null)
-
-//    UI 가져오기
-//    어른
-    val adultMinusButton: AppCompatButton = view.findViewById(R.id.adult_minus_button)
-    val adultPlusButton: AppCompatButton = view.findViewById(R.id.adult_plus_button)
-    val adultCountText: TextView = view.findViewById(R.id.adult_count_text)
-
-//    소아
-    val childMinusButton: AppCompatButton = view.findViewById(R.id.child_minus_button)
-    val childPlusButton: AppCompatButton = view.findViewById(R.id.child_plus_button)
-    val childCountText: TextView = view.findViewById(R.id.child_count_text)
-
-//    유아
-    val babyMinusButton: AppCompatButton = view.findViewById(R.id.baby_minus_button)
-    val babyPlusButton: AppCompatButton = view.findViewById(R.id.baby_plus_button)
-    val babyCountText: TextView = view.findViewById(R.id.baby_count_text)
-
-//    총 인원
-    val allPeopleCountText: TextView = view.findViewById(R.id.all_people_count_text)
-
-//    어른, 소아, 유아 초기값
-    adultCountText.text = adultCount.toString()
-    childCountText.text = childCount.toString()
-    babyCountText.text = babyCount.toString()
-    updateTotalPeopleCount(allPeopleCountText)
-
-//    어른 버튼 클릭
-    adultMinusButton.setOnClickListener {
-      if (adultCount > 1) {
-        adultCount--
-        adultCountText.text = adultCount.toString()
-        updateTotalPeopleCount(allPeopleCountText)
-      }
-    }
-    adultPlusButton.setOnClickListener {
-      if (allPeopleCount < 10) {
-        adultCount++
-        updateTotalPeopleCount(allPeopleCountText)
-        adultCountText.text = adultCount.toString()
-      } else {
-        showAlert("총 인원이 10명을 넘을 수는 없습니다")
-        Log.d("flightLog", "총 인원 $allPeopleCount 이 10명 이상입니다")
-      }
-    }
-
-//    소아 버튼 클릭
-    childMinusButton.setOnClickListener {
-      if (childCount > 0) {
-        childCount--
-        childCountText.text = childCount.toString()
-        updateTotalPeopleCount(allPeopleCountText)
-      }
-    }
-    childPlusButton.setOnClickListener {
-      if (allPeopleCount < 10) {
-        childCount++
-        updateTotalPeopleCount(allPeopleCountText)
-        childCountText.text = childCount.toString()
-      } else {
-        showAlert("총 인원이 10명을 넘을 수는 없습니다")
-        Log.d("flightLog", "총 인원 $allPeopleCount 이 10명 이상입니다")
-      }
-    }
-
-//    유아 버튼 클릭
-    babyMinusButton.setOnClickListener {
-      if (babyCount > 0) {
-        babyCount--
-        babyCountText.text = babyCount.toString()
-        updateTotalPeopleCount(allPeopleCountText)
-      }
-    }
-    babyPlusButton.setOnClickListener {
-      if (allPeopleCount < 10) {
-        babyCount++
-        updateTotalPeopleCount(allPeopleCountText)
-        babyCountText.text = babyCount.toString()
-      } else {
-        showAlert("총 인원이 10명을 넘을 수는 없습니다")
-        Log.d("flightLog", "총 인원 $allPeopleCount 이 10명 이상입니다")
-      }
-    }
-
-//    총 인원 수 출력
-    builder.setView(view)
-      .setTitle("인원 선택 (최소 1 명 ~ 최대 10 명)")
+    val builder = AlertDialog.Builder(requireContext())
+    // 다이얼로그에 뷰 설정
+    builder.setView(binding.root)
+      .setTitle("인원 선택")
+//      _,_ : 사용하지 않는 변수 (원래는 charSequence text 랑 Onclickelistner 의 listner 를 사용하는데
+//      현재 사용하고 있지 않으므로 _ 를 써서 사용하지 않는 변수임을 나타냄
       .setPositiveButton("확인") { _, _ ->
-        val result = "총 $allPeopleCount 명"
-        (activity as? OnPassengerSelectedListener)?.onPassengerSelected(result)
+//        listener 가 있으면 onPassengerSelected 실행
+//        $adultCount 값 MainActivity 로 전달
+        listener?.onPassengerSelected("$adultCount 명")
       }
       .setNegativeButton("취소", null)
 
+//    인원수 초기값
+    binding.adultCountText.text = adultCount.toString()
+    updateTotalPeopleCount(adultCount)
+
+//   - 버튼 클릭
+    binding.adultMinusButton.setOnClickListener {
+      if (adultCount > 1) {
+        adultCount--
+        binding.adultCountText.text = adultCount.toString()
+        updateTotalPeopleCount(adultCount)
+      }
+    }
+
+//    + 버튼 클릭
+    binding.adultPlusButton.setOnClickListener {
+      if (adultCount < 10) {
+        adultCount++
+        updateTotalPeopleCount(adultCount)
+        binding.adultCountText.text = adultCount.toString()
+      } else {
+        showAlert("총 인원이 10명을 넘을 수는 없습니다")
+        Log.d("flightLog", "총 인원 $adultCount 이 10명 이상입니다")
+      }
+    }
     return builder.create()
   }
 
   //  총 인원 수 갱신해주는 함수
   @SuppressLint("SetTextI18n")
-  private fun updateTotalPeopleCount(allPeopleCountText: TextView) {
-    allPeopleCount = adultCount + childCount + babyCount
-    allPeopleCountText.text = "$allPeopleCount 명"
+  private fun updateTotalPeopleCount(adultCount: Int) {
+    binding.allPeopleCountText.text = "$adultCount 명"
   }
 
   //  result 값을 Main 으로 옮기기 위해 만든 인터페이스
   interface OnPassengerSelectedListener {
     fun onPassengerSelected(result: String)
+  }
+
+//  MainActivity 에서 리스너를 설정할 수 있도록 추가
+  fun setOnPassengerSelectedListener(listener: MainActivity) {
+    this.listener = listener
   }
 
   //  알람 창 띄우는 함수

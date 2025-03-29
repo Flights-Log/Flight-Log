@@ -4,47 +4,46 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="bitc.fullstack503.flightlog.flightlogserver.mapper.FlightInfoSaveMapper">
 
-    <insert id="insertDFlightInfo" parameterType="java.util.List">
-        INSERT INTO flight_info (
-        flight_info_airline, flight_info_airlineNum, flight_info_startDate,
-        flight_info_Eddate, flight_info_startTime, flight_info_arrivalTime,
-        flight_info_startCity, flight_info_arrivalCity,
-        flight_mon, flight_tue, flight_wed,
-        flight_thu, flight_fri, flight_sat, flight_sun
-        ) VALUES
-        <foreach collection="flightInfoList" item="flight" separator=",">
-            (
-            <!--CONCAT(#{flight.domesticNum},
-            REPLACE(LEFT(#{flight.domesticStdate}, 10), '-', ''),
-            REPLACE(LEFT(#{flight.domesticEddate}, 10), '-', ''), #{flight.domesticStartTime}),
-            항공사명, 비행기번호, 운항시작일, 종료일, 출발시간, 도착시간, 출발지역, 도착지역, 월~일
-            -->
-            #{flight.airlineKorean}, #{flight.domesticNum}, #{flight.domesticStdate},
-            #{flight.domesticEddate}, #{flight.domesticStartTime}, #{flight.domesticArrivalTime},
-            #{flight.startcity}, #{flight.arrivalcity}, #{flight.domesticMon},
-            #{flight.domesticTue}, #{flight.domesticWed}, #{flight.domesticThu},
-            #{flight.domesticFri}, #{flight.domesticSat}, #{flight.domesticSun}
-            )
-        </foreach>
-    </insert>
+  <insert id="insertDFlightInfo" parameterType="java.util.List">
+    INSERT INTO flight_info (
+    flight_info_airline, flight_info_airlineNum, flight_info_startDate,
+    flight_info_Eddate, flight_info_startTime, flight_info_arrivalTime,
+    flight_info_startCity, flight_info_arrivalCity,
+    flight_mon, flight_tue, flight_wed,
+    flight_thu, flight_fri, flight_sat, flight_sun
+    ) VALUES
+    <foreach collection="flightInfoList" item="flight" separator=",">
+      (
+      <!--CONCAT(#{flight.domesticNum},
+      REPLACE(LEFT(#{flight.domesticStdate}, 10), '-', ''),
+      REPLACE(LEFT(#{flight.domesticEddate}, 10), '-', ''), #{flight.domesticStartTime}),
+      항공사명, 비행기번호, 운항시작일, 종료일, 출발시간, 도착시간, 출발지역, 도착지역, 월~일
+      -->
+      #{flight.airlineKorean}, #{flight.domesticNum}, #{flight.domesticStdate},
+      #{flight.domesticEddate}, #{flight.domesticStartTime}, #{flight.domesticArrivalTime},
+      #{flight.startcity}, #{flight.arrivalcity}, #{flight.domesticMon},
+      #{flight.domesticTue}, #{flight.domesticWed}, #{flight.domesticThu},
+      #{flight.domesticFri}, #{flight.domesticSat}, #{flight.domesticSun}
+      )
+    </foreach>
+  </insert>
 
-    <insert id="insertIFlightInfo" parameterType="java.util.List">
-        INSERT INTO flight_info ( <!--flight_id-->
-        flight_info_airline, flight_info_airlineNum, flight_info_startDate,
-        flight_info_Eddate, flight_info_startTime,
-        flight_info_startCity, flight_info_arrivalCity,
-        flight_mon, flight_tue, flight_wed,
-        flight_thu, flight_fri, flight_sat, flight_sun
-        ) VALUES
-        <foreach collection="iflightDTOList" item="flight" separator=",">
-            (
-            #{flight.airlineKorean}, #{flight.internationalNum}, #{flight.internationalStdate},
-            #{flight.internationalEddate}, #{flight.internationalTime},
-            #{flight.deptcity}, #{flight.arrvcity}, #{flight.internationalMon},
-            #{flight.internationalTue}, #{flight.internationalWed}, #{flight.internationalThu},
-            #{flight.internationalFri}, #{flight.internationalSat}, #{flight.internationalSun}
-            )
-        </foreach>
-    </insert>
-
+  <insert id="insertIFlightInfo" parameterType="java.util.List">
+    INSERT INTO flight_info ( <!--flight_id-->
+    flight_info_airline, flight_info_airlineNum, flight_info_startDate,
+    flight_info_Eddate, flight_info_startTime,
+    flight_info_startCity, flight_info_arrivalCity,
+    flight_mon, flight_tue, flight_wed,
+    flight_thu, flight_fri, flight_sat, flight_sun
+    ) VALUES
+    <foreach collection="iflightDTOList" item="flight" separator=",">
+      (
+      #{flight.airlineKorean}, #{flight.internationalNum}, #{flight.internationalStdate},
+      #{flight.internationalEddate}, #{flight.internationalTime},
+      #{flight.deptcity}, #{flight.arrvcity}, #{flight.internationalMon},
+      #{flight.internationalTue}, #{flight.internationalWed}, #{flight.internationalThu},
+      #{flight.internationalFri}, #{flight.internationalSat}, #{flight.internationalSun}
+      )
+    </foreach>
+  </insert>
 </mapper>

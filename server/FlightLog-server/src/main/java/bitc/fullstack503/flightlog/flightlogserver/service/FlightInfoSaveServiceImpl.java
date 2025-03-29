@@ -1,6 +1,7 @@
 package bitc.fullstack503.flightlog.flightlogserver.service;
 
 import bitc.fullstack503.flightlog.flightlogserver.dto.dFlightDTO;
+import bitc.fullstack503.flightlog.flightlogserver.dto.flightInfoDTO;
 import bitc.fullstack503.flightlog.flightlogserver.dto.iFlightDTO;
 import bitc.fullstack503.flightlog.flightlogserver.mapper.FlightInfoSaveMapper;
 import org.springframework.beans.factory.annotation.Autowired;

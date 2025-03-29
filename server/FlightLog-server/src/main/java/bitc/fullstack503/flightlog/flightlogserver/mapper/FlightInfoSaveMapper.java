@@ -1,6 +1,7 @@
 package bitc.fullstack503.flightlog.flightlogserver.mapper;
 
 import bitc.fullstack503.flightlog.flightlogserver.dto.dFlightDTO;
+import bitc.fullstack503.flightlog.flightlogserver.dto.flightInfoDTO;
 import bitc.fullstack503.flightlog.flightlogserver.dto.iFlightDTO;
 import org.apache.ibatis.annotations.Mapper;
 

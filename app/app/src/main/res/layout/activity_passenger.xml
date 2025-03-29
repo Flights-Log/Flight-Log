@@ -1,185 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical">
 
-    <include
-        android:id="@+id/tool_bar"
-        layout="@layout/tool_bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-<LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+  <!--  툴바-->
+  <include
+      android:id="@+id/tool_bar"
+      layout="@layout/tool_bar"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content" />
+
+  <!--탑승객 정보 입력-->
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="@color/skyBlue"
+      android:gravity="center"
+      android:paddingVertical="10dp">
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="10dp"
-        android:text="탑승객"
-        android:textSize="30sp"
+        android:text="탑승객 정보 입력"
+        android:textColor="@color/black"
+        android:textSize="20sp"
         android:textStyle="bold" />
+  </LinearLayout>
 
-    <!--    영문 이름-->
+  <ScrollView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+
+    <!--전체 뷰-->
     <LinearLayout
+        android:id="@+id/more_info_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginVertical="10dp"
-        android:orientation="vertical">
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+      <!--영문 이름-->
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginBottom="10dp"
+          android:gravity="center_vertical"
+          android:orientation="horizontal">
 
         <EditText
-            android:id="@+id/last_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="10dp"
+            android:id="@+id/last_name_user"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="20dp"
+            android:layout_weight="1"
             android:background="@drawable/edittext_border"
-            android:hint=" 영문 성 "
-            android:padding="10dp"
+            android:hint="영문 성"
+            android:textAlignment="center"
             android:textColor="#000000" />
 
         <EditText
-            android:id="@+id/first_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:id="@+id/first_name_user"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="20dp"
+            android:layout_weight="1"
             android:background="@drawable/edittext_border"
-            android:hint=" 영문 이름 "
-            android:padding="10dp"
+            android:hint="영문 이름"
+            android:textAlignment="center"
             android:textColor="#000000" />
-    </LinearLayout>
 
-    <!--    성별 선택-->
-    <Spinner
-            android:id="@+id/passenger_info_gender"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginVertical="10dp"
-            android:background="@drawable/edittext_border" />
+      </LinearLayout>
 
-    <Spinner
-        android:id="@+id/nationality"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginVertical="10dp"
-        android:background="@drawable/edittext_border" />
+      <!--여권 번호-->
+      <EditText
+          android:id="@+id/passport_number_user"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginVertical="10dp"
+          android:background="@drawable/edittext_border"
+          android:hint="여권 번호를 입력하세요"
+          android:paddingHorizontal="5dp"
+          android:paddingVertical="10dp"
+          android:textAlignment="center" />
 
+      <!--수하물 무게-->
+      <EditText
+          android:id="@+id/luggage_weight_user"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginVertical="10dp"
+          android:background="@drawable/edittext_border"
+          android:hint="수하물 무게(없다면 0)"
+          android:paddingHorizontal="5dp"
+          android:paddingVertical="10dp"
+          android:textAlignment="center" />
 
-        <!-- 생년월일 입력 -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal"
-            android:layout_marginVertical="5dp">
+      <!--동슥객 추가하기-->
+      <Button
+          android:id="@+id/plus_people_info_btn"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginVertical="10dp"
+          android:backgroundTint="#118cff"
+          android:text="동승객 추가하기"
+          android:textSize="20sp"
+          android:textStyle="bold" />
 
-        <Spinner
-                android:id="@+id/year_spinner"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/edittext_border"
-                android:layout_marginHorizontal="10dp"
-                android:paddingHorizontal="30dp"/>
-
-        <Spinner
-                android:id="@+id/month_spinner"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/edittext_border"
-                android:layout_marginHorizontal="10dp"
-                android:paddingHorizontal="30dp"/>
-
-        <Spinner
-                android:id="@+id/day_spinner"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/edittext_border"
-                android:layout_marginHorizontal="10dp"
-                android:paddingHorizontal="30dp"/>
+      <!--진짜 예매 저장-->
+      <Button
+          android:id="@+id/reserve_go_airplane_btn"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:backgroundTint="#118cff"
+          android:text="저장"
+          android:textSize="20sp"
+          android:textStyle="bold" />
 
     </LinearLayout>
 
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginVertical="10dp"
-        android:background="@drawable/edittext_border"
-        android:gravity="center"
-        android:padding="8dp"
-        android:text="신분증 종류 : 여권"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+  </ScrollView>
 
-
-    <EditText
-        android:id="@+id/passport_number"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginVertical="10dp"
-        android:background="@drawable/edittext_border"
-        android:hint="여권 번호를 입력하세요"
-        android:paddingHorizontal="5dp"
-        android:paddingVertical="10dp" />
-
-    <EditText
-        android:id="@+id/passenger_phone_number"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginVertical="10dp"
-        android:background="@drawable/edittext_border"
-        android:hint="전화 번호를 입력하세요"
-        android:paddingHorizontal="5dp"
-        android:paddingVertical="10dp" />
-
-    <EditText
-            android:id="@+id/passenger_baggage"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="수화물 무게"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginVertical="10dp"
-            android:background="@drawable/edittext_border"
-            android:paddingHorizontal="5dp"
-            android:paddingVertical="10dp" />
-
-
-
-    <LinearLayout
-            android:id="@+id/passenger_add_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"/>
-
-    <Button
-            android:id="@+id/btn_add_passenger"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="10dp"
-            android:text="동승객 추가하기"
-            android:backgroundTint="#118cff"/>
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginVertical="10dp"
-        android:id="@+id/passenger_info_save"
-        android:backgroundTint="#118cff"
-        android:text="저장"
-        android:textSize="20sp"
-        android:textStyle="bold" />
-</LinearLayout>
-    </ScrollView>
 </LinearLayout>

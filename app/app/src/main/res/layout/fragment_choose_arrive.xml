@@ -6,14 +6,23 @@
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context=".flightmain.ChooseDepartureFragment">
+    tools:context=".flightmain.ChooseArriveFragment">
 
   <androidx.recyclerview.widget.RecyclerView
-      android:id="@+id/departure_recycler_view"
+      android:id="@+id/arrive_recycler_view"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_marginTop="10dp"
       app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-      tools:listitem="@layout/item_departure" />
+      tools:listitem="@layout/item_arrive" />
+
+  <TextView
+      android:id="@+id/no_arrive_text"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="도착지가 없습니다."
+      android:textSize="16sp"
+      android:gravity="center"
+      android:visibility="gone"/>
 
 </LinearLayout>
