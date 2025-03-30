@@ -56,18 +56,11 @@
         <activity
             android:name=".sidebar.NonmemberActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <!-- 사이드바 - 예약 조회(왕복) -->
         <activity
             android:name=".sidebar.UnuserReservationActivity"
-            android:exported="false" >
-
-        </activity>
+            android:exported="false" />
         <!-- 사이드바 - 예약 조회(편도) -->
         <activity
             android:name=".sidebar.ReservationGoActivity"
@@ -84,8 +77,12 @@
             android:exported="true" /> <!-- 결제 하고 뜨는 예약 확정 -->
         <activity
             android:name=".flightchoose.ReservationCheckActivity"
-            android:exported="false">
+            android:exported="true" >
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
 
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
         </activity>
     </application>
 

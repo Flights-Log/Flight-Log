@@ -46,28 +46,8 @@ class ReservationCheckActivity : AppCompatActivity() {
     }
 
 
-//    val roundTrip = intent.getBooleanExtra("왕복", false)
-//
-//    val returnTicket = binding.returnTicket
-//    if (roundTrip) {
-//      returnTicket.visibility = View.VISIBLE  // 왕복이면 보이기
-//    } else {
-//      returnTicket.visibility = View.GONE  // 편도면 숨기기
-//    }
-//
-//    binding.btnReturnCheck.setOnClickListener {
-//      val oneWay = returnTicket.visibility
-//      if (oneWay == View.VISIBLE) {
-//        returnTicket.visibility = View.GONE  // 숨김
-//      } else {
-//        returnTicket.visibility = View.VISIBLE  // 보임
-//      }
-//    }
 
-
-//    val reno = binding.reservationNumber.text.toString()
-
-    val reservationNumber = "testNo1"
+    val reservationNumber = "test99"
     val api = AppServerClass.instance
     //      DTO 타입을 서버로 전달
     val call = api.getReservationCheck(reservationNumber)
@@ -82,29 +62,6 @@ class ReservationCheckActivity : AppCompatActivity() {
           val result = res.body()
           Log.d("csy", "result : $result")
 
-//          if (result != null) {
-//            // flightArrId가 null인 경우를 체크
-//            val hasReturnFlight = result.any { it.flightArrId != null }
-//
-//            val intent = Intent(this@ReservationCheckActivity, ReservationCheckActivity::class.java)
-
-//            // flightArrId가 null인 경우 다른 화면으로 전환
-//            if (hasReturnFlight) {
-//              // 왕복 비행편인 경우
-//              intent.putExtra("flight_data", ArrayList(result))
-//              startActivity(intent)
-//            } else {
-//              // 편도 비행편인 경우
-//              // 다른 화면을 보여주고, 그 화면에 맞는 Activity로 전환
-//              val oneWayIntent = Intent(this@OneWayReservationActivity, OneWayReservationActivity::class.java)
-//              oneWayIntent.putExtra("flight_data", ArrayList(result))
-//              startActivity(oneWayIntent)
-//            }
-//          }
-//
-//          else {
-//            Log.e("csy", "Result is null!")
-//          }
 
 
           if (result != null && result.isNotEmpty()) {
