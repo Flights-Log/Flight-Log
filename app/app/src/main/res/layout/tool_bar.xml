@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--    res/layout/tool_bar.xml-->
+
+<!--    activity_tool_bar.xml 사용 권장 -->
 <androidx.appcompat.widget.Toolbar
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -8,6 +11,8 @@
     android:elevation="4dp"
     android:theme="@style/Widget.AppCompat.ActionBar"
     app:titleTextColor="#ffffff">
+
+
   <!-- 햄버거 버튼 -->
   <ImageButton
       android:id="@+id/flight_log_menu"
@@ -16,6 +21,7 @@
       android:background="?attr/selectableItemBackgroundBorderless"
       android:src="@drawable/flight_log_menu"
       android:contentDescription="메뉴" />
+
 
   <!-- 중앙 아이콘 -->
   <ImageView
@@ -36,4 +42,9 @@
       android:textSize="16sp"
       android:layout_gravity="end"
       android:paddingEnd="16dp"/>
+
+
+
 </androidx.appcompat.widget.Toolbar>
+
+

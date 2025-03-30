@@ -1,20 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".flightmain.MainActivity">
+
+
+
+  <com.google.android.material.navigation.NavigationView
+      android:id="@+id/nav_view"
+      android:layout_width="wrap_content"
+      android:layout_height="match_parent"
+      android:layout_gravity="start"
+      android:layout_marginTop="72dp"
+      app:menu="@menu/drawer_menu">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp">
+
+      <!-- 로그인 상태 텍스트 -->
+      <EditText
+          android:id="@+id/login_status"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginStart="20dp"
+          android:fontFamily="sans-serif-medium"
+          android:text="로그인이 필요합니다"
+          android:textSize="16dp"
+          android:textStyle="bold" />
+
+      <!-- 로그인 아이콘 -->
+      <ImageView
+          android:id="@+id/action_login"
+          android:layout_width="30dp"
+          android:layout_height="30dp"
+          android:layout_marginStart="80dp"
+          android:layout_toEndOf="@id/login_status"
+          android:src="@drawable/ic_login" />
+
+      <!-- 알림 아이콘 -->
+      <ImageView
+          android:id="@+id/action_notifications"
+          android:layout_width="30dp"
+          android:layout_height="30dp"
+          android:layout_marginStart="10dp"
+          android:layout_toEndOf="@id/action_login"
+          android:src="@drawable/ic_notifications" />
+
+      <!-- 설정 아이콘 -->
+      <ImageView
+          android:id="@+id/action_settings"
+          android:layout_width="30dp"
+          android:layout_height="30dp"
+          android:layout_marginStart="10dp"
+          android:layout_toEndOf="@id/action_notifications"
+          android:src="@drawable/ic_settings" />
+    </RelativeLayout>
+
+  </com.google.android.material.navigation.NavigationView>
+
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+    android:id="@id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
     android:gravity="center_horizontal"
     android:orientation="vertical"
     tools:context=".sidebar.PaymentHistoryActivity">
+
+
+
   <!--  툴바-->
   <include
       android:id="@+id/tool_bar"
-      layout="@layout/tool_bar"
+      layout="@layout/activity_tool_bar"
       android:layout_width="match_parent"
-      android:layout_height="wrap_content" />
+      android:layout_height="58dp"/>
+
 
   <!--결제 내역-->
   <LinearLayout
@@ -134,3 +206,4 @@
       android:layout_height="1dp"
       android:background="@color/grey" />
 </LinearLayout>
+</androidx.drawerlayout.widget.DrawerLayout>
