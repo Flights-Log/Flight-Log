@@ -55,16 +55,18 @@ class UnuserReservationActivity : AppCompatActivity() {
 
 
 
-            binding.startCity2.setText(member.returnStartCity) //출발지
-            binding.arrivalCity2.setText(member.returnArrivalCity) //도착지
-            binding.departureDate2.setText(member.returnDepartureDate) //출발날짜
-            binding.departureTime2.setText(member.returnDepartureTime) //출발시간
-            binding.arrivalTime2.setText(member.returnArrivalTime) //도착시간
-            binding.reservationNumber.setText(member.flightReno)  // 예약 번호
-            binding.seatNumber2.setText (member.returnSeatNumber) // 좌석 번호
-            binding.passportNumber2.setText(member.passport) // 여권 번호
-            binding.luggage2.setText(member.luggage) // 수하물
-            binding.passengers2.setText(member.numPassengers) //인원수
+            binding.returnLastName.setText(member.lastName) //성
+            binding.returnFirstName.setText(member.firstName) //이름
+            binding.returnStartCity.setText(member.returnStartCity) //출발지
+            binding.returnArrivalCity.setText(member.returnArrivalCity) //도착지
+            binding.returnDepartureDate.setText(member.returnDepartureDate) //출발날짜
+            binding.returnDepartureTime.setText(member.returnDepartureTime) //출발시간
+            binding.returnArrivalTime.setText(member.returnArrivalTime) //도착시간
+            binding.returnReservationNumber.setText(member.flightReno)  // 예약 번호
+            binding.returnSeatNumber.setText (member.returnSeatNumber) // 좌석 번호
+            binding.returnPassportNumber.setText(member.passport) // 여권 번호
+            binding.returnLuggage.setText(member.luggage) // 수하물
+            binding.returnPassengers.setText(member.numPassengers) //인원수
 
 
         } else {
