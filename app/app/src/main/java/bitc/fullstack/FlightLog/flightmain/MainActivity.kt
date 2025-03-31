@@ -86,27 +86,6 @@ open class MainActivity  : AppCompatActivity(), SelectPeopleDialogFragment.OnPas
         } ?: run {
             binding.loginStatus.setText("로그인 사용자 없음")
         }
-//    사이드바
-//    툴바, 메뉴가 보이게 활성화
-//    val navView : NavigationView = findViewById(R.id.nav_view)
-        val toolbar = binding.toolBar.toolBarActivity
-        val menuButton = binding.toolBar.flightLogMenu
-
-//    드로어 레이아웃
-        val drawerLayout = binding.main
-
-        //  툴바를 액션바로 설정.
-        setSupportActionBar(toolbar)
-        supportActionBar?.setDisplayShowTitleEnabled(false) // 제목 제거 (선택)
-
-        //   버튼 클릭 이벤트 활성화
-        menuButton.setOnClickListener {
-            drawerLayout.openDrawer(GravityCompat.START)
-        }
-
-        // 햄버거 버튼 클릭으로 드로어 닫음
-        drawerLayout.closeDrawer(GravityCompat.START)
-        true
     }
 
 
@@ -230,5 +209,45 @@ open class MainActivity  : AppCompatActivity(), SelectPeopleDialogFragment.OnPas
 
             }
 
+
+//사이드바
+
+//    툴바, 메뉴가 보이게 활성화
+//    val navView : NavigationView = findViewById(R.id.nav_view)
+            val toolbar = binding.toolBar.toolBarActivity
+            val menuButton = binding.toolBar.flightLogMenu
+
+//    드로어 레이아웃
+            val drawerLayout = binding.main
+
+//     툴바를 액션바로 설정. 제어권 획득.
+            setSupportActionBar(toolbar)
+            supportActionBar?.setDisplayShowTitleEnabled(false) // 제목 제거 (선택)
+
+//     버튼 클릭 이벤트 활성화
+            menuButton.setOnClickListener {
+                drawerLayout.openDrawer(GravityCompat.START)
+            }
+
+
+
+            // 햄버거 버튼 클릭으로 드로어 닫음
+            drawerLayout.closeDrawer(GravityCompat.START)
+            true
+//
+//    // 메뉴 클릭 이벤트 처리(사용하지 않음)
+//    navView.setNavigationItemSelectedListener { menuItem ->
+//      when (menuItem.itemId) {
+//        R.id.nav_myinfo -> {
+//        }
+//        R.id.nav_reservations -> {
+//        }
+//        R.id.nav_ticket_info -> {
+//        }
+//        R.id.nav_ticket_info -> {
+//        }
+//        R.id.nav_pay_list -> {
+//        }
+//      }
         }
     }

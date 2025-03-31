@@ -1,5 +1,5 @@
 package bitc.fullstack.FlightLog.sidebar
-// 사이드바(툴바) 액티비티
+// 사이드바 액티비티
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge

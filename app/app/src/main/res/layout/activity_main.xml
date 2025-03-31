@@ -3,6 +3,7 @@
 <!-- 메인화면 -->
 
 
+
 <!-- 드로어 레이아웃(서랍) -->
 <androidx.drawerlayout.widget.DrawerLayout
     android:id="@id/main"
