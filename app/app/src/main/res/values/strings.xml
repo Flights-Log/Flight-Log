@@ -1,12 +1,12 @@
 <resources>
-    <string name="app_name">FlightLog</string>
-    <string name="login">로그인</string>
-    <string name="logout">로그아웃</string>
-    <string name="navigation_drawer_open">드로어 열기</string>
-    <string name="navigation_drawer_close">드로어 닫기</string>
+  <string name="app_name">FlightLog</string>
+  <string name="login">로그인</string>
+  <string name="logout">로그아웃</string>
+  <string name="navigation_drawer_open">드로어 열기</string>
+  <string name="navigation_drawer_close">드로어 닫기</string>
 
-    <string-array name="gender_array">
-        <item>여성</item>
-        <item>남성</item>
-    </string-array>
+  <string-array name="gender_array">
+    <item>여성</item>
+    <item>남성</item>
+  </string-array>
 </resources>

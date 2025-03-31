@@ -279,7 +279,8 @@ class PassengerActivity : AppCompatActivity() {
       } else {
         val api = AppServerClass.instance
 //      편도 여행이면
-        if (roundTripChecked == false && noComeAirplaneReno == "") {
+        if (roundTripChecked == false && noComeAirplaneReno != "") {
+          Log.d("flightLog","flightReno : $flightReno")
 //          firstNames 의 길이만큼 n 번째 값을 reserveGoAirplaneMember 에 계속해서 넣어줌
           for (i in firstNames.indices) {
             val call = api.reserveGoAirplaneMember(
@@ -313,8 +314,10 @@ class PassengerActivity : AppCompatActivity() {
             .create()
             .show()
 //          왕복 여행을 할려고 했는데 오는 비행기가 없어서 편도로 하는 경우
-        } else if (roundTripChecked == false && noComeAirplaneReno != null) {
+        } else if (roundTripChecked == false && noComeAirplaneReno == null) {
           for (i in firstNames.indices) {
+            Log.d("flightLog","noComeAirplaneReno : $noComeAirplaneReno")
+
             val call = api.reserveGoAirplaneMember(
               passports[i],
               noComeAirplaneReno,
@@ -353,6 +356,8 @@ class PassengerActivity : AppCompatActivity() {
 
           // firstNames 의 길이만큼 n 번째 값을 reserveRoundAirplaneMember 에 계속해서 넣어줌
           for (i in firstNames.indices) {
+            Log.d("flightLog","roundFlightReno : $roundFlightReno")
+
             val call = api.reserveRoundAirplaneMember(
               passports[i],
               roundFlightReno,

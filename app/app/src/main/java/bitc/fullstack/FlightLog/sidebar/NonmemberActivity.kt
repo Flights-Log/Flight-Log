@@ -18,9 +18,10 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class NonmemberActivity : AppCompatActivity() {
-  private val binding:ActivityNonMemberBinding by lazy{
+  private val binding: ActivityNonMemberBinding by lazy {
     ActivityNonMemberBinding.inflate(layoutInflater)
   }
+
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     enableEdgeToEdge()
@@ -34,9 +35,9 @@ class NonmemberActivity : AppCompatActivity() {
     initEventListener()
   }
 
-  private fun initEventListener(){
+  private fun initEventListener() {
     binding.unuserSearch.setOnClickListener {
-      Log.d("flightLog","unuser search")
+      Log.d("flightLog", "unuser search")
 
       // 예약번호
       val inputText = binding.nonmemberReservationNumber.text.toString()
@@ -52,34 +53,38 @@ class NonmemberActivity : AppCompatActivity() {
   //  Retrofit 통신 응답 부분을 따로 메소드로 분리
   private fun retrofitResponse(call: Call<List<FlightReservationCheckDTO>>) {
 
-    call.enqueue(object : Callback<List<FlightReservationCheckDTO>>{
-      override fun onResponse(p0: Call<List<FlightReservationCheckDTO>>, res: Response<List<FlightReservationCheckDTO>>) {
-          if (res.isSuccessful) {
-              val result = res.body()
-              Log.d("csy", "result : $result")
+    call.enqueue(object : Callback<List<FlightReservationCheckDTO>> {
+      override fun onResponse(
+        p0: Call<List<FlightReservationCheckDTO>>,
+        res: Response<List<FlightReservationCheckDTO>>
+      ) {
+        if (res.isSuccessful) {
+          val result = res.body()
+          Log.d("csy", "result : $result")
 
-              if (result != null) {
-                  // flightArrId가 null인 경우를 체크 it.flightArrId != null &&
-                  val hasReturnFlight = result.any { it.flightArrId != 0 }
+          if (result != null) {
+            // flightArrId가 null인 경우를 체크 it.flightArrId != null &&
+            val hasReturnFlight = result.any { it.flightArrId != 0 }
 
-                  // flightArrId가 null인 경우 다른 화면으로 전환
-                  if (hasReturnFlight) {
-                      // 왕복 비행편인 경우
-                      // 다른 화면을 보여주고, 그 화면에 맞는 Activity로 전환
-                      val intent = Intent(this@NonmemberActivity, UnuserReservationActivity::class.java)
-                      intent.putExtra("flight_data", ArrayList(result))
-                      startActivity(intent)
-                  } else {
-                      // 편도 비행편인 경우
-                      val intent  = Intent(this@NonmemberActivity, ReservationGoActivity::class.java)
-                      intent.putExtra("flight_data", ArrayList(result))
-                      startActivity(intent)
-                  }
-              } else {
-                  Log.e("csy", "Result is null!")
-              }
+            // flightArrId가 null인 경우 다른 화면으로 전환
+            if (hasReturnFlight) {
+              // 왕복 비행편인 경우
+              // 다른 화면을 보여주고, 그 화면에 맞는 Activity로 전환
+              val intent = Intent(this@NonmemberActivity, UnuserReservationActivity::class.java)
+              intent.putExtra("flight_data", ArrayList(result))
+              startActivity(intent)
+            } else {
+              // 편도 비행편인 경우
+              val intent = Intent(this@NonmemberActivity, ReservationGoActivity::class.java)
+              intent.putExtra("flight_data", ArrayList(result))
+              startActivity(intent)
+            }
+          } else {
+            Log.e("csy", "Result is null!")
           }
+        }
       }
+
       override fun onFailure(p0: Call<List<FlightReservationCheckDTO>>, t: Throwable) {
         Log.d("csy", "message : $t.message")
       }

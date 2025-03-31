@@ -4,21 +4,27 @@ import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.viewpager2.widget.ViewPager2
 import bitc.fullstack.FlightLog.R
 import bitc.fullstack.FlightLog.databinding.ActivityMainBinding
 import bitc.fullstack.FlightLog.flightchoose.GoAirplaneActivity
 import bitc.fullstack.FlightLog.sidebar.LoginActivity
+import com.google.android.material.navigation.NavigationView
 import java.time.LocalDate
 import java.util.Calendar
 import kotlin.math.abs
@@ -33,6 +39,8 @@ class MainActivity : AppCompatActivity(),
   private val binding: ActivityMainBinding by lazy {
     ActivityMainBinding.inflate(layoutInflater)
   }
+
+  private lateinit var drawerToggle: ActionBarDrawerToggle
 
   //  현재 날짜값 및 도착 예정 날짜값
   private var goDate = LocalDate.now()
@@ -54,11 +62,6 @@ class MainActivity : AppCompatActivity(),
     super.onCreate(savedInstanceState)
     enableEdgeToEdge()
     setContentView(binding.root)
-
-//    툴바 아이콘
-    val menuButton: ImageButton = findViewById(R.id.flight_log_menu)
-    val iconButton: ImageView = findViewById(R.id.flight_log_icon)
-    val loginButton: TextView = findViewById(R.id.flight_log_login)
 
     ViewCompat.setOnApplyWindowInsetsListener(binding.main) { v, insets ->
       val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -89,28 +92,16 @@ class MainActivity : AppCompatActivity(),
     oneWayOrRoundTrip()
 
 //    캐러샐뷰
-    val imageList =
-      listOf(
-        R.drawable.jeju_island_promotion,
-        R.drawable.osaka_gansai_promotion,
-        R.drawable.beijing_promotion,
-        R.drawable.quindao_promotion
-      )
+    carrouselView()
 
-    val viewPager: ViewPager2 = findViewById(R.id.viewPager)
-    viewPager.adapter = ImageAdapter(imageList)
+    drawerlayout()
 
-//    옆 아이템이 살짝 보이게
-    viewPager.offscreenPageLimit = 4
-    val pageMarginPx = resources.getDimensionPixelOffset(R.dimen.pageMargin)
-    val pageOffsetPx = resources.getDimensionPixelOffset(R.dimen.offset)
 
-    viewPager.setPageTransformer { page, position ->
-      val offset = pageOffsetPx * position
-      page.translationX = -offset
-      page.scaleY = 1 - (0.15f * abs(position))
-      page.alpha = 1 - (0.3f * abs(position))
-    }
+  }
+
+  //  점 세개 메뉴 버튼 안보이게
+  override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    return false
   }
 
   //  가는 날 텍스트(chooseGoDateText) 관련 함수
@@ -330,5 +321,51 @@ class MainActivity : AppCompatActivity(),
       }
 
     }
+  }
+
+  //  캐러샐뷰
+  fun carrouselView() {
+    val imageList =
+      listOf(
+        R.drawable.jeju_island_promotion,
+        R.drawable.osaka_gansai_promotion,
+        R.drawable.beijing_promotion,
+        R.drawable.quindao_promotion
+      )
+
+    val viewPager: ViewPager2 = findViewById(R.id.viewPager)
+    viewPager.adapter = ImageAdapter(imageList)
+
+//    옆 아이템이 살짝 보이게
+    viewPager.offscreenPageLimit = 4
+    val pageMarginPx = resources.getDimensionPixelOffset(R.dimen.pageMargin)
+    val pageOffsetPx = resources.getDimensionPixelOffset(R.dimen.offset)
+
+    viewPager.setPageTransformer { page, position ->
+      val offset = pageOffsetPx * position
+      page.translationX = -offset
+      page.scaleY = 1 - (0.15f * abs(position))
+      page.alpha = 1 - (0.3f * abs(position))
+    }
+  }
+
+  //  드로어 레이아웃
+  fun drawerlayout() {
+    //    액션바를 쓰되, 타이틀은 안보이게
+    setSupportActionBar(binding.toolbar)
+    supportActionBar?.setDisplayShowTitleEnabled(false)
+
+    val drawerLayout = findViewById<DrawerLayout>(R.id.drawer_layout)
+//    액션바 토글 버튼을 쓰기 위해서 사용
+    val toggle = ActionBarDrawerToggle(
+      this, drawerLayout, binding.toolbar,
+      R.string.navigation_drawer_open, R.string.navigation_drawer_close
+    )
+    drawerLayout.addDrawerListener(toggle)
+//    드로어 레이아웃과 동기화
+    toggle.syncState()
+
+//    색깔 하얀색
+    toggle.drawerArrowDrawable.color = ContextCompat.getColor(this, android.R.color.white)
   }
 }

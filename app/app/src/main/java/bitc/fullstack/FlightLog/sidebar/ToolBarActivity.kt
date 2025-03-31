@@ -12,32 +12,24 @@ import bitc.fullstack.FlightLog.databinding.ActivityMainBinding
 import bitc.fullstack.FlightLog.databinding.ActivityToolBarBinding
 
 class ToolBarActivity : AppCompatActivity() {
+  //    뷰 바인딩
+  //  ActivityMainBinding
+  private val binding: ActivityToolBarBinding by lazy {
+    ActivityToolBarBinding.inflate(layoutInflater)
+  }
 
-
-//    뷰 바인딩
-    //  ActivityMainBinding
-    private val binding: ActivityToolBarBinding by lazy {
-        ActivityToolBarBinding.inflate(layoutInflater)
-    }
-
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContentView(binding.root)
-
-
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    enableEdgeToEdge()
+    setContentView(binding.root)
 
 //        val drawerLayout = findViewById<DrawerLayout>(R.id.drawer_layout)
 
-
-
-        ViewCompat.setOnApplyWindowInsetsListener(binding.main) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
-        open class MainActivity
+    ViewCompat.setOnApplyWindowInsetsListener(binding.main) { v, insets ->
+      val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+      v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+      insets
     }
+    open class MainActivity
+  }
 }
