@@ -11,6 +11,7 @@ import bitc.fullstack.FlightLog.dto.iFlightDTO
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
@@ -25,17 +26,17 @@ interface AppServerInterface {
   // 국내 항공 스케줄 가져오기, url 매개변수로 키와, 검색날짜, 출력할 개수를 사용
   @GET("getDflightScheduleList")
   fun getFlightInfoXml(
-    @Query("ServiceKey") ServiceKey : String,
-    @Query("schDate") schDate : String,
-    @Query("numOfRows") numOfRows : Int
+    @Query("ServiceKey") ServiceKey: String,
+    @Query("schDate") schDate: String,
+    @Query("numOfRows") numOfRows: Int
   ): Call<FlightResponse>
 
   // 국제 항공 스케줄 가져오기
   @GET("getIflightScheduleList")
   fun getIFlightInfoXml(
-    @Query("ServiceKey") ServiceKey : String,
-    @Query("schDate") schDate : String,
-    @Query("numOfRows") numOfRows : Int
+    @Query("ServiceKey") ServiceKey: String,
+    @Query("schDate") schDate: String,
+    @Query("numOfRows") numOfRows: Int
   ): Call<InterFlightResponse>
 
   @POST("postDFlightInfo")
@@ -44,15 +45,15 @@ interface AppServerInterface {
   @POST("postIFlightInfo")
   fun postIFlightInfo(@Body IflightDTOList: MutableList<iFlightDTO>): Call<String>
 
-//  결제 후 예약 확정 페이지
+  //  결제 후 예약 확정 페이지
   @GET("getReservationCheck")
   fun getReservationCheck(
-    @Query("reservationNumber") reservationNumber:String
+    @Query("reservationNumber") reservationNumber: String
   ): Call<List<FlightReservationCheckDTO>>
 
   @GET("getOneWayReservationCheck")
   fun getOneWayReservationCheck(
-    @Query("reservationNumber") reservationNumber:String
+    @Query("reservationNumber") reservationNumber: String
   ): Call<List<FlightReservationCheckDTO>>
 
 
@@ -186,7 +187,26 @@ interface AppServerInterface {
   @POST("postUnuserSearch")
   @FormUrlEncoded
   fun postUnuserSearch(
-    @Field("nonmemberReservationNumber")nonmemberReservationNumber: String,
-    @Field("nonmemberPassnum")nonmemberPassnum: String
-  ):Call<List<FlightReservationCheckDTO>>
+    @Field("nonmemberReservationNumber") nonmemberReservationNumber: String,
+    @Field("nonmemberPassnum") nonmemberPassnum: String
+  ): Call<List<FlightReservationCheckDTO>>
+
+  //  회원 정보 입력에서 뒤로가기를 눌렀을 때 reserve_seat 의 예약된 행 지우기 (편도)
+  @DELETE("main/deleteOneWayFlight/{flightReno}")
+  fun deleteOneWayFlight(
+    @Path("flightReno") flightReno: String
+  ): Call<Void>
+
+  //  회원 정보 입력에서 뒤로가기를 눌렀을 때 reserve_seat 의 예약된 행 지우기
+  //  (왕복을 하고 싶었는데 오는 비행기가 없어서 편도로 바꿨을 때)
+  @DELETE("main/deleteOneWayFlightNoCome/{noComeAirplaneReno}")
+  fun deleteOneWayFlightNoCome(
+    @Path("noComeAirplaneReno") noComeAirplaneReno: String
+  ): Call<Void>
+
+  //  회원 정보 입력에서 뒤로 가기를 눌렀을 때 reserve_seat 의 예약된 행 지우기(왕복
+  @DELETE("main/deleteRoundFlight/{roundFlightReno}")
+  fun deleteRoundFlight(
+    @Path("roundFlightReno") roundFlightReno: String
+  ): Call<Void>
 }

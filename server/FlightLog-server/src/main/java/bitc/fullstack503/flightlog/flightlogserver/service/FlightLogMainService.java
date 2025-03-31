@@ -44,4 +44,13 @@ public interface FlightLogMainService {
 
   //  다른 날짜 추천
   String recommendStartDate(String startCity, String arrivalCity);
+
+  //  편도 비행기 제거
+  void deleteOneWayFlight(String flightReno);
+
+  //  왕복 하고 싶었는데 오는게 없을 때편도 비행기 제거
+  void deleteOneWayFlightNoCome(String noComeAirplaneReno);
+
+  //  왕복 비행기 제거
+  void deleteRoundFlight(String roundFlightReno);
 }

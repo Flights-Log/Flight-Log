@@ -30,7 +30,7 @@ android {
   kotlinOptions {
     jvmTarget = "11"
   }
-  viewBinding{
+  viewBinding {
     enable = true
   }
 }
@@ -45,6 +45,9 @@ dependencies {
   testImplementation(libs.junit)
   androidTestImplementation(libs.androidx.junit)
   androidTestImplementation(libs.androidx.espresso.core)
+  implementation("androidx.viewpager2:viewpager2:1.1.0")
+  implementation("com.github.bumptech.glide:glide:4.15.1")
+  annotationProcessor("com.github.bumptech.glide:compiler:4.15.1")
 
 
 // https://mvnrepository.com/artifact/com.squareup.retrofit2/retrofit
@@ -61,7 +64,6 @@ dependencies {
 
   // https://mvnrepository.com/artifact/com.squareup.retrofit2/converter-simplexml
   implementation(libs.converter.simplexml)
-
 
 
   //api 서버 로그 확인용라이브러리

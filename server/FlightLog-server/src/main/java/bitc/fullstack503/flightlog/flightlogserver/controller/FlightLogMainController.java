@@ -217,4 +217,25 @@ public class FlightLogMainController {
     return recommendDate;
   }
 
+  //  편도 비행기 제거
+  @DeleteMapping("deleteOneWayFlight/{flightReno}")
+  public void deleteOneWayFlight(@PathVariable("flightReno") String flightReno) {
+    System.out.println("deleteOneWayFlight");
+    flightlogMainService.deleteOneWayFlight(flightReno);
+  }
+
+  //  왕복 하고 싶었는데 오는 비행기 없을 때 제거
+  @DeleteMapping("deleteOneWayFlightNoCome/{noComeAirplaneReno}")
+  public void deleteOneWayFlightNoCome(@PathVariable("noComeAirplaneReno") String noComeAirplaneReno) {
+    System.out.println("deleteOneWayFlightNoCome");
+    flightlogMainService.deleteOneWayFlightNoCome(noComeAirplaneReno);
+  }
+
+  //  왕복 비행기 제거
+  @DeleteMapping("deleteRoundFlight/{roundFlightReno}")
+  public void deleteRoundFlight(@PathVariable("roundFlightReno") String roundFlightReno) {
+    System.out.println("deleteRoundFlight");
+    flightlogMainService.deleteRoundFlight(roundFlightReno);
+  }
 }
+

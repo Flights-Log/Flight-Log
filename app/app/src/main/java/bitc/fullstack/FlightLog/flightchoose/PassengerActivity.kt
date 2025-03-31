@@ -10,6 +10,8 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.EditText
 import android.widget.LinearLayout
+import androidx.activity.OnBackPressedCallback
+import androidx.activity.addCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -34,6 +36,7 @@ private var distance: Double = 0.0
 private var goAirplaneFlightId = 0
 private var comeAirplaneFlightId = 0
 private var roundTripChecked = false
+private var selectedSeat = 0
 
 //가는 비행기 예매 좌석
 private var selectedStartSeatNames: String = ""
@@ -100,6 +103,8 @@ class PassengerActivity : AppCompatActivity() {
 
     //    저장버튼 누르면 실제 db 저장
     saveButton()
+
+    onBackPressedDispatcher.addCallback(this@PassengerActivity, onBackPressedCallback)
   }
 
   override fun onDestroy() {
@@ -307,7 +312,8 @@ class PassengerActivity : AppCompatActivity() {
             })
             .create()
             .show()
-        } else if (roundTripChecked == false && noComeAirplaneReno != null){
+//          왕복 여행을 할려고 했는데 오는 비행기가 없어서 편도로 하는 경우
+        } else if (roundTripChecked == false && noComeAirplaneReno != null) {
           for (i in firstNames.indices) {
             val call = api.reserveGoAirplaneMember(
               passports[i],
@@ -339,8 +345,7 @@ class PassengerActivity : AppCompatActivity() {
             })
             .create()
             .show()
-        }
-        else {
+        } else {
 //        roundTripChecked 가 True(왕복 여행) 이면
           Log.d("flightLog", "-------------------------------")
           Log.d("flightLog", "selectedArriveSeatNames : $selectedArriveSeatNames")
@@ -385,6 +390,46 @@ class PassengerActivity : AppCompatActivity() {
     }
   }
 
+  private val onBackPressedCallback = object : OnBackPressedCallback(true) {
+    override fun handleOnBackPressed() {
+      AlertDialog.Builder(this@PassengerActivity)
+        .setTitle("주의")
+        .setMessage(
+          "뒤로가기를 누르면 현재까지 예약한 내역이 초기화됩니다." +
+                  "계속 하시겠습니까?"
+        )
+        .setNegativeButton("아니요", null)
+        .setPositiveButton("예", object : DialogInterface.OnClickListener {
+          override fun onClick(dialog: DialogInterface?, which: Int) {
+            val intent = Intent(this@PassengerActivity, MainActivity::class.java)
+            val api = AppServerClass.instance
+
+//            편도.
+            if (roundTripChecked == false && noComeAirplaneReno != "") {
+              Log.d("flightLog", "flightReno : $flightReno")
+              val call = api.deleteOneWayFlight(flightReno)
+              retrofitResponseAlone(call)
+//              왕복을 하고 싶었는데 오는 비행기가 없는 경우
+            } else if (roundTripChecked == false && noComeAirplaneReno == "") {
+              Log.d("flightLog", "noComeAirplaneReno : $noComeAirplaneReno")
+              val call = api.deleteOneWayFlightNoCome(noComeAirplaneReno)
+              retrofitResponseAlone(call)
+//              왕복
+            } else {
+              Log.d("flightLog", "roundFlightReno : $roundFlightReno")
+              val call = api.deleteRoundFlight(roundFlightReno)
+              retrofitResponseAlone(call)
+            }
+
+            finish()
+            startActivity(intent)
+          }
+        })
+        .create()
+        .show()
+    }
+  }
+
   //  Retrofit 통신 응답 List<List<flightUserDTO> : 예매 용
   private fun retrofitResponse(call: Call<List<flightUserDTO>>) {
     call.enqueue(object : Callback<List<flightUserDTO>> {
@@ -415,7 +460,7 @@ class PassengerActivity : AppCompatActivity() {
     })
   }
 
-  //  Retrofit 통신 응답 List<Void> : 예매 용
+  //  Retrofit 통신 응답 List<Void> : 예매 및 뒤로가기 눌렀을 때 reserve_seat 에 들어간 값 삭제용
   private fun retrofitResponseAlone(call: Call<Void>) {
     call.enqueue(object : Callback<Void> {
       @SuppressLint("NotifyDataSetChanged")
