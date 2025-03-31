@@ -44,4 +44,16 @@ public class FlightSideBarServiceImpl implements FlightSideBarService {
     public void joinMember(flightUserDTO flightuserDTO) {
         flightSideBarServiceMapper.joinMember(flightuserDTO);
     }
+
+    // 본인 정보 확인
+    @Override
+    public List<flightUserDTO> selectUserInfoById(String userId) {
+        return flightSideBarServiceMapper.selectUserInfoById(userId);
+    }
+
+    // 본인 정보 수정
+    @Override
+    public void updateUserInfo(flightUserDTO dto) {
+        flightSideBarServiceMapper.updateUserInfo(dto);
+    }
 }

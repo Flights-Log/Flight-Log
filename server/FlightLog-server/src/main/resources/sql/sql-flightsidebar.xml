@@ -41,18 +41,21 @@
         and frm.flight_passport = #{nonmemberPassnum}
     </select>
 
+    <!--  로그인한 사용자 정보 조회  -->
     <select id="isUserInfo" parameterType="map" resultType="int">
         select count(*) as cnt
         from flight_user
         where flight_user_id = #{inputUserId} and flight_user_pw = #{inputUserPw}
     </select>
 
+    <!--  사용자 정보 가져오기  -->
     <select id="getUserInfo" parameterType="String" resultType="bitc.fullstack503.flightlog.flightlogserver.dto.flightUserDTO">
         select *
         from flight_user
         where flight_user_id = #{inputUserId}
     </select>
 
+    <!--  회원가입  -->
     <insert id="joinMember" parameterType="bitc.fullstack503.flightlog.flightlogserver.dto.flightUserDTO">
         INSERT INTO flight_user (
         flight_user_id,
@@ -78,5 +81,28 @@
         #{flightUserEmail}
         )
     </insert>
+
+    <!--  본인 정보 확인  -->
+    <select id="selectUserInfoById" parameterType="String" resultType="bitc.fullstack503.flightlog.flightlogserver.dto.flightUserDTO">
+        SELECT * FROM flight_user WHERE flight_user_id = #{userId}
+    </select>
+
+    <!--  본인 정보 수정  -->
+    <update id="updateUserInfo" parameterType="bitc.fullstack503.flightlog.flightlogserver.dto.flightUserDTO">
+        UPDATE flight_user
+        SET
+        flight_user_id = #{flightUserId},
+        flight_user_email = #{flightUserEmail},
+        flight_user_pw = #{flightUserPw},
+        flight_user_firstname = #{flightUserFirstname},
+        flight_user_lastname = #{flightUserLastname},
+        flight_user_ko_firstname = #{flightUserKoFirstname},
+        flight_user_ko_lastname = #{flightUserKoLastname},
+        flight_user_phone = #{flightUserPhone},
+        flight_user_gender = #{flightUserGender},
+        flight_user_birth = #{flightUserBirth}
+        WHERE
+        flight_user_id = #{flightUserId}
+    </update>
 
 </mapper>

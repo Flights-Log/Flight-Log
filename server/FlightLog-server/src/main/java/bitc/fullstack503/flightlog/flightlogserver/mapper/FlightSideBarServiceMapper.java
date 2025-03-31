@@ -17,4 +17,10 @@ public interface FlightSideBarServiceMapper {
 
     // 회원가입
     void joinMember(flightUserDTO flightuserDTO);
+
+    // 본인 정보 확인
+    List<flightUserDTO> selectUserInfoById(String userId);
+
+    // 본인 정보 수정
+    void updateUserInfo(flightUserDTO dto);
 }

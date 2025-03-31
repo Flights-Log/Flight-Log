@@ -26,8 +26,8 @@ class ReservationCheckActivity : AppCompatActivity() {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_reservation_check)
 
-    recyclerView = findViewById(R.id.recyclerView)
-    recyclerView.layoutManager = LinearLayoutManager(this)
+//    recyclerView = findViewById(R.id.recyclerview)
+//    recyclerView.layoutManager = LinearLayoutManager(this)
 
     // Adapter 설정
     adapter = FlightReservationAdapter(flightReservationList)

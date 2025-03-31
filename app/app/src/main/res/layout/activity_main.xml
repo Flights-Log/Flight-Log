@@ -146,10 +146,10 @@
             <ImageView
                 android:id="@+id/main_one_way_trip_arrow"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="45dp"
                 android:layout_weight="1"
                 android:contentDescription="one_way_trip_arrow"
-                android:src="@drawable/arrow_right"
+                android:src="@drawable/arrow_right2"
                 android:visibility="visible" />
 
             <TextView

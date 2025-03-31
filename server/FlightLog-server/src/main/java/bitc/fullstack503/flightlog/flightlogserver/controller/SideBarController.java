@@ -22,7 +22,7 @@ public class SideBarController {
     private FlightSideBarService flightSideBarService;
 
     @PostMapping("/postUnuserSearch")
-    //@body
+    // 예약 조회
     public List<FlightReservationCheckDTO>  postMemberInfo(@RequestParam ("nonmemberReservationNumber") String nonmemberReservationNumber,
                                                            @RequestParam ("nonmemberPassnum") String  nonmemberPassnum) {
 
@@ -67,6 +67,7 @@ public class SideBarController {
         return resultMap;
     }
 
+    // 회원가입
     @PostMapping("/joinMember")
     public void joinMember(@RequestBody flightUserDTO flightuserDTO) {
 
@@ -76,5 +77,25 @@ public class SideBarController {
         System.out.println("Phone: " + flightuserDTO.getFlightUserPhone());
 
         flightSideBarService.joinMember(flightuserDTO);
+    }
+
+    // 본인정보 확인
+    @PostMapping("/userInfo")
+    public List<flightUserDTO> getUserInfo(@RequestParam("userId") String userId) {
+
+        List<flightUserDTO> userinfoList;
+        userinfoList = flightSideBarService.selectUserInfoById(userId);
+
+        return userinfoList;
+    }
+
+    // 본인정보 수정
+    @PostMapping("/updateUser")
+    public String updateUser(@RequestBody flightUserDTO dto) {
+        flightSideBarService.updateUserInfo(dto);
+
+        System.out.println("업데이트 완료");
+
+        return "sucess";
     }
 }
