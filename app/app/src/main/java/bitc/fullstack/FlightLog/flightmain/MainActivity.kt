@@ -88,6 +88,7 @@ class MainActivity : AppCompatActivity(),
 //    왕복, 편도 여부 묻는거
     oneWayOrRoundTrip()
 
+//    캐러샐뷰
     val imageList =
       listOf(
         R.drawable.jeju_island_promotion,

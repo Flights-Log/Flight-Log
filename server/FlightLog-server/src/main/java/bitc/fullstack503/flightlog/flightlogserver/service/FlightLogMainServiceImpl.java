@@ -86,7 +86,25 @@ public class FlightLogMainServiceImpl implements FlightLogMainService {
   }
 
   @Override
-  public String recommendStartDate(String startCity, String arrivalCity){
+  public String recommendStartDate(String startCity, String arrivalCity) {
     return flightLogMainMapper.recommendStartDate(startCity, arrivalCity);
+  }
+
+  //  편도 비행기 reserve_seat 제거
+  @Override
+  public void deleteOneWayFlight(String flightReno) {
+    flightLogMainMapper.deleteOneWayFlight(flightReno);
+  }
+
+  //  왕복 하고 싶었는데 오는 비행기가 없을 때 reserve_seat 제거
+  @Override
+  public void deleteOneWayFlightNoCome(String noComeAirplaneReno) {
+    flightLogMainMapper.deleteOneWayFlightNoCome(noComeAirplaneReno);
+  }
+
+  //  왕복 비행기 reserve_seat 제거
+  @Override
+  public void deleteRoundFlight(String roundFlightReno) {
+    flightLogMainMapper.deleteRoundFlight(roundFlightReno);
   }
 }

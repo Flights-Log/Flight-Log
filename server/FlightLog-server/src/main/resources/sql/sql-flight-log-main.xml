@@ -147,4 +147,19 @@
     where flight_info_startCity = #{startCity}
     and flight_info_arrivalCity = #{arrivalCity}
   </select>
+
+  <!--  편도 reserveSeat 지우기-->
+  <delete id="deleteOneWayFlight">
+    delete from flight_reserve where flight_reno = #{flightReno};
+  </delete>
+
+  <!--  왕복을 하고 싶었는데 오는 비행기가 없었을 때 reserveSeat 지우기-->
+  <delete id="deleteOneWayFlightNoCome">
+    delete from flight_reserve where flight_reno = #{noComeAirplaneReno};
+  </delete>
+
+  <!-- 왕복 reserveSeat 지우기 -->
+  <delete id="deleteRoundFlight">
+    delete from flight_reserve where flight_reno = #{roundFlightReno};
+  </delete>
 </mapper>
