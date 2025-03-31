@@ -1,18 +1,75 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="8dp" android:layout_marginBottom="8dp" android:background="?android:attr/selectableItemBackground">
-    <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical" android:background="@drawable/shape" android:layout_marginHorizontal="10dp" android:layout_marginVertical="5dp">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="?android:attr/selectableItemBackground">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@drawable/shape"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginVertical="5dp">
         <!--  결제 여부 체크박스  -->
-        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:paddingVertical="5dp">
-            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="horizontal">
-                <CheckBox android:id="@+id/ticket_check_box" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginHorizontal="10dp" android:text="선택" android:textSize="14sp" android:layout_weight="1"/>
-                <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginTop="10dp">
-                    <ImageView android:layout_width="200dp" android:layout_height="30dp" android:src="@drawable/barcode"/>
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingVertical="5dp">
+
+            <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                <CheckBox
+                        android:id="@+id/ticket_check_box"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="10dp"
+                        android:text="선택"
+                        android:textSize="14sp"
+                        android:layout_weight="1" />
+
+                <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="10dp">
+
+                    <ImageView
+                            android:layout_width="200dp"
+                            android:layout_height="30dp"
+                            android:src="@drawable/barcode" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
-        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:paddingVertical="5dp">
-            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="horizontal">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingVertical="5dp">
+
+            <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
                 <!--  탑승자 이름 (이름과 성 결합) TextView  -->
-                <TextView android:id="@+id/flightMemName" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="탑승자: " android:textSize="16sp" android:textStyle="bold" android:layout_weight="1" android:layout_marginStart="10dp"/>
+                <TextView
+                        android:id="@+id/flightMemName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="탑승자: "
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:layout_weight="1"
+                        android:layout_marginStart="10dp" />
                 <!--     &lt;!&ndash; 티켓팅한 ID TextView &ndash;&gt; -->
                 <!--     <TextView -->
                 <!--         android:id="@+id/flightUserId" -->
@@ -21,21 +78,74 @@
                 <!--         android:text="예약 ID: " -->
                 <!--         android:textSize="16sp" /> -->
                 <!--  항공사 TextView  -->
-                <TextView android:id="@+id/flightAirline" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="항공사: " android:textSize="16sp" android:textStyle="bold" android:layout_weight="1"/>
+                <TextView
+                        android:id="@+id/flightAirline"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="항공사: "
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:layout_weight="1" />
             </LinearLayout>
         </LinearLayout>
         <!--  출발지 및 출발 시간 TextView  -->
-        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:paddingVertical="5dp" android:background="@color/skyBlue">
-            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="horizontal">
-                <TextView android:id="@+id/flightStartInfo" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="출발지: " android:textSize="16sp" android:textStyle="bold" android:textColor="@color/white" android:layout_marginStart="10dp" android:layout_weight="1"/>
-                <ImageView android:layout_width="30dp" android:layout_height="30dp" android:src="@drawable/flight_arrow"/>
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingVertical="5dp"
+                android:background="@color/skyBlue">
+
+            <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                <TextView
+                        android:id="@+id/flightStartInfo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="출발지: "
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="1" />
+
+                <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/flight_arrow" />
                 <!--  도착지 및 도착 시간 TextView  -->
-                <TextView android:id="@+id/flightArrivalInfo" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="도착지: " android:textSize="16sp" android:textStyle="bold" android:layout_weight="1" android:textColor="@color/white" android:layout_marginStart="10dp"/>
+                <TextView
+                        android:id="@+id/flightArrivalInfo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="도착지: "
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:layout_marginStart="10dp" />
             </LinearLayout>
         </LinearLayout>
         <!--  출발일 TextView  -->
-        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:background="@color/skyBlue">
-            <TextView android:id="@+id/flightReserveSDate" android:layout_width="match_parent" android:layout_height="wrap_content" android:paddingVertical="5dp" android:text="출발일: " android:textSize="16sp" android:textStyle="bold" android:textColor="@color/white" android:layout_marginStart="10dp"/>
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/skyBlue">
+
+            <TextView
+                    android:id="@+id/flightReserveSDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="5dp"
+                    android:text="출발일: "
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:layout_marginStart="10dp" />
         </LinearLayout>
         <!--     &lt;!&ndash; 좌석 번호 TextView &ndash;&gt; -->
         <!--     <TextView -->
@@ -59,10 +169,31 @@
         <!--         android:text="수하물: " -->
         <!--         android:textSize="16sp" /> -->
         <!--  비행 거리 (가격 계산용) TextView  -->
-        <TextView android:id="@+id/paymentAmount" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="가격 : " android:textSize="16sp" android:layout_marginBottom="5dp" android:textStyle="bold" android:paddingVertical="5dp" android:textAlignment="textEnd" android:textColor="#ff8259"/>
+        <TextView
+                android:id="@+id/paymentAmount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="가격 : "
+                android:textSize="16sp"
+                android:layout_marginBottom="5dp"
+                android:textStyle="bold"
+                android:paddingVertical="5dp"
+                android:textAlignment="textEnd"
+                android:textColor="#ff8259" />
     </LinearLayout>
-    <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/grey" android:layout_marginVertical="5dp"/>
-    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center" android:layout_marginTop="10dp">
+
+    <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/grey"
+            android:layout_marginVertical="5dp" />
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="10dp">
         <!--  삭제 버튼  -->
     </LinearLayout>
 </LinearLayout>
