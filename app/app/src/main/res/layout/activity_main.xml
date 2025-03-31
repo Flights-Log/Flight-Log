@@ -146,10 +146,10 @@
             <ImageView
                 android:id="@+id/main_one_way_trip_arrow"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:contentDescription="one_way_trip_arrow"
-                android:src="@drawable/right_arrow_black"
+                android:src="@drawable/arrow_right"
                 android:visibility="visible" />
 
             <TextView
@@ -312,7 +312,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Made By 하늘일기"
+            android:text="FlightLog"
             android:textColor="@color/grey"
             android:textSize="20sp"
             android:textStyle="bold" />

@@ -374,7 +374,6 @@
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:layout_marginBottom="5dp"
-              android:text="대한민국"
               android:textSize="15sp"
               android:textStyle="bold" />
 
@@ -383,7 +382,9 @@
               android:layout_height="0dp"
               android:layout_weight="1"
               android:background="@drawable/join_member_edit_text"
-              android:inputType="text"/>
+              android:text="대한민국"
+              android:inputType="text"
+              android:gravity="center"/>
 
         </LinearLayout>
 
