@@ -4,6 +4,8 @@ package bitc.fullstack.FlightLog.appserver
 import bitc.fullstack.FlightLog.data.FlightResponse
 import bitc.fullstack.FlightLog.data.InterFlightResponse
 import bitc.fullstack.FlightLog.dto.FlightReservationCheckDTO
+import bitc.fullstack.FlightLog.dto.JoinDTO
+import bitc.fullstack.FlightLog.dto.LoginResponse
 import bitc.fullstack.FlightLog.dto.dFlightDTO
 import bitc.fullstack.FlightLog.dto.flightInfoDTO
 import bitc.fullstack.FlightLog.dto.flightUserDTO
@@ -209,4 +211,14 @@ interface AppServerInterface {
   fun deleteRoundFlight(
     @Path("roundFlightReno") roundFlightReno: String
   ): Call<Void>
+
+  //  회원가입 입력 전송하기
+  @POST("joinMember")
+  fun joinMember(@Body joinDTO: JoinDTO): Call<String>
+
+  // 로그인 요청
+  @POST("flightLogin")
+  @FormUrlEncoded
+  fun flightLogin(@Field("inputUserId") inputUserId:String,
+                  @Field("inputUserPw") inputUserPw:String): Call<LoginResponse>
 }

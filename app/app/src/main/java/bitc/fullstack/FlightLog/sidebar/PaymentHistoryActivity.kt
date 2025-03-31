@@ -9,7 +9,7 @@ import androidx.core.view.WindowInsetsCompat
 import bitc.fullstack.FlightLog.databinding.ActivityPaymentHistoryBinding
 import bitc.fullstack.FlightLog.flightmain.MainActivity
 
-class PaymentHistoryActivity : MainActivity() {
+class PaymentHistoryActivity : AppCompatActivity() {
   //  ActivityMainBinding
   private val binding: ActivityPaymentHistoryBinding by lazy {
     ActivityPaymentHistoryBinding.inflate(layoutInflater)
@@ -25,7 +25,6 @@ class PaymentHistoryActivity : MainActivity() {
       v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
       insets
     }
-    sidebarInfo()
     //사이드바
 
     // View 바인딩
