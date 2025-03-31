@@ -16,6 +16,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.view.GravityCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -24,6 +25,7 @@ import bitc.fullstack.FlightLog.R
 import bitc.fullstack.FlightLog.databinding.ActivityMainBinding
 import bitc.fullstack.FlightLog.flightchoose.GoAirplaneActivity
 import bitc.fullstack.FlightLog.sidebar.LoginActivity
+import bitc.fullstack.FlightLog.sidebar.TicketHolderActivity
 import com.google.android.material.navigation.NavigationView
 import java.time.LocalDate
 import java.util.Calendar
@@ -40,7 +42,7 @@ class MainActivity : AppCompatActivity(),
     ActivityMainBinding.inflate(layoutInflater)
   }
 
-  private lateinit var drawerToggle: ActionBarDrawerToggle
+  private lateinit var toggle: ActionBarDrawerToggle
 
   //  현재 날짜값 및 도착 예정 날짜값
   private var goDate = LocalDate.now()
@@ -60,6 +62,7 @@ class MainActivity : AppCompatActivity(),
   //  만들어지만 할거
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
+    setContentView(R.layout.activity_main)
     enableEdgeToEdge()
     setContentView(binding.root)
 
@@ -96,7 +99,24 @@ class MainActivity : AppCompatActivity(),
 
     drawerlayout()
 
+    val drawerLayout = findViewById<DrawerLayout>(R.id.drawer_layout)
+    val navView = findViewById<NavigationView>(R.id.nav_view)
 
+    navView.setNavigationItemSelectedListener { menuItem ->
+      when (menuItem.itemId) {
+        R.id.flight_log_login_button -> {
+          val intent = Intent(this, LoginActivity::class.java)
+          startActivity(intent)
+        }
+
+        R.id.nav_ticket_holder -> {
+          val intent = Intent(this, TicketHolderActivity::class.java)
+          startActivity(intent)
+        }
+      }
+      drawerLayout.closeDrawer(GravityCompat.START)
+      true
+    }
   }
 
   //  점 세개 메뉴 버튼 안보이게
@@ -357,7 +377,7 @@ class MainActivity : AppCompatActivity(),
 
     val drawerLayout = findViewById<DrawerLayout>(R.id.drawer_layout)
 //    액션바 토글 버튼을 쓰기 위해서 사용
-    val toggle = ActionBarDrawerToggle(
+    toggle = ActionBarDrawerToggle(
       this, drawerLayout, binding.toolbar,
       R.string.navigation_drawer_open, R.string.navigation_drawer_close
     )
@@ -368,4 +388,16 @@ class MainActivity : AppCompatActivity(),
 //    색깔 하얀색
     toggle.drawerArrowDrawable.color = ContextCompat.getColor(this, android.R.color.white)
   }
+
+  override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    when (item.itemId) {
+      R.id.flight_log_login_button -> {
+        val intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
+        return true
+      }
+    }
+    return super.onOptionsItemSelected(item)
+  }
+
 }

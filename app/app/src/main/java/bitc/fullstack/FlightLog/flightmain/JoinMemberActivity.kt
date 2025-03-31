@@ -40,8 +40,7 @@ class JoinMemberActivity : AppCompatActivity() {
     enableEdgeToEdge()
     setContentView(binding.root)
 
-
-    ViewCompat.setOnApplyWindowInsetsListener(binding.joinMember) { v, insets ->
+    ViewCompat.setOnApplyWindowInsetsListener(binding.joinMemberActivity) { v, insets ->
       val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
       v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
       insets

@@ -19,7 +19,6 @@ import bitc.fullstack.FlightLog.flightmain.MainActivity
 import bitc.fullstack.FlightLog.flightmain.SelectPeopleDialogFragment
 import bitc.fullstack.FlightLog.sidebar.LoginActivity
 import bitc.fullstack.FlightLog.sidebar.NonmemberActivity
-import bitc.fullstack.FlightLog.sidebar.PassengerInfoActivity
 import bitc.fullstack.FlightLog.sidebar.PaymentHistoryActivity
 import bitc.fullstack.FlightLog.sidebar.Pop_upActivity
 import bitc.fullstack.FlightLog.sidebar.ReservationConfirmActivity

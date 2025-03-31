@@ -57,6 +57,7 @@ class GoAirplaneActivity : AppCompatActivity() {
     super.onCreate(savedInstanceState)
     enableEdgeToEdge()
     setContentView(binding.root)
+    setContentView(R.layout.activity_go_airplane)
 
     ViewCompat.setOnApplyWindowInsetsListener(binding.main) { v, insets ->
       val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())

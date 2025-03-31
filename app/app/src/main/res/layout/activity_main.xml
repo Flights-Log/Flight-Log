@@ -4,13 +4,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
 
   <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:gravity="center_horizontal"
       android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+      <ImageView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:src="@drawable/flight_log_logo"
+          android:layout_gravity="center_horizontal"/>
+    </androidx.appcompat.widget.Toolbar>
 
     <LinearLayout
         android:id="@+id/main"
@@ -22,22 +37,6 @@
         android:orientation="vertical"
         tools:context=".flightmain.MainActivity"
         tools:ignore="UselessParent">
-
-      <androidx.appcompat.widget.Toolbar
-          android:id="@+id/toolbar"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:background="@color/mainBlue"
-          android:elevation="4dp"
-          android:theme="@style/ToolbarTitleStyle"
-          app:titleTextColor="@color/white">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:src="@drawable/flight_log_logo" />
-      </androidx.appcompat.widget.Toolbar>
 
       <!--  메인 화면-->
       <ScrollView
@@ -355,6 +354,7 @@
   </LinearLayout>
 
   <com.google.android.material.navigation.NavigationView
+      android:id="@+id/nav_view"
       android:layout_width="wrap_content"
       android:layout_height="match_parent"
       android:layout_gravity="start"

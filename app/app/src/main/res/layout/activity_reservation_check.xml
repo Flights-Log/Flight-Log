@@ -1,43 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/main"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+  <ScrollView
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:background="@drawable/background_gradient">
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-    <!--   툴바 -->
-    <include
-            android:id="@+id/tool_bar"
-            layout="@layout/tool_bar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+        android:orientation="vertical"
+        android:padding="16dp">
 
-    <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/background_gradient">
+      <androidx.recyclerview.widget.RecyclerView
+          android:id="@+id/recyclerView"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="16dp" />
 
 
-        <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:padding="16dp">
-
-            <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"/>
-
-
-            <Button
-                    android:id="@+id/btn_home"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:backgroundTint="#118cff"
-                    android:text="메인 화면으로 이동"
-                    android:textSize="18sp" />
-        </LinearLayout>
-    </ScrollView>
+      <Button
+          android:id="@+id/btn_home"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="20dp"
+          android:backgroundTint="#118cff"
+          android:text="메인 화면으로 이동"
+          android:textSize="18sp" />
+    </LinearLayout>
+  </ScrollView>
 </LinearLayout>

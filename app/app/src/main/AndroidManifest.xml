@@ -17,8 +17,9 @@
       android:theme="@style/Base.Theme.FlightLog"
       android:usesCleartextTraffic="true"
       tools:targetApi="31">
-
-
+    <activity
+        android:name=".flightmain.BaseActivity"
+        android:exported="false" />
     <activity
         android:name=".sidebar.LoginActivity"
         android:exported="true" />
@@ -33,14 +34,15 @@
 
         <category android:name="android.intent.category.LAUNCHER" />
       </intent-filter>
-
     </activity> <!-- 인원 선택 -->
     <activity
         android:name=".flightmain.JoinMemberActivity"
         android:exported="true" /> <!-- 가는편 비행기 선택 -->
     <activity
         android:name=".flightchoose.GoAirplaneActivity"
-        android:exported="true" /> <!-- 가는편 비행기 좌석 선택 -->
+        android:exported="true">
+
+    </activity> <!-- 가는편 비행기 좌석 선택 -->
     <activity
         android:name=".flightchoose.GoAirplaneChooseSeatActivity"
         android:exported="true" /> <!-- 오는편 비행기 선택 -->
@@ -79,13 +81,13 @@
         android:exported="true" /> <!-- 결제 하고 뜨는 예약 확정 -->
     <activity
         android:name=".flightchoose.ReservationCheckActivity"
-        android:exported="true"></activity>
+        android:exported="true" />
     <activity
         android:name=".AllViewActivity"
-        android:exported="true"></activity>
+        android:exported="true" />
     <activity
         android:name=".flightchoose.OneWayReservationActivity"
-        android:exported="true"></activity>
+        android:exported="true" />
   </application>
 
 </manifest>

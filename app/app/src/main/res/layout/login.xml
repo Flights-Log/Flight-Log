@@ -22,7 +22,7 @@
 
   <!-- 상단 툴바 -->
   <androidx.appcompat.widget.Toolbar
-      android:id="@+id/toolbar"
+      android:id="@+id/toolbar_login"
       android:layout_width="match_parent"
       android:layout_height="?attr/actionBarSize"
       android:background="@color/mainBlue"
