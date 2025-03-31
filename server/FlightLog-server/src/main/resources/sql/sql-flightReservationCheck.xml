@@ -68,7 +68,7 @@
         LEFT JOIN flight_info fi_arr ON fr.flight_arr_id = fi_arr.flight_id
 
         WHERE fr.flight_reno = #{reservationNumber}
-        and frm.flight_arr_payCheck = 'y'
-        or frm.flight_start_payCheck = 'y'
+        and (frm.flight_arr_payCheck = 'y'
+        or frm.flight_start_payCheck = 'y')
     </select>
 </mapper>

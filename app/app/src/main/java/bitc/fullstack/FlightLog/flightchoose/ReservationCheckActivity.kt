@@ -1,6 +1,8 @@
 package bitc.fullstack.FlightLog.flightchoose
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -9,6 +11,7 @@ import bitc.fullstack.FlightLog.R
 import bitc.fullstack.FlightLog.appserver.AppServerClass
 import bitc.fullstack.FlightLog.dto.FlightReservationCheckDTO
 import bitc.fullstack.FlightLog.flightchoose.FlightReservationAdapter
+import bitc.fullstack.FlightLog.flightmain.MainActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -35,6 +38,12 @@ class ReservationCheckActivity : AppCompatActivity() {
 
     // 예약 정보 API 호출
     fetchReservationDetails(reservationNumber)
+
+    val home = findViewById<Button>(R.id.btn_home)
+    home.setOnClickListener {
+      val intent = Intent(this, MainActivity::class.java)
+      startActivity(intent)
+    }
   }
 
   private fun fetchReservationDetails(reservationNumber: String) {
