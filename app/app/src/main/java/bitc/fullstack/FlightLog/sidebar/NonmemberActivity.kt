@@ -72,8 +72,8 @@ class NonmemberActivity : AppCompatActivity() {
                   } else {
                       // 편도 비행편인 경우
                       val intent  = Intent(this@NonmemberActivity, ReservationGoActivity::class.java)
-                      intent .putExtra("flight_data", ArrayList(result))
-                      startActivity(intent )
+                      intent.putExtra("flight_data", ArrayList(result))
+                      startActivity(intent)
                   }
               } else {
                   Log.e("csy", "Result is null!")

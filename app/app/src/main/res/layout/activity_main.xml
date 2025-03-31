@@ -203,12 +203,12 @@
 
             <!--오는 날-->
             <LinearLayout
+                android:id="@+id/come_date_choose_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:visibility="gone"
-                android:id="@+id/come_date_choose_layout">
+                android:visibility="gone">
 
               <TextView
                   android:layout_width="0dp"
@@ -286,13 +286,16 @@
           android:layout_marginBottom="15dp"
           android:background="@color/grey" />
 
-      <!--  광고 이미지-->
-      <ImageView
+      <!--캐러셀 용 뷰페이저-->
+      <androidx.viewpager2.widget.ViewPager2
+          android:id="@+id/viewPager"
           android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_marginHorizontal="15dp"
-          android:contentDescription="advertisement1"
-          android:src="@drawable/advertisement1" />
+          android:layout_height="200dp"
+          android:clipChildren="false"
+          android:clipToPadding="false"
+          android:overScrollMode="never"
+          android:paddingStart="40dp"
+          android:paddingEnd="40dp" />
 
       <View
           android:layout_width="match_parent"

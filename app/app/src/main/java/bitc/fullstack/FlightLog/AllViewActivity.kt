@@ -11,12 +11,20 @@ import bitc.fullstack.FlightLog.flightchoose.ComeAirplaneActivity
 import bitc.fullstack.FlightLog.flightchoose.ComeAirplaneChooseSeatActivity
 import bitc.fullstack.FlightLog.flightchoose.GoAirplaneActivity
 import bitc.fullstack.FlightLog.flightchoose.GoAirplaneChooseSeatActivity
+import bitc.fullstack.FlightLog.flightchoose.OneWayReservationActivity
 import bitc.fullstack.FlightLog.flightchoose.PassengerActivity
+import bitc.fullstack.FlightLog.flightchoose.ReservationCheckActivity
 import bitc.fullstack.FlightLog.flightmain.JoinMemberActivity
 import bitc.fullstack.FlightLog.flightmain.MainActivity
+import bitc.fullstack.FlightLog.flightmain.SelectPeopleDialogFragment
+import bitc.fullstack.FlightLog.sidebar.LoginActivity
+import bitc.fullstack.FlightLog.sidebar.NonmemberActivity
+import bitc.fullstack.FlightLog.sidebar.PassengerInfoActivity
 import bitc.fullstack.FlightLog.sidebar.PaymentHistoryActivity
+import bitc.fullstack.FlightLog.sidebar.Pop_upActivity
 import bitc.fullstack.FlightLog.sidebar.ReservationConfirmActivity
 import bitc.fullstack.FlightLog.sidebar.TicketHolderActivity
+import bitc.fullstack.FlightLog.sidebar.UnuserReservationActivity
 
 class AllViewActivity : AppCompatActivity() {
   //  ActivityMainBinding
@@ -75,13 +83,49 @@ class AllViewActivity : AppCompatActivity() {
       startActivity(intent)
     }
 
+
+    binding.passengerActivityButton.setOnClickListener {
+      val intent = Intent(this, PassengerActivity::class.java)
+      startActivity(intent)
+    }
+
     binding.joinMemberActivityButton.setOnClickListener {
       val intent = Intent(this, JoinMemberActivity::class.java)
       startActivity(intent)
     }
 
-    binding.passengerActivityButton.setOnClickListener {
-      val intent = Intent(this, PassengerActivity::class.java)
+    binding.oneWayReservationButton.setOnClickListener {
+      val intent = Intent(this, OneWayReservationActivity::class.java)
+      startActivity(intent)
+    }
+
+    binding.reservationCheckButton.setOnClickListener {
+      val intent = Intent(this, ReservationCheckActivity::class.java)
+      startActivity(intent)
+    }
+
+    binding.loginButton.setOnClickListener {
+      val intent = Intent(this, LoginActivity::class.java)
+      startActivity(intent)
+    }
+
+    binding.nonMemberButton.setOnClickListener {
+      val intent = Intent(this, NonmemberActivity::class.java)
+      startActivity(intent)
+    }
+
+    binding.popUpButton.setOnClickListener {
+      val intent = Intent(this, Pop_upActivity::class.java)
+      startActivity(intent)
+    }
+
+    binding.reservationGoButton.setOnClickListener {
+      val intent = Intent(this, ReservationConfirmActivity::class.java)
+      startActivity(intent)
+    }
+
+    binding.unuserReservationButton.setOnClickListener {
+      val intent = Intent(this, UnuserReservationActivity::class.java)
       startActivity(intent)
     }
   }

@@ -14,11 +14,14 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.viewpager2.widget.ViewPager2
 import bitc.fullstack.FlightLog.R
 import bitc.fullstack.FlightLog.databinding.ActivityMainBinding
 import bitc.fullstack.FlightLog.flightchoose.GoAirplaneActivity
+import bitc.fullstack.FlightLog.sidebar.LoginActivity
 import java.time.LocalDate
 import java.util.Calendar
+import kotlin.math.abs
 import kotlin.math.round
 
 class MainActivity : AppCompatActivity(),
@@ -36,8 +39,8 @@ class MainActivity : AppCompatActivity(),
   private var comeDate = LocalDate.now()
 
   //  출발지 및 도착지
-  private var selectedDeparture: String = ""
-  private var selectedArrive: String = ""
+  private var selectedDeparture: String = "출발지"
+  private var selectedArrive: String = "도착지"
 
   //  출발지와 도착지를 바꿀 때 임시로 저장할 string 객체 하나
   private var tempLocation: String = ""
@@ -82,25 +85,31 @@ class MainActivity : AppCompatActivity(),
 //    조회하기 버튼
     searchFlight()
 
-    binding.roundTripCheckbox.setOnCheckedChangeListener { buttonView, isChecked ->
-      Log.d("flightLog", "checked : $isChecked")
-//      왕복 선택 여부를 roundTripChecked 에 넣음
-      roundTripChecked = isChecked
+//    왕복, 편도 여부 묻는거
+    oneWayOrRoundTrip()
 
-//      왕복을 선택하면 왕복 화살표와 오는 날 선택창 나오게
-      if (isChecked == true) {
-        binding.mainOneWayTripArrow.visibility = GONE
-        binding.mainRoundTripArrow.visibility = VISIBLE
-        binding.comeDateChooseLayout.visibility = VISIBLE
-//        아니면 사라지게
-      } else {
-        binding.mainOneWayTripArrow.visibility = VISIBLE
-        binding.mainRoundTripArrow.visibility = GONE
-        binding.comeDateChooseLayout.visibility = GONE
-      }
+    val imageList =
+      listOf(
+        R.drawable.jeju_island_promotion,
+        R.drawable.osaka_gansai_promotion,
+        R.drawable.beijing_promotion,
+        R.drawable.quindao_promotion
+      )
 
+    val viewPager: ViewPager2 = findViewById(R.id.viewPager)
+    viewPager.adapter = ImageAdapter(imageList)
+
+//    옆 아이템이 살짝 보이게
+    viewPager.offscreenPageLimit = 4
+    val pageMarginPx = resources.getDimensionPixelOffset(R.dimen.pageMargin)
+    val pageOffsetPx = resources.getDimensionPixelOffset(R.dimen.offset)
+
+    viewPager.setPageTransformer { page, position ->
+      val offset = pageOffsetPx * position
+      page.translationX = -offset
+      page.scaleY = 1 - (0.15f * abs(position))
+      page.alpha = 1 - (0.3f * abs(position))
     }
-
   }
 
   //  가는 날 텍스트(chooseGoDateText) 관련 함수
@@ -297,6 +306,28 @@ class MainActivity : AppCompatActivity(),
         intent.putExtra("왕복 선택 여부", roundTripChecked)
         startActivity(intent)
       }
+    }
+  }
+
+  //  왕복과 편도 여부 묻는거
+  fun oneWayOrRoundTrip() {
+    binding.roundTripCheckbox.setOnCheckedChangeListener { buttonView, isChecked ->
+      Log.d("flightLog", "checked : $isChecked")
+//      왕복 선택 여부를 roundTripChecked 에 넣음
+      roundTripChecked = isChecked
+
+//      왕복을 선택하면 왕복 화살표와 오는 날 선택창 나오게
+      if (isChecked == true) {
+        binding.mainOneWayTripArrow.visibility = GONE
+        binding.mainRoundTripArrow.visibility = VISIBLE
+        binding.comeDateChooseLayout.visibility = VISIBLE
+//        아니면 사라지게
+      } else {
+        binding.mainOneWayTripArrow.visibility = VISIBLE
+        binding.mainRoundTripArrow.visibility = GONE
+        binding.comeDateChooseLayout.visibility = GONE
+      }
+
     }
   }
 }
