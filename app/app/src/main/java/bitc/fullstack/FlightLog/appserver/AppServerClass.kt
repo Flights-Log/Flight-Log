@@ -19,9 +19,10 @@ object AppServerClass {
       .addConverterFactory(GsonConverterFactory.create())
       .build()
       .create(AppServerInterface::class.java)
+
   }
 
-    val api = AppServerClass.instance
+
 }
 
 

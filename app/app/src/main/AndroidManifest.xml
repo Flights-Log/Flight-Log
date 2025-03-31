@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" >
+    xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -16,24 +16,33 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FlightLog"
         android:usesCleartextTraffic="true"
-        tools:targetApi="31" >
+        tools:targetApi="31">
+        <activity
+            android:name=".sidebar.MyInfoActivity"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".sidebar.ToolBarActivity"
             android:exported="false" />
         <activity
             android:name=".sidebar.LoginActivity"
-            android:exported="true" />
+            android:exported="true"/>
         <activity
             android:name=".FlightInfoAPIActivity"
             android:exported="false" /> <!-- 메인화면 -->
         <activity
             android:name=".flightmain.MainActivity"
-            android:exported="true" /> <!-- 오는편 비행기 선택 -->
+            android:exported="true"/> <!-- 오는편 비행기 선택 -->
         <!-- 인원 선택 -->
         <activity
             android:name=".flightmain.JoinMemberActivity"
-            android:exported="false" >
-        </activity> <!-- 가는편 비행기 선택 -->
+            android:exported="true" >
+        </activity> <!-- 사이드바 - 비회원조회 --> <!-- 가는편 비행기 선택 -->
         <activity
             android:name=".flightchoose.GoAirplaneActivity"
             android:exported="false" /> <!-- 가는편 비행기 좌석 선택 -->
@@ -54,13 +63,7 @@
             android:exported="false" /> <!-- 사이드바 - 결제내역 -->
         <activity
             android:name=".sidebar.PaymentHistoryActivity"
-            android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity> <!-- 사이드바 - 비회원조회 -->
+            android:exported="true"/>
         <activity
             android:name=".sidebar.NonmemberActivity"
             android:exported="false" /> <!-- 사이드바 - 비회원조회 결과 -->

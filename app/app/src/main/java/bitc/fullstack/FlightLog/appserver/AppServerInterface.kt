@@ -14,6 +14,7 @@ import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.PUT
 import retrofit2.http.Query
 
 //  Retrofit 을 사용하여 서버와 통신 시 사용할 메소드 형식 설정
@@ -51,7 +52,18 @@ interface AppServerInterface {
   @FormUrlEncoded
   fun flightLogin(@Field("inputUserId") inputUserId:String,
                   @Field("inputUserPw") inputUserPw:String): Call<LoginResponse>
-  
+
+  @POST("updateUser")
+  fun updateUserInfo(
+    @Body user: JoinDTO
+  ):Call<List<JoinDTO>>
+
+
+  @POST("userInfo")
+  @FormUrlEncoded
+  fun userInfo
+            (@Field ("userId") userId : String,
+  ):Call<List<JoinDTO>>
 }
 
 

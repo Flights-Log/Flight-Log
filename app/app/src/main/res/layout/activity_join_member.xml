@@ -220,7 +220,7 @@
           android:orientation="horizontal"
           android:paddingHorizontal="30dp">
 
-<!--        영어 LastName(성이름) 라벨 -->
+<!--        영어 LastName(성) 라벨 -->
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -230,7 +230,7 @@
             android:textSize="15sp"
             android:textStyle="bold" />
 
-<!--        영어 LastName(성이름) 에디트 박스 -->
+<!--        영어 LastName(성) 에디트 박스 -->
         <EditText
             android:id="@+id/editFirstName"
             android:layout_width="0dp"

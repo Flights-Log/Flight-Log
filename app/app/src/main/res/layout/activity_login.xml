@@ -179,12 +179,10 @@
                 android:layout_marginEnd="10dp" />
 
             <!--      android:src="@drawable/google_icon"-->
-
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 app:cornerRadius="6dp" />
-
 
             <!--      android:src="@drawable/insta_icon"-->
 
