@@ -125,8 +125,8 @@
         android:textStyle="bold" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
+        android:layout_width="28dp"
+        android:layout_height="40dp"
         android:layout_weight="1"
         android:background="@drawable/blue_button"
         android:text="날짜순"
