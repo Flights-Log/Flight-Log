@@ -16,86 +16,86 @@ import java.util.List;
 @RestController
 public class ReservationCheckController {
 
-    @Autowired
-    private FlightChooseService flightChooseService;
+  @Autowired
+  private FlightChooseService flightChooseService;
 
-    @GetMapping("/getReservationCheck")
-    public List<FlightReservationCheckDTO> getReservationCheck(@RequestParam("reservationNumber") String reservationNumber) {
-        List<FlightReservationCheckDTO> flightReservationCheckList;
+  @GetMapping("/getReservationCheck")
+  public List<FlightReservationCheckDTO> getReservationCheck(@RequestParam("flightUserId") String flightUserId) {
+    List<FlightReservationCheckDTO> flightReservationCheckList;
 
-        System.out.println(reservationNumber);
+    System.out.println("전달 받은 userId : " + flightUserId);
 
-        flightReservationCheckList = flightChooseService.flightReservationCheck(reservationNumber);
+    flightReservationCheckList = flightChooseService.flightReservationCheck(flightUserId);
 
-        if (flightReservationCheckList != null && !flightReservationCheckList.isEmpty()) {
-            System.out.println("Flight Reservation Details:");
-            for (FlightReservationCheckDTO dto : flightReservationCheckList) {
-                // DTO의 각 필드 값 출력
-                System.out.println("예약번호 : " + dto.getFlightReno());
-                System.out.println("성 : " + dto.getLastName());
-                System.out.println("이름 : " + dto.getFirstName());
-                System.out.println("출발도시: " + dto.getStartCity());
-                System.out.println("도착도시: " + dto.getArrivalCity());
-                System.out.println("출발날자: " + dto.getDepartureDate());
-                System.out.println("출발시간: " + dto.getDepartureTime());
-                System.out.println("도착시간: " + dto.getArrivalTime());
-                System.out.println("인원수: " + dto.getNumPassengers());
-                System.out.println("좌석넘버: " + dto.getSeatNumber());
-                System.out.println("여권 번호: " + dto.getPassport());
-                System.out.println("수화물: " + dto.getLuggage());
-                System.out.println("==============돌아오는 표=================");
+    if (flightReservationCheckList != null && !flightReservationCheckList.isEmpty()) {
+      System.out.println("Flight Reservation Details:");
+      for (FlightReservationCheckDTO dto : flightReservationCheckList) {
+        // DTO의 각 필드 값 출력
+        System.out.println("예약번호 : " + dto.getFlightReno());
+        System.out.println("성 : " + dto.getLastName());
+        System.out.println("이름 : " + dto.getFirstName());
+        System.out.println("출발도시: " + dto.getStartCity());
+        System.out.println("도착도시: " + dto.getArrivalCity());
+        System.out.println("출발날자: " + dto.getDepartureDate());
+        System.out.println("출발시간: " + dto.getDepartureTime());
+        System.out.println("도착시간: " + dto.getArrivalTime());
+        System.out.println("인원수: " + dto.getNumPassengers());
+        System.out.println("좌석넘버: " + dto.getSeatNumber());
+        System.out.println("여권 번호: " + dto.getPassport());
+        System.out.println("수화물: " + dto.getLuggage());
+        System.out.println("==============돌아오는 표=================");
 
-                System.out.println("돌아오는 출발도시: " + dto.getReturnStartCity());
-                System.out.println("돌아오는 도착도시: " + dto.getReturnArrivalCity());
-                System.out.println("돌아오는 출발날자: " + dto.getReturnDepartureDate());
-                System.out.println("돌아오는 출발시간: " + dto.getReturnDepartureTime());
-                System.out.println("돌아오는 도착시간: " + dto.getReturnArrivalTime());
-                System.out.println("돌아오는 인원수: " + dto.getNumPassengers());
-                System.out.println("돌아오는 좌석넘버: " + dto.getReturnSeatNumber());
-                System.out.println("돌아오는 여권번호: " + dto.getPassport());
-                System.out.println("돌아오는 수화물: " + dto.getLuggage());
-                System.out.println("========================================");
-            }
-        } else {
-            System.out.println("반환 리스트가 비어있음");
-        }
-
-
-        return flightReservationCheckList;
+        System.out.println("돌아오는 출발도시: " + dto.getReturnStartCity());
+        System.out.println("돌아오는 도착도시: " + dto.getReturnArrivalCity());
+        System.out.println("돌아오는 출발날자: " + dto.getReturnDepartureDate());
+        System.out.println("돌아오는 출발시간: " + dto.getReturnDepartureTime());
+        System.out.println("돌아오는 도착시간: " + dto.getReturnArrivalTime());
+        System.out.println("돌아오는 인원수: " + dto.getNumPassengers());
+        System.out.println("돌아오는 좌석넘버: " + dto.getReturnSeatNumber());
+        System.out.println("돌아오는 여권번호: " + dto.getPassport());
+        System.out.println("돌아오는 수화물: " + dto.getLuggage());
+        System.out.println("========================================");
+      }
+    } else {
+      System.out.println("반환 리스트가 비어있음");
     }
 
-//    편도
-    @GetMapping("/getOneWayReservationCheck")
-    public List<FlightReservationCheckDTO> getOneWayReservationCheck(@RequestParam("reservationNumber") String reservationNumber) {
-        List<FlightReservationCheckDTO> flightOneWayReservationCheckList;
 
-        System.out.println(reservationNumber);
+    return flightReservationCheckList;
+  }
 
-        flightOneWayReservationCheckList = flightChooseService.OneWayReservationCheck(reservationNumber);
+  //    편도
+  @GetMapping("/getOneWayReservationCheck")
+  public List<FlightReservationCheckDTO> getOneWayReservationCheck(@RequestParam("flightUserId") String flightUserId) {
+    List<FlightReservationCheckDTO> flightOneWayReservationCheckList;
 
-        if (flightOneWayReservationCheckList != null && !flightOneWayReservationCheckList.isEmpty()) {
-            System.out.println("Flight Reservation Details:");
-            for (FlightReservationCheckDTO dto : flightOneWayReservationCheckList) {
-                // DTO의 각 필드 값 출력
-                System.out.println("예약번호 : " + dto.getFlightReno());
-                System.out.println("성 : " + dto.getLastName());
-                System.out.println("이름 : " + dto.getFirstName());
-                System.out.println("출발도시: " + dto.getStartCity());
-                System.out.println("도착도시: " + dto.getArrivalCity());
-                System.out.println("출발날자: " + dto.getDepartureDate());
-                System.out.println("출발시간: " + dto.getDepartureTime());
-                System.out.println("도착시간: " + dto.getArrivalTime());
-                System.out.println("인원수: " + dto.getNumPassengers());
-                System.out.println("좌석넘버: " + dto.getReturnSeatNumber());
-                System.out.println("Passport: " + dto.getPassport());
-                System.out.println("수화물: " + dto.getPassport());
-                System.out.println("=======================================");
-            }
-        } else {
-            System.out.println("반환 리스트가 비어있음");
-        }
+    System.out.println(flightUserId);
 
+    flightOneWayReservationCheckList = flightChooseService.OneWayReservationCheck(flightUserId);
 
-        return flightOneWayReservationCheckList;
+    if (flightOneWayReservationCheckList != null && !flightOneWayReservationCheckList.isEmpty()) {
+      System.out.println("Flight Reservation Details:");
+      for (FlightReservationCheckDTO dto : flightOneWayReservationCheckList) {
+        // DTO의 각 필드 값 출력
+        System.out.println("예약번호 : " + dto.getFlightReno());
+        System.out.println("성 : " + dto.getLastName());
+        System.out.println("이름 : " + dto.getFirstName());
+        System.out.println("출발도시: " + dto.getStartCity());
+        System.out.println("도착도시: " + dto.getArrivalCity());
+        System.out.println("출발날자: " + dto.getDepartureDate());
+        System.out.println("출발시간: " + dto.getDepartureTime());
+        System.out.println("도착시간: " + dto.getArrivalTime());
+        System.out.println("인원수: " + dto.getNumPassengers());
+        System.out.println("좌석넘버: " + dto.getReturnSeatNumber());
+        System.out.println("Passport: " + dto.getPassport());
+        System.out.println("수화물: " + dto.getPassport());
+        System.out.println("=======================================");
+      }
+    } else {
+      System.out.println("반환 리스트가 비어있음");
     }
+
+
+    return flightOneWayReservationCheckList;
+  }
 }

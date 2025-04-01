@@ -2,6 +2,7 @@ package bitc.fullstack.FlightLog.flightchoose
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -22,22 +23,23 @@ class ReservationCheckActivity : AppCompatActivity() {
   private lateinit var adapter: FlightReservationAdapter
   private val flightReservationList: MutableList<FlightReservationCheckDTO> = mutableListOf()
 
+
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_reservation_check)
 
-//    recyclerView = findViewById(R.id.recyclerview)
-//    recyclerView.layoutManager = LinearLayoutManager(this)
+    val flightUserId = intent.getStringExtra("flightUserId") ?: ""
+    Log.d("ReservationCheck", "받은 flightUserId: $flightUserId")
+
+    recyclerView = findViewById(R.id.recyclerView)
+    recyclerView.layoutManager = LinearLayoutManager(this)
 
     // Adapter 설정
     adapter = FlightReservationAdapter(flightReservationList)
     recyclerView.adapter = adapter
 
-    // 예약 번호 (예시로 고정값 사용)
-    val reservationNumber = "KEY1634"
-
     // 예약 정보 API 호출
-    fetchReservationDetails(reservationNumber)
+    fetchReservationDetails(flightUserId)
 
     val home = findViewById<Button>(R.id.btn_home)
     home.setOnClickListener {
@@ -46,10 +48,10 @@ class ReservationCheckActivity : AppCompatActivity() {
     }
   }
 
-  private fun fetchReservationDetails(reservationNumber: String) {
+  private fun fetchReservationDetails(flightUserId: String) {
     val apiService = AppServerClass.instance
 
-    apiService.getReservationCheck(reservationNumber).enqueue(object : Callback<List<FlightReservationCheckDTO>> {
+    apiService.getReservationCheck(flightUserId).enqueue(object : Callback<List<FlightReservationCheckDTO>> {
       override fun onResponse(call: Call<List<FlightReservationCheckDTO>>, response: Response<List<FlightReservationCheckDTO>>) {
         if (response.isSuccessful) {
           val reservationData = response.body()

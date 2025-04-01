@@ -1,0 +1,16 @@
+<!-- res/drawable/shape_with_border.xml -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 테두리 부분 -->
+    <item>
+        <shape>
+            <solid android:color="#FFFFFF"/> <!-- 배경 색상 -->
+            <stroke android:color="#000000" android:width="2dp"/> <!-- 테두리 색상과 두께 -->
+            <corners android:radius="10dp"/> <!-- 테두리의 둥근 모서리 설정 -->
+        </shape>
+    </item>
+
+    <!-- 내부 배경 이미지 부분 -->
+    <item android:right="10dp" android:left="10dp" android:top="10dp" android:bottom="10dp">
+        <bitmap android:src="@drawable/white_map" android:gravity="center"/>
+    </item>
+</layer-list>

@@ -10,26 +10,26 @@ import java.util.List;
 @Service
 public class FlightChooseServiceImpl implements FlightChooseService {
 
-    @Autowired
-    private FlightChooseServiceMapper flightChooseServiceMapper;
+  @Autowired
+  private FlightChooseServiceMapper flightChooseServiceMapper;
 
-    @Override
-    public List<FlightReservationCheckDTO> flightReservationCheck(String reservationNumber) {
+  @Override
+  public List<FlightReservationCheckDTO> flightReservationCheck(String flightUserId) {
 
-        List<FlightReservationCheckDTO> test = flightChooseServiceMapper.flightReservationCheck(reservationNumber);
+    List<FlightReservationCheckDTO> test = flightChooseServiceMapper.flightReservationCheck(flightUserId);
 
-        System.out.println(test);
+    System.out.println(test);
 
-        return flightChooseServiceMapper.flightReservationCheck(reservationNumber);
-    }
+    return flightChooseServiceMapper.flightReservationCheck(flightUserId);
+  }
 
-    @Override
-    public List<FlightReservationCheckDTO> OneWayReservationCheck(String reservationNumber) {
+  @Override
+  public List<FlightReservationCheckDTO> OneWayReservationCheck(String flightUserId) {
 
-        List<FlightReservationCheckDTO> test = flightChooseServiceMapper.OneWayReservationCheck(reservationNumber);
+    List<FlightReservationCheckDTO> test = flightChooseServiceMapper.OneWayReservationCheck(flightUserId);
 
-        System.out.println(test);
+    System.out.println(test);
 
-        return flightChooseServiceMapper.OneWayReservationCheck(reservationNumber);
-    }
+    return flightChooseServiceMapper.OneWayReservationCheck(flightUserId);
+  }
 }

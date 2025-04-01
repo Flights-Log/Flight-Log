@@ -6,8 +6,8 @@ import java.util.List;
 
 public interface FlightChooseService {
 
-    // 예약 번호에 해당하는 정보를 반환하는 메서드 정의
-    List<FlightReservationCheckDTO> flightReservationCheck(String reservationNumber);
+  // 예약 번호에 해당하는 정보를 반환하는 메서드 정의
+  List<FlightReservationCheckDTO> flightReservationCheck(String flightUserId);
 
-    List<FlightReservationCheckDTO> OneWayReservationCheck(String reservationNumber);
+  List<FlightReservationCheckDTO> OneWayReservationCheck(String flightUserId);
 }
