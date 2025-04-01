@@ -9,10 +9,10 @@ import java.util.List;
 @Mapper
 public interface FlightChooseServiceMapper {
 
-    // reservationNumber에 해당하는 예약 정보를 List로 반환
-    List<FlightReservationCheckDTO> flightReservationCheck(@Param("reservationNumber") String reservationNumber);
+  // reservationNumber에 해당하는 예약 정보를 List로 반환
+  List<FlightReservationCheckDTO> flightReservationCheck(@Param("flightUserId") String flightUserId);
 
-    List<FlightReservationCheckDTO> OneWayReservationCheck(@Param("reservationNumber") String reservationNumber);
+  List<FlightReservationCheckDTO> OneWayReservationCheck(@Param("flightUserId") String flightUserId);
 
 
 }
