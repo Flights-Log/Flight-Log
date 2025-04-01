@@ -82,7 +82,7 @@ public class SideBarController {
     // 본인정보 확인
     @PostMapping("/userInfo")
     public List<flightUserDTO> getUserInfo(@RequestParam("userId") String userId) {
-
+    System.out.println(userId);
         List<flightUserDTO> userinfoList;
         userinfoList = flightSideBarService.selectUserInfoById(userId);
 

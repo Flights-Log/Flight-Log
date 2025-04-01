@@ -221,4 +221,16 @@ interface AppServerInterface {
   @FormUrlEncoded
   fun flightLogin(@Field("inputUserId") inputUserId:String,
                   @Field("inputUserPw") inputUserPw:String): Call<LoginResponse>
+
+  //  수정하기
+  @POST("updateUser")
+  fun updateUserInfo(
+    @Body user: JoinDTO
+  ):Call<List<JoinDTO>>
+
+  //  불러오기
+  @POST("userInfo")
+  @FormUrlEncoded
+  fun userInfo
+            (@Field ("userId") userId : String):Call<List<JoinDTO>>
 }

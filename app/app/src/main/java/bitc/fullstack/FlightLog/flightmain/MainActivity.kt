@@ -1,24 +1,39 @@
 package bitc.fullstack.FlightLog.flightmain
 
+import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
 import android.view.View.GONE
 import android.view.View.VISIBLE
+import android.webkit.CookieManager
+import android.webkit.ValueCallback
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.core.view.GravityCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.viewpager2.widget.ViewPager2
 import bitc.fullstack.FlightLog.R
 import bitc.fullstack.FlightLog.databinding.ActivityMainBinding
 import bitc.fullstack.FlightLog.flightchoose.GoAirplaneActivity
+import bitc.fullstack.FlightLog.flightchoose.ReservationCheckActivity
 import bitc.fullstack.FlightLog.sidebar.LoginActivity
+import bitc.fullstack.FlightLog.sidebar.MyInfoActivity
+import bitc.fullstack.FlightLog.sidebar.NonmemberActivity
+import bitc.fullstack.FlightLog.sidebar.TicketHolderActivity
+import com.google.android.material.navigation.NavigationView
 import java.time.LocalDate
 import java.util.Calendar
 import kotlin.math.abs
@@ -33,6 +48,11 @@ class MainActivity : AppCompatActivity(),
   private val binding: ActivityMainBinding by lazy {
     ActivityMainBinding.inflate(layoutInflater)
   }
+
+  //  쿠키 저장
+  private val cookieManager by lazy { CookieManager.getInstance() }
+
+  private lateinit var toggle: ActionBarDrawerToggle
 
   //  현재 날짜값 및 도착 예정 날짜값
   private var goDate = LocalDate.now()
@@ -49,22 +69,29 @@ class MainActivity : AppCompatActivity(),
 
   private var roundTripChecked: Boolean = false
 
+
+  //  유저 이름, 아이디 쿠키 저장용
+  private lateinit var cookieUserId: String
+  private lateinit var cookieUserFirstName: String
+  private lateinit var cookieUserLastName: String
+
   //  만들어지만 할거
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     enableEdgeToEdge()
     setContentView(binding.root)
 
-//    툴바 아이콘
-    val menuButton: ImageButton = findViewById(R.id.flight_log_menu)
-    val iconButton: ImageView = findViewById(R.id.flight_log_icon)
-    val loginButton: TextView = findViewById(R.id.flight_log_login)
-
     ViewCompat.setOnApplyWindowInsetsListener(binding.main) { v, insets ->
       val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
       v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
       insets
     }
+
+    //    쿠키 체크용
+    cookieManager.apply {
+      this.acceptCookie()
+    }
+
 
 //    가는날 오는날 텍스트, 날짜 선택
     chooseGoDate()
@@ -88,7 +115,170 @@ class MainActivity : AppCompatActivity(),
 //    왕복, 편도 여부 묻는거
     oneWayOrRoundTrip()
 
-//    캐러샐뷰
+    //    캐러샐뷰
+    carrouselView()
+
+  }
+  // 새로고침
+  override fun onResume() {
+    super.onResume()
+    //    값 받아오기
+    getCookieExtra()
+    navViewFunc()
+  }
+  override fun onDestroy() {
+//    쿠키 삭제용
+    super.onDestroy()
+    val callback = ValueCallback<Boolean> {
+      println(if (it) "success to remove" else "fail to remove")
+    }
+    cookieManager.removeAllCookies(callback)
+  }
+
+  //  점 세개 메뉴 버튼 안보이게
+  override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    return false
+  }
+
+  //  값 받아오기
+  @SuppressLint("SetTextI18n", "RestrictedApi")
+  fun getCookieExtra() {
+//    쿠키 있는지 확인용
+    hasCookies()
+    Log.d("flightLog", "쿠키 유무 : ${hasCookies()}")
+
+    cookieUserId = getCookie("userId").toString()
+    Log.d("flightLog", "cookieUserId : $cookieUserId")
+
+    cookieUserFirstName = getCookie("userFirstName").toString()
+    Log.d("flightLog", "cookieUserFirstName : $cookieUserFirstName")
+
+    cookieUserLastName = getCookie("userLastName").toString()
+    Log.d("flightLog", "cookieUserLastName : $cookieUserLastName")
+  }
+
+  //  쿠키 있는지 확인용
+  private fun hasCookies(): Boolean {
+    return cookieManager.hasCookies()
+  }
+
+  //  쿠키에서 Id 값 가져오기
+  private fun getCookie(key: String?): String? {
+    return cookieManager.getCookie(key)
+  }
+
+  //  네비게이션 및 드로어뷰 관련
+  @SuppressLint("SetTextI18n")
+  fun navViewFunc() {
+    val drawerLayout = findViewById<DrawerLayout>(R.id.drawer_layout)
+    val navView = findViewById<NavigationView>(R.id.nav_view)
+    val headerView = navView.getHeaderView(0)
+
+    val isLogin = headerView?.findViewById<TextView>(R.id.nav_is_login)
+    val loginButton = headerView?.findViewById<TextView>(R.id.nav_login_button)
+
+//    네비게이션 메뉴 아이템 가져오기
+    val menu = navView.menu
+    val myInfoItem = menu.findItem(R.id.nav_my_info)
+    val ticketHolderItem = menu.findItem(R.id.nav_ticket_holder)
+    val showReservationItem = menu.findItem(R.id.nav_show_reservation)
+
+//    쿠키가 있으면 다른거 보이게
+    if (hasCookies() == true) {
+      Log.d("flightLog", "hasCookies() true")
+      isLogin?.text = "$cookieUserFirstName$cookieUserLastName 님 환영합니다"
+      loginButton?.text = "로그아웃"
+
+      myInfoItem.isVisible = true
+      ticketHolderItem.isVisible = true
+      showReservationItem.isVisible = true
+      loginButton?.setOnClickListener {
+        Toast.makeText(this@MainActivity, "로그아웃 되었습니다", Toast.LENGTH_SHORT).show()
+
+//        쿠키 삭제
+        val callback = ValueCallback<Boolean> {
+          println(if (it) "logout" else "fail to logout")
+        }
+        cookieManager.removeAllCookies(callback)
+
+//        메인 액티비티 재시작
+        val intent = Intent(this@MainActivity, MainActivity::class.java)
+        finish()
+        startActivity(intent)
+      }
+    } else {
+//      다른거 안보이게
+      myInfoItem.isVisible = false
+      ticketHolderItem.isVisible = false
+      showReservationItem.isVisible = false
+
+//        로그인 창으로
+      loginButton?.setOnClickListener {
+        val intent = Intent(this@MainActivity, LoginActivity::class.java)
+        startActivity(intent)
+      }
+    }
+
+    //    메뉴 어디를 누르는지에 따라서 가는 곳이 달라짐
+    navView.setNavigationItemSelectedListener { menuItem ->
+      when (menuItem.itemId) {
+//        마이페이지
+        R.id.nav_user_info -> {
+          val intent = Intent(this@MainActivity, MyInfoActivity::class.java)
+          intent.putExtra("userId",cookieUserId)
+          startActivity(intent)
+        }
+
+//        티켓 홀더
+        R.id.nav_ticket_holder -> {
+          val intent = Intent(this@MainActivity, TicketHolderActivity::class.java)
+          startActivity(intent)
+        }
+
+//        예약 조회
+        R.id.nav_show_reservation -> {
+          val intent = Intent(this@MainActivity, NonmemberActivity::class.java)
+          startActivity(intent)
+        }
+
+//        메인 화면으로
+        R.id.nav_go_to_main -> {
+          val intent = Intent(this@MainActivity, MainActivity::class.java)
+          finish()
+          startActivity(intent)
+        }
+      }
+      drawerLayout.closeDrawer(GravityCompat.START)
+      true
+    }
+
+    //    액션바를 쓰되, 타이틀은 안보이게
+    setSupportActionBar(binding.toolbar)
+    supportActionBar?.setDisplayShowTitleEnabled(false)
+
+//    액션바 토글 버튼을 쓰기 위해서 사용
+    toggle = ActionBarDrawerToggle(
+      this, drawerLayout, binding.toolbar,
+      R.string.navigation_drawer_open, R.string.navigation_drawer_close
+    )
+    drawerLayout.addDrawerListener(toggle)
+//    드로어 레이아웃과 동기화
+    toggle.syncState()
+
+//    색깔 하얀색
+    toggle.drawerArrowDrawable.color = ContextCompat.getColor(this, android.R.color.white)
+  }
+
+
+
+
+
+
+
+
+    // 캐러셀 뷰
+  fun carrouselView(){
+    //    캐러샐뷰
     val imageList =
       listOf(
         R.drawable.jeju_island_promotion,
@@ -112,6 +302,7 @@ class MainActivity : AppCompatActivity(),
       page.alpha = 1 - (0.3f * abs(position))
     }
   }
+
 
   //  가는 날 텍스트(chooseGoDateText) 관련 함수
   fun chooseGoDate() {

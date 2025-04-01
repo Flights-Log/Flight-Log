@@ -9,6 +9,7 @@ package bitc.fullstack.FlightLog.sidebar
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.webkit.CookieManager
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
@@ -32,6 +33,9 @@ class LoginActivity : AppCompatActivity() {
         ActivityLoginBinding.inflate(layoutInflater)
     }
 
+    //  쿠키 저장
+    private val cookieManager by lazy { CookieManager.getInstance() }
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,6 +48,11 @@ class LoginActivity : AppCompatActivity() {
             insets
         }
         initEventListener()
+
+        cookieManager.apply {
+            this.acceptCookie()
+        }
+
     }
 
 //    로그인 이벤트 활성화 함수
@@ -84,13 +93,15 @@ class LoginActivity : AppCompatActivity() {
                         val name = user?.flightUserKoLastname ?: "알 수 없음"
                         Toast.makeText(this@LoginActivity, "$name 님 환영합니다", Toast.LENGTH_SHORT).show()
 
-
-//                        유저 정보 인텐터에 전송
-                        intent.putExtra("login_user", user)
+                        //            쿠키에 저장
+                        setCookie("userFirstName", user?.flightUserKoFirstname)
+                        setCookie("userLastName", user?.flightUserKoLastname)
+                        setCookie("userId", user?.flightUserId)
 
                         // 로그인 성공 → 메인 화면으로 이동
                         startActivity(intent)
                         finish()
+
 
 //                        작성 문제로 로그인 실패 시
                     } else {
@@ -112,5 +123,9 @@ class LoginActivity : AppCompatActivity() {
             }
         })
     }
+    private fun setCookie(key: String?, value: String?) {
+        cookieManager.setCookie(key, value)
+    }
+
 
 }
