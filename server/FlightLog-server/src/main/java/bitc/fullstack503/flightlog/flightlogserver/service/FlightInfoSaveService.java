@@ -1,5 +1,7 @@
 package bitc.fullstack503.flightlog.flightlogserver.service;
 
+
+import bitc.fullstack503.flightlog.flightlogserver.dto.TicketHolderDTO;
 import bitc.fullstack503.flightlog.flightlogserver.dto.dFlightDTO;
 import bitc.fullstack503.flightlog.flightlogserver.dto.iFlightDTO;
 
@@ -12,5 +14,6 @@ public interface FlightInfoSaveService {
 
   // 국제 운항 정보
   void saveIFlightInfo(List<iFlightDTO> IflightDTOList);
+
 
 }

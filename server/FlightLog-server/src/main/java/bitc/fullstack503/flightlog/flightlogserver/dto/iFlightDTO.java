@@ -23,7 +23,6 @@ public class iFlightDTO {
 
   @JsonProperty("internationalWed")
   private String internationalWed;
-
   @JsonProperty("internationalThu")
   private String internationalThu;
 

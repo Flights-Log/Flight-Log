@@ -1,5 +1,7 @@
 package bitc.fullstack503.flightlog.flightlogserver.mapper;
 
+
+import bitc.fullstack503.flightlog.flightlogserver.dto.TicketHolderDTO;
 import bitc.fullstack503.flightlog.flightlogserver.dto.dFlightDTO;
 import bitc.fullstack503.flightlog.flightlogserver.dto.iFlightDTO;
 import org.apache.ibatis.annotations.Mapper;
@@ -13,4 +15,5 @@ public interface FlightInfoSaveMapper {
 
   // 국제 운항 정보
   void insertIFlightInfo(List<iFlightDTO> iflightDTOList);
+
 }

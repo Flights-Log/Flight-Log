@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bitc.fullstack503.flightlog.flightlogserver.mapper.TicketHolderMapper">
+    <select id="selectFlightPassengers" resultType="bitc.fullstack503.flightlog.flightlogserver.dto.TicketHolderDTO">
+
+        SELECT
+        fr.flight_reserveSdate AS flight_reserveSdate,
+        frm.flight_user_id AS flight_user_id,
+        frm.flight_reno AS flight_reno,
+        frm.flight_mem_firstName AS flight_mem_firstName,
+        frm.flight_mem_lastName AS flight_mem_lastName,
+        fi.flight_info_airline AS flight_info_airline,
+        fi.flight_info_startCity AS flight_info_startCity,
+        fi.flight_info_startTime AS flight_info_startTime,
+        fi.flight_info_arrivalCity AS flight_info_arrivalCity,
+        fi.flight_info_arrivalTime AS flight_info_arrivalTime,
+        fi.flight_distance AS flight_distance,
+        frm.flight_mem_start_seatNum AS flight_mem_start_seatNum,
+        frm.flight_mem_arrive_seatNum AS flight_mem_arrive_seatNum,
+        frm.flight_passport AS flight_passport,
+        frm.flight_mem_luggage AS flight_mem_luggage,
+        frm.flight_start_payCheck AS flight_start_payCheck,
+        frm.flight_arr_payCheck AS flight_arr_payCheck,
+        fi.flight_id AS flight_id,
+
+        CASE
+        WHEN fr.flight_start_id = fi.flight_id THEN frm.flight_mem_start_seatNum
+        WHEN fr.flight_arr_id = fi.flight_id THEN frm.flight_mem_arrive_seatNum
+        ELSE '없음'
+        END AS selected_seat,
+
+        CASE
+        WHEN fr.flight_start_id = fi.flight_id THEN frm.flight_mem_start_price
+        WHEN fr.flight_arr_id = fi.flight_id THEN frm.flight_mem_arr_price
+        ELSE 0
+        END AS selected_price
+
+        FROM flight_reserve_member frm
+        JOIN flight_reserve fr
+        ON frm.flight_reno = fr.flight_reno
+        JOIN flight_info fi
+        ON fr.flight_start_id = fi.flight_id
+        OR fr.flight_arr_id = fi.flight_id
+        WHERE fr.flight_user_id = #{userMemId}
+        AND (frm.flight_start_payCheck = 'N' OR frm.flight_arr_payCheck = 'N')
+    </select>
+
+    <update id="updatePaymentStatus" parameterType="map">
+        UPDATE flight_reserve_member frm
+        JOIN flight_reserve fr ON frm.flight_reno = fr.flight_reno
+        SET
+        frm.flight_start_payCheck =
+        (CASE
+        WHEN fr.flight_start_id IS NOT NULL
+        <if test="flightIds != null and flightIds.size() > 0">
+            AND fr.flight_start_id IN
+            <foreach item="id" collection="flightIds" open="(" separator="," close=")">
+                #{id}
+            </foreach>
+        </if>
+        THEN 'Y'
+        ELSE frm.flight_start_payCheck
+        END),
+
+        frm.flight_arr_payCheck =
+        (CASE
+        WHEN fr.flight_arr_id IS NOT NULL
+        <if test="flightIds != null and flightIds.size() > 0">
+            AND fr.flight_arr_id IN
+            <foreach item="id" collection="flightIds" open="(" separator="," close=")">
+                #{id}
+            </foreach>
+        </if>
+        THEN 'Y'
+        ELSE frm.flight_arr_payCheck
+        END)
+        WHERE frm.flight_passport = #{flightPassport}
+        AND frm.flight_reno = #{flightReno}
+    </update>
+
+
+
+
+    <!-- 티켓 삭제... -->
+    <delete id="deleteFlightReserveMember" parameterType="map">
+        DELETE FROM flight_reserve_member
+        WHERE flight_reno = #{flightReno}
+        AND flight_mem_start_seatNum = #{flightMemStartSeatNum}
+    </delete>
+
+
+
+</mapper>

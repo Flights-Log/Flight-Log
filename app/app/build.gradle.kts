@@ -30,6 +30,7 @@ android {
   kotlinOptions {
     jvmTarget = "11"
   }
+
   viewBinding{
     enable = true
   }
@@ -42,10 +43,14 @@ dependencies {
   implementation(libs.material)
   implementation(libs.androidx.activity)
   implementation(libs.androidx.constraintlayout)
+
   testImplementation(libs.junit)
   androidTestImplementation(libs.androidx.junit)
   androidTestImplementation(libs.androidx.espresso.core)
 
+  implementation("androidx.viewpager2:viewpager2:1.1.0")
+  implementation("com.github.bumptech.glide:glide:4.15.1")
+  annotationProcessor("com.github.bumptech.glide:compiler:4.15.1")
 
 // https://mvnrepository.com/artifact/com.squareup.retrofit2/retrofit
   implementation(libs.retrofit)
@@ -67,4 +72,9 @@ dependencies {
   //api 서버 로그 확인용라이브러리
   implementation("com.squareup.okhttp3:okhttp:4.9.2")
   implementation("com.squareup.okhttp3:logging-interceptor:4.9.2")
+
+
+  // 결제 api 추가 (동윤)
+  implementation ("io.github.bootpay:android:+")
+
 }

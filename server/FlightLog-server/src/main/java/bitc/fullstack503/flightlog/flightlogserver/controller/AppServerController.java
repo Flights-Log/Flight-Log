@@ -1,8 +1,7 @@
 package bitc.fullstack503.flightlog.flightlogserver.controller;
 
 //import org.springframework.web.bind.annotation.*;
-import bitc.fullstack503.flightlog.flightlogserver.dto.dFlightDTO;
-import bitc.fullstack503.flightlog.flightlogserver.dto.iFlightDTO;
+import bitc.fullstack503.flightlog.flightlogserver.dto.*;
 import bitc.fullstack503.flightlog.flightlogserver.service.FlightInfoSaveService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 //  서버 기본 주소
-@Controller
 @RequestMapping("/flightLog")
 @RestController
 public class AppServerController {
@@ -83,10 +81,16 @@ public class AppServerController {
 
     return IflightDTOList;
   }
-
-
-
 }
+
+
+
+
+
+
+
+
+
 
 
 

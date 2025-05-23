@@ -10,11 +10,11 @@
     android:orientation="vertical"
     tools:context=".flightchoose.ComeAirplaneChooseSeatActivity">
   <!--  툴바-->
-  <include
-      android:id="@+id/tool_bar"
-      layout="@layout/tool_bar"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content" />
+<!--  <include-->
+<!--      android:id="@+id/tool_bar"-->
+<!--      layout="@layout/tool_bar"-->
+<!--      android:layout_width="match_parent"-->
+<!--      android:layout_height="wrap_content" />-->
 
   <!--  (비행기 번호) 좌석 선택-->
   <LinearLayout

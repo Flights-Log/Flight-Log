@@ -1,5 +1,7 @@
 package bitc.fullstack503.flightlog.flightlogserver.service;
 
+
+import bitc.fullstack503.flightlog.flightlogserver.dto.TicketHolderDTO;
 import bitc.fullstack503.flightlog.flightlogserver.dto.dFlightDTO;
 import bitc.fullstack503.flightlog.flightlogserver.dto.iFlightDTO;
 import bitc.fullstack503.flightlog.flightlogserver.mapper.FlightInfoSaveMapper;
@@ -25,4 +27,6 @@ public class FlightInfoSaveServiceImpl implements FlightInfoSaveService {
   public void saveIFlightInfo(List<iFlightDTO> IflightDTOList) {
     flightInfoSaveMapper.insertIFlightInfo(IflightDTOList);
   }
+
+
 }
